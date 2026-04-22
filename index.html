@@ -8,385 +8,321 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
   <style>
-    /* ─── TOKENS ─────────────────────────────────────────── */
     :root {
-      --bg:          #050509;
-      --bg2:         #09090f;
-      --surface:     rgba(255,255,255,0.025);
-      --surface-h:   rgba(255,255,255,0.045);
-      --border:      rgba(255,255,255,0.07);
-      --border-h:    rgba(124,211,255,0.35);
-      --accent:      #7cd3ff;
-      --accent-dim:  rgba(124,211,255,0.12);
-      --text:        #f0f0fa;
-      --text-2:      #8080a8;
-      --text-3:      #3c3c60;
-      --radius:      14px;
-      --font-display:'Syne', sans-serif;
-      --font-mono:   'JetBrains Mono', monospace;
-      --font-body:   'DM Sans', sans-serif;
+      --bg:        #050509;
+      --bg2:       #09090f;
+      --surface:   rgba(255,255,255,0.025);
+      --surface-h: rgba(255,255,255,0.045);
+      --border:    rgba(255,255,255,0.07);
+      --text:      #f0f0fa;
+      --text-2:    #8080a8;
+      --text-3:    #3c3c60;
+      --radius:    14px;
+      --ff-display:'Syne', sans-serif;
+      --ff-mono:   'JetBrains Mono', monospace;
+      --ff-body:   'DM Sans', sans-serif;
     }
-
-    /* ─── RESET ──────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
-      font-family: var(--font-body);
+      font-family: var(--ff-body);
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
       overflow-x: hidden;
     }
-
-    /* ─── DOT GRID BACKGROUND ────────────────────────────── */
     body::before {
       content: '';
       position: fixed; inset: 0; z-index: 0; pointer-events: none;
-      background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-image: radial-gradient(circle, rgba(255,255,255,0.035) 1px, transparent 1px);
       background-size: 26px 26px;
     }
-    /* Glow spotlight top-right */
     body::after {
       content: '';
       position: fixed; top: -200px; right: -200px;
       width: 600px; height: 600px; z-index: 0; pointer-events: none;
-      background: radial-gradient(ellipse at center, rgba(124,211,255,0.06) 0%, transparent 70%);
+      background: radial-gradient(ellipse at center, rgba(124,211,255,0.05) 0%, transparent 70%);
     }
 
-    /* ─── HEADER ─────────────────────────────────────────── */
+    /* ── HEADER ───────────────────────────────────── */
     header {
       position: sticky; top: 0; z-index: 50;
-      background: rgba(5,5,9,0.85);
+      background: rgba(5,5,9,0.88);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
       padding: 0 32px;
-      height: 64px;
-      display: flex; align-items: center; gap: 20px;
+      height: 62px;
+      display: flex; align-items: center; gap: 18px;
     }
     .logo {
-      display: flex; align-items: center; gap: 10px;
-      flex-shrink: 0;
+      display: flex; align-items: center; gap: 10px; flex-shrink: 0;
+      text-decoration: none;
     }
     .logo-mark {
       width: 34px; height: 34px;
-      border: 1.5px solid var(--accent);
+      border: 1.5px solid #7cd3ff;
       border-radius: 9px;
       display: flex; align-items: center; justify-content: center;
-      font-family: var(--font-mono);
-      font-size: 15px; font-weight: 600;
-      color: var(--accent);
-      letter-spacing: -1px;
-      box-shadow: 0 0 16px rgba(124,211,255,0.12);
+      font-family: var(--ff-mono); font-size: 15px; font-weight: 600;
+      color: #7cd3ff;
+      box-shadow: 0 0 14px rgba(124,211,255,0.1);
     }
     .logo-text {
-      font-family: var(--font-display);
+      font-family: var(--ff-display);
       font-size: 16px; font-weight: 800;
-      letter-spacing: -0.02em;
-      color: var(--text);
+      letter-spacing: -.02em; color: var(--text);
     }
     .logo-sub {
       font-size: 11px; color: var(--text-3);
-      font-family: var(--font-mono);
-      letter-spacing: 0.04em;
+      font-family: var(--ff-mono); letter-spacing: .04em;
     }
-
-    /* Search */
+    .header-stat {
+      font-family: var(--ff-mono); font-size: 11px; color: var(--text-2);
+      background: var(--surface); border: 1px solid var(--border);
+      padding: 5px 12px; border-radius: 20px; white-space: nowrap; flex-shrink: 0;
+    }
+    .header-stat b { color: #7cd3ff; }
     .search-wrap {
-      margin-left: auto;
-      position: relative;
-      flex-shrink: 0;
+      margin-left: auto; position: relative; flex-shrink: 0;
     }
     .search-wrap input {
-      width: 280px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      color: var(--text);
-      border-radius: 10px;
-      padding: 9px 40px 9px 38px;
-      font-size: 13px;
-      font-family: var(--font-body);
-      outline: none;
+      width: 270px;
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--text); border-radius: 10px;
+      padding: 8px 36px 8px 36px;
+      font-size: 13px; font-family: var(--ff-body); outline: none;
       transition: border-color .2s, box-shadow .2s;
     }
     .search-wrap input:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(124,211,255,0.08);
+      border-color: #7cd3ff;
+      box-shadow: 0 0 0 3px rgba(124,211,255,0.07);
     }
     .search-wrap input::placeholder { color: var(--text-3); }
-    .search-ico {
+    .s-ico {
       position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
       color: var(--text-3); font-size: 13px; pointer-events: none;
     }
-    .search-hint {
+    .s-hint {
       position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
-      font-family: var(--font-mono); font-size: 10px;
-      color: var(--text-3); background: var(--bg2);
-      border: 1px solid var(--border);
-      padding: 2px 6px; border-radius: 5px;
-      pointer-events: none;
-      transition: opacity .2s;
+      font-family: var(--ff-mono); font-size: 10px; color: var(--text-3);
+      background: var(--bg2); border: 1px solid var(--border);
+      padding: 2px 6px; border-radius: 5px; pointer-events: none;
     }
-    .search-wrap input:focus + .search-ico ~ .search-hint { opacity: 0; }
-    .search-clear {
+    .s-clear {
       position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
-      display: none; cursor: pointer;
-      color: var(--text-2); font-size: 16px;
-      line-height: 1; padding: 2px;
+      display: none; cursor: pointer; color: var(--text-2); font-size: 15px;
     }
-    .search-clear.visible { display: block; }
+    .s-clear.on { display: block; }
 
-    /* Stats pill */
-    .stat-pill {
-      font-family: var(--font-mono);
-      font-size: 11px; color: var(--text-2);
-      background: var(--surface);
-      border: 1px solid var(--border);
-      padding: 5px 12px; border-radius: 20px;
-      white-space: nowrap; flex-shrink: 0;
-    }
-    .stat-pill b { color: var(--accent); }
-
-    /* ─── FILTERS ────────────────────────────────────────── */
-    .filters-bar {
-      position: sticky; top: 64px; z-index: 40;
-      background: rgba(5,5,9,0.9);
-      backdrop-filter: blur(12px);
+    /* ── CATEGORY FILTERS ─────────────────────────── */
+    .cat-bar {
+      position: sticky; top: 62px; z-index: 40;
+      background: rgba(5,5,9,0.92);
+      backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border);
-      padding: 10px 32px;
-      display: flex; gap: 6px;
-      overflow-x: auto;
-      scrollbar-width: none;
+      padding: 0 32px;
+      display: flex; gap: 0;
+      overflow-x: auto; scrollbar-width: none;
     }
-    .filters-bar::-webkit-scrollbar { display: none; }
-    .f-btn {
-      flex-shrink: 0;
-      padding: 5px 13px;
-      border-radius: 20px;
-      border: 1px solid var(--border);
-      background: transparent;
-      color: var(--text-2);
-      font-size: 12px;
-      font-family: var(--font-body);
-      cursor: pointer;
-      transition: all .15s;
-      display: flex; align-items: center; gap: 6px;
-    }
-    .f-btn:hover { border-color: rgba(124,211,255,0.25); color: var(--text); }
-    .f-btn.active {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #050509;
-      font-weight: 600;
-    }
-    .f-btn .count {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      background: rgba(255,255,255,0.15);
-      padding: 1px 5px;
-      border-radius: 10px;
-    }
-    .f-btn.active .count { background: rgba(0,0,0,0.2); }
+    .cat-bar::-webkit-scrollbar { display: none; }
 
-    /* ─── MAIN ───────────────────────────────────────────── */
+    .cat-btn {
+      flex-shrink: 0;
+      display: flex; align-items: center; gap: 7px;
+      padding: 0 16px; height: 52px;
+      border: none; background: transparent;
+      color: var(--text-2);
+      font-family: var(--ff-body); font-size: 13px;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: color .15s, border-color .15s;
+      position: relative;
+    }
+    .cat-btn:hover { color: var(--text); }
+    .cat-btn.active {
+      color: var(--text);
+      border-bottom-color: var(--cat-color, #7cd3ff);
+    }
+    .cat-btn .cat-icon { font-size: 15px; line-height: 1; }
+    .cat-btn .cat-name { font-weight: 500; }
+    .cat-btn .cat-count {
+      font-family: var(--ff-mono); font-size: 10px;
+      background: rgba(255,255,255,0.06);
+      padding: 2px 6px; border-radius: 10px;
+      color: var(--text-3);
+    }
+    .cat-btn.active .cat-count {
+      background: rgba(255,255,255,0.1);
+      color: var(--text-2);
+    }
+
+    /* ── MAIN ─────────────────────────────────────── */
     main {
       position: relative; z-index: 1;
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 36px 32px 60px;
+      max-width: 1400px; margin: 0 auto;
+      padding: 36px 32px 80px;
     }
 
-    /* ─── PLUGIN GROUP ───────────────────────────────────── */
-    .p-group { margin-bottom: 52px; }
-    .p-group[hidden] { display: none; }
-    .p-header {
-      display: flex; align-items: center; gap: 12px;
-      margin-bottom: 18px;
-      padding-bottom: 14px;
-      border-bottom: 1px solid var(--border);
+    /* ── CATEGORY SECTION ─────────────────────────── */
+    .cat-section { margin-bottom: 56px; }
+    .cat-section[hidden] { display: none; }
+
+    .cat-section-head {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 20px;
     }
-    .p-indicator {
-      width: 8px; height: 8px; border-radius: 50%;
-      box-shadow: 0 0 10px currentColor;
+    .cat-section-icon {
+      width: 42px; height: 42px; border-radius: 12px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
     }
-    .p-name {
-      font-family: var(--font-display);
-      font-size: 12px; font-weight: 700;
-      text-transform: uppercase; letter-spacing: .12em;
-      color: var(--text-2);
+    .cat-section-info { flex: 1; }
+    .cat-section-name {
+      font-family: var(--ff-display);
+      font-size: 18px; font-weight: 800;
+      letter-spacing: -.02em; color: var(--text);
+      margin-bottom: 2px;
     }
-    .p-count {
-      font-family: var(--font-mono);
-      font-size: 10px; color: var(--text-3);
+    .cat-section-desc {
+      font-size: 12px; color: var(--text-2);
     }
-    .p-line {
+    .cat-section-line {
       flex: 1; height: 1px;
       background: linear-gradient(to right, var(--border), transparent);
     }
+    .cat-section-count {
+      font-family: var(--ff-mono); font-size: 11px; color: var(--text-3);
+    }
 
-    /* ─── GRID ───────────────────────────────────────────── */
+    /* ── GRID ─────────────────────────────────────── */
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 12px;
     }
 
-    /* ─── SKILL CARD ─────────────────────────────────────── */
+    /* ── SKILL CARD ───────────────────────────────── */
     .s-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 18px 18px 16px;
-      position: relative;
-      overflow: hidden;
-      cursor: default;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 18px 18px 16px;
+      position: relative; overflow: hidden; cursor: default;
       transition: background .2s, border-color .2s, transform .2s, box-shadow .2s;
-      /* Entrance animation */
-      opacity: 0;
-      animation: fadeUp .4s ease forwards;
+      opacity: 0; animation: fadeUp .4s ease forwards;
     }
     .s-card:hover {
       background: var(--surface-h);
-      border-color: var(--border-h);
+      border-color: rgba(255,255,255,0.12);
       transform: translateY(-2px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(124,211,255,0.05);
+      box-shadow: 0 10px 36px rgba(0,0,0,0.4);
     }
     .s-card[hidden] { display: none !important; }
-
-    /* Colored left border */
     .s-card::before {
       content: '';
       position: absolute; left: 0; top: 16px; bottom: 16px;
       width: 3px;
-      background: var(--plugin-color, var(--accent));
+      background: var(--cat-color, #7cd3ff);
       border-radius: 0 3px 3px 0;
-      opacity: .7;
-      transition: opacity .2s;
+      opacity: .6; transition: opacity .2s;
     }
     .s-card:hover::before { opacity: 1; }
-
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(10px); }
+      from { opacity: 0; transform: translateY(8px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
     .card-head {
       display: flex; align-items: flex-start;
       justify-content: space-between; gap: 10px;
-      margin-bottom: 8px;
-      padding-left: 12px;
+      margin-bottom: 7px; padding-left: 12px;
     }
     .card-name {
-      font-family: var(--font-display);
+      font-family: var(--ff-display);
       font-size: 14px; font-weight: 700;
       color: var(--text); line-height: 1.3;
     }
-
-    /* Command badge — click to copy */
     .card-cmd {
-      font-family: var(--font-mono);
-      font-size: 11px; font-weight: 600;
-      color: var(--plugin-color, var(--accent));
+      font-family: var(--ff-mono); font-size: 11px; font-weight: 600;
+      color: var(--cat-color, #7cd3ff);
       background: rgba(124,211,255,0.06);
       border: 1px solid rgba(124,211,255,0.15);
-      padding: 4px 9px;
-      border-radius: 7px;
-      white-space: nowrap;
-      flex-shrink: 0;
-      cursor: pointer;
+      padding: 4px 9px; border-radius: 7px;
+      white-space: nowrap; flex-shrink: 0;
+      cursor: pointer; user-select: none;
       transition: background .15s, border-color .15s, transform .1s;
-      user-select: none;
     }
-    .card-cmd:hover {
-      background: rgba(124,211,255,0.12);
-      border-color: rgba(124,211,255,0.4);
-    }
-    .card-cmd:active { transform: scale(0.96); }
-    .card-cmd.copied {
-      color: #4ade80;
-      border-color: rgba(74,222,128,0.4);
-      background: rgba(74,222,128,0.08);
-    }
+    .card-cmd:hover { background: rgba(124,211,255,0.12); border-color: rgba(124,211,255,0.4); }
+    .card-cmd:active { transform: scale(0.95); }
+    .card-cmd.copied { color: #4ade80; border-color: rgba(74,222,128,0.35); background: rgba(74,222,128,0.07); }
 
     .card-desc {
-      font-size: 12px; font-weight: 400;
-      color: var(--text-2);
-      line-height: 1.5;
-      margin-bottom: 10px;
-      padding-left: 12px;
+      font-size: 12px; color: var(--text-2); line-height: 1.5;
+      margin-bottom: 10px; padding-left: 12px;
     }
-
     .card-bullets {
-      list-style: none;
-      display: flex; flex-direction: column; gap: 4px;
-      padding-left: 12px;
+      list-style: none; display: flex; flex-direction: column; gap: 4px;
+      padding-left: 12px; margin-bottom: 12px;
     }
     .card-bullets li {
       font-size: 11.5px; color: var(--text-2);
-      display: flex; gap: 8px; align-items: flex-start;
-      line-height: 1.45;
+      display: flex; gap: 8px; align-items: flex-start; line-height: 1.45;
     }
     .card-bullets li::before {
-      content: '›';
-      color: var(--plugin-color, var(--accent));
-      font-weight: 700; font-size: 14px;
-      flex-shrink: 0; line-height: 1.2;
-      opacity: .7;
+      content: '›'; color: var(--cat-color, #7cd3ff);
+      font-weight: 700; font-size: 14px; flex-shrink: 0;
+      line-height: 1.2; opacity: .7;
+    }
+    .card-footer {
+      padding-left: 12px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .plugin-tag {
+      font-family: var(--ff-mono); font-size: 10px;
+      color: var(--text-3); background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      padding: 2px 7px; border-radius: 5px;
     }
 
-    /* ─── TOAST ──────────────────────────────────────────── */
+    /* ── EMPTY ────────────────────────────────────── */
+    .empty {
+      display: none; text-align: center; padding: 80px 20px;
+      z-index: 1; position: relative;
+    }
+    .empty-icon { font-size: 44px; margin-bottom: 14px; opacity: .25; }
+    .empty-title { font-family: var(--ff-display); font-size: 18px; font-weight: 800; color: var(--text-2); margin-bottom: 6px; }
+    .empty-sub { font-size: 13px; color: var(--text-3); }
+
+    /* ── TOAST ────────────────────────────────────── */
     .toast {
-      position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(20px);
+      position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(16px);
       background: #0e1a12; border: 1px solid rgba(74,222,128,0.3);
-      color: #4ade80;
-      font-family: var(--font-mono); font-size: 12px;
+      color: #4ade80; font-family: var(--ff-mono); font-size: 12px;
       padding: 10px 18px; border-radius: 10px;
       box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-      z-index: 999;
-      opacity: 0; pointer-events: none;
+      z-index: 999; opacity: 0; pointer-events: none;
       transition: opacity .2s, transform .2s;
     }
     .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-    /* ─── NO RESULTS ─────────────────────────────────────── */
-    .empty {
-      display: none;
-      text-align: center;
-      padding: 80px 20px;
-      z-index: 1; position: relative;
-    }
-    .empty-icon { font-size: 48px; margin-bottom: 16px; opacity: .3; }
-    .empty-title {
-      font-family: var(--font-display);
-      font-size: 20px; font-weight: 800;
-      color: var(--text-2); margin-bottom: 6px;
-    }
-    .empty-sub { font-size: 13px; color: var(--text-3); }
-
-    /* ─── FOOTER ─────────────────────────────────────────── */
     footer {
-      position: relative; z-index: 1;
-      text-align: center;
-      padding: 20px;
-      font-family: var(--font-mono);
-      font-size: 11px; color: var(--text-3);
-      border-top: 1px solid var(--border);
+      position: relative; z-index: 1; text-align: center;
+      padding: 20px; font-family: var(--ff-mono); font-size: 11px;
+      color: var(--text-3); border-top: 1px solid var(--border);
     }
-    footer .hl { color: var(--accent); }
+    footer .hl { color: #7cd3ff; }
 
-    /* ─── RESPONSIVE ─────────────────────────────────────── */
     @media (max-width: 680px) {
       header { padding: 0 16px; gap: 10px; }
-      .logo-sub { display: none; }
+      .logo-sub, .header-stat { display: none; }
       .search-wrap input { width: 180px; }
-      .stat-pill { display: none; }
       main { padding: 24px 16px 40px; }
-      .filters-bar { padding: 8px 16px; }
+      .cat-bar { padding: 0 16px; }
     }
   </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <header>
   <div class="logo">
     <div class="logo-mark">⌘</div>
@@ -395,522 +331,320 @@
       <div class="logo-sub">claude code</div>
     </div>
   </div>
-
-  <div class="stat-pill" id="stat-pill">
-    <b id="stat-skills">0</b> skills · <b id="stat-plugins">0</b> plugins
-  </div>
-
+  <div class="header-stat"><b id="stat-skills">0</b> skills · <b id="stat-cats">0</b> categorias</div>
   <div class="search-wrap">
-    <span class="search-ico">⌕</span>
-    <input type="text" id="search" placeholder="Buscar skill ou comando..." autocomplete="off" />
-    <span class="search-hint">pressione /</span>
-    <span class="search-clear" id="search-clear" onclick="clearSearch()">✕</span>
+    <span class="s-ico">⌕</span>
+    <input type="text" id="search" placeholder="Buscar skill ou /comando..." autocomplete="off" />
+    <span class="s-hint">pressione /</span>
+    <span class="s-clear" id="s-clear" onclick="clearSearch()">✕</span>
   </div>
 </header>
 
-<!-- FILTERS -->
-<div class="filters-bar" id="filters-bar">
-  <button class="f-btn active" data-plugin="all" onclick="filterPlugin('all', this)">
-    Todos <span class="count" id="count-all">0</span>
+<div class="cat-bar" id="cat-bar">
+  <button class="cat-btn active" data-cat="all" style="--cat-color:#7cd3ff" onclick="filterCat('all',this)">
+    <span class="cat-icon">✦</span>
+    <span class="cat-name">Todos</span>
+    <span class="cat-count" id="cnt-all">0</span>
   </button>
 </div>
 
-<!-- MAIN -->
 <main id="main"></main>
-
-<!-- EMPTY STATE -->
 <div class="empty" id="empty">
   <div class="empty-icon">⌖</div>
   <div class="empty-title">Nada encontrado</div>
   <div class="empty-sub">Tente outro termo ou instale uma nova skill</div>
 </div>
 
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
-<footer>
-  Atualizado em <span class="hl" id="updated"></span> · <span class="hl" id="footer-count">0</span> skills instaladas
-</footer>
+<footer>Atualizado em <span class="hl" id="updated"></span> · <span class="hl" id="footer-cnt">0</span> skills instaladas</footer>
 
 <script>
 /* ================================================================
-   DADOS — adicione novas skills aqui ao instalar
+   CATEGORIAS — organização por tipo de função
    ================================================================ */
-const PLUGINS = [
+const CATS = [
   {
-    id: 'superpowers',
-    name: 'Superpowers',
+    id: 'planejar',
+    name: 'Planejar',
+    icon: '🧠',
     color: '#a78bfa',
+    desc: 'Do brainstorming ao plano detalhado de implementação',
     skills: [
-      {
-        name: 'Brainstorming',
-        command: '/brainstorming',
-        desc: 'Explorar intenção, requisitos e design antes de implementar',
-        bullets: [
-          'Transforma ideias em specs completas via diálogo colaborativo',
-          'Faz perguntas uma de cada vez para refinar o design',
+      { name: 'Brainstorming', command: '/brainstorming', plugin: 'superpowers',
+        desc: 'Transformar uma ideia em spec completa antes de qualquer código',
+        bullets: ['Faz perguntas uma de cada vez para refinar o design',
           'Propõe 2–3 abordagens com trade-offs e recomendação',
-          'Exige aprovação antes de qualquer código',
-          'Salva doc de design em docs/superpowers/specs/',
-        ]
-      },
-      {
-        name: 'Planejamento',
-        command: '/writing-plans',
-        desc: 'Escrever planos de implementação detalhados antes de tocar em código',
-        bullets: [
-          'Mapeia todos os arquivos a criar ou modificar',
-          'Divide o trabalho em tarefas granulares e sequenciais',
-          'Documenta como testar cada parte',
-          'Salva plano em docs/superpowers/plans/',
-          'Aplica princípios DRY, YAGNI e TDD',
-        ]
-      },
-      {
-        name: 'Executar Planos',
-        command: '/executing-plans',
+          'Exige aprovação do design antes de implementar',
+          'Salva doc em docs/superpowers/specs/'] },
+      { name: 'Escrever Plano', command: '/writing-plans', plugin: 'superpowers',
+        desc: 'Plano de implementação detalhado com tasks e testes descritos',
+        bullets: ['Mapeia todos os arquivos a criar ou modificar',
+          'Divide o trabalho em tasks granulares e sequenciais',
+          'Salva em docs/superpowers/plans/',
+          'Aplica DRY, YAGNI e TDD'] },
+      { name: 'Make Plan', command: '/make-plan', plugin: 'thedotmack',
+        desc: 'Plano faseado com descoberta prévia de docs e APIs reais',
+        bullets: ['Fase 0 obrigatória: lê docs antes de planejar',
+          'Subagents coletam fatos (APIs, assinaturas, exemplos)',
+          'Produz plano executável em contextos de chat separados'] },
+      { name: 'Executar Plano', command: '/executing-plans', plugin: 'superpowers',
         desc: 'Carregar e executar um plano de implementação já escrito',
-        bullets: [
-          'Lê o plano e identifica questões antes de iniciar',
-          'Executa cada tarefa em ordem com checkpoints',
-          'Usa subagents para tarefas paralelas quando possível',
-        ]
-      },
-      {
-        name: 'Subagent Dev',
-        command: '/subagent-driven-development',
-        desc: 'Executar planos via subagent dedicado por tarefa com revisão dupla',
-        bullets: [
-          'Um subagent fresco por tarefa independente',
-          'Revisão em dois estágios: spec + qualidade de código',
-          'Preserva contexto do agente principal para coordenação',
-        ]
-      },
-      {
-        name: 'Parallel Agents',
-        command: '/dispatching-parallel-agents',
-        desc: 'Delegar 2+ tarefas independentes para agentes paralelos',
-        bullets: [
-          'Identifica quando tarefas são verdadeiramente independentes',
-          'Cria subagents com contexto isolado e preciso',
-          'Ideal para múltiplas falhas em subsistemas diferentes',
-        ]
-      },
-      {
-        name: 'TDD',
-        command: '/test-driven-development',
-        desc: 'Escrever o teste primeiro, ver falhar, depois implementar',
-        bullets: [
-          'Ciclo RED → GREEN → REFACTOR rigoroso',
-          'Garante que o teste verifica o comportamento certo',
-          'Funciona para features, bugfixes e refatorações',
-        ]
-      },
-      {
-        name: 'Debug Sistemático',
-        command: '/systematic-debugging',
-        desc: 'Encontrar a causa raiz antes de propor qualquer correção',
-        bullets: [
-          'Lei de ferro: sem correção sem causa raiz identificada',
-          'Fases: reproduzir → isolar → identificar → corrigir',
-          'Patches de sintoma são proibidos',
-        ]
-      },
-      {
-        name: 'Verificação Final',
-        command: '/verification-before-completion',
-        desc: 'Rodar verificações antes de declarar que o trabalho está pronto',
-        bullets: [
-          'Proibido afirmar "pronto" sem evidência recente de verificação',
-          'Identifica e roda o comando que prova a claim',
-          'Aplica antes de commits, PRs ou qualquer declaração de sucesso',
-        ]
-      },
-      {
-        name: 'Solicitar Code Review',
-        command: '/requesting-code-review',
-        desc: 'Despachar subagent revisor após completar features ou tasks',
-        bullets: [
-          'Dispatch do agente code-reviewer com contexto preciso',
-          'Obrigatório após cada task em subagent dev e antes de merge',
-          'Revisor não herda histórico da sessão — avaliação imparcial',
-        ]
-      },
-      {
-        name: 'Receber Code Review',
-        command: '/receiving-code-review',
-        desc: 'Avaliar feedback de code review com rigor técnico',
-        bullets: [
-          'Verificar antes de implementar qualquer sugestão',
-          'Permite pushback técnico fundamentado quando necessário',
-          'Nunca aceitar sugestão por performance social',
-        ]
-      },
-      {
-        name: 'Fechar Branch',
-        command: '/finishing-a-development-branch',
-        desc: 'Guiar a finalização de trabalho de desenvolvimento',
-        bullets: [
-          'Verifica se todos os testes passam antes de qualquer ação',
-          'Apresenta opções: merge direto, PR ou squash',
-          'Faz limpeza do worktree e branches temporárias',
-        ]
-      },
-      {
-        name: 'Git Worktrees',
-        command: '/using-git-worktrees',
-        desc: 'Criar workspaces git isolados para trabalhar em paralelo',
-        bullets: [
-          'Cria worktree isolado sem conflitar com o trabalho atual',
-          'Seleção inteligente de diretório (.worktrees/worktrees)',
-          'Verificação de segurança antes de criar isolamento',
-        ]
-      },
-      {
-        name: 'Criar Skills',
-        command: '/writing-skills',
-        desc: 'Criar novas skills usando metodologia TDD',
-        bullets: [
-          'TDD aplicado a documentação de processo',
-          'Testa comportamento do agente sem a skill antes de escrever',
-          'Salva em ~/.claude/skills/ ou ~/.agents/skills/',
-        ]
-      },
-      {
-        name: 'Using Superpowers',
-        command: '/using-superpowers',
-        desc: 'Skill mestre — estabelece como encontrar e usar todas as outras skills',
-        bullets: [
-          'Invocar skill relevante ANTES de qualquer resposta ou ação',
-          'Define prioridade: usuário > superpowers > system prompt',
-          'Documenta red flags de racionalização para não pular skills',
-        ]
-      },
+        bullets: ['Lê o plano e levanta questões antes de iniciar',
+          'Executa cada task em ordem com checkpoints',
+          'Marca tasks como concluídas em tempo real'] },
+      { name: 'Planning (Arquivos)', command: '/planning-with-files-zh', plugin: 'planning-with-files-zh',
+        desc: 'Sistema de planejamento estilo Manus com arquivos de progresso',
+        bullets: ['Cria task_plan.md, findings.md e progress.md',
+          'Rastreia progresso entre sessões',
+          'Resume automaticamente ao detectar plano ativo'] },
     ]
   },
   {
-    id: 'thedotmack',
-    name: 'TheDotMack',
-    color: '#22d3ee',
-    skills: [
-      {
-        name: 'Make Plan',
-        command: '/make-plan',
-        desc: 'Criar plano de implementação faseado com descoberta de documentação',
-        bullets: [
-          'Fase 0 obrigatória: descoberta de docs e exemplos reais',
-          'Usa subagents para coleta de fatos (APIs, arquivos, exemplos)',
-          'Produz plano executável em contextos de chat separados',
-        ]
-      },
-      {
-        name: 'Do',
-        command: '/do',
-        desc: 'Executar plano faseado usando subagents como orquestrador',
-        bullets: [
-          'Um subagent de implementação por fase',
-          'Subagent de verificação e anti-patterns após cada fase',
-          'Não avança sem confirmação de conclusão da fase anterior',
-        ]
-      },
-      {
-        name: 'Smart Explore',
-        command: '/smart-explore',
-        desc: 'Exploração de código via AST tree-sitter — reduz tokens drasticamente',
-        bullets: [
-          'Substitui Read/Grep/Glob por smart_search/outline/unfold',
-          'Indexa estrutura antes de carregar implementação',
-          'Camadas: busca → outline → símbolo específico',
-        ]
-      },
-      {
-        name: 'Mem Search',
-        command: '/mem-search',
-        desc: 'Buscar memória persistente entre sessões via claude-mem',
-        bullets: [
-          'Responde "já resolvemos isso antes?" e "como fizemos X?"',
-          'Fluxo 3 camadas para economizar tokens',
-          'Busca semântica por projeto, tipo, conceito ou data',
-        ]
-      },
-      {
-        name: 'Knowledge Agent',
-        command: '/knowledge-agent',
-        desc: 'Construir e consultar bases de conhecimento a partir de observações',
-        bullets: [
-          'Compila corpus filtrado do histórico de observações',
-          'Cria "cérebros" focados por tema ou serviço',
-          'Consulta conversacionalmente com contexto especializado',
-        ]
-      },
-      {
-        name: 'Timeline Report',
-        command: '/timeline-report',
-        desc: 'Gerar relatório narrativo da história de desenvolvimento de um projeto',
-        bullets: [
-          'Analisa todo o histórico via claude-mem timeline',
-          'Produz narrativa "Journey Into [Projeto]"',
-          'Cobre decisões, bugs, features e refatorações no tempo',
-        ]
-      },
-      {
-        name: 'Version Bump',
-        command: '/version-bump',
-        desc: 'Versionamento semântico e workflow de release para plugins',
-        bullets: [
-          'Incrementa versão em package.json, marketplace.json e plugin.json',
-          'Cria commit, tag annotated, push e GitHub Release',
-          'Regenera CHANGELOG.md via GitHub API',
-        ]
-      },
-    ]
-  },
-  {
-    id: 'playwright',
-    name: 'Playwright',
-    color: '#4ade80',
-    skills: [
-      {
-        name: 'Playwright Skill',
-        command: '/playwright-skill',
-        desc: 'Automação completa de browser com Playwright',
-        bullets: [
-          'Auto-detecta servidores dev em localhost antes de testar',
-          'Testa páginas, preenche formulários, verifica responsividade',
-          'Valida UX, fluxos de login e monitora erros de console',
-          'Escreve e executa scripts Playwright no /tmp',
-        ]
-      },
-      {
-        name: 'Playwright CLI',
-        command: '/playwright-cli',
-        desc: 'CLI de automação — comandos diretos: open, goto, click, type',
-        bullets: [
-          'Navega por URL, clica em elementos por ref do snapshot',
-          'Digita texto, pressiona teclas, tira screenshot',
-          'Fecha browser ao terminar',
-        ]
-      },
-      {
-        name: 'Playwright Trace',
-        command: '/playwright-trace',
-        desc: 'Inspecionar arquivos de trace do Playwright via CLI sem abrir browser',
-        bullets: [
-          'Lista ações, requests, console, erros e snapshots DOM',
-          'Opera em arquivos .zip de trace gerados pelo Playwright',
-          'Ideal para análise em CI/CD',
-        ]
-      },
-    ]
-  },
-  {
-    id: 'agent-browser',
-    name: 'Agent Browser',
+    id: 'implementar',
+    name: 'Implementar',
+    icon: '⚙️',
     color: '#60a5fa',
+    desc: 'Padrões e fluxos para escrever código com qualidade',
     skills: [
-      {
-        name: 'Agent Browser',
-        command: '/agent-browser',
-        desc: 'CLI de automação de browser para agentes IA via Chrome/CDP',
-        bullets: [
-          'Navegar, preencher formulários, clicar e extrair dados',
-          'Testar web apps e automatizar fluxos completos',
-          'Automatizar apps Electron (VS Code, Slack, Discord, Figma)',
-          'Automação Slack: mensagens, busca, unreads',
-          'Suporte a AWS Bedrock AgentCore cloud browsers',
-        ]
-      },
+      { name: 'TDD', command: '/test-driven-development', plugin: 'superpowers',
+        desc: 'Escrever o teste primeiro, ver falhar, depois implementar',
+        bullets: ['Ciclo RED → GREEN → REFACTOR rigoroso',
+          'Garante que o teste verifica o comportamento certo',
+          'Funciona para features, bugfixes e refatorações'] },
+      { name: 'Subagent Dev', command: '/subagent-driven-development', plugin: 'superpowers',
+        desc: 'Executar planos com subagent fresco por task + revisão dupla',
+        bullets: ['Um subagent isolado por task independente',
+          'Revisão em dois estágios: spec + qualidade do código',
+          'Preserva contexto do agente principal'] },
+      { name: 'Parallel Agents', command: '/dispatching-parallel-agents', plugin: 'superpowers',
+        desc: 'Delegar 2+ tarefas independentes para agentes paralelos',
+        bullets: ['Identifica tarefas verdadeiramente independentes',
+          'Cada subagent com contexto isolado e preciso',
+          'Ideal para múltiplos bugs em subsistemas diferentes'] },
+      { name: 'Do (Orquestrador)', command: '/do', plugin: 'thedotmack',
+        desc: 'Executar plano faseado delegando tudo para subagents',
+        bullets: ['Subagent de implementação por fase',
+          'Subagent de verificação e anti-patterns após cada fase',
+          'Não avança sem confirmação da fase anterior'] },
+      { name: 'Git Worktrees', command: '/using-git-worktrees', plugin: 'superpowers',
+        desc: 'Workspaces git isolados para trabalhar em paralelo sem conflitos',
+        bullets: ['Cria worktree isolado sem afetar o trabalho atual',
+          'Seleção inteligente de diretório (.worktrees / worktrees)',
+          'Verificação de segurança antes de criar o isolamento'] },
+      { name: 'Criar Skills', command: '/writing-skills', plugin: 'superpowers',
+        desc: 'Criar novas skills para Claude Code usando metodologia TDD',
+        bullets: ['TDD aplicado à documentação de processo',
+          'Testa comportamento sem a skill antes de escrever',
+          'Salva em ~/.claude/skills/ ou ~/.agents/skills/'] },
+      { name: 'Version Bump', command: '/version-bump', plugin: 'thedotmack',
+        desc: 'Versionamento semântico e release workflow para plugins',
+        bullets: ['Incrementa versão em package.json, marketplace.json, plugin.json',
+          'Cria commit, tag annotated, push e GitHub Release',
+          'Regenera CHANGELOG.md via GitHub API'] },
+    ]
+  },
+  {
+    id: 'revisar',
+    name: 'Debug & Review',
+    icon: '🔍',
+    color: '#f87171',
+    desc: 'Debug sistemático, revisão de código e verificação antes de entregar',
+    skills: [
+      { name: 'Debug Sistemático', command: '/systematic-debugging', plugin: 'superpowers',
+        desc: 'Encontrar a causa raiz antes de propor qualquer correção',
+        bullets: ['Lei de ferro: sem fix sem causa raiz identificada',
+          'Fases: reproduzir → isolar → identificar → corrigir',
+          'Patches de sintoma são proibidos'] },
+      { name: 'Solicitar Review', command: '/requesting-code-review', plugin: 'superpowers',
+        desc: 'Despachar subagent revisor após completar features ou tasks',
+        bullets: ['Dispatch do code-reviewer com contexto preciso e isolado',
+          'Obrigatório após cada task em subagent dev e antes de merge',
+          'Revisor não herda histórico da sessão'] },
+      { name: 'Receber Review', command: '/receiving-code-review', plugin: 'superpowers',
+        desc: 'Avaliar feedback de code review com rigor técnico, não performativo',
+        bullets: ['Verificar antes de implementar qualquer sugestão',
+          'Permite pushback técnico fundamentado quando necessário',
+          'Nunca aceitar sugestão por performance social'] },
+      { name: 'Verificação Final', command: '/verification-before-completion', plugin: 'superpowers',
+        desc: 'Rodar verificações antes de declarar que o trabalho está pronto',
+        bullets: ['Proibido afirmar "pronto" sem evidência recente',
+          'Identifica e roda o comando que prova a claim',
+          'Aplica antes de commits, PRs e qualquer declaração de sucesso'] },
+      { name: 'Fechar Branch', command: '/finishing-a-development-branch', plugin: 'superpowers',
+        desc: 'Guiar a finalização de trabalho e integração da branch',
+        bullets: ['Verifica testes antes de qualquer ação',
+          'Apresenta opções: merge direto, PR ou squash',
+          'Faz limpeza de worktree e branches temporárias'] },
+      { name: 'Smart Explore', command: '/smart-explore', plugin: 'thedotmack',
+        desc: 'Exploração de código via AST tree-sitter — muito mais eficiente',
+        bullets: ['Substitui Read/Grep/Glob por smart_search/outline/unfold',
+          'Indexa estrutura antes de carregar detalhes de implementação',
+          'Reduz tokens drasticamente em codebases grandes'] },
     ]
   },
   {
     id: 'design',
-    name: 'Design & Frontend',
+    name: 'Design & UI',
+    icon: '🎨',
     color: '#f472b6',
+    desc: 'Interfaces visuais, componentes e boas práticas de frontend',
     skills: [
-      {
-        name: 'Frontend Design',
-        command: '/frontend-design',
-        desc: 'Criar interfaces frontend de produção com alta qualidade visual',
-        bullets: [
-          'Evita estética genérica de IA — gera designs memoráveis',
-          'Define direção estética antes de codificar',
+      { name: 'Frontend Design', command: '/frontend-design', plugin: 'frontend-design',
+        desc: 'Criar interfaces de produção com estética memorável e distintiva',
+        bullets: ['Evita estética genérica de IA — define direção estética clara',
           'Produz HTML/CSS/JS ou React funcional e visualmente marcante',
-          'Atenção a tipografia, espaçamento e micro-interações',
-        ]
-      },
-      {
-        name: 'UI/UX Pro Max',
-        command: '/ui-ux-pro-max',
-        desc: 'Biblioteca completa de referências de design UI/UX',
-        bullets: [
-          '50+ estilos visuais, 161 paletas de cores, 57 pares de fontes',
-          '99 diretrizes de UX e 25 tipos de gráfico',
-          '10 stacks: React, Next.js, Vue, Svelte, Tailwind, shadcn/ui, Flutter...',
-          'Revisão de UI para acessibilidade e consistência visual',
-        ]
-      },
-      {
-        name: 'Figma → Código',
-        command: '/figma-implement-design',
+          'Atenção a tipografia, espaçamento e micro-interações'] },
+      { name: 'UI/UX Pro Max', command: '/ui-ux-pro-max', plugin: 'ui-ux-pro-max',
+        desc: 'Biblioteca completa de referências de design com 161 paletas e 99 diretrizes',
+        bullets: ['50+ estilos visuais, 161 paletas, 57 pares de fontes',
+          '10 stacks: React, Next.js, Vue, Tailwind, shadcn/ui, Flutter...',
+          'Revisão de UI para acessibilidade e consistência visual'] },
+      { name: 'Figma → Código', command: '/figma-implement-design', plugin: 'figma-implement-design',
         desc: 'Traduzir designs Figma para código de produção com fidelidade 1:1',
-        bullets: [
-          'Lê arquivo Figma via MCP server para extrair tokens de design',
-          'Gera código pixel-perfect com o design',
-          'Integra com sistema de design e biblioteca de componentes existente',
-        ]
-      },
-      {
-        name: 'Vercel React',
-        command: '/vercel-react-best-practices',
-        desc: 'Boas práticas React/Next.js da Vercel Engineering',
-        bullets: [
-          '70 regras em 8 categorias priorizadas por impacto',
-          'Eliminar waterfalls de dados (CRÍTICO)',
-          'Otimização de bundle size, SSR e client-side fetching',
-        ]
-      },
+        bullets: ['Lê arquivo Figma via MCP server para extrair tokens de design',
+          'Gera código pixel-perfect',
+          'Integra com sistema de design e biblioteca de componentes'] },
+      { name: 'Vercel React', command: '/vercel-react-best-practices', plugin: 'vercel-react',
+        desc: 'Boas práticas React/Next.js da Vercel Engineering — 70 regras',
+        bullets: ['Eliminar waterfalls de dados (CRÍTICO)',
+          'Otimização de bundle size (CRÍTICO)',
+          'Performance SSR e client-side data fetching'] },
     ]
   },
   {
-    id: 'copy',
-    name: 'Copy & Escrita',
+    id: 'escrever',
+    name: 'Copywriting',
+    icon: '✍️',
     color: '#fbbf24',
+    desc: 'Copy de marketing, humanização de texto e estilo de escrita',
     skills: [
-      {
-        name: 'Copywriting',
-        command: '/copywriting',
-        desc: 'Escrever copy de marketing persuasivo que converte',
-        bullets: [
-          'Homepage, landing pages, pricing, feature pages, about',
+      { name: 'Copywriting', command: '/copywriting', plugin: 'copywriting',
+        desc: 'Escrever copy de marketing persuasivo que converte visitantes',
+        bullets: ['Homepage, landing pages, pricing, feature pages, about',
           'Headlines, CTAs, value propositions e taglines',
           'Analisa persona, problema, objeções e linguagem do cliente',
-          'Lê .agents/product-marketing-context.md se existir',
-        ]
-      },
-      {
-        name: 'Humanizer',
-        command: '/humanizer',
+          'Lê .agents/product-marketing-context.md se existir'] },
+      { name: 'Humanizer', command: '/humanizer', plugin: 'humanizer',
         desc: 'Remover padrões de escrita IA para soar natural e humano',
-        bullets: [
-          'Remove: simbolismo inflado, abuso de travessão (—), voz passiva',
+        bullets: ['Remove: simbolismo inflado, travessão excessivo, voz passiva',
           'Elimina frases de relleno e atribuições vagas',
-          'Baseado no guia "Signs of AI writing" da Wikipedia',
-        ]
-      },
-      {
-        name: 'My Writing Style',
-        command: '/my-writing-style',
-        desc: 'Skill de estilo de escrita personalizado com auto-aprendizado',
-        bullets: [
-          'Aprende seu estilo a partir das suas edições automaticamente',
+          'Baseado no guia "Signs of AI writing" da Wikipedia'] },
+      { name: 'My Writing Style', command: '/my-writing-style', plugin: 'my-writing-style',
+        desc: 'Skill de estilo personalizado que aprende com suas edições',
+        bullets: ['Aprende seu estilo automaticamente a partir das suas correções',
           'Fica mais preciso quanto mais você usa e corrige',
-        ]
-      },
+          'Template: fork e configure suas próprias regras'] },
     ]
   },
   {
-    id: 'productivity',
-    name: 'Produtividade',
+    id: 'browser',
+    name: 'Browser & Testes',
+    icon: '🌐',
     color: '#34d399',
+    desc: 'Automação de browser, testes e2e e inspeção de traces',
     skills: [
-      {
-        name: 'Caveman Mode',
-        command: '/caveman',
-        desc: 'Modo ultra-comprimido — reduz tokens ~75% mantendo precisão técnica',
-        bullets: [
-          'Remove artigos, adjetivos e cortesias, preserva substância',
-          'Níveis: lite, full (padrão), ultra',
-          'Ativo em todas as respostas até "stop caveman"',
-        ]
-      },
-      {
-        name: 'Cost Mode',
-        command: '/cost-mode',
-        desc: 'Modo econômico — reduz tokens 40–70% e custos 30–60%',
-        bullets: [
-          'Elimina cortesias, hedging e repetição do prompt',
-          'Mantém toda substância técnica, código e warnings',
-          'Níveis: lite, standard, strict',
-        ]
-      },
-      {
-        name: 'Find Skills',
-        command: '/find-skills',
-        desc: 'Descobrir e instalar skills do ecossistema open agent skills',
-        bullets: [
-          'Busca por funcionalidade no marketplace skills.sh',
-          'Verifica qualidade: installs, reputação e stars no GitHub',
-          'Sugere comando de instalação npx skills add',
-        ]
-      },
-      {
-        name: 'Context7 CLI',
-        command: '/context7-cli',
-        desc: 'Buscar documentação atualizada de qualquer biblioteca',
-        bullets: [
-          'Docs em tempo real para qualquer lib (training data pode estar desatualizado)',
-          'Gerencia skills: instalar, buscar, listar e remover',
-          'Configura Context7 MCP para Claude Code / Cursor',
-        ]
-      },
-      {
-        name: 'Planning (ZH)',
-        command: '/planning-with-files-zh',
-        desc: 'Sistema de planejamento em arquivos estilo Manus',
-        bullets: [
-          'Cria task_plan.md, findings.md e progress.md',
-          'Rastreia progresso de tarefas complexas entre sessões',
-          'Resume sessão automaticamente ao detectar plano ativo',
-        ]
-      },
+      { name: 'Playwright Skill', command: '/playwright-skill', plugin: 'playwright-skill',
+        desc: 'Automação completa de browser com Playwright — testes e2e',
+        bullets: ['Auto-detecta servidores dev em localhost antes de testar',
+          'Testa páginas, preenche formulários, verifica responsividade',
+          'Monitora erros de console, valida UX e fluxos de login',
+          'Escreve e executa scripts Playwright no /tmp'] },
+      { name: 'Playwright CLI', command: '/playwright-cli', plugin: 'playwright-skill',
+        desc: 'Comandos diretos de browser via CLI: open, goto, click, type',
+        bullets: ['Navega por URL, clica em elementos por ref do snapshot',
+          'Digita texto, pressiona teclas, tira screenshot',
+          'Fecha browser ao terminar'] },
+      { name: 'Playwright Trace', command: '/playwright-trace', plugin: 'playwright-skill',
+        desc: 'Inspecionar arquivos .zip de trace sem abrir browser',
+        bullets: ['Lista ações com IDs, duração e localização no código',
+          'Inspeciona requests, console, erros e snapshots DOM',
+          'Ideal para análise de falhas em CI/CD'] },
+      { name: 'Agent Browser', command: '/agent-browser', plugin: 'agent-browser',
+        desc: 'CLI de automação de browser via Chrome/CDP para agentes IA',
+        bullets: ['Navegar, preencher formulários, clicar e extrair dados',
+          'Automatizar apps Electron (VS Code, Slack, Discord, Figma)',
+          'Automação Slack: mensagens, busca, unreads',
+          'Suporte a AWS Bedrock AgentCore cloud browsers'] },
     ]
   },
   {
-    id: 'apify',
-    name: 'Apify / Scraping',
+    id: 'dados',
+    name: 'Dados & Scraping',
+    icon: '📊',
     color: '#fb923c',
+    desc: 'Extração de dados da web, scraping e Apify Actors',
     skills: [
-      {
-        name: 'Ultimate Scraper',
-        command: '/apify-ultimate-scraper',
-        desc: 'Scraper universal com IA para 55+ plataformas',
-        bullets: [
-          'Instagram, Facebook, TikTok, YouTube, Google Maps/Search/Trends',
+      { name: 'Ultimate Scraper', command: '/apify-ultimate-scraper', plugin: 'apify',
+        desc: 'Scraper universal com IA para 55+ plataformas automaticamente',
+        bullets: ['Instagram, Facebook, TikTok, YouTube, Google Maps/Search/Trends',
           'Booking.com, TripAdvisor e muito mais',
           'Lead gen, monitoramento de marca, análise de concorrentes',
-          'Seleciona automaticamente o melhor Actor para cada tarefa',
-        ]
-      },
-      {
-        name: 'Actor Development',
-        command: '/apify-actor-development',
-        desc: 'Desenvolver, debugar e fazer deploy de Apify Actors',
-        bullets: [
-          'Actors: programas serverless para scraping e automação',
-          'Aceitam JSON input, rodam em Docker isolado',
-          'Deploy via apify push',
-        ]
-      },
-      {
-        name: 'Actorization',
-        command: '/apify-actorization',
+          'Seleciona automaticamente o melhor Actor para cada tarefa'] },
+      { name: 'Actor Development', command: '/apify-actor-development', plugin: 'apify',
+        desc: 'Desenvolver, debugar e fazer deploy de Apify Actors serverless',
+        bullets: ['Actors: programas serverless Docker para scraping e automação',
+          'Aceitam JSON input, persistem estado, escalam automaticamente',
+          'Deploy via apify push'] },
+      { name: 'Actorization', command: '/apify-actorization', plugin: 'apify',
         desc: 'Converter projetos existentes em Apify Actors',
-        bullets: [
-          'Envolve código JS/TS, Python ou qualquer linguagem com SDK',
-          'Configura .actor/input_schema.json e .actor/actor.json',
-          'Testa localmente com apify run antes do deploy',
-        ]
-      },
-      {
-        name: 'Output Schema',
-        command: '/apify-generate-output-schema',
+        bullets: ['Envolve código JS/TS, Python ou qualquer linguagem',
+          'Configura .actor/input_schema.json e actor.json',
+          'Testa localmente com apify run antes do deploy'] },
+      { name: 'Output Schema', command: '/apify-generate-output-schema', plugin: 'apify',
         desc: 'Gerar schemas de output para Actors analisando o código fonte',
-        bullets: [
-          'Analisa o código — nunca adivinha o output',
+        bullets: ['Analisa o código — nunca adivinha o output',
           'Gera dataset_schema.json, output_schema.json e key_value_store_schema.json',
-          'Todos os campos nullable por padrão (APIs são imprevisíveis)',
-        ]
-      },
+          'Todos os campos nullable por padrão'] },
+    ]
+  },
+  {
+    id: 'produtividade',
+    name: 'Produtividade',
+    icon: '⚡',
+    color: '#22d3ee',
+    desc: 'Memória, economia de tokens, ferramentas e atalhos de eficiência',
+    skills: [
+      { name: 'Caveman Mode', command: '/caveman', plugin: 'caveman',
+        desc: 'Modo ultra-comprimido — reduz tokens ~75% mantendo precisão técnica',
+        bullets: ['Remove artigos, adjetivos e cortesias, preserva substância',
+          'Níveis: lite, full (padrão), ultra',
+          'Ativo em todas as respostas até "stop caveman"'] },
+      { name: 'Cost Mode', command: '/cost-mode', plugin: 'cost-mode',
+        desc: 'Modo econômico — reduz tokens 40–70% e custos 30–60%',
+        bullets: ['Elimina cortesias, hedging e repetição do prompt',
+          'Mantém toda substância técnica, código e warnings',
+          'Níveis: lite, standard, strict'] },
+      { name: 'Mem Search', command: '/mem-search', plugin: 'thedotmack',
+        desc: 'Buscar memória persistente entre sessões via claude-mem',
+        bullets: ['Responde "já resolvemos isso?" e "como fizemos X na última sessão?"',
+          'Fluxo 3 camadas para economizar tokens na busca',
+          'Busca semântica por projeto, tipo, conceito ou data'] },
+      { name: 'Knowledge Agent', command: '/knowledge-agent', plugin: 'thedotmack',
+        desc: 'Criar e consultar bases de conhecimento a partir de observações passadas',
+        bullets: ['Compila corpus filtrado do histórico de observações',
+          'Cria "cérebros" focados: "tudo sobre hooks", "todos os bugfixes do worker"',
+          'Consulta conversacionalmente com contexto especializado'] },
+      { name: 'Timeline Report', command: '/timeline-report', plugin: 'thedotmack',
+        desc: 'Relatório narrativo da história de desenvolvimento de um projeto',
+        bullets: ['Analisa todo o histórico via claude-mem timeline',
+          'Produz narrativa "Journey Into [Projeto]"',
+          'Cobre decisões, bugs, features e refatorações no tempo'] },
+      { name: 'Find Skills', command: '/find-skills', plugin: 'find-skills',
+        desc: 'Descobrir e instalar skills do ecossistema open agent skills',
+        bullets: ['Busca por funcionalidade no marketplace skills.sh',
+          'Verifica qualidade: installs, reputação e stars no GitHub',
+          'Sugere comando npx skills add'] },
+      { name: 'Context7 CLI', command: '/context7-cli', plugin: 'context7-cli',
+        desc: 'Buscar documentação atualizada de qualquer biblioteca em tempo real',
+        bullets: ['Docs em tempo real (training data pode estar desatualizado)',
+          'Gerencia skills: instalar, buscar, listar e remover',
+          'Configura Context7 MCP para Claude Code / Cursor'] },
+      { name: 'Using Superpowers', command: '/using-superpowers', plugin: 'superpowers',
+        desc: 'Skill mestre — define como encontrar e usar todas as outras skills',
+        bullets: ['Invocar skill relevante ANTES de qualquer resposta',
+          'Define prioridade: usuário > superpowers > system prompt',
+          'Documenta red flags de racionalização para não pular skills'] },
     ]
   },
 ];
@@ -918,89 +652,118 @@ const PLUGINS = [
 /* ================================================================
    RENDER
    ================================================================ */
-let activePlugin = 'all';
-let searchQuery = '';
-let toastTimer;
+let activeCat = 'all';
+let searchQ = '';
+let toastTmr;
 
 function render() {
-  const main = document.getElementById('main');
-  const filtersBar = document.getElementById('filters-bar');
-  let totalSkills = 0;
-  let delay = 0;
+  const main  = document.getElementById('main');
+  const catBar = document.getElementById('cat-bar');
+  let total = 0, delay = 0;
 
-  PLUGINS.forEach(plugin => {
-    totalSkills += plugin.skills.length;
+  CATS.forEach(cat => {
+    total += cat.skills.length;
 
-    // Filter button
+    // Filter tab
     const btn = document.createElement('button');
-    btn.className = 'f-btn';
-    btn.dataset.plugin = plugin.id;
-    btn.onclick = function() { filterPlugin(plugin.id, this); };
-    btn.innerHTML = `${plugin.name} <span class="count">${plugin.skills.length}</span>`;
-    filtersBar.appendChild(btn);
+    btn.className = 'cat-btn';
+    btn.dataset.cat = cat.id;
+    btn.style.setProperty('--cat-color', cat.color);
+    btn.onclick = function() { filterCat(cat.id, this); };
+    btn.innerHTML = `<span class="cat-icon">${cat.icon}</span><span class="cat-name">${cat.name}</span><span class="cat-count" id="cnt-${cat.id}">${cat.skills.length}</span>`;
+    catBar.appendChild(btn);
 
-    // Plugin group
-    const group = document.createElement('div');
-    group.className = 'p-group';
-    group.dataset.plugin = plugin.id;
-
-    // Plugin header
-    const ph = document.createElement('div');
-    ph.className = 'p-header';
-    ph.innerHTML = `
-      <div class="p-indicator" style="background:${plugin.color};color:${plugin.color}"></div>
-      <div class="p-name">${plugin.name}</div>
-      <div class="p-count">${plugin.skills.length} skill${plugin.skills.length > 1 ? 's' : ''}</div>
-      <div class="p-line"></div>
+    // Section
+    const sec = document.createElement('div');
+    sec.className = 'cat-section';
+    sec.dataset.cat = cat.id;
+    sec.style.setProperty('--cat-color', cat.color);
+    sec.innerHTML = `
+      <div class="cat-section-head">
+        <div class="cat-section-icon">${cat.icon}</div>
+        <div class="cat-section-info">
+          <div class="cat-section-name">${cat.name}</div>
+          <div class="cat-section-desc">${cat.desc}</div>
+        </div>
+        <div class="cat-section-count" id="sec-cnt-${cat.id}">${cat.skills.length} skills</div>
+        <div class="cat-section-line"></div>
+      </div>
     `;
-    group.appendChild(ph);
 
-    // Skills grid
     const grid = document.createElement('div');
     grid.className = 'skills-grid';
 
-    plugin.skills.forEach(skill => {
-      delay += 35;
+    cat.skills.forEach(skill => {
+      delay += 30;
       const card = document.createElement('div');
       card.className = 's-card';
-      card.style.setProperty('--plugin-color', plugin.color);
+      card.style.setProperty('--cat-color', cat.color);
       card.style.animationDelay = `${delay}ms`;
       card.dataset.search = (skill.name + ' ' + skill.command + ' ' + skill.desc + ' ' + skill.bullets.join(' ')).toLowerCase();
 
       card.innerHTML = `
         <div class="card-head">
           <div class="card-name">${skill.name}</div>
-          <div class="card-cmd" title="Clique para copiar" onclick="copyCmd('${skill.command}', this)">${skill.command}</div>
+          <div class="card-cmd" title="Clique para copiar" onclick="copyCmd('${skill.command}',this)">${skill.command}</div>
         </div>
         <div class="card-desc">${skill.desc}</div>
-        <ul class="card-bullets">
-          ${skill.bullets.map(b => `<li>${b}</li>`).join('')}
-        </ul>
+        <ul class="card-bullets">${skill.bullets.map(b=>`<li>${b}</li>`).join('')}</ul>
+        <div class="card-footer"><span class="plugin-tag">${skill.plugin}</span></div>
       `;
       grid.appendChild(card);
     });
 
-    group.appendChild(grid);
-    main.appendChild(group);
+    sec.appendChild(grid);
+    main.appendChild(sec);
   });
 
-  // Stats
-  document.getElementById('stat-skills').textContent = totalSkills;
-  document.getElementById('stat-plugins').textContent = PLUGINS.length;
-  document.getElementById('count-all').textContent = totalSkills;
-  document.getElementById('footer-count').textContent = totalSkills;
+  document.getElementById('stat-skills').textContent = total;
+  document.getElementById('stat-cats').textContent = CATS.length;
+  document.getElementById('cnt-all').textContent = total;
+  document.getElementById('footer-cnt').textContent = total;
   document.getElementById('updated').textContent = new Date().toLocaleDateString('pt-BR');
+}
+
+function filterCat(catId, btn) {
+  activeCat = catId;
+  searchQ = '';
+  document.getElementById('search').value = '';
+  document.getElementById('s-clear').classList.remove('on');
+
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+
+function applyFilters() {
+  let total = 0;
+
+  document.querySelectorAll('.cat-section').forEach(sec => {
+    const matchCat = activeCat === 'all' || sec.dataset.cat === activeCat;
+    if (!matchCat) { sec.hidden = true; return; }
+
+    let secCount = 0;
+    sec.querySelectorAll('.s-card').forEach(card => {
+      const ok = !searchQ || card.dataset.search.includes(searchQ);
+      card.hidden = !ok;
+      if (ok) { secCount++; total++; }
+    });
+    sec.hidden = secCount === 0;
+
+    const cntEl = sec.querySelector(`[id^="sec-cnt-"]`);
+    if (cntEl) cntEl.textContent = `${secCount} skill${secCount !== 1 ? 's' : ''}`;
+  });
+
+  document.getElementById('cnt-all').textContent = total;
+  document.getElementById('empty').style.display = total === 0 ? 'block' : 'none';
 }
 
 function copyCmd(cmd, el) {
   navigator.clipboard.writeText(cmd).then(() => {
     el.classList.add('copied');
     el.textContent = '✓ copiado';
-    setTimeout(() => {
-      el.classList.remove('copied');
-      el.textContent = cmd;
-    }, 1500);
-    showToast(`${cmd} copiado para a área de transferência`);
+    setTimeout(() => { el.classList.remove('copied'); el.textContent = cmd; }, 1500);
+    showToast(`${cmd} copiado!`);
   });
 }
 
@@ -1008,76 +771,32 @@ function showToast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg;
   t.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.classList.remove('show'), 2000);
-}
-
-function filterPlugin(pluginId, btn) {
-  activePlugin = pluginId;
-  searchQuery = '';
-  document.getElementById('search').value = '';
-  document.getElementById('search-clear').classList.remove('visible');
-
-  document.querySelectorAll('.f-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-
-  applyFilters();
-}
-
-function applyFilters() {
-  let visibleCount = 0;
-
-  document.querySelectorAll('.p-group').forEach(group => {
-    const matchPlugin = activePlugin === 'all' || group.dataset.plugin === activePlugin;
-    if (!matchPlugin) { group.hidden = true; return; }
-
-    let groupHasVisible = false;
-    group.querySelectorAll('.s-card').forEach(card => {
-      const matchSearch = !searchQuery || card.dataset.search.includes(searchQuery);
-      card.hidden = !matchSearch;
-      if (matchSearch) { groupHasVisible = true; visibleCount++; }
-    });
-
-    group.hidden = !groupHasVisible;
-  });
-
-  document.getElementById('empty').style.display = visibleCount === 0 ? 'block' : 'none';
-  document.getElementById('count-all').textContent = visibleCount;
+  clearTimeout(toastTmr);
+  toastTmr = setTimeout(() => t.classList.remove('show'), 2000);
 }
 
 function clearSearch() {
   document.getElementById('search').value = '';
-  document.getElementById('search-clear').classList.remove('visible');
-  searchQuery = '';
+  document.getElementById('s-clear').classList.remove('on');
+  searchQ = '';
   applyFilters();
 }
 
-// ── SEARCH INPUT
 document.getElementById('search').addEventListener('input', e => {
-  searchQuery = e.target.value.toLowerCase().trim();
-  const clear = document.getElementById('search-clear');
-  clear.classList.toggle('visible', searchQuery.length > 0);
-
-  // Reset plugin filter when searching
-  if (searchQuery) {
-    activePlugin = 'all';
-    document.querySelectorAll('.f-btn').forEach(b => b.classList.remove('active'));
-    document.querySelector('[data-plugin="all"]').classList.add('active');
+  searchQ = e.target.value.toLowerCase().trim();
+  document.getElementById('s-clear').classList.toggle('on', searchQ.length > 0);
+  if (searchQ) {
+    activeCat = 'all';
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector('[data-cat="all"]').classList.add('active');
   }
   applyFilters();
 });
 
-// ── KEYBOARD SHORTCUTS
 document.addEventListener('keydown', e => {
   const inp = document.getElementById('search');
-  if (e.key === '/' && document.activeElement !== inp) {
-    e.preventDefault();
-    inp.focus();
-  }
-  if (e.key === 'Escape' && document.activeElement === inp) {
-    clearSearch();
-    inp.blur();
-  }
+  if (e.key === '/' && document.activeElement !== inp) { e.preventDefault(); inp.focus(); }
+  if (e.key === 'Escape' && document.activeElement === inp) { clearSearch(); inp.blur(); }
 });
 
 render();
