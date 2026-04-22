@@ -207,7 +207,7 @@
     .s-card {
       background: var(--surface); border: 1px solid var(--border);
       border-radius: var(--radius); padding: 18px 18px 16px;
-      position: relative; overflow: hidden; cursor: default;
+      position: relative; overflow: hidden; cursor: pointer;
       transition: background .2s, border-color .2s, transform .2s, box-shadow .2s;
       opacity: 0; animation: fadeUp .4s ease forwards;
     }
@@ -711,18 +711,21 @@ function render() {
 
     cat.skills.forEach(skill => {
       delay += 30;
+      const skillId = skill.command.replace(/^\//, '');
       const card = document.createElement('div');
       card.className = 's-card';
       card.style.setProperty('--cat-color', cat.color);
       card.style.animationDelay = `${delay}ms`;
       card.dataset.search = (skill.name + ' ' + skill.command + ' ' + skill.desc + ' ' + skill.bullets.join(' ')).toLowerCase();
+      card.dataset.id = skillId;
+      card.onclick = () => window.location.href = `skill.html?id=${skillId}`;
 
       card.innerHTML = `
         <div class="card-head">
           <div class="card-name">${skill.name}</div>
           <div class="cmd-group">
-            <div class="card-cmd">${skill.command}</div>
-            <button class="copy-btn" title="Copiar comando" onclick="copyCmd('${skill.command}',this)">
+            <div class="card-cmd" onclick="copyCmd('${skill.command}',this); event.stopPropagation();">${skill.command}</div>
+            <button class="copy-btn" title="Copiar comando" onclick="copyCmd('${skill.command}',this); event.stopPropagation();">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
               </svg>

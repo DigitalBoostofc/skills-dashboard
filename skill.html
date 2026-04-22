@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skill Detail — Claude Code</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:        #050509;
+      --bg2:       #09090f;
+      --surface:   rgba(255,255,255,0.025);
+      --surface-h: rgba(255,255,255,0.045);
+      --border:    rgba(255,255,255,0.07);
+      --text:      #f0f0fa;
+      --text-2:    #8080a8;
+      --text-3:    #3c3c60;
+      --radius:    14px;
+      --cat-color: #7cd3ff;
+      --ff-display:'Syne', sans-serif;
+      --ff-mono:   'JetBrains Mono', monospace;
+      --ff-body:   'DM Sans', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--ff-body);
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 26px 26px;
+    }
+
+    /* ── HEADER ─────────────────────────────────── */
+    header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(5,5,9,0.88);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 32px;
+      height: 62px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .back-btn {
+      display: flex; align-items: center; gap: 8px;
+      text-decoration: none; color: var(--text-2);
+      font-family: var(--ff-mono); font-size: 12px;
+      padding: 6px 12px; border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      transition: color .15s, border-color .15s, background .15s;
+      flex-shrink: 0;
+    }
+    .back-btn:hover { color: var(--text); border-color: rgba(255,255,255,0.15); background: var(--surface-h); }
+    .back-arrow { font-size: 14px; }
+    .breadcrumb {
+      font-family: var(--ff-mono); font-size: 12px;
+      color: var(--text-3);
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .breadcrumb .sep { color: var(--text-3); margin: 0 6px; }
+    .breadcrumb .crumb-skill { color: var(--text-2); }
+    .header-cmd-badge {
+      margin-left: auto; flex-shrink: 0;
+      font-family: var(--ff-mono); font-size: 11px; font-weight: 600;
+      color: var(--cat-color);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 5px 12px; border-radius: 7px;
+      cursor: pointer;
+      transition: background .15s, border-color .15s;
+    }
+    .header-cmd-badge:hover { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.2); }
+    .header-cmd-badge.copied { color: #4ade80; border-color: rgba(74,222,128,0.35); background: rgba(74,222,128,0.07); }
+
+    /* ── MAIN ──────────────────────────────────── */
+    main {
+      position: relative; z-index: 1;
+      max-width: 960px; margin: 0 auto;
+      padding: 48px 32px 100px;
+    }
+
+    /* ── HERO ──────────────────────────────────── */
+    .hero { margin-bottom: 48px; }
+
+    .hero-top {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 20px;
+    }
+    .skill-num {
+      font-family: var(--ff-mono); font-size: 12px;
+      color: var(--cat-color);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 4px 10px; border-radius: 6px;
+    }
+    .cat-pill {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 12px; color: var(--text-2);
+      background: var(--surface); border: 1px solid var(--border);
+      padding: 4px 10px; border-radius: 20px;
+    }
+
+    .skill-title {
+      font-family: var(--ff-display);
+      font-size: clamp(32px, 5vw, 54px);
+      font-weight: 800; letter-spacing: -.03em;
+      color: var(--text);
+      line-height: 1.05;
+      margin-bottom: 18px;
+    }
+
+    .skill-meta {
+      display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .cmd-badge {
+      font-family: var(--ff-mono); font-size: 13px; font-weight: 600;
+      color: var(--cat-color);
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 6px 14px; border-radius: 8px;
+      cursor: pointer;
+      transition: background .15s, border-color .15s, transform .1s;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .cmd-badge:hover { background: rgba(255,255,255,0.09); border-color: rgba(255,255,255,0.22); }
+    .cmd-badge:active { transform: scale(0.97); }
+    .cmd-badge.copied { color: #4ade80; border-color: rgba(74,222,128,0.35); background: rgba(74,222,128,0.07); }
+    .cmd-badge svg { width: 13px; height: 13px; opacity: .6; }
+    .plugin-tag {
+      font-family: var(--ff-mono); font-size: 11px;
+      color: var(--text-3); background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      padding: 5px 10px; border-radius: 6px;
+    }
+
+    .skill-tagline {
+      font-size: 18px; font-weight: 500;
+      color: var(--text-2); line-height: 1.45;
+      margin-bottom: 10px;
+      max-width: 680px;
+    }
+    .skill-desc {
+      font-size: 14px; color: var(--text-3);
+      line-height: 1.7; max-width: 640px;
+    }
+
+    /* ── STATS ─────────────────────────────────── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 40px;
+    }
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-top: 2px solid var(--cat-color);
+      border-radius: var(--radius);
+      padding: 22px 20px;
+      text-align: center;
+      transition: background .2s, transform .2s;
+    }
+    .stat-card:hover { background: var(--surface-h); transform: translateY(-2px); }
+    .stat-value {
+      font-family: var(--ff-display);
+      font-size: 32px; font-weight: 800;
+      letter-spacing: -.04em;
+      color: var(--cat-color);
+      line-height: 1; margin-bottom: 8px;
+    }
+    .stat-label {
+      font-size: 12px; color: var(--text-2);
+      line-height: 1.4;
+    }
+
+    /* ── COMPARISON ────────────────────────────── */
+    .comparison-title {
+      font-family: var(--ff-display);
+      font-size: 13px; font-weight: 700;
+      letter-spacing: .06em; text-transform: uppercase;
+      color: var(--text-3); margin-bottom: 14px;
+    }
+    .comparison {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 14px; margin-bottom: 32px;
+    }
+    .col-bad, .col-good {
+      border-radius: var(--radius);
+      padding: 24px 22px;
+      position: relative; overflow: hidden;
+    }
+    .col-bad {
+      background: rgba(220,38,38,0.07);
+      border: 1px solid rgba(220,38,38,0.2);
+    }
+    .col-good {
+      background: rgba(34,197,94,0.07);
+      border: 1px solid rgba(34,197,94,0.2);
+    }
+    .col-header {
+      font-family: var(--ff-mono); font-size: 10px;
+      font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+      margin-bottom: 16px; padding-bottom: 10px;
+      border-bottom: 1px solid;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .col-bad .col-header { color: #f87171; border-color: rgba(220,38,38,0.2); }
+    .col-good .col-header { color: #4ade80; border-color: rgba(34,197,94,0.2); }
+    .col-header-icon { font-size: 14px; }
+    .comp-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .comp-list li {
+      font-size: 13px; line-height: 1.45; color: var(--text-2);
+      display: flex; gap: 10px; align-items: flex-start;
+    }
+    .comp-list li .bullet {
+      flex-shrink: 0; font-size: 15px; line-height: 1.2; margin-top: 1px;
+    }
+    .col-bad  .comp-list li .bullet { color: #f87171; }
+    .col-good .comp-list li .bullet { color: #4ade80; }
+
+    /* ── EXAMPLE ACCORDION ─────────────────────── */
+    .example-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .example-section summary {
+      display: flex; align-items: center; gap: 10px;
+      padding: 16px 22px; cursor: pointer;
+      font-family: var(--ff-mono); font-size: 12px;
+      color: var(--text-2); letter-spacing: .04em;
+      text-transform: uppercase;
+      list-style: none;
+      user-select: none;
+      transition: background .15s, color .15s;
+    }
+    .example-section summary:hover { background: var(--surface-h); color: var(--text); }
+    .example-section summary::-webkit-details-marker { display: none; }
+    .summary-chevron { font-size: 11px; transition: transform .2s; }
+    .example-section[open] summary .summary-chevron { transform: rotate(180deg); }
+    .summary-label { flex: 1; }
+    .summary-hint { font-size: 11px; color: var(--text-3); letter-spacing: 0; text-transform: none; }
+
+    .example-body {
+      padding: 0 22px 22px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 14px; border-top: 1px solid var(--border);
+    }
+    .ex-col { padding-top: 18px; }
+    .ex-label {
+      font-family: var(--ff-mono); font-size: 10px;
+      font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .ex-col:first-child .ex-label { color: #f87171; }
+    .ex-col:last-child  .ex-label { color: #4ade80; }
+    .ex-pre {
+      background: rgba(0,0,0,0.4);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 18px;
+      font-family: var(--ff-mono); font-size: 12px;
+      color: var(--text-2); line-height: 1.6;
+      white-space: pre-wrap; overflow-wrap: break-word;
+      margin: 0;
+    }
+    .ex-col:first-child .ex-pre { border-color: rgba(220,38,38,0.15); }
+    .ex-col:last-child  .ex-pre { border-color: rgba(34,197,94,0.15); color: #a7f3d0; }
+
+    /* ── TOAST ─────────────────────────────────── */
+    .toast {
+      position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(16px);
+      background: #0e1a12; border: 1px solid rgba(74,222,128,0.3);
+      color: #4ade80; font-family: var(--ff-mono); font-size: 12px;
+      padding: 10px 18px; border-radius: 10px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      z-index: 999; opacity: 0; pointer-events: none;
+      transition: opacity .2s, transform .2s;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* ── NOT FOUND ─────────────────────────────── */
+    .not-found {
+      text-align: center; padding: 100px 20px;
+    }
+    .not-found-icon { font-size: 56px; opacity: .2; margin-bottom: 20px; }
+    .not-found-title {
+      font-family: var(--ff-display); font-size: 24px; font-weight: 800;
+      color: var(--text-2); margin-bottom: 10px;
+    }
+    .not-found-sub { font-size: 14px; color: var(--text-3); margin-bottom: 24px; }
+    .not-found-link {
+      font-family: var(--ff-mono); font-size: 12px;
+      color: var(--cat-color); text-decoration: none;
+      border: 1px solid rgba(124,211,255,0.25);
+      padding: 8px 18px; border-radius: 8px;
+      transition: background .15s;
+    }
+    .not-found-link:hover { background: rgba(124,211,255,0.06); }
+
+    @media (max-width: 680px) {
+      header { padding: 0 16px; }
+      .breadcrumb { display: none; }
+      main { padding: 32px 16px 60px; }
+      .stats-row { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+      .stat-value { font-size: 24px; }
+      .comparison { grid-template-columns: 1fr; }
+      .example-body { grid-template-columns: 1fr; }
+      .skill-title { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="back-btn">
+    <span class="back-arrow">←</span> Dashboard
+  </a>
+  <div class="breadcrumb">
+    <span class="sep">/</span>
+    <span class="crumb-skill" id="hdr-name">—</span>
+  </div>
+  <div class="header-cmd-badge" id="hdr-cmd" onclick="copyCmd()" title="Copiar comando"></div>
+</header>
+
+<main id="main">
+  <div class="not-found" id="not-found" style="display:none">
+    <div class="not-found-icon">⌖</div>
+    <div class="not-found-title">Skill não encontrada</div>
+    <div class="not-found-sub">Verifique o ID na URL ou volte ao dashboard.</div>
+    <a href="index.html" class="not-found-link">← Voltar ao Dashboard</a>
+  </div>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script src="skills-data.js"></script>
+<script>
+const params = new URLSearchParams(location.search);
+const id = params.get('id');
+const skill = id && SKILLS_DB[id];
+
+if (!skill) {
+  document.getElementById('not-found').style.display = 'block';
+} else {
+  const cat = CATS_META[skill.catId] || { name: skill.catId, icon: '⚙️', color: '#7cd3ff' };
+
+  // Set CSS var for cat color
+  document.documentElement.style.setProperty('--cat-color', cat.color);
+
+  // Compute skill number
+  let num = 1;
+  for (const cid of CATS_ORDER) {
+    const catSkillIds = Object.values(SKILLS_DB)
+      .filter(s => s.catId === cid)
+      .map(s => s.id);
+    const idx = catSkillIds.indexOf(id);
+    if (idx !== -1) { num += idx; break; }
+    num += catSkillIds.length;
+  }
+
+  // Header
+  document.title = `${skill.name} — Claude Code Skills`;
+  document.getElementById('hdr-name').textContent = skill.name;
+  document.getElementById('hdr-cmd').textContent = skill.command;
+
+  // Build page
+  const main = document.getElementById('main');
+  main.innerHTML = `
+    <!-- Hero -->
+    <div class="hero">
+      <div class="hero-top">
+        <span class="skill-num">#${String(num).padStart(2,'0')}</span>
+        <span class="cat-pill">${cat.icon} ${cat.name}</span>
+      </div>
+      <h1 class="skill-title">${skill.name}</h1>
+      <div class="skill-meta">
+        <div class="cmd-badge" id="cmd-badge" onclick="copyCmd()" title="Copiar comando">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+          </svg>
+          ${skill.command}
+        </div>
+        <span class="plugin-tag">${skill.plugin}</span>
+      </div>
+      <p class="skill-tagline">${skill.tagline}</p>
+      ${skill.desc ? `<p class="skill-desc">${skill.desc}</p>` : ''}
+    </div>
+
+    <!-- Stats -->
+    <div class="comparison-title">Estatísticas</div>
+    <div class="stats-row" id="stats-row"></div>
+
+    <!-- Comparison -->
+    <div class="comparison-title">Comparativo</div>
+    <div class="comparison">
+      <div class="col-bad">
+        <div class="col-header">
+          <span class="col-header-icon">✗</span>
+          SEM A SKILL
+        </div>
+        <ul class="comp-list" id="without-list"></ul>
+      </div>
+      <div class="col-good">
+        <div class="col-header">
+          <span class="col-header-icon">✓</span>
+          COM A SKILL
+        </div>
+        <ul class="comp-list" id="with-list"></ul>
+      </div>
+    </div>
+
+    <!-- Example -->
+    ${skill.example ? `
+    <details class="example-section">
+      <summary>
+        <span class="summary-chevron">▼</span>
+        <span class="summary-label">Exemplo</span>
+        <span class="summary-hint">ANTES / DEPOIS</span>
+      </summary>
+      <div class="example-body">
+        <div class="ex-col">
+          <div class="ex-label">Antes</div>
+          <pre class="ex-pre">${esc(skill.example.before)}</pre>
+        </div>
+        <div class="ex-col">
+          <div class="ex-label">Depois</div>
+          <pre class="ex-pre">${esc(skill.example.after)}</pre>
+        </div>
+      </div>
+    </details>` : ''}
+  `;
+
+  // Stats
+  const statsRow = document.getElementById('stats-row');
+  skill.stats.forEach(s => {
+    const el = document.createElement('div');
+    el.className = 'stat-card';
+    el.innerHTML = `<div class="stat-value">${s.value}</div><div class="stat-label">${s.label}</div>`;
+    statsRow.appendChild(el);
+  });
+
+  // Without
+  const withoutList = document.getElementById('without-list');
+  skill.without.forEach(b => {
+    const li = document.createElement('li');
+    li.innerHTML = `<span class="bullet">✗</span><span>${b}</span>`;
+    withoutList.appendChild(li);
+  });
+
+  // With
+  const withList = document.getElementById('with-list');
+  skill.with.forEach(b => {
+    const li = document.createElement('li');
+    li.innerHTML = `<span class="bullet">✓</span><span>${b}</span>`;
+    withList.appendChild(li);
+  });
+}
+
+function esc(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+let toastTmr;
+function copyCmd() {
+  const cmd = skill && skill.command;
+  if (!cmd) return;
+  navigator.clipboard.writeText(cmd).then(() => {
+    const badge = document.getElementById('cmd-badge');
+    const hdrBadge = document.getElementById('hdr-cmd');
+    if (badge) badge.classList.add('copied');
+    if (hdrBadge) hdrBadge.classList.add('copied');
+    showToast(`${cmd} copiado!`);
+    setTimeout(() => {
+      if (badge) badge.classList.remove('copied');
+      if (hdrBadge) hdrBadge.classList.remove('copied');
+    }, 1500);
+  });
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTmr);
+  toastTmr = setTimeout(() => t.classList.remove('show'), 2000);
+}
+</script>
+</body>
+</html>
