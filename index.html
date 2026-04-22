@@ -4,267 +4,443 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Skills Dashboard — Claude Code</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
   <style>
+    /* ─── TOKENS ─────────────────────────────────────────── */
     :root {
-      --bg: #0d0d14;
-      --bg2: #13131f;
-      --bg3: #1a1a2e;
-      --surface: #1e1e30;
-      --surface2: #252540;
-      --border: #2a2a45;
-      --text: #e8e8f0;
-      --text2: #9898b8;
-      --text3: #5a5a80;
-      --accent: #7c6af7;
-      --accent2: #a78bfa;
+      --bg:          #050509;
+      --bg2:         #09090f;
+      --surface:     rgba(255,255,255,0.025);
+      --surface-h:   rgba(255,255,255,0.045);
+      --border:      rgba(255,255,255,0.07);
+      --border-h:    rgba(124,211,255,0.35);
+      --accent:      #7cd3ff;
+      --accent-dim:  rgba(124,211,255,0.12);
+      --text:        #f0f0fa;
+      --text-2:      #8080a8;
+      --text-3:      #3c3c60;
+      --radius:      14px;
+      --font-display:'Syne', sans-serif;
+      --font-mono:   'JetBrains Mono', monospace;
+      --font-body:   'DM Sans', sans-serif;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ─── RESET ──────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      font-family: var(--font-body);
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
+      overflow-x: hidden;
     }
 
-    /* HEADER */
+    /* ─── DOT GRID BACKGROUND ────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 26px 26px;
+    }
+    /* Glow spotlight top-right */
+    body::after {
+      content: '';
+      position: fixed; top: -200px; right: -200px;
+      width: 600px; height: 600px; z-index: 0; pointer-events: none;
+      background: radial-gradient(ellipse at center, rgba(124,211,255,0.06) 0%, transparent 70%);
+    }
+
+    /* ─── HEADER ─────────────────────────────────────────── */
     header {
-      background: var(--bg2);
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(5,5,9,0.85);
+      backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
-      padding: 20px 32px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      backdrop-filter: blur(12px);
+      padding: 0 32px;
+      height: 64px;
+      display: flex; align-items: center; gap: 20px;
     }
-    .header-logo {
-      width: 36px; height: 36px;
-      background: linear-gradient(135deg, #7c6af7, #a78bfa);
-      border-radius: 10px;
+    .logo {
+      display: flex; align-items: center; gap: 10px;
+      flex-shrink: 0;
+    }
+    .logo-mark {
+      width: 34px; height: 34px;
+      border: 1.5px solid var(--accent);
+      border-radius: 9px;
       display: flex; align-items: center; justify-content: center;
-      font-size: 18px; flex-shrink: 0;
+      font-family: var(--font-mono);
+      font-size: 15px; font-weight: 600;
+      color: var(--accent);
+      letter-spacing: -1px;
+      box-shadow: 0 0 16px rgba(124,211,255,0.12);
     }
-    .header-title { font-size: 18px; font-weight: 700; color: var(--text); }
-    .header-sub { font-size: 12px; color: var(--text3); margin-top: 1px; }
-    .header-search {
+    .logo-text {
+      font-family: var(--font-display);
+      font-size: 16px; font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+    .logo-sub {
+      font-size: 11px; color: var(--text-3);
+      font-family: var(--font-mono);
+      letter-spacing: 0.04em;
+    }
+
+    /* Search */
+    .search-wrap {
       margin-left: auto;
       position: relative;
+      flex-shrink: 0;
     }
-    .header-search input {
+    .search-wrap input {
+      width: 280px;
       background: var(--surface);
       border: 1px solid var(--border);
       color: var(--text);
       border-radius: 10px;
-      padding: 8px 14px 8px 36px;
+      padding: 9px 40px 9px 38px;
       font-size: 13px;
-      width: 260px;
+      font-family: var(--font-body);
       outline: none;
-      transition: border-color 0.2s;
+      transition: border-color .2s, box-shadow .2s;
     }
-    .header-search input:focus { border-color: var(--accent); }
-    .header-search input::placeholder { color: var(--text3); }
-    .search-icon {
-      position: absolute; left: 11px; top: 50%; transform: translateY(-50%);
-      color: var(--text3); font-size: 14px; pointer-events: none;
+    .search-wrap input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(124,211,255,0.08);
     }
-    .header-count {
-      font-size: 12px; color: var(--text3);
-      background: var(--surface);
-      padding: 4px 10px;
-      border-radius: 20px;
+    .search-wrap input::placeholder { color: var(--text-3); }
+    .search-ico {
+      position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
+      color: var(--text-3); font-size: 13px; pointer-events: none;
+    }
+    .search-hint {
+      position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+      font-family: var(--font-mono); font-size: 10px;
+      color: var(--text-3); background: var(--bg2);
       border: 1px solid var(--border);
-      white-space: nowrap;
+      padding: 2px 6px; border-radius: 5px;
+      pointer-events: none;
+      transition: opacity .2s;
     }
+    .search-wrap input:focus + .search-ico ~ .search-hint { opacity: 0; }
+    .search-clear {
+      position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+      display: none; cursor: pointer;
+      color: var(--text-2); font-size: 16px;
+      line-height: 1; padding: 2px;
+    }
+    .search-clear.visible { display: block; }
 
-    /* FILTERS */
-    .filters {
-      padding: 16px 32px;
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      border-bottom: 1px solid var(--border);
-      background: var(--bg2);
+    /* Stats pill */
+    .stat-pill {
+      font-family: var(--font-mono);
+      font-size: 11px; color: var(--text-2);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 5px 12px; border-radius: 20px;
+      white-space: nowrap; flex-shrink: 0;
     }
-    .filter-btn {
-      padding: 5px 12px;
+    .stat-pill b { color: var(--accent); }
+
+    /* ─── FILTERS ────────────────────────────────────────── */
+    .filters-bar {
+      position: sticky; top: 64px; z-index: 40;
+      background: rgba(5,5,9,0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 32px;
+      display: flex; gap: 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .filters-bar::-webkit-scrollbar { display: none; }
+    .f-btn {
+      flex-shrink: 0;
+      padding: 5px 13px;
       border-radius: 20px;
       border: 1px solid var(--border);
       background: transparent;
-      color: var(--text2);
+      color: var(--text-2);
       font-size: 12px;
+      font-family: var(--font-body);
       cursor: pointer;
-      transition: all 0.15s;
+      transition: all .15s;
+      display: flex; align-items: center; gap: 6px;
     }
-    .filter-btn:hover { border-color: var(--accent); color: var(--accent2); }
-    .filter-btn.active {
+    .f-btn:hover { border-color: rgba(124,211,255,0.25); color: var(--text); }
+    .f-btn.active {
       background: var(--accent);
       border-color: var(--accent);
-      color: #fff;
+      color: #050509;
       font-weight: 600;
     }
-
-    /* MAIN */
-    main { padding: 28px 32px; max-width: 1400px; margin: 0 auto; }
-
-    /* PLUGIN GROUP */
-    .plugin-group { margin-bottom: 40px; }
-    .plugin-group[hidden] { display: none; }
-    .plugin-header {
-      display: flex; align-items: center; gap: 10px;
-      margin-bottom: 16px;
-    }
-    .plugin-dot {
-      width: 10px; height: 10px; border-radius: 50%;
-    }
-    .plugin-name {
-      font-size: 13px; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 0.08em;
-      color: var(--text2);
-    }
-    .plugin-skill-count {
-      font-size: 11px; color: var(--text3);
-      background: var(--surface);
-      padding: 2px 8px;
+    .f-btn .count {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      background: rgba(255,255,255,0.15);
+      padding: 1px 5px;
       border-radius: 10px;
-      border: 1px solid var(--border);
+    }
+    .f-btn.active .count { background: rgba(0,0,0,0.2); }
+
+    /* ─── MAIN ───────────────────────────────────────────── */
+    main {
+      position: relative; z-index: 1;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 36px 32px 60px;
     }
 
-    /* SKILLS GRID */
+    /* ─── PLUGIN GROUP ───────────────────────────────────── */
+    .p-group { margin-bottom: 52px; }
+    .p-group[hidden] { display: none; }
+    .p-header {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 18px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+    .p-indicator {
+      width: 8px; height: 8px; border-radius: 50%;
+      box-shadow: 0 0 10px currentColor;
+    }
+    .p-name {
+      font-family: var(--font-display);
+      font-size: 12px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .12em;
+      color: var(--text-2);
+    }
+    .p-count {
+      font-family: var(--font-mono);
+      font-size: 10px; color: var(--text-3);
+    }
+    .p-line {
+      flex: 1; height: 1px;
+      background: linear-gradient(to right, var(--border), transparent);
+    }
+
+    /* ─── GRID ───────────────────────────────────────────── */
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 14px;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 12px;
     }
 
-    /* SKILL CARD */
-    .skill-card {
+    /* ─── SKILL CARD ─────────────────────────────────────── */
+    .s-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 18px 20px;
-      transition: all 0.2s;
+      border-radius: var(--radius);
+      padding: 18px 18px 16px;
       position: relative;
       overflow: hidden;
+      cursor: default;
+      transition: background .2s, border-color .2s, transform .2s, box-shadow .2s;
+      /* Entrance animation */
+      opacity: 0;
+      animation: fadeUp .4s ease forwards;
     }
-    .skill-card:hover {
-      border-color: var(--accent);
-      background: var(--surface2);
-      transform: translateY(-1px);
-      box-shadow: 0 8px 24px rgba(124,106,247,0.1);
+    .s-card:hover {
+      background: var(--surface-h);
+      border-color: var(--border-h);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(124,211,255,0.05);
     }
-    .skill-card[hidden] { display: none; }
-    .skill-card::before {
+    .s-card[hidden] { display: none !important; }
+
+    /* Colored left border */
+    .s-card::before {
       content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: var(--card-color, var(--accent));
-      opacity: 0.6;
+      position: absolute; left: 0; top: 16px; bottom: 16px;
+      width: 3px;
+      background: var(--plugin-color, var(--accent));
+      border-radius: 0 3px 3px 0;
+      opacity: .7;
+      transition: opacity .2s;
     }
-    .card-top {
+    .s-card:hover::before { opacity: 1; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .card-head {
       display: flex; align-items: flex-start;
       justify-content: space-between; gap: 10px;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
+      padding-left: 12px;
     }
     .card-name {
+      font-family: var(--font-display);
       font-size: 14px; font-weight: 700;
       color: var(--text); line-height: 1.3;
     }
-    .card-command {
-      font-size: 11px; font-family: 'Fira Code', 'Cascadia Code', monospace;
-      background: var(--bg3);
-      color: var(--accent2);
-      padding: 3px 8px;
-      border-radius: 6px;
-      border: 1px solid var(--border);
+
+    /* Command badge — click to copy */
+    .card-cmd {
+      font-family: var(--font-mono);
+      font-size: 11px; font-weight: 600;
+      color: var(--plugin-color, var(--accent));
+      background: rgba(124,211,255,0.06);
+      border: 1px solid rgba(124,211,255,0.15);
+      padding: 4px 9px;
+      border-radius: 7px;
       white-space: nowrap;
       flex-shrink: 0;
+      cursor: pointer;
+      transition: background .15s, border-color .15s, transform .1s;
+      user-select: none;
     }
+    .card-cmd:hover {
+      background: rgba(124,211,255,0.12);
+      border-color: rgba(124,211,255,0.4);
+    }
+    .card-cmd:active { transform: scale(0.96); }
+    .card-cmd.copied {
+      color: #4ade80;
+      border-color: rgba(74,222,128,0.4);
+      background: rgba(74,222,128,0.08);
+    }
+
     .card-desc {
-      font-size: 12px; color: var(--text2);
-      margin-bottom: 10px;
+      font-size: 12px; font-weight: 400;
+      color: var(--text-2);
       line-height: 1.5;
+      margin-bottom: 10px;
+      padding-left: 12px;
     }
+
     .card-bullets {
       list-style: none;
-      display: flex; flex-direction: column; gap: 5px;
+      display: flex; flex-direction: column; gap: 4px;
+      padding-left: 12px;
     }
     .card-bullets li {
-      font-size: 12px; color: var(--text2);
+      font-size: 11.5px; color: var(--text-2);
       display: flex; gap: 8px; align-items: flex-start;
-      line-height: 1.4;
+      line-height: 1.45;
     }
     .card-bullets li::before {
       content: '›';
-      color: var(--card-color, var(--accent));
-      font-weight: 700;
-      flex-shrink: 0;
-      margin-top: 0px;
+      color: var(--plugin-color, var(--accent));
+      font-weight: 700; font-size: 14px;
+      flex-shrink: 0; line-height: 1.2;
+      opacity: .7;
     }
 
-    /* NO RESULTS */
-    .no-results {
-      text-align: center; padding: 60px 20px;
-      color: var(--text3); font-size: 14px;
+    /* ─── TOAST ──────────────────────────────────────────── */
+    .toast {
+      position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(20px);
+      background: #0e1a12; border: 1px solid rgba(74,222,128,0.3);
+      color: #4ade80;
+      font-family: var(--font-mono); font-size: 12px;
+      padding: 10px 18px; border-radius: 10px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      z-index: 999;
+      opacity: 0; pointer-events: none;
+      transition: opacity .2s, transform .2s;
     }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-    /* FOOTER */
-    footer {
+    /* ─── NO RESULTS ─────────────────────────────────────── */
+    .empty {
+      display: none;
       text-align: center;
-      padding: 24px;
-      color: var(--text3);
-      font-size: 11px;
-      border-top: 1px solid var(--border);
-      margin-top: 20px;
+      padding: 80px 20px;
+      z-index: 1; position: relative;
     }
-    footer span { color: var(--accent2); }
+    .empty-icon { font-size: 48px; margin-bottom: 16px; opacity: .3; }
+    .empty-title {
+      font-family: var(--font-display);
+      font-size: 20px; font-weight: 800;
+      color: var(--text-2); margin-bottom: 6px;
+    }
+    .empty-sub { font-size: 13px; color: var(--text-3); }
 
-    @media (max-width: 640px) {
-      header { padding: 14px 16px; flex-wrap: wrap; }
-      .header-search input { width: 200px; }
-      main { padding: 20px 16px; }
-      .filters { padding: 12px 16px; }
+    /* ─── FOOTER ─────────────────────────────────────────── */
+    footer {
+      position: relative; z-index: 1;
+      text-align: center;
+      padding: 20px;
+      font-family: var(--font-mono);
+      font-size: 11px; color: var(--text-3);
+      border-top: 1px solid var(--border);
+    }
+    footer .hl { color: var(--accent); }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────── */
+    @media (max-width: 680px) {
+      header { padding: 0 16px; gap: 10px; }
+      .logo-sub { display: none; }
+      .search-wrap input { width: 180px; }
+      .stat-pill { display: none; }
+      main { padding: 24px 16px 40px; }
+      .filters-bar { padding: 8px 16px; }
     }
   </style>
 </head>
 <body>
 
+<!-- HEADER -->
 <header>
-  <div class="header-logo">⚡</div>
-  <div>
-    <div class="header-title">Skills Dashboard</div>
-    <div class="header-sub">Claude Code — todas as skills disponíveis</div>
+  <div class="logo">
+    <div class="logo-mark">⌘</div>
+    <div>
+      <div class="logo-text">Skills</div>
+      <div class="logo-sub">claude code</div>
+    </div>
   </div>
-  <div class="header-search">
-    <span class="search-icon">🔍</span>
-    <input type="text" id="search" placeholder="Buscar skill..." oninput="filterSkills()" />
+
+  <div class="stat-pill" id="stat-pill">
+    <b id="stat-skills">0</b> skills · <b id="stat-plugins">0</b> plugins
   </div>
-  <div class="header-count" id="count"></div>
+
+  <div class="search-wrap">
+    <span class="search-ico">⌕</span>
+    <input type="text" id="search" placeholder="Buscar skill ou comando..." autocomplete="off" />
+    <span class="search-hint">pressione /</span>
+    <span class="search-clear" id="search-clear" onclick="clearSearch()">✕</span>
+  </div>
 </header>
 
-<div class="filters" id="filters">
-  <button class="filter-btn active" onclick="filterPlugin('all', this)">Todos</button>
+<!-- FILTERS -->
+<div class="filters-bar" id="filters-bar">
+  <button class="f-btn active" data-plugin="all" onclick="filterPlugin('all', this)">
+    Todos <span class="count" id="count-all">0</span>
+  </button>
 </div>
 
+<!-- MAIN -->
 <main id="main"></main>
 
-<div class="no-results" id="no-results" style="display:none">
-  Nenhuma skill encontrada para "<span id="search-term"></span>"
+<!-- EMPTY STATE -->
+<div class="empty" id="empty">
+  <div class="empty-icon">⌖</div>
+  <div class="empty-title">Nada encontrado</div>
+  <div class="empty-sub">Tente outro termo ou instale uma nova skill</div>
 </div>
 
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
 <footer>
-  Atualizado em <span id="updated-date"></span> · <span id="total-count"></span> skills instaladas
+  Atualizado em <span class="hl" id="updated"></span> · <span class="hl" id="footer-count">0</span> skills instaladas
 </footer>
 
 <script>
-// =====================================================================
-// DADOS DAS SKILLS — edite aqui ao instalar novas skills
-// =====================================================================
+/* ================================================================
+   DADOS — adicione novas skills aqui ao instalar
+   ================================================================ */
 const PLUGINS = [
   {
     id: 'superpowers',
     name: 'Superpowers',
-    color: '#7c6af7',
+    color: '#a78bfa',
     skills: [
       {
         name: 'Brainstorming',
@@ -274,7 +450,7 @@ const PLUGINS = [
           'Transforma ideias em specs completas via diálogo colaborativo',
           'Faz perguntas uma de cada vez para refinar o design',
           'Propõe 2–3 abordagens com trade-offs e recomendação',
-          'Exige aprovação do design antes de qualquer código',
+          'Exige aprovação antes de qualquer código',
           'Salva doc de design em docs/superpowers/specs/',
         ]
       },
@@ -297,7 +473,6 @@ const PLUGINS = [
         bullets: [
           'Lê o plano e identifica questões antes de iniciar',
           'Executa cada tarefa em ordem com checkpoints',
-          'Marca tasks como concluídas em tempo real',
           'Usa subagents para tarefas paralelas quando possível',
         ]
       },
@@ -307,9 +482,8 @@ const PLUGINS = [
         desc: 'Executar planos via subagent dedicado por tarefa com revisão dupla',
         bullets: [
           'Um subagent fresco por tarefa independente',
-          'Revisão em dois estágios: conformidade com spec + qualidade do código',
+          'Revisão em dois estágios: spec + qualidade de código',
           'Preserva contexto do agente principal para coordenação',
-          'Alta qualidade com iteração rápida',
         ]
       },
       {
@@ -319,8 +493,7 @@ const PLUGINS = [
         bullets: [
           'Identifica quando tarefas são verdadeiramente independentes',
           'Cria subagents com contexto isolado e preciso',
-          'Não herda histórico da sessão principal',
-          'Ideal para múltiplas falhas de teste em subsistemas diferentes',
+          'Ideal para múltiplas falhas em subsistemas diferentes',
         ]
       },
       {
@@ -328,10 +501,9 @@ const PLUGINS = [
         command: '/test-driven-development',
         desc: 'Escrever o teste primeiro, ver falhar, depois implementar',
         bullets: [
-          'Aplica o ciclo RED → GREEN → REFACTOR rigorosamente',
-          'Garante que o teste realmente verifica o comportamento certo',
+          'Ciclo RED → GREEN → REFACTOR rigoroso',
+          'Garante que o teste verifica o comportamento certo',
           'Funciona para features, bugfixes e refatorações',
-          'Sem exceções sem aprovação explícita',
         ]
       },
       {
@@ -339,9 +511,8 @@ const PLUGINS = [
         command: '/systematic-debugging',
         desc: 'Encontrar a causa raiz antes de propor qualquer correção',
         bullets: [
-          'Lei de ferro: sem correção sem investigação de causa raiz',
-          'Fases estruturadas: reproduzir → isolar → identificar → corrigir',
-          'Funciona para bugs, falhas de teste e comportamentos inesperados',
+          'Lei de ferro: sem correção sem causa raiz identificada',
+          'Fases: reproduzir → isolar → identificar → corrigir',
           'Patches de sintoma são proibidos',
         ]
       },
@@ -350,8 +521,8 @@ const PLUGINS = [
         command: '/verification-before-completion',
         desc: 'Rodar verificações antes de declarar que o trabalho está pronto',
         bullets: [
-          'Proibido afirmar "pronto" sem evidência de verificação recente',
-          'Identifica qual comando prova a claim, roda e mostra output',
+          'Proibido afirmar "pronto" sem evidência recente de verificação',
+          'Identifica e roda o comando que prova a claim',
           'Aplica antes de commits, PRs ou qualquer declaração de sucesso',
         ]
       },
@@ -371,8 +542,8 @@ const PLUGINS = [
         desc: 'Avaliar feedback de code review com rigor técnico',
         bullets: [
           'Verificar antes de implementar qualquer sugestão',
-          'Padrão: ler → entender → verificar → avaliar → responder → implementar',
-          'Permite pushback técnico fundamentado quando a sugestão estiver errada',
+          'Permite pushback técnico fundamentado quando necessário',
+          'Nunca aceitar sugestão por performance social',
         ]
       },
       {
@@ -381,7 +552,7 @@ const PLUGINS = [
         desc: 'Guiar a finalização de trabalho de desenvolvimento',
         bullets: [
           'Verifica se todos os testes passam antes de qualquer ação',
-          'Apresenta opções: merge direto, PR, ou squash',
+          'Apresenta opções: merge direto, PR ou squash',
           'Faz limpeza do worktree e branches temporárias',
         ]
       },
@@ -391,7 +562,7 @@ const PLUGINS = [
         desc: 'Criar workspaces git isolados para trabalhar em paralelo',
         bullets: [
           'Cria worktree isolado sem conflitar com o trabalho atual',
-          'Seleção inteligente de diretório (.worktrees, worktrees, etc.)',
+          'Seleção inteligente de diretório (.worktrees/worktrees)',
           'Verificação de segurança antes de criar isolamento',
         ]
       },
@@ -401,9 +572,8 @@ const PLUGINS = [
         desc: 'Criar novas skills usando metodologia TDD',
         bullets: [
           'TDD aplicado a documentação de processo',
-          'Testa o comportamento do agente sem a skill (RED) antes de escrever',
+          'Testa comportamento do agente sem a skill antes de escrever',
           'Salva em ~/.claude/skills/ ou ~/.agents/skills/',
-          'Inclui revisão e fechamento de brechas (REFACTOR)',
         ]
       },
       {
@@ -412,7 +582,7 @@ const PLUGINS = [
         desc: 'Skill mestre — estabelece como encontrar e usar todas as outras skills',
         bullets: [
           'Invocar skill relevante ANTES de qualquer resposta ou ação',
-          'Define prioridade: instruções do usuário > superpowers > system prompt',
+          'Define prioridade: usuário > superpowers > system prompt',
           'Documenta red flags de racionalização para não pular skills',
         ]
       },
@@ -421,39 +591,36 @@ const PLUGINS = [
   {
     id: 'thedotmack',
     name: 'TheDotMack',
-    color: '#06b6d4',
+    color: '#22d3ee',
     skills: [
       {
         name: 'Make Plan',
         command: '/make-plan',
         desc: 'Criar plano de implementação faseado com descoberta de documentação',
         bullets: [
-          'Fase 0 obrigatória: descoberta de docs e exemplos reais antes de planejar',
+          'Fase 0 obrigatória: descoberta de docs e exemplos reais',
           'Usa subagents para coleta de fatos (APIs, arquivos, exemplos)',
-          'Mantém síntese e autoria com o orquestrador',
           'Produz plano executável em contextos de chat separados',
         ]
       },
       {
-        name: 'Do (Executar Plano)',
+        name: 'Do',
         command: '/do',
         desc: 'Executar plano faseado usando subagents como orquestrador',
         bullets: [
           'Um subagent de implementação por fase',
-          'Subagent de verificação após cada fase',
-          'Subagent de anti-patterns para checar bad code',
+          'Subagent de verificação e anti-patterns após cada fase',
           'Não avança sem confirmação de conclusão da fase anterior',
         ]
       },
       {
         name: 'Smart Explore',
         command: '/smart-explore',
-        desc: 'Exploração de código otimizada para tokens via AST tree-sitter',
+        desc: 'Exploração de código via AST tree-sitter — reduz tokens drasticamente',
         bullets: [
-          'Substitui Read/Grep/Glob por smart_search/smart_outline/smart_unfold',
-          'Indexa estrutura antes de carregar detalhes de implementação',
-          'Camadas: busca → outline → unfold de símbolo específico',
-          'Reduz tokens drasticamente em exploração de codebases grandes',
+          'Substitui Read/Grep/Glob por smart_search/outline/unfold',
+          'Indexa estrutura antes de carregar implementação',
+          'Camadas: busca → outline → símbolo específico',
         ]
       },
       {
@@ -461,18 +628,18 @@ const PLUGINS = [
         command: '/mem-search',
         desc: 'Buscar memória persistente entre sessões via claude-mem',
         bullets: [
-          'Responde "já resolvemos isso antes?" e "como fizemos X?',
-          'Fluxo 3 camadas: busca → filtra → detalhe (10x menos tokens)',
+          'Responde "já resolvemos isso antes?" e "como fizemos X?"',
+          'Fluxo 3 camadas para economizar tokens',
           'Busca semântica por projeto, tipo, conceito ou data',
         ]
       },
       {
         name: 'Knowledge Agent',
         command: '/knowledge-agent',
-        desc: 'Construir e consultar bases de conhecimento IA a partir de observações',
+        desc: 'Construir e consultar bases de conhecimento a partir de observações',
         bullets: [
           'Compila corpus filtrado do histórico de observações',
-          'Cria "cérebros" focados: "tudo sobre hooks", "todos os bugfixes do worker"',
+          'Cria "cérebros" focados por tema ou serviço',
           'Consulta conversacionalmente com contexto especializado',
         ]
       },
@@ -483,25 +650,25 @@ const PLUGINS = [
         bullets: [
           'Analisa todo o histórico via claude-mem timeline',
           'Produz narrativa "Journey Into [Projeto]"',
-          'Cobre decisões, bugs, features e refatorações ao longo do tempo',
+          'Cobre decisões, bugs, features e refatorações no tempo',
         ]
       },
       {
         name: 'Version Bump',
         command: '/version-bump',
-        desc: 'Versionamento semântico automatizado e workflow de release para plugins',
+        desc: 'Versionamento semântico e workflow de release para plugins',
         bullets: [
           'Incrementa versão em package.json, marketplace.json e plugin.json',
-          'Roda build, cria commit, tag annotated e push',
-          'Cria GitHub Release e regenera CHANGELOG.md',
+          'Cria commit, tag annotated, push e GitHub Release',
+          'Regenera CHANGELOG.md via GitHub API',
         ]
       },
     ]
   },
   {
-    id: 'playwright-skill',
+    id: 'playwright',
     name: 'Playwright',
-    color: '#22c55e',
+    color: '#4ade80',
     skills: [
       {
         name: 'Playwright Skill',
@@ -509,32 +676,29 @@ const PLUGINS = [
         desc: 'Automação completa de browser com Playwright',
         bullets: [
           'Auto-detecta servidores dev em localhost antes de testar',
-          'Testa páginas, preenche formulários, verifica design responsivo',
-          'Valida UX, fluxos de login e links',
+          'Testa páginas, preenche formulários, verifica responsividade',
+          'Valida UX, fluxos de login e monitora erros de console',
           'Escreve e executa scripts Playwright no /tmp',
-          'Tira screenshots e monitora erros de console',
         ]
       },
       {
         name: 'Playwright CLI',
         command: '/playwright-cli',
-        desc: 'CLI de automação de browser — comandos diretos via terminal',
+        desc: 'CLI de automação — comandos diretos: open, goto, click, type',
         bullets: [
-          'Abrir browser, navegar para URL, clicar em elementos',
-          'Digitar texto, pressionar teclas, tirar screenshot',
-          'Referencia elementos por ID do snapshot (ex: e15)',
-          'Fechar browser ao terminar',
+          'Navega por URL, clica em elementos por ref do snapshot',
+          'Digita texto, pressiona teclas, tira screenshot',
+          'Fecha browser ao terminar',
         ]
       },
       {
         name: 'Playwright Trace',
         command: '/playwright-trace',
-        desc: 'Inspecionar arquivos de trace do Playwright via CLI',
+        desc: 'Inspecionar arquivos de trace do Playwright via CLI sem abrir browser',
         bullets: [
-          'Abre arquivo .zip de trace e mostra metadados',
-          'Lista todas as ações com IDs, duração e localização no código',
-          'Inspeciona requests, console, erros e snapshots DOM',
-          'Opera sem abrir browser — ideal para CI/CD',
+          'Lista ações, requests, console, erros e snapshots DOM',
+          'Opera em arquivos .zip de trace gerados pelo Playwright',
+          'Ideal para análise em CI/CD',
         ]
       },
     ]
@@ -542,18 +706,17 @@ const PLUGINS = [
   {
     id: 'agent-browser',
     name: 'Agent Browser',
-    color: '#3b82f6',
+    color: '#60a5fa',
     skills: [
       {
         name: 'Agent Browser',
         command: '/agent-browser',
         desc: 'CLI de automação de browser para agentes IA via Chrome/CDP',
         bullets: [
-          'Navegar páginas, preencher formulários, clicar botões',
-          'Tirar screenshots e extrair dados de páginas',
+          'Navegar, preencher formulários, clicar e extrair dados',
           'Testar web apps e automatizar fluxos completos',
           'Automatizar apps Electron (VS Code, Slack, Discord, Figma)',
-          'Automação Slack: checar unreads, enviar mensagens, buscar conversas',
+          'Automação Slack: mensagens, busca, unreads',
           'Suporte a AWS Bedrock AgentCore cloud browsers',
         ]
       },
@@ -562,7 +725,7 @@ const PLUGINS = [
   {
     id: 'design',
     name: 'Design & Frontend',
-    color: '#ec4899',
+    color: '#f472b6',
     skills: [
       {
         name: 'Frontend Design',
@@ -570,20 +733,20 @@ const PLUGINS = [
         desc: 'Criar interfaces frontend de produção com alta qualidade visual',
         bullets: [
           'Evita estética genérica de IA — gera designs memoráveis',
-          'Define direção estética antes de codificar (minimalismo, brutalismo, etc.)',
-          'Produz HTML/CSS/JS, React ou Vue funcional e visualmente marcante',
+          'Define direção estética antes de codificar',
+          'Produz HTML/CSS/JS ou React funcional e visualmente marcante',
           'Atenção a tipografia, espaçamento e micro-interações',
         ]
       },
       {
         name: 'UI/UX Pro Max',
         command: '/ui-ux-pro-max',
-        desc: 'Inteligência de design UI/UX com biblioteca completa de referências',
+        desc: 'Biblioteca completa de referências de design UI/UX',
         bullets: [
           '50+ estilos visuais, 161 paletas de cores, 57 pares de fontes',
           '99 diretrizes de UX e 25 tipos de gráfico',
-          'Suporte para 10 stacks: React, Next.js, Vue, Svelte, Tailwind, shadcn/ui, Flutter...',
-          'Revisão de UI para acessibilidade, consistência e qualidade percebida',
+          '10 stacks: React, Next.js, Vue, Svelte, Tailwind, shadcn/ui, Flutter...',
+          'Revisão de UI para acessibilidade e consistência visual',
         ]
       },
       {
@@ -592,9 +755,8 @@ const PLUGINS = [
         desc: 'Traduzir designs Figma para código de produção com fidelidade 1:1',
         bullets: [
           'Lê arquivo Figma via MCP server para extrair tokens de design',
-          'Gera código que corresponde pixel a pixel ao design',
+          'Gera código pixel-perfect com o design',
           'Integra com sistema de design e biblioteca de componentes existente',
-          'Suporta seleção de nó diretamente no app Figma Desktop',
         ]
       },
       {
@@ -604,16 +766,15 @@ const PLUGINS = [
         bullets: [
           '70 regras em 8 categorias priorizadas por impacto',
           'Eliminar waterfalls de dados (CRÍTICO)',
-          'Otimização de bundle size (CRÍTICO)',
-          'Performance server-side e client-side data fetching',
+          'Otimização de bundle size, SSR e client-side fetching',
         ]
       },
     ]
   },
   {
-    id: 'copywriting',
+    id: 'copy',
     name: 'Copy & Escrita',
-    color: '#f59e0b',
+    color: '#fbbf24',
     skills: [
       {
         name: 'Copywriting',
@@ -623,8 +784,7 @@ const PLUGINS = [
           'Homepage, landing pages, pricing, feature pages, about',
           'Headlines, CTAs, value propositions e taglines',
           'Analisa persona, problema, objeções e linguagem do cliente',
-          'Lê contexto em .agents/product-marketing-context.md se existir',
-          'Estrutura copy com hierarquia clara de benefícios',
+          'Lê .agents/product-marketing-context.md se existir',
         ]
       },
       {
@@ -632,8 +792,7 @@ const PLUGINS = [
         command: '/humanizer',
         desc: 'Remover padrões de escrita IA para soar natural e humano',
         bullets: [
-          'Detecta e corrige: simbolismo inflado, linguagem promocional',
-          'Remove abuso de travessão (—), regra dos três, voz passiva',
+          'Remove: simbolismo inflado, abuso de travessão (—), voz passiva',
           'Elimina frases de relleno e atribuições vagas',
           'Baseado no guia "Signs of AI writing" da Wikipedia',
         ]
@@ -645,7 +804,6 @@ const PLUGINS = [
         bullets: [
           'Aprende seu estilo a partir das suas edições automaticamente',
           'Fica mais preciso quanto mais você usa e corrige',
-          'Template: fork e configure suas regras de estilo',
         ]
       },
     ]
@@ -653,26 +811,24 @@ const PLUGINS = [
   {
     id: 'productivity',
     name: 'Produtividade',
-    color: '#10b981',
+    color: '#34d399',
     skills: [
       {
         name: 'Caveman Mode',
         command: '/caveman',
-        desc: 'Modo de comunicação ultra-comprimido — reduz tokens ~75%',
+        desc: 'Modo ultra-comprimido — reduz tokens ~75% mantendo precisão técnica',
         bullets: [
-          'Mantém precisão técnica total, elimina apenas relleno',
+          'Remove artigos, adjetivos e cortesias, preserva substância',
           'Níveis: lite, full (padrão), ultra',
-          'Remove artigos, adjetivos desnecessários e cortesias',
           'Ativo em todas as respostas até "stop caveman"',
         ]
       },
       {
         name: 'Cost Mode',
         command: '/cost-mode',
-        desc: 'Modo econômico — reduz tokens 40-70% e custos 30-60%',
+        desc: 'Modo econômico — reduz tokens 40–70% e custos 30–60%',
         bullets: [
           'Elimina cortesias, hedging e repetição do prompt',
-          'Remove sumários do que acabou de fazer',
           'Mantém toda substância técnica, código e warnings',
           'Níveis: lite, standard, strict',
         ]
@@ -682,10 +838,9 @@ const PLUGINS = [
         command: '/find-skills',
         desc: 'Descobrir e instalar skills do ecossistema open agent skills',
         bullets: [
-          'Busca por funcionalidade: "find a skill for X"',
-          'Verifica qualidade: installs, reputação da fonte, stars no GitHub',
+          'Busca por funcionalidade no marketplace skills.sh',
+          'Verifica qualidade: installs, reputação e stars no GitHub',
           'Sugere comando de instalação npx skills add',
-          'Consulta o leaderboard em skills.sh',
         ]
       },
       {
@@ -693,20 +848,19 @@ const PLUGINS = [
         command: '/context7-cli',
         desc: 'Buscar documentação atualizada de qualquer biblioteca',
         bullets: [
-          'Documentação em tempo real para qualquer lib (training data pode estar desatualizado)',
-          'Gerencia skills: instalar, buscar, listar, remover, gerar',
-          'Configura Context7 MCP para Claude Code / Cursor / OpenCode',
+          'Docs em tempo real para qualquer lib (training data pode estar desatualizado)',
+          'Gerencia skills: instalar, buscar, listar e remover',
+          'Configura Context7 MCP para Claude Code / Cursor',
         ]
       },
       {
         name: 'Planning (ZH)',
         command: '/planning-with-files-zh',
-        desc: 'Sistema de planejamento baseado em arquivos estilo Manus',
+        desc: 'Sistema de planejamento em arquivos estilo Manus',
         bullets: [
           'Cria task_plan.md, findings.md e progress.md',
           'Rastreia progresso de tarefas complexas entre sessões',
           'Resume sessão automaticamente ao detectar plano ativo',
-          'Atualiza progress.md após cada edição de arquivo',
         ]
       },
     ]
@@ -714,7 +868,7 @@ const PLUGINS = [
   {
     id: 'apify',
     name: 'Apify / Scraping',
-    color: '#f97316',
+    color: '#fb923c',
     skills: [
       {
         name: 'Ultimate Scraper',
@@ -733,8 +887,7 @@ const PLUGINS = [
         desc: 'Desenvolver, debugar e fazer deploy de Apify Actors',
         bullets: [
           'Actors: programas serverless para scraping e automação',
-          'Aceitam JSON input, rodam em containers Docker isolados',
-          'Podem executar de segundos a horas, com persistência de estado',
+          'Aceitam JSON input, rodam em Docker isolado',
           'Deploy via apify push',
         ]
       },
@@ -753,63 +906,71 @@ const PLUGINS = [
         command: '/apify-generate-output-schema',
         desc: 'Gerar schemas de output para Actors analisando o código fonte',
         bullets: [
-          'Analisa o código para entender exatamente o que é produzido',
-          'Gera dataset_schema.json, output_schema.json, key_value_store_schema.json',
-          'Todos os campos são nullable por padrão (APIs são imprevisíveis)',
-          'Nunca usa dados reais de usuários em exemplos',
+          'Analisa o código — nunca adivinha o output',
+          'Gera dataset_schema.json, output_schema.json e key_value_store_schema.json',
+          'Todos os campos nullable por padrão (APIs são imprevisíveis)',
         ]
       },
     ]
   },
 ];
 
-// =====================================================================
-// RENDER
-// =====================================================================
+/* ================================================================
+   RENDER
+   ================================================================ */
+let activePlugin = 'all';
+let searchQuery = '';
+let toastTimer;
 
 function render() {
   const main = document.getElementById('main');
-  const filters = document.getElementById('filters');
+  const filtersBar = document.getElementById('filters-bar');
   let totalSkills = 0;
+  let delay = 0;
 
   PLUGINS.forEach(plugin => {
     totalSkills += plugin.skills.length;
 
     // Filter button
     const btn = document.createElement('button');
-    btn.className = 'filter-btn';
-    btn.textContent = plugin.name;
-    btn.onclick = function() { filterPlugin(plugin.id, this); };
+    btn.className = 'f-btn';
     btn.dataset.plugin = plugin.id;
-    filters.appendChild(btn);
+    btn.onclick = function() { filterPlugin(plugin.id, this); };
+    btn.innerHTML = `${plugin.name} <span class="count">${plugin.skills.length}</span>`;
+    filtersBar.appendChild(btn);
 
-    // Group
+    // Plugin group
     const group = document.createElement('div');
-    group.className = 'plugin-group';
+    group.className = 'p-group';
     group.dataset.plugin = plugin.id;
 
-    const header = document.createElement('div');
-    header.className = 'plugin-header';
-    header.innerHTML = `
-      <div class="plugin-dot" style="background:${plugin.color}"></div>
-      <div class="plugin-name">${plugin.name}</div>
-      <div class="plugin-skill-count">${plugin.skills.length} skill${plugin.skills.length > 1 ? 's' : ''}</div>
+    // Plugin header
+    const ph = document.createElement('div');
+    ph.className = 'p-header';
+    ph.innerHTML = `
+      <div class="p-indicator" style="background:${plugin.color};color:${plugin.color}"></div>
+      <div class="p-name">${plugin.name}</div>
+      <div class="p-count">${plugin.skills.length} skill${plugin.skills.length > 1 ? 's' : ''}</div>
+      <div class="p-line"></div>
     `;
-    group.appendChild(header);
+    group.appendChild(ph);
 
+    // Skills grid
     const grid = document.createElement('div');
     grid.className = 'skills-grid';
 
     plugin.skills.forEach(skill => {
+      delay += 35;
       const card = document.createElement('div');
-      card.className = 'skill-card';
-      card.style.setProperty('--card-color', plugin.color);
-      card.dataset.name = (skill.name + ' ' + skill.command + ' ' + skill.desc + ' ' + skill.bullets.join(' ')).toLowerCase();
+      card.className = 's-card';
+      card.style.setProperty('--plugin-color', plugin.color);
+      card.style.animationDelay = `${delay}ms`;
+      card.dataset.search = (skill.name + ' ' + skill.command + ' ' + skill.desc + ' ' + skill.bullets.join(' ')).toLowerCase();
 
       card.innerHTML = `
-        <div class="card-top">
+        <div class="card-head">
           <div class="card-name">${skill.name}</div>
-          <div class="card-command">${skill.command}</div>
+          <div class="card-cmd" title="Clique para copiar" onclick="copyCmd('${skill.command}', this)">${skill.command}</div>
         </div>
         <div class="card-desc">${skill.desc}</div>
         <ul class="card-bullets">
@@ -823,70 +984,101 @@ function render() {
     main.appendChild(group);
   });
 
-  document.getElementById('total-count').textContent = totalSkills;
-  document.getElementById('updated-date').textContent = new Date().toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
-  updateCount();
+  // Stats
+  document.getElementById('stat-skills').textContent = totalSkills;
+  document.getElementById('stat-plugins').textContent = PLUGINS.length;
+  document.getElementById('count-all').textContent = totalSkills;
+  document.getElementById('footer-count').textContent = totalSkills;
+  document.getElementById('updated').textContent = new Date().toLocaleDateString('pt-BR');
 }
 
-function updateCount() {
-  const visible = document.querySelectorAll('.skill-card:not([hidden])').length;
-  document.getElementById('count').textContent = `${visible} skills`;
+function copyCmd(cmd, el) {
+  navigator.clipboard.writeText(cmd).then(() => {
+    el.classList.add('copied');
+    el.textContent = '✓ copiado';
+    setTimeout(() => {
+      el.classList.remove('copied');
+      el.textContent = cmd;
+    }, 1500);
+    showToast(`${cmd} copiado para a área de transferência`);
+  });
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2000);
 }
 
 function filterPlugin(pluginId, btn) {
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  activePlugin = pluginId;
+  searchQuery = '';
+  document.getElementById('search').value = '';
+  document.getElementById('search-clear').classList.remove('visible');
+
+  document.querySelectorAll('.f-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
 
-  document.querySelectorAll('.plugin-group').forEach(g => {
-    if (pluginId === 'all' || g.dataset.plugin === pluginId) {
-      g.removeAttribute('hidden');
-    } else {
-      g.setAttribute('hidden', '');
-    }
+  applyFilters();
+}
+
+function applyFilters() {
+  let visibleCount = 0;
+
+  document.querySelectorAll('.p-group').forEach(group => {
+    const matchPlugin = activePlugin === 'all' || group.dataset.plugin === activePlugin;
+    if (!matchPlugin) { group.hidden = true; return; }
+
+    let groupHasVisible = false;
+    group.querySelectorAll('.s-card').forEach(card => {
+      const matchSearch = !searchQuery || card.dataset.search.includes(searchQuery);
+      card.hidden = !matchSearch;
+      if (matchSearch) { groupHasVisible = true; visibleCount++; }
+    });
+
+    group.hidden = !groupHasVisible;
   });
 
-  // Clear search
+  document.getElementById('empty').style.display = visibleCount === 0 ? 'block' : 'none';
+  document.getElementById('count-all').textContent = visibleCount;
+}
+
+function clearSearch() {
   document.getElementById('search').value = '';
-  document.querySelectorAll('.skill-card').forEach(c => c.removeAttribute('hidden'));
-  document.getElementById('no-results').style.display = 'none';
-  updateCount();
+  document.getElementById('search-clear').classList.remove('visible');
+  searchQuery = '';
+  applyFilters();
 }
 
-function filterSkills() {
-  const q = document.getElementById('search').value.toLowerCase().trim();
+// ── SEARCH INPUT
+document.getElementById('search').addEventListener('input', e => {
+  searchQuery = e.target.value.toLowerCase().trim();
+  const clear = document.getElementById('search-clear');
+  clear.classList.toggle('visible', searchQuery.length > 0);
 
-  // Reset plugin filter
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  document.querySelector('[onclick*="all"]').classList.add('active');
-  document.querySelectorAll('.plugin-group').forEach(g => g.removeAttribute('hidden'));
-
-  if (!q) {
-    document.querySelectorAll('.skill-card').forEach(c => c.removeAttribute('hidden'));
-    document.getElementById('no-results').style.display = 'none';
-    updateCount();
-    return;
+  // Reset plugin filter when searching
+  if (searchQuery) {
+    activePlugin = 'all';
+    document.querySelectorAll('.f-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector('[data-plugin="all"]').classList.add('active');
   }
+  applyFilters();
+});
 
-  let anyVisible = false;
-  document.querySelectorAll('.skill-card').forEach(card => {
-    if (card.dataset.name.includes(q)) {
-      card.removeAttribute('hidden');
-      anyVisible = true;
-    } else {
-      card.setAttribute('hidden', '');
-    }
-  });
-
-  // Hide empty groups
-  document.querySelectorAll('.plugin-group').forEach(group => {
-    const hasVisible = group.querySelectorAll('.skill-card:not([hidden])').length > 0;
-    if (!hasVisible) group.setAttribute('hidden', '');
-  });
-
-  document.getElementById('no-results').style.display = anyVisible ? 'none' : 'block';
-  document.getElementById('search-term').textContent = q;
-  updateCount();
-}
+// ── KEYBOARD SHORTCUTS
+document.addEventListener('keydown', e => {
+  const inp = document.getElementById('search');
+  if (e.key === '/' && document.activeElement !== inp) {
+    e.preventDefault();
+    inp.focus();
+  }
+  if (e.key === 'Escape' && document.activeElement === inp) {
+    clearSearch();
+    inp.blur();
+  }
+});
 
 render();
 </script>
