@@ -119,6 +119,15 @@ const SKILLS_DB = {
     with:['Versão sincronizada em todos os arquivos','Tag annotated criada e empurrada','GitHub Release publicado com release notes','CHANGELOG.md regenerado via GitHub API'],
     example:{before:'$ vim package.json  # bump\n$ vim marketplace.json  # bump\n$ git tag v1.2.3\n$ gh release create... # esqueci a flag',after:'/version-bump → MINOR\n✓ package.json → 1.2.0\n✓ marketplace.json → 1.2.0\n✓ tag v1.2.0 criada\n✓ GitHub Release publicado'},
   },
+  'squad-builder': {
+    id:'squad-builder', name:'Squad Builder', command:'/squad-builder', plugin:'squad-builder', catId:'implementar',
+    tagline:'Monte times de agentes IA especializados para qualquer domínio',
+    desc:'Constrói squads multi-agente no Claude Code: define papéis, fluxo de orquestração e arquivos de agentes — do briefing ao primeiro teste.',
+    stats:[{value:'3–5',label:'agentes por squad'},{value:'3',label:'padrões de orquestração'},{value:'0',label:'arquivos sem aprovação'}],
+    without:['Agentes genéricos sem papel bem definido — triggers imprecisos','Não sabe quando squad é necessário vs agente único','CLAUDE.md mal estruturado — agentes nunca são acionados','Skills não wired — raciocínio genérico sem especialização'],
+    with:['Um agente por papel com description precisa e frases de trigger','Fluxo sequencial, paralelo ou fan-out conforme o caso','CLAUDE.md gerado com tabela de agentes e regras de orquestração','Skills wired em cada agente — conhecimento especializado carregado'],
+    example:{before:'// "Cria agentes de marketing"\n// (sem estrutura, sem triggers,\n// skills não integradas)',after:'.claude/agents/\n  researcher.md    ← Haiku\n  strategist.md    ← Sonnet\n  copywriter.md    ← Sonnet + /copywriting\nFluxo: researcher → strategist → copywriter'},
+  },
   'systematic-debugging': {
     id:'systematic-debugging', name:'Debug Sistemático', command:'/systematic-debugging', plugin:'superpowers', catId:'revisar',
     tagline:'Causa raiz antes de qualquer correção — sem exceção',
