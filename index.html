@@ -242,6 +242,22 @@
       font-size: 14px; font-weight: 700;
       color: var(--text); line-height: 1.3;
     }
+    .cmd-group {
+      display: flex; align-items: center; gap: 5px; flex-shrink: 0;
+    }
+    .copy-btn {
+      width: 26px; height: 26px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 7px; border: 1px solid var(--border);
+      background: transparent; cursor: pointer;
+      color: var(--text-3);
+      transition: background .15s, border-color .15s, color .15s, transform .1s;
+      flex-shrink: 0;
+    }
+    .copy-btn:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.15); color: var(--text-2); }
+    .copy-btn:active { transform: scale(0.9); }
+    .copy-btn.copied { color: #4ade80; border-color: rgba(74,222,128,0.35); background: rgba(74,222,128,0.07); }
+    .copy-btn svg { width: 13px; height: 13px; }
     .card-cmd {
       font-family: var(--ff-mono); font-size: 11px; font-weight: 600;
       color: var(--cat-color, #7cd3ff);
@@ -704,7 +720,14 @@ function render() {
       card.innerHTML = `
         <div class="card-head">
           <div class="card-name">${skill.name}</div>
-          <div class="card-cmd" title="Clique para copiar" onclick="copyCmd('${skill.command}',this)">${skill.command}</div>
+          <div class="cmd-group">
+            <div class="card-cmd">${skill.command}</div>
+            <button class="copy-btn" title="Copiar comando" onclick="copyCmd('${skill.command}',this)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+              </svg>
+            </button>
+          </div>
         </div>
         <div class="card-desc">${skill.desc}</div>
         <ul class="card-bullets">${skill.bullets.map(b=>`<li>${b}</li>`).join('')}</ul>
@@ -761,8 +784,9 @@ function applyFilters() {
 function copyCmd(cmd, el) {
   navigator.clipboard.writeText(cmd).then(() => {
     el.classList.add('copied');
-    el.textContent = '✓ copiado';
-    setTimeout(() => { el.classList.remove('copied'); el.textContent = cmd; }, 1500);
+    const orig = el.innerHTML;
+    el.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><polyline points="20 6 9 17 4 12"/></svg>`;
+    setTimeout(() => { el.classList.remove('copied'); el.innerHTML = orig; }, 1500);
     showToast(`${cmd} copiado!`);
   });
 }
