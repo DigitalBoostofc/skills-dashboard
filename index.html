@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skills Dashboard — Claude Code</title>
+  <style>
+    :root {
+      --bg: #0d0d14;
+      --bg2: #13131f;
+      --bg3: #1a1a2e;
+      --surface: #1e1e30;
+      --surface2: #252540;
+      --border: #2a2a45;
+      --text: #e8e8f0;
+      --text2: #9898b8;
+      --text3: #5a5a80;
+      --accent: #7c6af7;
+      --accent2: #a78bfa;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* HEADER */
+    header {
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 32px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+    }
+    .header-logo {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, #7c6af7, #a78bfa);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; flex-shrink: 0;
+    }
+    .header-title { font-size: 18px; font-weight: 700; color: var(--text); }
+    .header-sub { font-size: 12px; color: var(--text3); margin-top: 1px; }
+    .header-search {
+      margin-left: auto;
+      position: relative;
+    }
+    .header-search input {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 10px;
+      padding: 8px 14px 8px 36px;
+      font-size: 13px;
+      width: 260px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .header-search input:focus { border-color: var(--accent); }
+    .header-search input::placeholder { color: var(--text3); }
+    .search-icon {
+      position: absolute; left: 11px; top: 50%; transform: translateY(-50%);
+      color: var(--text3); font-size: 14px; pointer-events: none;
+    }
+    .header-count {
+      font-size: 12px; color: var(--text3);
+      background: var(--surface);
+      padding: 4px 10px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    /* FILTERS */
+    .filters {
+      padding: 16px 32px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg2);
+    }
+    .filter-btn {
+      padding: 5px 12px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text2);
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .filter-btn:hover { border-color: var(--accent); color: var(--accent2); }
+    .filter-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+      font-weight: 600;
+    }
+
+    /* MAIN */
+    main { padding: 28px 32px; max-width: 1400px; margin: 0 auto; }
+
+    /* PLUGIN GROUP */
+    .plugin-group { margin-bottom: 40px; }
+    .plugin-group[hidden] { display: none; }
+    .plugin-header {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 16px;
+    }
+    .plugin-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+    }
+    .plugin-name {
+      font-size: 13px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--text2);
+    }
+    .plugin-skill-count {
+      font-size: 11px; color: var(--text3);
+      background: var(--surface);
+      padding: 2px 8px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+
+    /* SKILLS GRID */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 14px;
+    }
+
+    /* SKILL CARD */
+    .skill-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px 20px;
+      transition: all 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .skill-card:hover {
+      border-color: var(--accent);
+      background: var(--surface2);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(124,106,247,0.1);
+    }
+    .skill-card[hidden] { display: none; }
+    .skill-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: var(--card-color, var(--accent));
+      opacity: 0.6;
+    }
+    .card-top {
+      display: flex; align-items: flex-start;
+      justify-content: space-between; gap: 10px;
+      margin-bottom: 10px;
+    }
+    .card-name {
+      font-size: 14px; font-weight: 700;
+      color: var(--text); line-height: 1.3;
+    }
+    .card-command {
+      font-size: 11px; font-family: 'Fira Code', 'Cascadia Code', monospace;
+      background: var(--bg3);
+      color: var(--accent2);
+      padding: 3px 8px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .card-desc {
+      font-size: 12px; color: var(--text2);
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+    .card-bullets {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 5px;
+    }
+    .card-bullets li {
+      font-size: 12px; color: var(--text2);
+      display: flex; gap: 8px; align-items: flex-start;
+      line-height: 1.4;
+    }
+    .card-bullets li::before {
+      content: '›';
+      color: var(--card-color, var(--accent));
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 0px;
+    }
+
+    /* NO RESULTS */
+    .no-results {
+      text-align: center; padding: 60px 20px;
+      color: var(--text3); font-size: 14px;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 24px;
+      color: var(--text3);
+      font-size: 11px;
+      border-top: 1px solid var(--border);
+      margin-top: 20px;
+    }
+    footer span { color: var(--accent2); }
+
+    @media (max-width: 640px) {
+      header { padding: 14px 16px; flex-wrap: wrap; }
+      .header-search input { width: 200px; }
+      main { padding: 20px 16px; }
+      .filters { padding: 12px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-logo">⚡</div>
+  <div>
+    <div class="header-title">Skills Dashboard</div>
+    <div class="header-sub">Claude Code — todas as skills disponíveis</div>
+  </div>
+  <div class="header-search">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="search" placeholder="Buscar skill..." oninput="filterSkills()" />
+  </div>
+  <div class="header-count" id="count"></div>
+</header>
+
+<div class="filters" id="filters">
+  <button class="filter-btn active" onclick="filterPlugin('all', this)">Todos</button>
+</div>
+
+<main id="main"></main>
+
+<div class="no-results" id="no-results" style="display:none">
+  Nenhuma skill encontrada para "<span id="search-term"></span>"
+</div>
+
+<footer>
+  Atualizado em <span id="updated-date"></span> · <span id="total-count"></span> skills instaladas
+</footer>
+
+<script>
+// =====================================================================
+// DADOS DAS SKILLS — edite aqui ao instalar novas skills
+// =====================================================================
+const PLUGINS = [
+  {
+    id: 'superpowers',
+    name: 'Superpowers',
+    color: '#7c6af7',
+    skills: [
+      {
+        name: 'Brainstorming',
+        command: '/brainstorming',
+        desc: 'Explorar intenção, requisitos e design antes de implementar',
+        bullets: [
+          'Transforma ideias em specs completas via diálogo colaborativo',
+          'Faz perguntas uma de cada vez para refinar o design',
+          'Propõe 2–3 abordagens com trade-offs e recomendação',
+          'Exige aprovação do design antes de qualquer código',
+          'Salva doc de design em docs/superpowers/specs/',
+        ]
+      },
+      {
+        name: 'Planejamento',
+        command: '/writing-plans',
+        desc: 'Escrever planos de implementação detalhados antes de tocar em código',
+        bullets: [
+          'Mapeia todos os arquivos a criar ou modificar',
+          'Divide o trabalho em tarefas granulares e sequenciais',
+          'Documenta como testar cada parte',
+          'Salva plano em docs/superpowers/plans/',
+          'Aplica princípios DRY, YAGNI e TDD',
+        ]
+      },
+      {
+        name: 'Executar Planos',
+        command: '/executing-plans',
+        desc: 'Carregar e executar um plano de implementação já escrito',
+        bullets: [
+          'Lê o plano e identifica questões antes de iniciar',
+          'Executa cada tarefa em ordem com checkpoints',
+          'Marca tasks como concluídas em tempo real',
+          'Usa subagents para tarefas paralelas quando possível',
+        ]
+      },
+      {
+        name: 'Subagent Dev',
+        command: '/subagent-driven-development',
+        desc: 'Executar planos via subagent dedicado por tarefa com revisão dupla',
+        bullets: [
+          'Um subagent fresco por tarefa independente',
+          'Revisão em dois estágios: conformidade com spec + qualidade do código',
+          'Preserva contexto do agente principal para coordenação',
+          'Alta qualidade com iteração rápida',
+        ]
+      },
+      {
+        name: 'Parallel Agents',
+        command: '/dispatching-parallel-agents',
+        desc: 'Delegar 2+ tarefas independentes para agentes paralelos',
+        bullets: [
+          'Identifica quando tarefas são verdadeiramente independentes',
+          'Cria subagents com contexto isolado e preciso',
+          'Não herda histórico da sessão principal',
+          'Ideal para múltiplas falhas de teste em subsistemas diferentes',
+        ]
+      },
+      {
+        name: 'TDD',
+        command: '/test-driven-development',
+        desc: 'Escrever o teste primeiro, ver falhar, depois implementar',
+        bullets: [
+          'Aplica o ciclo RED → GREEN → REFACTOR rigorosamente',
+          'Garante que o teste realmente verifica o comportamento certo',
+          'Funciona para features, bugfixes e refatorações',
+          'Sem exceções sem aprovação explícita',
+        ]
+      },
+      {
+        name: 'Debug Sistemático',
+        command: '/systematic-debugging',
+        desc: 'Encontrar a causa raiz antes de propor qualquer correção',
+        bullets: [
+          'Lei de ferro: sem correção sem investigação de causa raiz',
+          'Fases estruturadas: reproduzir → isolar → identificar → corrigir',
+          'Funciona para bugs, falhas de teste e comportamentos inesperados',
+          'Patches de sintoma são proibidos',
+        ]
+      },
+      {
+        name: 'Verificação Final',
+        command: '/verification-before-completion',
+        desc: 'Rodar verificações antes de declarar que o trabalho está pronto',
+        bullets: [
+          'Proibido afirmar "pronto" sem evidência de verificação recente',
+          'Identifica qual comando prova a claim, roda e mostra output',
+          'Aplica antes de commits, PRs ou qualquer declaração de sucesso',
+        ]
+      },
+      {
+        name: 'Solicitar Code Review',
+        command: '/requesting-code-review',
+        desc: 'Despachar subagent revisor após completar features ou tasks',
+        bullets: [
+          'Dispatch do agente code-reviewer com contexto preciso',
+          'Obrigatório após cada task em subagent dev e antes de merge',
+          'Revisor não herda histórico da sessão — avaliação imparcial',
+        ]
+      },
+      {
+        name: 'Receber Code Review',
+        command: '/receiving-code-review',
+        desc: 'Avaliar feedback de code review com rigor técnico',
+        bullets: [
+          'Verificar antes de implementar qualquer sugestão',
+          'Padrão: ler → entender → verificar → avaliar → responder → implementar',
+          'Permite pushback técnico fundamentado quando a sugestão estiver errada',
+        ]
+      },
+      {
+        name: 'Fechar Branch',
+        command: '/finishing-a-development-branch',
+        desc: 'Guiar a finalização de trabalho de desenvolvimento',
+        bullets: [
+          'Verifica se todos os testes passam antes de qualquer ação',
+          'Apresenta opções: merge direto, PR, ou squash',
+          'Faz limpeza do worktree e branches temporárias',
+        ]
+      },
+      {
+        name: 'Git Worktrees',
+        command: '/using-git-worktrees',
+        desc: 'Criar workspaces git isolados para trabalhar em paralelo',
+        bullets: [
+          'Cria worktree isolado sem conflitar com o trabalho atual',
+          'Seleção inteligente de diretório (.worktrees, worktrees, etc.)',
+          'Verificação de segurança antes de criar isolamento',
+        ]
+      },
+      {
+        name: 'Criar Skills',
+        command: '/writing-skills',
+        desc: 'Criar novas skills usando metodologia TDD',
+        bullets: [
+          'TDD aplicado a documentação de processo',
+          'Testa o comportamento do agente sem a skill (RED) antes de escrever',
+          'Salva em ~/.claude/skills/ ou ~/.agents/skills/',
+          'Inclui revisão e fechamento de brechas (REFACTOR)',
+        ]
+      },
+      {
+        name: 'Using Superpowers',
+        command: '/using-superpowers',
+        desc: 'Skill mestre — estabelece como encontrar e usar todas as outras skills',
+        bullets: [
+          'Invocar skill relevante ANTES de qualquer resposta ou ação',
+          'Define prioridade: instruções do usuário > superpowers > system prompt',
+          'Documenta red flags de racionalização para não pular skills',
+        ]
+      },
+    ]
+  },
+  {
+    id: 'thedotmack',
+    name: 'TheDotMack',
+    color: '#06b6d4',
+    skills: [
+      {
+        name: 'Make Plan',
+        command: '/make-plan',
+        desc: 'Criar plano de implementação faseado com descoberta de documentação',
+        bullets: [
+          'Fase 0 obrigatória: descoberta de docs e exemplos reais antes de planejar',
+          'Usa subagents para coleta de fatos (APIs, arquivos, exemplos)',
+          'Mantém síntese e autoria com o orquestrador',
+          'Produz plano executável em contextos de chat separados',
+        ]
+      },
+      {
+        name: 'Do (Executar Plano)',
+        command: '/do',
+        desc: 'Executar plano faseado usando subagents como orquestrador',
+        bullets: [
+          'Um subagent de implementação por fase',
+          'Subagent de verificação após cada fase',
+          'Subagent de anti-patterns para checar bad code',
+          'Não avança sem confirmação de conclusão da fase anterior',
+        ]
+      },
+      {
+        name: 'Smart Explore',
+        command: '/smart-explore',
+        desc: 'Exploração de código otimizada para tokens via AST tree-sitter',
+        bullets: [
+          'Substitui Read/Grep/Glob por smart_search/smart_outline/smart_unfold',
+          'Indexa estrutura antes de carregar detalhes de implementação',
+          'Camadas: busca → outline → unfold de símbolo específico',
+          'Reduz tokens drasticamente em exploração de codebases grandes',
+        ]
+      },
+      {
+        name: 'Mem Search',
+        command: '/mem-search',
+        desc: 'Buscar memória persistente entre sessões via claude-mem',
+        bullets: [
+          'Responde "já resolvemos isso antes?" e "como fizemos X?',
+          'Fluxo 3 camadas: busca → filtra → detalhe (10x menos tokens)',
+          'Busca semântica por projeto, tipo, conceito ou data',
+        ]
+      },
+      {
+        name: 'Knowledge Agent',
+        command: '/knowledge-agent',
+        desc: 'Construir e consultar bases de conhecimento IA a partir de observações',
+        bullets: [
+          'Compila corpus filtrado do histórico de observações',
+          'Cria "cérebros" focados: "tudo sobre hooks", "todos os bugfixes do worker"',
+          'Consulta conversacionalmente com contexto especializado',
+        ]
+      },
+      {
+        name: 'Timeline Report',
+        command: '/timeline-report',
+        desc: 'Gerar relatório narrativo da história de desenvolvimento de um projeto',
+        bullets: [
+          'Analisa todo o histórico via claude-mem timeline',
+          'Produz narrativa "Journey Into [Projeto]"',
+          'Cobre decisões, bugs, features e refatorações ao longo do tempo',
+        ]
+      },
+      {
+        name: 'Version Bump',
+        command: '/version-bump',
+        desc: 'Versionamento semântico automatizado e workflow de release para plugins',
+        bullets: [
+          'Incrementa versão em package.json, marketplace.json e plugin.json',
+          'Roda build, cria commit, tag annotated e push',
+          'Cria GitHub Release e regenera CHANGELOG.md',
+        ]
+      },
+    ]
+  },
+  {
+    id: 'playwright-skill',
+    name: 'Playwright',
+    color: '#22c55e',
+    skills: [
+      {
+        name: 'Playwright Skill',
+        command: '/playwright-skill',
+        desc: 'Automação completa de browser com Playwright',
+        bullets: [
+          'Auto-detecta servidores dev em localhost antes de testar',
+          'Testa páginas, preenche formulários, verifica design responsivo',
+          'Valida UX, fluxos de login e links',
+          'Escreve e executa scripts Playwright no /tmp',
+          'Tira screenshots e monitora erros de console',
+        ]
+      },
+      {
+        name: 'Playwright CLI',
+        command: '/playwright-cli',
+        desc: 'CLI de automação de browser — comandos diretos via terminal',
+        bullets: [
+          'Abrir browser, navegar para URL, clicar em elementos',
+          'Digitar texto, pressionar teclas, tirar screenshot',
+          'Referencia elementos por ID do snapshot (ex: e15)',
+          'Fechar browser ao terminar',
+        ]
+      },
+      {
+        name: 'Playwright Trace',
+        command: '/playwright-trace',
+        desc: 'Inspecionar arquivos de trace do Playwright via CLI',
+        bullets: [
+          'Abre arquivo .zip de trace e mostra metadados',
+          'Lista todas as ações com IDs, duração e localização no código',
+          'Inspeciona requests, console, erros e snapshots DOM',
+          'Opera sem abrir browser — ideal para CI/CD',
+        ]
+      },
+    ]
+  },
+  {
+    id: 'agent-browser',
+    name: 'Agent Browser',
+    color: '#3b82f6',
+    skills: [
+      {
+        name: 'Agent Browser',
+        command: '/agent-browser',
+        desc: 'CLI de automação de browser para agentes IA via Chrome/CDP',
+        bullets: [
+          'Navegar páginas, preencher formulários, clicar botões',
+          'Tirar screenshots e extrair dados de páginas',
+          'Testar web apps e automatizar fluxos completos',
+          'Automatizar apps Electron (VS Code, Slack, Discord, Figma)',
+          'Automação Slack: checar unreads, enviar mensagens, buscar conversas',
+          'Suporte a AWS Bedrock AgentCore cloud browsers',
+        ]
+      },
+    ]
+  },
+  {
+    id: 'design',
+    name: 'Design & Frontend',
+    color: '#ec4899',
+    skills: [
+      {
+        name: 'Frontend Design',
+        command: '/frontend-design',
+        desc: 'Criar interfaces frontend de produção com alta qualidade visual',
+        bullets: [
+          'Evita estética genérica de IA — gera designs memoráveis',
+          'Define direção estética antes de codificar (minimalismo, brutalismo, etc.)',
+          'Produz HTML/CSS/JS, React ou Vue funcional e visualmente marcante',
+          'Atenção a tipografia, espaçamento e micro-interações',
+        ]
+      },
+      {
+        name: 'UI/UX Pro Max',
+        command: '/ui-ux-pro-max',
+        desc: 'Inteligência de design UI/UX com biblioteca completa de referências',
+        bullets: [
+          '50+ estilos visuais, 161 paletas de cores, 57 pares de fontes',
+          '99 diretrizes de UX e 25 tipos de gráfico',
+          'Suporte para 10 stacks: React, Next.js, Vue, Svelte, Tailwind, shadcn/ui, Flutter...',
+          'Revisão de UI para acessibilidade, consistência e qualidade percebida',
+        ]
+      },
+      {
+        name: 'Figma → Código',
+        command: '/figma-implement-design',
+        desc: 'Traduzir designs Figma para código de produção com fidelidade 1:1',
+        bullets: [
+          'Lê arquivo Figma via MCP server para extrair tokens de design',
+          'Gera código que corresponde pixel a pixel ao design',
+          'Integra com sistema de design e biblioteca de componentes existente',
+          'Suporta seleção de nó diretamente no app Figma Desktop',
+        ]
+      },
+      {
+        name: 'Vercel React',
+        command: '/vercel-react-best-practices',
+        desc: 'Boas práticas React/Next.js da Vercel Engineering',
+        bullets: [
+          '70 regras em 8 categorias priorizadas por impacto',
+          'Eliminar waterfalls de dados (CRÍTICO)',
+          'Otimização de bundle size (CRÍTICO)',
+          'Performance server-side e client-side data fetching',
+        ]
+      },
+    ]
+  },
+  {
+    id: 'copywriting',
+    name: 'Copy & Escrita',
+    color: '#f59e0b',
+    skills: [
+      {
+        name: 'Copywriting',
+        command: '/copywriting',
+        desc: 'Escrever copy de marketing persuasivo que converte',
+        bullets: [
+          'Homepage, landing pages, pricing, feature pages, about',
+          'Headlines, CTAs, value propositions e taglines',
+          'Analisa persona, problema, objeções e linguagem do cliente',
+          'Lê contexto em .agents/product-marketing-context.md se existir',
+          'Estrutura copy com hierarquia clara de benefícios',
+        ]
+      },
+      {
+        name: 'Humanizer',
+        command: '/humanizer',
+        desc: 'Remover padrões de escrita IA para soar natural e humano',
+        bullets: [
+          'Detecta e corrige: simbolismo inflado, linguagem promocional',
+          'Remove abuso de travessão (—), regra dos três, voz passiva',
+          'Elimina frases de relleno e atribuições vagas',
+          'Baseado no guia "Signs of AI writing" da Wikipedia',
+        ]
+      },
+      {
+        name: 'My Writing Style',
+        command: '/my-writing-style',
+        desc: 'Skill de estilo de escrita personalizado com auto-aprendizado',
+        bullets: [
+          'Aprende seu estilo a partir das suas edições automaticamente',
+          'Fica mais preciso quanto mais você usa e corrige',
+          'Template: fork e configure suas regras de estilo',
+        ]
+      },
+    ]
+  },
+  {
+    id: 'productivity',
+    name: 'Produtividade',
+    color: '#10b981',
+    skills: [
+      {
+        name: 'Caveman Mode',
+        command: '/caveman',
+        desc: 'Modo de comunicação ultra-comprimido — reduz tokens ~75%',
+        bullets: [
+          'Mantém precisão técnica total, elimina apenas relleno',
+          'Níveis: lite, full (padrão), ultra',
+          'Remove artigos, adjetivos desnecessários e cortesias',
+          'Ativo em todas as respostas até "stop caveman"',
+        ]
+      },
+      {
+        name: 'Cost Mode',
+        command: '/cost-mode',
+        desc: 'Modo econômico — reduz tokens 40-70% e custos 30-60%',
+        bullets: [
+          'Elimina cortesias, hedging e repetição do prompt',
+          'Remove sumários do que acabou de fazer',
+          'Mantém toda substância técnica, código e warnings',
+          'Níveis: lite, standard, strict',
+        ]
+      },
+      {
+        name: 'Find Skills',
+        command: '/find-skills',
+        desc: 'Descobrir e instalar skills do ecossistema open agent skills',
+        bullets: [
+          'Busca por funcionalidade: "find a skill for X"',
+          'Verifica qualidade: installs, reputação da fonte, stars no GitHub',
+          'Sugere comando de instalação npx skills add',
+          'Consulta o leaderboard em skills.sh',
+        ]
+      },
+      {
+        name: 'Context7 CLI',
+        command: '/context7-cli',
+        desc: 'Buscar documentação atualizada de qualquer biblioteca',
+        bullets: [
+          'Documentação em tempo real para qualquer lib (training data pode estar desatualizado)',
+          'Gerencia skills: instalar, buscar, listar, remover, gerar',
+          'Configura Context7 MCP para Claude Code / Cursor / OpenCode',
+        ]
+      },
+      {
+        name: 'Planning (ZH)',
+        command: '/planning-with-files-zh',
+        desc: 'Sistema de planejamento baseado em arquivos estilo Manus',
+        bullets: [
+          'Cria task_plan.md, findings.md e progress.md',
+          'Rastreia progresso de tarefas complexas entre sessões',
+          'Resume sessão automaticamente ao detectar plano ativo',
+          'Atualiza progress.md após cada edição de arquivo',
+        ]
+      },
+    ]
+  },
+  {
+    id: 'apify',
+    name: 'Apify / Scraping',
+    color: '#f97316',
+    skills: [
+      {
+        name: 'Ultimate Scraper',
+        command: '/apify-ultimate-scraper',
+        desc: 'Scraper universal com IA para 55+ plataformas',
+        bullets: [
+          'Instagram, Facebook, TikTok, YouTube, Google Maps/Search/Trends',
+          'Booking.com, TripAdvisor e muito mais',
+          'Lead gen, monitoramento de marca, análise de concorrentes',
+          'Seleciona automaticamente o melhor Actor para cada tarefa',
+        ]
+      },
+      {
+        name: 'Actor Development',
+        command: '/apify-actor-development',
+        desc: 'Desenvolver, debugar e fazer deploy de Apify Actors',
+        bullets: [
+          'Actors: programas serverless para scraping e automação',
+          'Aceitam JSON input, rodam em containers Docker isolados',
+          'Podem executar de segundos a horas, com persistência de estado',
+          'Deploy via apify push',
+        ]
+      },
+      {
+        name: 'Actorization',
+        command: '/apify-actorization',
+        desc: 'Converter projetos existentes em Apify Actors',
+        bullets: [
+          'Envolve código JS/TS, Python ou qualquer linguagem com SDK',
+          'Configura .actor/input_schema.json e .actor/actor.json',
+          'Testa localmente com apify run antes do deploy',
+        ]
+      },
+      {
+        name: 'Output Schema',
+        command: '/apify-generate-output-schema',
+        desc: 'Gerar schemas de output para Actors analisando o código fonte',
+        bullets: [
+          'Analisa o código para entender exatamente o que é produzido',
+          'Gera dataset_schema.json, output_schema.json, key_value_store_schema.json',
+          'Todos os campos são nullable por padrão (APIs são imprevisíveis)',
+          'Nunca usa dados reais de usuários em exemplos',
+        ]
+      },
+    ]
+  },
+];
+
+// =====================================================================
+// RENDER
+// =====================================================================
+
+function render() {
+  const main = document.getElementById('main');
+  const filters = document.getElementById('filters');
+  let totalSkills = 0;
+
+  PLUGINS.forEach(plugin => {
+    totalSkills += plugin.skills.length;
+
+    // Filter button
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn';
+    btn.textContent = plugin.name;
+    btn.onclick = function() { filterPlugin(plugin.id, this); };
+    btn.dataset.plugin = plugin.id;
+    filters.appendChild(btn);
+
+    // Group
+    const group = document.createElement('div');
+    group.className = 'plugin-group';
+    group.dataset.plugin = plugin.id;
+
+    const header = document.createElement('div');
+    header.className = 'plugin-header';
+    header.innerHTML = `
+      <div class="plugin-dot" style="background:${plugin.color}"></div>
+      <div class="plugin-name">${plugin.name}</div>
+      <div class="plugin-skill-count">${plugin.skills.length} skill${plugin.skills.length > 1 ? 's' : ''}</div>
+    `;
+    group.appendChild(header);
+
+    const grid = document.createElement('div');
+    grid.className = 'skills-grid';
+
+    plugin.skills.forEach(skill => {
+      const card = document.createElement('div');
+      card.className = 'skill-card';
+      card.style.setProperty('--card-color', plugin.color);
+      card.dataset.name = (skill.name + ' ' + skill.command + ' ' + skill.desc + ' ' + skill.bullets.join(' ')).toLowerCase();
+
+      card.innerHTML = `
+        <div class="card-top">
+          <div class="card-name">${skill.name}</div>
+          <div class="card-command">${skill.command}</div>
+        </div>
+        <div class="card-desc">${skill.desc}</div>
+        <ul class="card-bullets">
+          ${skill.bullets.map(b => `<li>${b}</li>`).join('')}
+        </ul>
+      `;
+      grid.appendChild(card);
+    });
+
+    group.appendChild(grid);
+    main.appendChild(group);
+  });
+
+  document.getElementById('total-count').textContent = totalSkills;
+  document.getElementById('updated-date').textContent = new Date().toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+  updateCount();
+}
+
+function updateCount() {
+  const visible = document.querySelectorAll('.skill-card:not([hidden])').length;
+  document.getElementById('count').textContent = `${visible} skills`;
+}
+
+function filterPlugin(pluginId, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  document.querySelectorAll('.plugin-group').forEach(g => {
+    if (pluginId === 'all' || g.dataset.plugin === pluginId) {
+      g.removeAttribute('hidden');
+    } else {
+      g.setAttribute('hidden', '');
+    }
+  });
+
+  // Clear search
+  document.getElementById('search').value = '';
+  document.querySelectorAll('.skill-card').forEach(c => c.removeAttribute('hidden'));
+  document.getElementById('no-results').style.display = 'none';
+  updateCount();
+}
+
+function filterSkills() {
+  const q = document.getElementById('search').value.toLowerCase().trim();
+
+  // Reset plugin filter
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('[onclick*="all"]').classList.add('active');
+  document.querySelectorAll('.plugin-group').forEach(g => g.removeAttribute('hidden'));
+
+  if (!q) {
+    document.querySelectorAll('.skill-card').forEach(c => c.removeAttribute('hidden'));
+    document.getElementById('no-results').style.display = 'none';
+    updateCount();
+    return;
+  }
+
+  let anyVisible = false;
+  document.querySelectorAll('.skill-card').forEach(card => {
+    if (card.dataset.name.includes(q)) {
+      card.removeAttribute('hidden');
+      anyVisible = true;
+    } else {
+      card.setAttribute('hidden', '');
+    }
+  });
+
+  // Hide empty groups
+  document.querySelectorAll('.plugin-group').forEach(group => {
+    const hasVisible = group.querySelectorAll('.skill-card:not([hidden])').length > 0;
+    if (!hasVisible) group.setAttribute('hidden', '');
+  });
+
+  document.getElementById('no-results').style.display = anyVisible ? 'none' : 'block';
+  document.getElementById('search-term').textContent = q;
+  updateCount();
+}
+
+render();
+</script>
+</body>
+</html>
