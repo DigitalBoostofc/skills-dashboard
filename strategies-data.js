@@ -955,6 +955,130 @@ const STRATEGIES_DB = [
     ]
   },
 
+  /* ─────────────────────────────────────────────────────────────
+     18. PENTEST / RED TEAM ENGAGEMENT
+     ───────────────────────────────────────────────────────────── */
+  {
+    id: 'pentest-engagement',
+    title: 'Pentest / Red Team Engagement',
+    icon: '🎯',
+    category: 'ops',
+    tagline: 'Teste de penetração completo — do plano do jogo ao relatório executivo',
+    description: 'Use em engajamentos autorizados de teste de penetração ou red team. Cobre reconhecimento, enumeração, exploração, pós-exploração e geração de relatório — com ética e autorização em primeiro lugar.',
+    difficulty: 'hard',
+    timeEstimate: '2-6 semanas',
+    outcome: 'Relatório técnico e executivo com achados priorizados, prova de conceito e roadmap de correção',
+    phases: [
+      {
+        name: 'Pré-engajamento & ética',
+        description: 'Nada começa sem autorização escrita',
+        steps: [
+          { agent: 'cyber-chief',   command: '*assess',       purpose: 'Verificar autorização, escopo e plano operacional' },
+          { agent: 'cyber-peter',   command: '*playbook',     purpose: 'Construir o playbook de ataque para o engajamento' },
+          { agent: 'cyber-peter',   command: '*redteam',      purpose: 'Planejar operação red team com MITRE ATT&CK' },
+        ]
+      },
+      {
+        name: 'Reconhecimento & OSINT',
+        description: 'Mapear o alvo antes de tocar nele',
+        steps: [
+          { agent: 'cyber-shannon', command: '*profile',      purpose: 'Perfil OSINT completo do alvo' },
+          { agent: 'cyber-shannon', command: '*breach',       purpose: 'Verificar exposição de credenciais' },
+          { agent: 'cyber-cart',    command: '*passive',      purpose: 'Reconhecimento passivo sem interação' },
+          { agent: 'cyber-cart',    command: '*active',       purpose: 'Varredura ativa com autorização' },
+        ]
+      },
+      {
+        name: 'Enumeração & descoberta',
+        description: 'Cada serviço tem algo a dizer',
+        steps: [
+          { agent: 'cyber-bust',    command: '*bust',         purpose: 'Descoberta de conteúdo web' },
+          { agent: 'cyber-bust',    command: '*api',          purpose: 'Enumeração de endpoints de API' },
+          { agent: 'cyber-dirber',  command: '*enum',         purpose: 'Enumeração de serviços (SMB, LDAP, SNMP)' },
+          { agent: 'cyber-dirber',  command: '*ad',           purpose: 'Mapeamento de caminhos de ataque em AD' },
+          { agent: 'cyber-fuzz',    command: '*fuzz',         purpose: 'Fuzzing de parâmetros e entradas' },
+        ]
+      },
+      {
+        name: 'Exploração controlada',
+        description: 'Confirmar risco com impacto demonstrado',
+        steps: [
+          { agent: 'cyber-rip',     command: '*crack',        purpose: 'Cracking de credenciais capturadas' },
+          { agent: 'cyber-rogue',   command: '*chain',        purpose: 'Cadeia de exploração até o objetivo' },
+          { agent: 'cyber-rogue',   command: '*privesc',      purpose: 'Escalação de privilégio' },
+          { agent: 'cyber-rogue',   command: '*lateral',      purpose: 'Movimento lateral planejado' },
+          { agent: 'cyber-peter',   command: '*evasion',      purpose: 'Evasão de detecção e furtividade' },
+        ]
+      },
+      {
+        name: 'Limpeza & relatório',
+        description: 'Deixar o ambiente como estava e documentar tudo',
+        steps: [
+          { agent: 'cyber-rogue',   command: '*cleanup',      purpose: 'Remover artefatos e ferramentas do alvo' },
+          { agent: 'cyber-chief',   command: '*report',       purpose: 'Sintetizar achados em relatório' },
+          { agent: 'cyber-georgia', command: '*pentest',      purpose: 'Relatório técnico + executivo' },
+        ]
+      },
+    ]
+  },
+
+  /* ─────────────────────────────────────────────────────────────
+     19. BLUE TEAM & THREAT HUNTING
+     ───────────────────────────────────────────────────────────── */
+  {
+    id: 'blue-team-hunt',
+    title: 'Blue Team & Threat Hunting',
+    icon: '🛡️',
+    category: 'ops',
+    tagline: 'Detectar, investigar e responder antes que o dano vire notícia',
+    description: 'Use quando a empresa precisa de postura defensiva real — monitoramento de rede, threat hunting proativo, resposta a incidente e programa de segurança. Complementar à estratégia Security Baseline.',
+    difficulty: 'hard',
+    timeEstimate: '8-16 semanas',
+    outcome: 'Programa de segurança operando com detecção, hunting, IR e threat intel',
+    phases: [
+      {
+        name: 'Fundação & programa',
+        description: 'Sem estratégia, só se apaga incêndio',
+        steps: [
+          { agent: 'cyber-omar',    command: '*program',      purpose: 'Construir programa de cibersegurança do zero' },
+          { agent: 'cyber-marcus',  command: '*lead',         purpose: 'Construção de time de segurança' },
+          { agent: 'cyber-omar',    command: '*standard',     purpose: 'Padrões (CSAF, VEX, SBOM)' },
+          { agent: 'cl-cio',        command: '*govern',       purpose: 'Estabelecer governança de TI' },
+        ]
+      },
+      {
+        name: 'Monitoramento de rede',
+        description: 'Conhecer o normal para achar o maligno',
+        steps: [
+          { agent: 'cyber-sanders', command: '*monitor',      purpose: 'Arquitetura de NSM' },
+          { agent: 'cyber-sanders', command: '*detect',       purpose: 'Regras de detecção (YARA, Sigma, Suricata)' },
+          { agent: 'cyber-sanders', command: '*honeypot',     purpose: 'Desenhar e implantar honeypots' },
+        ]
+      },
+      {
+        name: 'Threat hunting proativo',
+        description: 'Caçar, não esperar',
+        steps: [
+          { agent: 'cyber-sanders', command: '*hunt',         purpose: 'Operação estruturada de threat hunting' },
+          { agent: 'cyber-sanders', command: '*investigate',  purpose: 'Investigação com teoria aplicada' },
+          { agent: 'cyber-marcus',  command: '*threat-intel', purpose: 'Programa de threat intelligence' },
+          { agent: 'cyber-marcus',  command: '*simulate',     purpose: 'Simulação de breach — testar defesas reais' },
+        ]
+      },
+      {
+        name: 'AppSec & resposta a incidente',
+        description: 'Quando acontece, agir rápido e certo',
+        steps: [
+          { agent: 'cyber-manico',  command: '*secure',       purpose: 'Revisar código e fixes de segurança' },
+          { agent: 'cyber-manico',  command: '*threat-model', purpose: 'Threat modeling da aplicação' },
+          { agent: 'cyber-omar',    command: '*vuln',         purpose: 'Gestão de vulnerabilidade e disclosure' },
+          { agent: 'cyber-omar',    command: '*incident',     purpose: 'Playbook de resposta a incidente' },
+          { agent: 'cyber-chief',   command: '*incident',     purpose: 'Coordenar resposta a incidente em squad' },
+        ]
+      },
+    ]
+  },
+
 ];
 
 const STRATEGIES_COUNT = STRATEGIES_DB.length;
