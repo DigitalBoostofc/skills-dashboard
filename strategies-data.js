@@ -564,6 +564,397 @@ const STRATEGIES_DB = [
     ]
   },
 
+  /* ─────────────────────────────────────────────────────────────
+     11. PLANEJAMENTO ESTRATÉGICO EXECUTIVO
+     ───────────────────────────────────────────────────────────── */
+  {
+    id: 'strategic-planning',
+    title: 'Planejamento Estratégico Executivo',
+    icon: '♟️',
+    category: 'strategy',
+    tagline: 'Do diagnóstico da visão ao OKR trimestral com todo o C-Level alinhado',
+    description: 'Use para o planejamento anual ou trimestral executivo, quando precisa alinhar visão, tecnologia, IA, operações e marketing em uma direção coerente. Combina o C-Level Squad com o Advisory Board.',
+    difficulty: 'hard',
+    timeEstimate: '3-5 semanas',
+    outcome: 'Plano estratégico executável com visão clara, OKRs por função e orçamento alinhado',
+    phases: [
+      {
+        name: 'Diagnóstico estratégico',
+        description: 'Onde estamos e onde a realidade aponta',
+        steps: [
+          { agent: 'cl-vision',   command: '*diagnose',     purpose: 'Diagnosticar desafio estratégico' },
+          { agent: 'ab-munger',   command: '*invert',       purpose: 'Pensar ao contrário sobre o problema' },
+          { agent: 'ab-dalio',    command: '*principles',   purpose: 'Codificar princípios de decisão' },
+        ]
+      },
+      {
+        name: 'Visão & estratégia',
+        description: 'Definir para onde vamos — e por quê',
+        steps: [
+          { agent: 'cl-vision',   command: '*vision',       purpose: 'Definir visão, missão e direção' },
+          { agent: 'cl-vision',   command: '*strategy',     purpose: 'Plano estratégico em 3 horizontes' },
+          { agent: 'ab-sinek',    command: '*why',          purpose: 'Articular o Porquê profundo' },
+          { agent: 'ab-sivers',   command: '*focus',        purpose: 'Hell Yeah or No — cortar ruído' },
+        ]
+      },
+      {
+        name: 'Alinhamento C-Level',
+        description: 'Cada função traduzindo a visão em ação',
+        steps: [
+          { agent: 'cl-cto',      command: '*roadmap',      purpose: 'Roadmap de tecnologia alinhado à estratégia' },
+          { agent: 'cl-cmo',      command: '*gtm',          purpose: 'Go-to-market com posicionamento claro' },
+          { agent: 'cl-coo',      command: '*okr',          purpose: 'OKRs em nível empresa → departamento → time' },
+          { agent: 'cl-caio',     command: '*ai-strategy',  purpose: 'Estratégia de IA priorizada' },
+          { agent: 'cl-cio',      command: '*transform',    purpose: 'Roadmap de transformação digital' },
+        ]
+      },
+      {
+        name: 'Cultura & comunicação',
+        description: 'Traduzir o plano em comportamento',
+        steps: [
+          { agent: 'cl-vision',   command: '*culture',      purpose: 'Arquitetar cultura para suportar a estratégia' },
+          { agent: 'cl-vision',   command: '*board',        purpose: 'Preparar apresentação para o board' },
+          { agent: 'cl-vision',   command: '*synthesize',   purpose: 'Sintetizar outputs em direção unificada' },
+        ]
+      },
+    ]
+  },
+
+  /* ─────────────────────────────────────────────────────────────
+     12. DESIGN SYSTEM DO ZERO
+     ───────────────────────────────────────────────────────────── */
+  {
+    id: 'design-system-zero',
+    title: 'Design System do Zero',
+    icon: '🧩',
+    category: 'ops',
+    tagline: 'De componentes soltos a um sistema escalável adotado pelos times',
+    description: 'Use quando o produto cresceu mas o design está inconsistente, cada tela tem seus próprios botões e o handoff design→dev é doloroso. Cria o sistema e garante adoção real.',
+    difficulty: 'hard',
+    timeEstimate: '8-16 semanas',
+    outcome: 'Design system com tokens, componentes versionados e adoção >80% nos times',
+    phases: [
+      {
+        name: 'Diagnóstico & arquitetura',
+        description: 'Entender o terreno antes de construir',
+        steps: [
+          { agent: 'ds-chief',    command: '*audit',        purpose: 'Auditoria de design e acessibilidade' },
+          { agent: 'ds-brad',     command: '*audit',        purpose: 'Auditoria do sistema existente' },
+          { agent: 'ds-dave',     command: '*assess',       purpose: 'Avaliar maturidade e prontidão DesignOps' },
+          { agent: 'aiox-uma',    command: '*audit',        purpose: 'Scan do codebase para redundâncias de UI' },
+        ]
+      },
+      {
+        name: 'Tokens & estrutura',
+        description: 'As fundações invisíveis do sistema',
+        steps: [
+          { agent: 'ds-brad',     command: '*atomic',       purpose: 'Metodologia Atomic Design aplicada' },
+          { agent: 'ds-arch',     command: '*token',        purpose: 'Desenhar e implementar design tokens' },
+          { agent: 'aiox-uma',    command: '*tokenize',     purpose: 'Extrair tokens dos padrões consolidados' },
+          { agent: 'ds-brad',     command: '*tokens',       purpose: 'Arquitetura de design tokens' },
+        ]
+      },
+      {
+        name: 'Componentes & documentação',
+        description: 'O sistema vira produto',
+        steps: [
+          { agent: 'ds-arch',     command: '*component',    purpose: 'APIs de componente (props, variants, states)' },
+          { agent: 'ds-arch',     command: '*library',      purpose: 'Arquitetar biblioteca completa' },
+          { agent: 'ds-arch',     command: '*document',     purpose: 'Documentação e guias de uso' },
+          { agent: 'ds-ui',       command: '*implement',    purpose: 'Implementar em código de produção' },
+          { agent: 'aiox-uma',    command: '*a11y-check',   purpose: 'Auditoria de acessibilidade WCAG' },
+        ]
+      },
+      {
+        name: 'Adoção & governança',
+        description: 'O sistema só vale se for usado',
+        steps: [
+          { agent: 'ds-dan',      command: '*pilot',        purpose: 'Projeto piloto para provar valor' },
+          { agent: 'ds-dan',      command: '*adopt',        purpose: 'Dirigir adoção sem forçar' },
+          { agent: 'ds-dan',      command: '*govern',       purpose: 'Governance e modelo de contribuição' },
+          { agent: 'ds-dave',     command: '*process',      purpose: 'Otimizar workflow e entrega de design' },
+          { agent: 'ccm-anvil',   command: '*create-skill', purpose: 'Documentar padrões como skills reusáveis' },
+        ]
+      },
+    ]
+  },
+
+  /* ─────────────────────────────────────────────────────────────
+     13. NARRATIVA DE MARCA PARA CRESCIMENTO
+     ───────────────────────────────────────────────────────────── */
+  {
+    id: 'brand-narrative',
+    title: 'Narrativa de Marca para Crescimento',
+    icon: '📖',
+    category: 'brand',
+    tagline: 'Storytelling estratégico que faz a marca grudar na mente',
+    description: 'Use quando a marca tem posicionamento, mas não tem história que cole — o cliente não sabe contar sobre você. Combina storytelling clássico, brand voice e copy voice-of-customer.',
+    difficulty: 'medium',
+    timeEstimate: '4-6 semanas',
+    outcome: 'Conjunto de narrativas (fundador, cliente, missão, produto) que o time usa em vendas, marketing e recrutamento',
+    phases: [
+      {
+        name: 'Diagnóstico narrativo',
+        description: 'Qual história a marca está tentando contar',
+        steps: [
+          { agent: 'st-chief',    command: '*diagnose',     purpose: 'Diagnosticar desafio narrativo' },
+          { agent: 'st-chief',    command: '*audit',        purpose: 'Auditar narrativa contra múltiplos frameworks' },
+          { agent: 'brand-chief', command: '*diagnose',     purpose: 'Triagem de brand para contexto estratégico' },
+        ]
+      },
+      {
+        name: 'Estruturas universais',
+        description: 'Ancorar em padrões que funcionam há milênios',
+        steps: [
+          { agent: 'st-campbell', command: '*journey',      purpose: 'Mapear a Jornada do Herói da marca' },
+          { agent: 'st-harmon',   command: '*circle',       purpose: 'Aplicar o Story Circle' },
+          { agent: 'st-park',     command: '*abt',          purpose: 'Declaração ABT (And-But-Therefore)' },
+          { agent: 'st-park',     command: '*cycle',        purpose: 'Story Cycle da marca' },
+        ]
+      },
+      {
+        name: 'Histórias estratégicas',
+        description: 'As 4 histórias que todo negócio precisa',
+        steps: [
+          { agent: 'st-kindra',   command: '*four-stories', purpose: 'Construir as 4 histórias empresariais' },
+          { agent: 'st-kindra',   command: '*founder-story', purpose: 'História do fundador convincente' },
+          { agent: 'st-kindra',   command: '*value-story',  purpose: 'Histórias de Valor para vendas' },
+          { agent: 'brand-miller',command: '*storybrand',   purpose: 'BrandScript SB7 com cliente como herói' },
+        ]
+      },
+      {
+        name: 'Voz & ativação',
+        description: 'Colocar as histórias em operação',
+        steps: [
+          { agent: 'cm-joanna',   command: '*mine',         purpose: 'Message mining — palavras exatas do cliente' },
+          { agent: 'brand-arch',  command: '*tone',         purpose: 'Guia de tom de voz por arquétipo' },
+          { agent: 'st-chief',    command: '*synthesize',   purpose: 'Sintetizar em storytelling playbook' },
+        ]
+      },
+    ]
+  },
+
+  /* ─────────────────────────────────────────────────────────────
+     14. APRESENTAÇÃO EXECUTIVA DE ALTO IMPACTO
+     ───────────────────────────────────────────────────────────── */
+  {
+    id: 'executive-presentation',
+    title: 'Apresentação Executiva de Alto Impacto',
+    icon: '🎤',
+    category: 'sales',
+    tagline: 'Do keynote de conferência ao board — narrativa, frame e clareza',
+    description: 'Use para keynote, apresentação de board, reunião de all-hands ou grande pitch. Funciona quando a mensagem precisa mover audiência qualificada a decidir algo.',
+    difficulty: 'medium',
+    timeEstimate: '2-4 semanas',
+    outcome: 'Apresentação com estrutura Sparkline, frame controlado, momento STAR e one-liner memorável',
+    phases: [
+      {
+        name: 'Triagem & estratégia',
+        description: 'Qual tipo de apresentação é realmente?',
+        steps: [
+          { agent: 'st-chief',    command: '*diagnose',     purpose: 'Triagem narrativa e roteamento' },
+          { agent: 'st-chief',    command: '*framework',    purpose: 'Comparar frameworks de storytelling' },
+        ]
+      },
+      {
+        name: 'Estrutura narrativa',
+        description: 'Cabeamento invisível que sustenta a mensagem',
+        steps: [
+          { agent: 'st-duarte',   command: '*sparkline',    purpose: 'Estrutura Sparkline para apresentação' },
+          { agent: 'st-duarte',   command: '*star',         purpose: 'Projetar o S.T.A.R. moment' },
+          { agent: 'st-duarte',   command: '*bigidea',      purpose: 'Big Idea em uma frase' },
+        ]
+      },
+      {
+        name: 'Frame & pitch',
+        description: 'Controlar a dinâmica de status e energia',
+        steps: [
+          { agent: 'st-klaff',    command: '*pitch',        purpose: 'Estrutura STRONG para pitch alto-stakes' },
+          { agent: 'st-klaff',    command: '*frame',        purpose: 'Estratégia de controle de frame' },
+          { agent: 'st-klaff',    command: '*hookpoint',    purpose: 'Projetar o momento hookpoint' },
+        ]
+      },
+      {
+        name: 'Fala & ensaio',
+        description: 'A execução que entrega a idéia',
+        steps: [
+          { agent: 'st-dicks',    command: '*moment',       purpose: 'Achar o momento de 5 segundos' },
+          { agent: 'st-dicks',    command: '*stakes',       purpose: 'Carregar a audiência de stakes' },
+          { agent: 'brand-miller',command: '*one-liner',    purpose: 'One-liner que o público leva para casa' },
+          { agent: 'cm-voss',     command: '*accusation-audit', purpose: 'Antecipar e desarmar objeções' },
+        ]
+      },
+    ]
+  },
+
+  /* ─────────────────────────────────────────────────────────────
+     15. RESOLUÇÃO DE CRISE CULTURAL
+     ───────────────────────────────────────────────────────────── */
+  {
+    id: 'culture-crisis',
+    title: 'Resolução de Crise Cultural',
+    icon: '🤝',
+    category: 'ops',
+    tagline: 'Quando a equipe está quebrada — confiança, conflito e reconstrução',
+    description: 'Use quando há sinais claros de disfunção no time: reuniões improdutivas, gente boa saindo, silos entre áreas, fofoca, moral baixa. Combina frameworks de saúde organizacional com liderança corajosa.',
+    difficulty: 'hard',
+    timeEstimate: '6-12 semanas',
+    outcome: 'Equipe com confiança reconstruída, conflito saudável ativado e accountability sem medo',
+    phases: [
+      {
+        name: 'Diagnóstico honesto',
+        description: 'Parar de negar a realidade',
+        steps: [
+          { agent: 'ab-lencioni', command: '*health',       purpose: 'Diagnosticar saúde do time (5 disfunções)' },
+          { agent: 'ab-lencioni', command: '*pyramid',      purpose: 'Aplicar Pirâmide das 5 Disfunções' },
+          { agent: 'ab-dalio',    command: '*radical',      purpose: 'Implementar transparência radical' },
+          { agent: 'cl-coo',      command: '*diagnose',     purpose: 'Health check operacional de 6 dimensões' },
+        ]
+      },
+      {
+        name: 'Confiança & vulnerabilidade',
+        description: 'Base de tudo',
+        steps: [
+          { agent: 'ab-lencioni', command: '*trust',        purpose: 'Construir confiança via vulnerabilidade' },
+          { agent: 'ab-brene',    command: '*vulnerability', purpose: 'Estruturar conversa de vulnerabilidade' },
+          { agent: 'ab-brene',    command: '*courage',      purpose: 'Desenvolver liderança corajosa' },
+          { agent: 'ab-brene',    command: '*belonging',    purpose: 'Arquitetar cultura de pertencimento' },
+        ]
+      },
+      {
+        name: 'Conflito & accountability',
+        description: 'Estruturar atrito saudável',
+        steps: [
+          { agent: 'ab-lencioni', command: '*conflict',     purpose: 'Estruturar conflito produtivo' },
+          { agent: 'ab-lencioni', command: '*accountability', purpose: 'Implementar accountability sem punição' },
+          { agent: 'ab-brene',    command: '*shame',        purpose: 'Mapear dinâmica de vergonha' },
+        ]
+      },
+      {
+        name: 'Propósito & reestruturação',
+        description: 'Onde reconstruir em cima',
+        steps: [
+          { agent: 'ab-sinek',    command: '*purpose',      purpose: 'Realinhar organização ao propósito' },
+          { agent: 'ab-sinek',    command: '*inspire',      purpose: 'Estruturar liderança inspiradora' },
+          { agent: 'cl-vision',   command: '*culture',      purpose: 'Framework cultural em 5 pilares' },
+          { agent: 'cl-coo',      command: '*structure',    purpose: 'Estrutura organizacional apropriada' },
+        ]
+      },
+    ]
+  },
+
+  /* ─────────────────────────────────────────────────────────────
+     16. UX RESEARCH + REDESIGN
+     ───────────────────────────────────────────────────────────── */
+  {
+    id: 'ux-redesign',
+    title: 'UX Research + Redesign de Produto',
+    icon: '🎨',
+    category: 'ops',
+    tagline: 'Do insight do usuário à tela lançada — evidência vence opinião',
+    description: 'Use quando o produto parou de crescer e ninguém sabe por quê, ou quando há muito ruído de feedback e pouco sinal. Combina pesquisa qualitativa, dados comportamentais e redesign completo.',
+    difficulty: 'medium',
+    timeEstimate: '6-10 semanas',
+    outcome: 'Redesign baseado em evidência com hipóteses testadas e métricas de sucesso definidas',
+    phases: [
+      {
+        name: 'Pesquisa & descoberta',
+        description: 'Entender o usuário antes de redesenhar',
+        steps: [
+          { agent: 'ds-ux',       command: '*research',     purpose: 'Pesquisa com usuários (qualitativa)' },
+          { agent: 'ds-ux',       command: '*persona',      purpose: 'Personas backed por pesquisa real' },
+          { agent: 'ds-ux',       command: '*journey',      purpose: 'Mapear user journey atual e futuro' },
+          { agent: 'aiox-uma',    command: '*research',     purpose: 'Workflow completo de UX research' },
+        ]
+      },
+      {
+        name: 'Dados comportamentais',
+        description: 'O que os dados dizem que os usuários não dizem',
+        steps: [
+          { agent: 'data-avinash', command: '*see',         purpose: 'Análise See-Think-Do-Care do funil' },
+          { agent: 'data-avinash', command: '*segment',     purpose: 'Segmentar por comportamento real' },
+          { agent: 'cm-joanna',    command: '*mine',        purpose: 'Message mining dos reviews e SAC' },
+        ]
+      },
+      {
+        name: 'Design & prototipação',
+        description: 'Materializar as hipóteses',
+        steps: [
+          { agent: 'ds-ux',        command: '*wireframe',   purpose: 'Wireframes de baixa fidelidade' },
+          { agent: 'ds-ux',        command: '*flow',        purpose: 'User flows e task flows' },
+          { agent: 'ds-vis',       command: '*identity',    purpose: 'Direção visual alinhada à marca' },
+          { agent: 'ds-arch',      command: '*component',   purpose: 'APIs dos componentes do redesign' },
+          { agent: 'aiox-uma',     command: '*build',       purpose: 'Construir componente atômico production-ready' },
+        ]
+      },
+      {
+        name: 'Validação & handoff',
+        description: 'Testar antes de lançar',
+        steps: [
+          { agent: 'ds-ux',        command: '*test',        purpose: 'Teste de usabilidade com usuários reais' },
+          { agent: 'ds-ux',        command: '*audit',       purpose: 'Auditoria de acessibilidade (WCAG)' },
+          { agent: 'ds-ui',        command: '*implement',   purpose: 'Implementar em código de produção' },
+          { agent: 'data-sean',    command: '*test',        purpose: 'Estruturar experimentos de crescimento pós-lançamento' },
+        ]
+      },
+    ]
+  },
+
+  /* ─────────────────────────────────────────────────────────────
+     17. SECURITY BASELINE PARA SAAS
+     ───────────────────────────────────────────────────────────── */
+  {
+    id: 'security-baseline',
+    title: 'Security Baseline para SaaS',
+    icon: '🛡️',
+    category: 'ops',
+    tagline: 'Postura de segurança mínima aceitável antes de crescer ou vender',
+    description: 'Use ao fechar primeiros enterprise deals, ao se preparar para due diligence, ou ao expandir para mercados regulados. Estabelece fundação de segurança sem overkill.',
+    difficulty: 'hard',
+    timeEstimate: '6-12 semanas',
+    outcome: 'Baseline de segurança documentada, reconhecimento externo concluído e roadmap de compliance',
+    phases: [
+      {
+        name: 'Reconhecimento & avaliação',
+        description: 'Ver sua própria superfície de ataque',
+        steps: [
+          { agent: 'cl-cio',       command: '*audit',       purpose: 'Auditoria de TI — sistemas, segurança, compliance' },
+          { agent: 'cl-cio',       command: '*secure',      purpose: 'Avaliar postura de segurança' },
+          { agent: 'cyber-bust',   command: '*bust',        purpose: 'Descoberta de conteúdo web exposto' },
+          { agent: 'cyber-bust',   command: '*api',         purpose: 'Enumeração de endpoints de API' },
+        ]
+      },
+      {
+        name: 'Arquitetura segura',
+        description: 'Desenhar com segurança embutida',
+        steps: [
+          { agent: 'aiox-aria',    command: '*create-full-stack-architecture', purpose: 'Arquitetura com security-first' },
+          { agent: 'aiox-dara',    command: '*security-audit', purpose: 'Auditoria de DB + RLS policies' },
+          { agent: 'aiox-dara',    command: '*create-rls-policies', purpose: 'Desenhar RLS no Postgres/Supabase' },
+          { agent: 'cl-cto',       command: '*architect',   purpose: 'Trade-offs técnicos de segurança' },
+        ]
+      },
+      {
+        name: 'Compliance & governança',
+        description: 'Do técnico ao regulatório',
+        steps: [
+          { agent: 'cl-cio',       command: '*comply',      purpose: 'Mapear compliance aplicável (LGPD, SOC2)' },
+          { agent: 'cl-cio',       command: '*govern',      purpose: 'Estabelecer governance de TI' },
+          { agent: 'cl-cio',       command: '*vendor',      purpose: 'Avaliar fornecedores por risco' },
+        ]
+      },
+      {
+        name: 'Operação & resposta',
+        description: 'Manter a postura ao longo do tempo',
+        steps: [
+          { agent: 'aiox-gage',    command: '*health-check', purpose: 'Diagnóstico de saúde do repositório' },
+          { agent: 'aiox-quinn',   command: '*security-check', purpose: 'Scan de vulnerabilidades em 8 pontos' },
+          { agent: 'cl-caio',      command: '*responsible', purpose: 'Framework de IA responsável' },
+        ]
+      },
+    ]
+  },
+
 ];
 
 const STRATEGIES_COUNT = STRATEGIES_DB.length;

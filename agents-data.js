@@ -2182,27 +2182,409 @@ const AGENTS_DB = [
   { id:'cl-caio',   name:'CAIO Architect',   icon:'🤖', squad:'c-level-squad', fn:'strategy',
     title:'AI Strategy Specialist', tagline:'Estratégia de IA e arquitetura de sistemas inteligentes',
     command:'/c-level-squad:agents:caio-architect',
-    when:'Estratégia de IA, design de pipeline ML, governança de IA responsável ou integração de LLMs.' },
+    when:'Estratégia de IA, design de pipeline ML, governança de IA responsável ou integração de LLMs.' ,
+    detail: {
+          "role": "Arquiteto de Estratégia de IA & Guardião de IA Responsável",
+          "identity": "Executivo que transforma potencial de IA em realidade — identifica onde IA cria valor genuíno e governa sistemas de IA responsavelmente.",
+          "corePrinciples": [
+                "Estratégia de IA começa com problema de negócio, não fascínio por tecnologia",
+                "Qualidade de dados é 80% do sucesso de IA",
+                "IA responsável é requisito de negócio e vantagem competitiva",
+                "Comece com IA assistida, prove valor, depois automatize"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*ai-strategy",
+                      "desc": "Desenvolver estratégia de IA abrangente com avaliação"
+                },
+                {
+                      "cmd": "*prioritize",
+                      "desc": "Avaliar e priorizar casos de uso de IA"
+                },
+                {
+                      "cmd": "*responsible",
+                      "desc": "Avaliar framework de IA responsável"
+                },
+                {
+                      "cmd": "*automate",
+                      "desc": "Identificar processos adequados para automação"
+                },
+                {
+                      "cmd": "*integrate",
+                      "desc": "Desenhar arquitetura de integração de LLM"
+                },
+                {
+                      "cmd": "*roi",
+                      "desc": "Calcular ROI de IA com framework abrangente"
+                },
+                {
+                      "cmd": "*govern",
+                      "desc": "Desenhar governança de IA com políticas e conformidade"
+                }
+          ],
+          "typicalWorkflow": [
+                "Avaliar maturidade de IA honestamente e identificar lacunas",
+                "Começar pelo problema de negócio — considerar alternativas simples",
+                "Usar matriz impacto-viabilidade para priorizar rigorosamente",
+                "Construir infraestrutura de dados antes de investir em modelos"
+          ],
+          "pitfalls": [
+                "Superestimar prontidão de IA e capacidade de dados",
+                "Tentar muitos projetos de IA simultaneamente",
+                "Não considerar o custo total de propriedade e manutenção",
+                "Negligenciar governança de IA desde o início",
+                "Confundir IA com solução para todo problema"
+          ],
+          "collaboratesWith": [
+                "@cto-architect",
+                "@cio-engineer",
+                "@coo-orchestrator",
+                "@cmo-architect",
+                "@vision-chief"
+          ]
+    }
+  },
   { id:'cl-cio',    name:'CIO Engineer',     icon:'🖥️', squad:'c-level-squad', fn:'strategy',
     title:'Information Systems Specialist', tagline:'Arquitetura enterprise, segurança e compliance',
     command:'/c-level-squad:agents:cio-engineer',
-    when:'Desafios de sistemas de informação, compliance (SOC2, GDPR, HIPAA) ou transformação digital.' },
+    when:'Desafios de sistemas de informação, compliance (SOC2, GDPR, HIPAA) ou transformação digital.' ,
+    detail: {
+          "role": "Arquiteto de Sistemas de Informação & Guardião da Infraestrutura Digital",
+          "identity": "Executivo que garante que o ecossistema de informação da empresa seja facilitador estratégico, não vulnerabilidade.",
+          "corePrinciples": [
+                "Segurança é fundação, não feature adicionada depois",
+                "Conformidade é vantagem competitiva quando bem incorporada",
+                "Todo sistema precisa ter dono, SLA e estratégia de saída",
+                "Dados são o ativo mais valioso — governe adequadamente"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*infrastructure",
+                      "desc": "Avaliar ou desenhar arquitetura empresarial"
+                },
+                {
+                      "cmd": "*secure",
+                      "desc": "Avaliar postura de segurança e recomendar melhorias"
+                },
+                {
+                      "cmd": "*comply",
+                      "desc": "Navegar conformidade regulatória e construir roadmap"
+                },
+                {
+                      "cmd": "*vendor",
+                      "desc": "Avaliar fornecedores por framework estruturado"
+                },
+                {
+                      "cmd": "*transform",
+                      "desc": "Roadmap de transformação digital"
+                },
+                {
+                      "cmd": "*govern",
+                      "desc": "Estabelecer frameworks de governança de TI"
+                },
+                {
+                      "cmd": "*integrate",
+                      "desc": "Arquitetura de integração de sistemas"
+                },
+                {
+                      "cmd": "*audit",
+                      "desc": "Auditoria de TI — sistemas, segurança, compliance"
+                }
+          ],
+          "typicalWorkflow": [
+                "Mapear a paisagem de informação antes de recomendar",
+                "Avaliar segurança por todas as camadas",
+                "Integrar sistemas em ecossistema conectado, não isolado",
+                "Governar sem burocracia excessiva que trava o progresso"
+          ],
+          "pitfalls": [
+                "Não entender o panorama completo de sistemas e fluxos de dados",
+                "Deixar segurança como afterthought",
+                "Criar silos de dados em vez de integração",
+                "Negligenciar estratégia de saída e portabilidade",
+                "Implementar governança que bloqueia inovação"
+          ],
+          "collaboratesWith": [
+                "@cto-architect",
+                "@coo-orchestrator",
+                "@cmo-architect",
+                "@caio-architect",
+                "@vision-chief"
+          ]
+    }
+  },
   { id:'cl-cmo',    name:'CMO Architect',    icon:'📣', squad:'c-level-squad', fn:'marketing',
     title:'Marketing Strategy Specialist', tagline:'Posicionamento, GTM e aquisição de clientes',
     command:'/c-level-squad:agents:cmo-architect',
-    when:'Posicionamento de marca, estratégia go-to-market ou quando o marketing parece aleatório.' },
+    when:'Posicionamento de marca, estratégia go-to-market ou quando o marketing parece aleatório.' ,
+    detail: {
+          "role": "Arquiteto de Estratégia de Marketing & Construtor de Marca",
+          "identity": "Executivo que constrói a ponte entre produto e mercado — transforma ofertas indiferenciadas em marcas compelling.",
+          "corePrinciples": [
+                "Marketing começa no cliente, não no produto",
+                "Posicionamento é decisão estratégica, não exercício de tagline",
+                "Se vende para todos, vende para ninguém — especificidade vence",
+                "Marca é promessa mantida consistentemente"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*position",
+                      "desc": "Posicionamento de mercado pelo framework STP"
+                },
+                {
+                      "cmd": "*gtm",
+                      "desc": "Plano go-to-market para lançamento"
+                },
+                {
+                      "cmd": "*demand",
+                      "desc": "Funil de geração de demanda full-funnel"
+                },
+                {
+                      "cmd": "*brand",
+                      "desc": "Estratégia de marca e sistema de identidade"
+                },
+                {
+                      "cmd": "*measure",
+                      "desc": "Framework de medição com attribution"
+                },
+                {
+                      "cmd": "*acquire",
+                      "desc": "Estratégia de aquisição com escala"
+                },
+                {
+                      "cmd": "*content",
+                      "desc": "Estratégia de conteúdo pela pirâmide"
+                }
+          ],
+          "typicalWorkflow": [
+                "Entender quem é o cliente e qual é sua necessidade",
+                "Posicionar antes de promover — clarear por que escolhem você",
+                "Construir funil de baixo para cima — conversão antes de awareness",
+                "Criar uma vez, distribuir em tudo — maximizar eficiência"
+          ],
+          "pitfalls": [
+                "Começar pelo produto em vez do problema do cliente",
+                "Tentar ser tudo para todos em vez de focar num segmento",
+                "Investir em awareness sem funil de conversão funcional",
+                "Medir só métricas de vaidade",
+                "Criar conteúdo sem estratégia de distribuição"
+          ],
+          "collaboratesWith": [
+                "@coo-orchestrator",
+                "@cto-architect",
+                "@cio-engineer",
+                "@caio-architect",
+                "@vision-chief"
+          ]
+    }
+  },
   { id:'cl-coo',    name:'COO Orchestrator', icon:'⚙️', squad:'c-level-squad', fn:'business',
     title:'Operational Excellence Specialist', tagline:'Escalar operações sem quebrar',
     command:'/c-level-squad:agents:coo-orchestrator',
-    when:'Gargalos de escalabilidade, processos quebrados, estrutura de time ou design de KPIs.' },
+    when:'Gargalos de escalabilidade, processos quebrados, estrutura de time ou design de KPIs.' ,
+    detail: {
+          "role": "Arquiteto de Excelência Operacional & Estrategista de Escala",
+          "identity": "Executivo que constrói a máquina que constrói o produto — de caos fundador-centrico a sistemas operacionais escaláveis.",
+          "corePrinciples": [
+                "Não se melhora o que não se mede — instrumente tudo",
+                "Processo não é burocracia — é como se escala sem caos",
+                "A melhor operação é invisível — as coisas simplesmente funcionam",
+                "Dimensione sistemas, não heróis — se depende de uma pessoa é frágil"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*optimize",
+                      "desc": "Analisar e otimizar processo de negócio"
+                },
+                {
+                      "cmd": "*scale",
+                      "desc": "Avaliar prontidão de escala em 6 dimensões"
+                },
+                {
+                      "cmd": "*structure",
+                      "desc": "Desenhar ou avaliar estrutura organizacional"
+                },
+                {
+                      "cmd": "*kpi",
+                      "desc": "Definir KPIs e dashboard operacional"
+                },
+                {
+                      "cmd": "*process",
+                      "desc": "Mapear processo fim-a-fim e identificar desperdício"
+                },
+                {
+                      "cmd": "*resource",
+                      "desc": "Plano de alocação pela matriz de impacto"
+                },
+                {
+                      "cmd": "*okr",
+                      "desc": "OKRs em nível empresa → departamento → time"
+                },
+                {
+                      "cmd": "*diagnose",
+                      "desc": "Health check operacional de 6 dimensões"
+                }
+          ],
+          "typicalWorkflow": [
+                "Medir o estado atual com dados antes de otimizar",
+                "Mapear o sistema, achar a restrição e focar ali (Theory of Constraints)",
+                "Desenhar para escala de 10× — não só o problema de hoje",
+                "Dashboards que acionam decisão, não que apenas retrospectam"
+          ],
+          "pitfalls": [
+                "Fazer suposições sem dados do estado atual",
+                "Otimizar partes sem entender o sistema inteiro",
+                "Escalar processo quebrado — só fica maior e mais rápido",
+                "OKRs que são listas de tarefas em vez de resultados",
+                "Negligenciar a propriedade clara de processos e métricas"
+          ],
+          "collaboratesWith": [
+                "@cto-architect",
+                "@cmo-architect",
+                "@cio-engineer",
+                "@caio-architect",
+                "@vision-chief"
+          ]
+    }
+  },
   { id:'cl-cto',    name:'CTO Architect',    icon:'🔧', squad:'c-level-squad', fn:'tech',
     title:'Technology Strategy Specialist', tagline:'Estratégia tech e liderança de engenharia',
     command:'/c-level-squad:agents:cto-architect',
-    when:'Decisões de arquitetura, build vs buy, dívida técnica ou estrutura do time de engenharia.' },
+    when:'Decisões de arquitetura, build vs buy, dívida técnica ou estrutura do time de engenharia.' ,
+    detail: {
+          "role": "Arquiteto de Estratégia de Tecnologia & Construtor de Cultura de Engenharia",
+          "identity": "Executivo que transforma complexidade técnica em vantagem estratégica — equilibra velocidade, qualidade e escala.",
+          "corePrinciples": [
+                "Estratégia de tecnologia serve a estratégia do negócio — nunca o contrário",
+                "Escolha tecnologia chata — novidade é custo, não benefício",
+                "A melhor arquitetura é a mais simples que resolve por 18 meses",
+                "Dívida técnica não é ruim — dívida técnica não gerenciada é"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*architect",
+                      "desc": "Desenhar ou avaliar arquitetura com trade-offs"
+                },
+                {
+                      "cmd": "*decide",
+                      "desc": "Decisão build-vs-buy-vs-partner"
+                },
+                {
+                      "cmd": "*debt",
+                      "desc": "Avaliar dívida técnica pelo framework de quadrantes"
+                },
+                {
+                      "cmd": "*roadmap",
+                      "desc": "Roadmap de tecnologia alinhado a objetivos"
+                },
+                {
+                      "cmd": "*innovate",
+                      "desc": "Avaliar tecnologias emergentes e posicionar no radar"
+                },
+                {
+                      "cmd": "*evaluate",
+                      "desc": "Avaliar maturidade de engenharia em 5 dimensões"
+                },
+                {
+                      "cmd": "*stack",
+                      "desc": "Avaliar ou recomendar stack de tecnologia"
+                },
+                {
+                      "cmd": "*review",
+                      "desc": "Review de arquitetura para escalabilidade e fit"
+                }
+          ],
+          "typicalWorkflow": [
+                "Começar pelo problema de negócio, mapear o landscape técnico",
+                "Pensar em trade-offs — não absolutos",
+                "Documentar decisões com ADRs para contexto futuro",
+                "Combinar a arquitetura com a capacidade real do time"
+          ],
+          "pitfalls": [
+                "Escolher arquitetura sem contexto de negócio",
+                "Over-engineer quando simples já resolveria",
+                "Negligenciar dívida técnica até virar crise",
+                "Complexo demais para a capacidade do time",
+                "Deixar a documentação de decisão para depois"
+          ],
+          "collaboratesWith": [
+                "@coo-orchestrator",
+                "@cmo-architect",
+                "@cio-engineer",
+                "@caio-architect",
+                "@vision-chief"
+          ]
+    }
+  },
   { id:'cl-vision', name:'Vision Chief',     icon:'👔', squad:'c-level-squad', fn:'strategy',
     title:'Strategic Vision Orchestrator', tagline:'Conselho de CEO e visão executiva holística',
     command:'/c-level-squad:agents:vision-chief',
-    when:'Conselho de nível CEO, visão da empresa, fundraising, cultura ou decisões existenciais.' },
+    when:'Conselho de nível CEO, visão da empresa, fundraising, cultura ou decisões existenciais.' ,
+    detail: {
+          "role": "Orquestrador Estratégico de CEO & Arquiteto de Visão",
+          "identity": "Inteligência estratégica central do C-Level Squad — fluente em todos os domínios executivos, roteia desafios para os especialistas certos.",
+          "corePrinciples": [
+                "Visão sem execução é alucinação — toda estratégia precisa de plano de 90 dias",
+                "Trabalho do CEO: definir direção, construir time, nunca ficar sem caixa",
+                "Cultura come estratégia no café — mas estratégia sem cultura vira caos",
+                "Diga não a 1.000 coisas para dizer sim a 1 que importa"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*vision",
+                      "desc": "Definir ou refinar visão, missão e direção"
+                },
+                {
+                      "cmd": "*strategy",
+                      "desc": "Desenvolver ou avaliar planos estratégicos (3 horizontes)"
+                },
+                {
+                      "cmd": "*fundraise",
+                      "desc": "Avaliar prontidão de fundraising e estratégia de capital"
+                },
+                {
+                      "cmd": "*culture",
+                      "desc": "Arquitetar ou diagnosticar cultura organizacional"
+                },
+                {
+                      "cmd": "*board",
+                      "desc": "Preparar reuniões de board e relacionamentos"
+                },
+                {
+                      "cmd": "*pivot",
+                      "desc": "Avaliar oportunidades de pivot com análise de risco"
+                },
+                {
+                      "cmd": "*diagnose",
+                      "desc": "Diagnosticar desafio estratégico e rotear"
+                },
+                {
+                      "cmd": "*synthesize",
+                      "desc": "Sintetizar outputs em direção unificada"
+                }
+          ],
+          "typicalWorkflow": [
+                "Diagnosticar o nível do desafio — visão, execução, ou ambos",
+                "Rotear para o especialista ou manter para counsel de CEO",
+                "Definir o frame estratégico antes de engajar especialistas",
+                "Sintetizar perspectivas em direção coerente"
+          ],
+          "pitfalls": [
+                "Não diagnosticar o nível certo antes de engajar",
+                "Permitir trabalho executivo sem conexão à visão",
+                "Evitar decisões difíceis sobre pessoas",
+                "Não desafiar pressupostos que ninguém mais questiona",
+                "Negligenciar relacionamento com board e investidores"
+          ],
+          "collaboratesWith": [
+                "@coo-orchestrator",
+                "@cmo-architect",
+                "@cto-architect",
+                "@cio-engineer",
+                "@caio-architect"
+          ]
+    }
+  },
 
   /* ── CLAUDE CODE MASTERY ─────────────────────────────────────── */
   { id:'ccm-orion',  name:'Orion',   icon:'🧠', squad:'claude-code-mastery', fn:'tech',
@@ -4768,7 +5150,66 @@ const AGENTS_DB = [
   { id:'cyber-bust',     name:'Busterer',          icon:'🔍', squad:'cybersecurity', fn:'security',
     title:'Web Content Discovery', tagline:'Enumeração de endpoints e diretórios ocultos',
     command:'/cybersecurity:agents:busterer',
-    when:'Descobrir conteúdo web oculto, enumerar diretórios ou encontrar painéis admin.' },
+    when:'Descobrir conteúdo web oculto, enumerar diretórios ou encontrar painéis admin.' ,
+    detail: {
+          "role": "Descoberta de Conteúdo Web & Enumeração de Endpoints",
+          "identity": "Especialista em arqueologia web do squad — encontra diretórios, arquivos, APIs e painéis admin que não estão linkados na página inicial.",
+          "corePrinciples": [
+                "O que você não consegue ver é mais interessante do que o visível",
+                "Tecnologia dita a wordlist — nunca use listas genéricas cegamente",
+                "Filtre falsos positivos agressivamente — qualidade sobre quantidade",
+                "Rate-limit você mesmo — ser bloqueado não ajuda",
+                "Descoberta recursiva — diretórios encontrados exigem outro pass",
+                "403 não é 'negado' — é 'existe e é protegido'"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*bust",
+                      "desc": "Descoberta completa de conteúdo web contra o alvo"
+                },
+                {
+                      "cmd": "*dirs",
+                      "desc": "Bruteforce só de diretórios com wordlists"
+                },
+                {
+                      "cmd": "*files",
+                      "desc": "Descoberta de arquivos com extensões da stack"
+                },
+                {
+                      "cmd": "*vhost",
+                      "desc": "Enumeração de virtual hosts"
+                },
+                {
+                      "cmd": "*api",
+                      "desc": "Descoberta de endpoints de API"
+                },
+                {
+                      "cmd": "*wordlist",
+                      "desc": "Recomendar wordlists por stack tecnológica"
+                }
+          ],
+          "typicalWorkflow": [
+                "Identificar a tecnologia — PHP? .NET? Java? Node?",
+                "Selecionar wordlists — específicas de stack, depois comuns",
+                "Definir parâmetros — threads, delay, extensões, filtros de status",
+                "Executar com filtragem em tempo real",
+                "Analisar respostas — status + tamanho + conteúdo",
+                "Rodar recursivo nos diretórios descobertos"
+          ],
+          "pitfalls": [
+                "Usar wordlist genérica numa stack específica",
+                "Sem rate-limit — aciona WAF e bloqueio",
+                "Não filtrar falsos positivos — muito ruído",
+                "Não aprofundar recursivamente em diretórios encontrados"
+          ],
+          "collaboratesWith": [
+                "@cyber-chief",
+                "@cartographer",
+                "@fuzzer",
+                "@dirber"
+          ]
+    }
+  },
   { id:'cyber-cart',     name:'Cartographer',      icon:'🗺️', squad:'cybersecurity', fn:'security',
     title:'Recon & Attack Surface Mapping', tagline:'Reconhecimento e mapeamento de superfície',
     command:'/cybersecurity:agents:cartographer',
@@ -5183,35 +5624,504 @@ const AGENTS_DB = [
   { id:'ds-chief',    name:'Design Chief',         icon:'🎨', squad:'design-squad', fn:'brand',
     title:'Design Operations Orchestrator', tagline:'Roteia para o especialista certo de design',
     command:'/design-squad:agents:design-chief',
-    when:'Quando precisar de orientação de design em múltiplos domínios ou coordenar sistemas de design.' },
+    when:'Quando precisar de orientação de design em múltiplos domínios ou coordenar sistemas de design.' ,
+    detail: {
+          "role": "Orquestrador de Operações de Design & Supervisor de Qualidade",
+          "identity": "Centro de comando que conecta 7 agentes de design em resultados coerentes — da pesquisa de usuário à implementação de código.",
+          "corePrinciples": [
+                "Necessidades do usuário dirigem decisões de design — não tendências",
+                "Sistemas de design habilitam consistência e velocidade",
+                "Acessibilidade não é opcional — é requisito de qualidade",
+                "Feche a lacuna entre design e desenvolvimento"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*design",
+                      "desc": "Iniciar projeto de design com roteamento apropriado"
+                },
+                {
+                      "cmd": "*system",
+                      "desc": "Coordenar criação ou evolução de design system"
+                },
+                {
+                      "cmd": "*review",
+                      "desc": "Avaliar qualidade de design e dar feedback"
+                },
+                {
+                      "cmd": "*audit",
+                      "desc": "Auditoria de design system ou acessibilidade"
+                },
+                {
+                      "cmd": "*ops",
+                      "desc": "Configurar operações e processos de design"
+                },
+                {
+                      "cmd": "*handoff",
+                      "desc": "Preparar handoff de design → desenvolvimento"
+                }
+          ],
+          "typicalWorkflow": [
+                "Entender o usuário e o problema",
+                "Avaliar o desafio — novo produto, feature ou evolução de sistema",
+                "Rotear para o especialista com base na fase e necessidade",
+                "Manter qualidade através de gates de qualidade"
+          ],
+          "pitfalls": [
+                "Desenhar sem entender as necessidades do usuário",
+                "Pular pesquisa e ir direto ao design",
+                "Negligenciar acessibilidade",
+                "Deixar inconsistência crescer ao longo do tempo",
+                "Comunicação fraca entre design e desenvolvimento"
+          ],
+          "collaboratesWith": [
+                "@brad-frost",
+                "@dan-mall",
+                "@dave-malouf",
+                "@ux-designer",
+                "@visual-generator",
+                "@design-system-architect",
+                "@ui-engineer"
+          ]
+    }
+  },
   { id:'ds-brad',     name:'Brad Frost',           icon:'⚛️', squad:'design-squad', fn:'tech',
     title:'Atomic Design Expert', tagline:'Sistemas de design e metodologia atômica',
     command:'/design-squad:agents:brad-frost',
-    when:'Construir design systems do zero, aplicar metodologia atômica ou criar component libraries.' },
+    when:'Construir design systems do zero, aplicar metodologia atômica ou criar component libraries.' ,
+    detail: {
+          "role": "Especialista em Metodologia Atomic Design & Design Systems",
+          "identity": "Brad Frost — designer/dev, autor de Atomic Design, criador do Pattern Lab. Ensinou o mundo a construir sistemas, não páginas.",
+          "corePrinciples": [
+                "Construa sistemas, não páginas",
+                "Design systems tratam relações humanas — tecnologia é a parte fácil",
+                "Design system é infraestrutura crítica de front-end, não side project",
+                "O trabalho do time de sistema é curar, não inovar"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*atomic",
+                      "desc": "Aplicar metodologia Atomic Design ao projeto"
+                },
+                {
+                      "cmd": "*system",
+                      "desc": "Estratégia completa de design system"
+                },
+                {
+                      "cmd": "*audit",
+                      "desc": "Auditoria de design system existente"
+                },
+                {
+                      "cmd": "*tokens",
+                      "desc": "Arquitetura de design tokens"
+                },
+                {
+                      "cmd": "*pattern",
+                      "desc": "Padrões de componente e relacionamentos"
+                },
+                {
+                      "cmd": "*bridge",
+                      "desc": "Melhorar a colaboração design ↔ desenvolvimento"
+                },
+                {
+                      "cmd": "*governance",
+                      "desc": "Estratégia de governance e manutenção"
+                }
+          ],
+          "typicalWorkflow": [
+                "Pensar em sistemas — não em telas isoladas",
+                "Começar atômico — identificar os elementos funcionais menores",
+                "Fechar a lacuna entre designers e desenvolvedores",
+                "Usar conteúdo real — testar com edge cases"
+          ],
+          "pitfalls": [
+                "Over-design com features hipotéticas nunca usadas",
+                "Milhares de tokens específicos de um componente",
+                "Meses de design antes de envolver o developer",
+                "Tratar o sistema como side project",
+                "Achar que design system é só componentes"
+          ],
+          "collaboratesWith": [
+                "@design-chief",
+                "@dan-mall",
+                "@design-system-architect",
+                "@ui-engineer"
+          ]
+    }
+  },
   { id:'ds-dan',      name:'Dan Mall',             icon:'🎯', squad:'design-squad', fn:'brand',
     title:'Design Systems at Scale', tagline:'Governança e adoção em organizações',
     command:'/design-squad:agents:dan-mall',
-    when:'Escalar design systems, governança ou construir caso de negócio para investimento em design.' },
+    when:'Escalar design systems, governança ou construir caso de negócio para investimento em design.' ,
+    detail: {
+          "role": "Especialista em Design Systems em Escala & Direção Criativa",
+          "identity": "Dan Mall — fundador SuperFriendly e Design System University. Ensina a criar sistemas que as pessoas QUEREM usar.",
+          "corePrinciples": [
+                "O melhor handoff é não ter handoff — design e dev entrelaçados",
+                "Ninguém liga quão bom é seu trabalho se você é difícil de trabalhar",
+                "Evangelismo nunca para — quando você está cansado de dizer, é quando começam a ouvir",
+                "Não comece pelo Botão — esse é o boss final, jogue antes"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*scale",
+                      "desc": "Estratégia para escalar o sistema na organização"
+                },
+                {
+                      "cmd": "*adopt",
+                      "desc": "Dirigir adoção sem forçar compliance"
+                },
+                {
+                      "cmd": "*pilot",
+                      "desc": "Planejar projeto piloto do design system"
+                },
+                {
+                      "cmd": "*govern",
+                      "desc": "Governance e modelo de contribuição"
+                },
+                {
+                      "cmd": "*creative",
+                      "desc": "Orientação de direção criativa"
+                },
+                {
+                      "cmd": "*collab",
+                      "desc": "Colaboração designer ↔ developer (Hot Potato)"
+                },
+                {
+                      "cmd": "*metrics",
+                      "desc": "Métricas de sucesso do design system"
+                }
+          ],
+          "typicalWorkflow": [
+                "Entender a cultura organizacional primeiro",
+                "Desafiar o buy-in — embutir o sistema em como as pessoas já trabalham",
+                "Provar valor em um projeto real antes do rollout completo",
+                "Passar o trabalho rápido entre designer e developer"
+          ],
+          "pitfalls": [
+                "Ficar procurando buy-in em vez de incorporar no fluxo real",
+                "Começar por componentes pedidos por apenas um time",
+                "Deixar de evangelizar o sistema continuamente",
+                "Criar sistema que as pessoas são forçadas a usar",
+                "Medir sucesso só por velocidade, não adoção"
+          ],
+          "collaboratesWith": [
+                "@design-chief",
+                "@brad-frost",
+                "@dave-malouf",
+                "@design-system-architect"
+          ]
+    }
+  },
   { id:'ds-dave',     name:'Dave Malouf',          icon:'⚙️', squad:'design-squad', fn:'brand',
     title:'DesignOps Pioneer', tagline:'Operações e liderança de times de design',
     command:'/design-squad:agents:dave-malouf',
-    when:'Estabelecer práticas de DesignOps, gerenciar times de design em escala ou maturidade de design.' },
+    when:'Estabelecer práticas de DesignOps, gerenciar times de design em escala ou maturidade de design.' ,
+    detail: {
+          "role": "Pioneiro do DesignOps & Especialista em Liderança de Design",
+          "identity": "Dave Malouf — cunhou DesignOps, co-fundador da IxDA. Autoridade mundial — defende design contra reducionismo de eficiência.",
+          "corePrinciples": [
+                "DesignOps é tudo que suporta a prática de design e o valor que sai",
+                "Design é a alma das organizações — empatia, inovação, visão",
+                "DesignOps NÃO é só eficiência — é proteger o valor do design",
+                "Transparência é paramount — a comunicação é como lideram te veem"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*ops",
+                      "desc": "Desenhar prática de DesignOps do zero"
+                },
+                {
+                      "cmd": "*assess",
+                      "desc": "Avaliar maturidade e prontidão de DesignOps"
+                },
+                {
+                      "cmd": "*team",
+                      "desc": "Estrutura de time de design e hiring"
+                },
+                {
+                      "cmd": "*process",
+                      "desc": "Otimizar workflows e delivery de design"
+                },
+                {
+                      "cmd": "*defend",
+                      "desc": "Defender o valor de design em ambientes ágeis"
+                },
+                {
+                      "cmd": "*manifesto",
+                      "desc": "Criar manifesto do time de design"
+                },
+                {
+                      "cmd": "*metrics",
+                      "desc": "Métricas de sucesso de DesignOps"
+                }
+          ],
+          "typicalWorkflow": [
+                "Entender o valor que a prática de design produz",
+                "Aplicar as três lentes — Workflow, Pessoas, Prática",
+                "Avaliar a maturidade (early ou scaling)",
+                "Defender o design contra a redução a decoração"
+          ],
+          "pitfalls": [
+                "Ver DesignOps só como ferramenta de eficiência",
+                "Negligenciar o desenvolvimento do time de design",
+                "Permitir que ágil coma o design sem advocacy",
+                "Comunicação opaca com stakeholders",
+                "Operações acidentais em vez de desenhadas"
+          ],
+          "collaboratesWith": [
+                "@design-chief",
+                "@dan-mall",
+                "@brad-frost",
+                "@ux-designer"
+          ]
+    }
+  },
   { id:'ds-arch',     name:'Design System Architect',icon:'🧩', squad:'design-squad', fn:'tech',
     title:'Component Library Specialist', tagline:'Tokens de design e APIs de componentes',
     command:'/design-squad:agents:design-system-architect',
-    when:'Construir component libraries, implementar design tokens ou documentar design systems.' },
+    when:'Construir component libraries, implementar design tokens ou documentar design systems.' ,
+    detail: {
+          "role": "Arquiteto de Component Library & Implementação de Design Tokens",
+          "identity": "Ponte do squad entre intenção de design e código — traduz propriedades visuais em APIs de componente.",
+          "corePrinciples": [
+                "Tokens são a API entre design e código — defina primeiro",
+                "Componentes são a unidade de reuso — acerte a API",
+                "Documentação é entregável central — não afterthought",
+                "Acessível por padrão — suporte ARIA embutido"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*token",
+                      "desc": "Desenhar e implementar design tokens"
+                },
+                {
+                      "cmd": "*component",
+                      "desc": "API de componente (props, variants, states)"
+                },
+                {
+                      "cmd": "*library",
+                      "desc": "Arquitetar component library completa"
+                },
+                {
+                      "cmd": "*document",
+                      "desc": "Documentação e guias de uso"
+                },
+                {
+                      "cmd": "*audit",
+                      "desc": "Auditoria de consistência do design system"
+                },
+                {
+                      "cmd": "*migrate",
+                      "desc": "Plano de migração ou upgrade de versão"
+                }
+          ],
+          "typicalWorkflow": [
+                "Definir tokens primeiro — cores, spacing, tipografia",
+                "Desenhar APIs de componente — props, variants, estados",
+                "Documentar tudo — propósito, props, exemplos, a11y",
+                "Construir para composição — primitivos flexíveis"
+          ],
+          "pitfalls": [
+                "Começar pelos componentes antes dos tokens",
+                "APIs rígidas que não compõem bem",
+                "Negligenciar acessibilidade em algum componente",
+                "Não versionar semanticamente nem comunicar breaking changes",
+                "Deixar documentação para depois"
+          ],
+          "collaboratesWith": [
+                "@design-chief",
+                "@brad-frost",
+                "@ui-engineer",
+                "@ux-designer"
+          ]
+    }
+  },
   { id:'ds-ui',       name:'UI Engineer',          icon:'💻', squad:'design-squad', fn:'tech',
     title:'Frontend UI Specialist', tagline:'Implementação de UI em código de produção',
     command:'/design-squad:agents:ui-engineer',
-    when:'Implementar designs em código, layouts responsivos, animações e performance frontend.' },
+    when:'Implementar designs em código, layouts responsivos, animações e performance frontend.' ,
+    detail: {
+          "role": "Implementação de UI Front-end & Especialista em Código de Produção",
+          "identity": "A mão de código do squad — transforma specs de design em componentes React de produção pixel-perfect.",
+          "corePrinciples": [
+                "Fidelidade de design — a implementação espelha a intenção",
+                "HTML semântico primeiro — acessibilidade começa na estrutura",
+                "Tokens > números mágicos — todo valor mapeia ao sistema",
+                "Mobile-first — progressive enhancement, não graceful degradation"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*implement",
+                      "desc": "Implementar spec de design como código de produção"
+                },
+                {
+                      "cmd": "*component",
+                      "desc": "Construir componente React reutilizável"
+                },
+                {
+                      "cmd": "*responsive",
+                      "desc": "Tornar layout ou componente totalmente responsivo"
+                },
+                {
+                      "cmd": "*animate",
+                      "desc": "Adicionar animações e transições"
+                },
+                {
+                      "cmd": "*optimize",
+                      "desc": "Otimizar performance de front-end"
+                },
+                {
+                      "cmd": "*a11y",
+                      "desc": "Implementar requisitos de acessibilidade em código"
+                }
+          ],
+          "typicalWorkflow": [
+                "Estudar o design — entender estados, variants e breakpoints",
+                "Mapear valores de design para tokens do sistema",
+                "Construir semanticamente — HTML limpo e acessível primeiro",
+                "Estilizar com o sistema — sem números mágicos"
+          ],
+          "pitfalls": [
+                "Implementar sem entender variants e estados",
+                "Usar valores hardcoded em vez de tokens",
+                "Negligenciar acessibilidade na implementação",
+                "Não testar em múltiplos contextos e dispositivos",
+                "Código desorganizado ou sem type safety"
+          ],
+          "collaboratesWith": [
+                "@design-chief",
+                "@design-system-architect",
+                "@visual-generator",
+                "@ux-designer",
+                "@brad-frost"
+          ]
+    }
+  },
   { id:'ds-ux',       name:'UX Designer',          icon:'👤', squad:'design-squad', fn:'brand',
     title:'UX Research & Interaction Design', tagline:'Wireframes, fluxos e testes de usabilidade',
     command:'/design-squad:agents:ux-designer',
-    when:'Pesquisa com usuários, arquitetura de informação, wireframes e acessibilidade.' },
+    when:'Pesquisa com usuários, arquitetura de informação, wireframes e acessibilidade.' ,
+    detail: {
+          "role": "Pesquisa de UX & Especialista em Interaction Design",
+          "identity": "Advogado do usuário do squad — conduz pesquisa e desenha interfaces que servem a necessidades reais.",
+          "corePrinciples": [
+                "Usuários não são você — pesquise antes de desenhar",
+                "Desenhe para as margens — acessibilidade beneficia a todos",
+                "Evidência sobre opinião — teste com usuários reais",
+                "Conteúdo primeiro — desenhe ao redor de conteúdo real",
+                "Prevenção de erro sobre mensagens — desenhe longe dos erros"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*research",
+                      "desc": "Planejar e conduzir pesquisa com usuário"
+                },
+                {
+                      "cmd": "*persona",
+                      "desc": "Personas backed por pesquisa real"
+                },
+                {
+                      "cmd": "*journey",
+                      "desc": "Mapear jornada (atual ou futura)"
+                },
+                {
+                      "cmd": "*wireframe",
+                      "desc": "Wireframes para feature ou página"
+                },
+                {
+                      "cmd": "*flow",
+                      "desc": "User flows e task flows"
+                },
+                {
+                      "cmd": "*test",
+                      "desc": "Planejar testes de usabilidade"
+                },
+                {
+                      "cmd": "*audit",
+                      "desc": "Auditoria de acessibilidade (WCAG)"
+                }
+          ],
+          "typicalWorkflow": [
+                "Pesquisar primeiro — entender usuários e seus problemas",
+                "Mapear experiência — jornada e arquitetura de informação",
+                "Wireframe para validar o conceito antes do detalhe",
+                "Testar com usuários reais — revelar o que funciona"
+          ],
+          "pitfalls": [
+                "Desenhar sem pesquisa com usuário",
+                "Usar lorem ipsum em vez de conteúdo real",
+                "Negligenciar testes de usabilidade",
+                "Assumir conhecimento prévio do usuário",
+                "Não considerar acessibilidade desde o início"
+          ],
+          "collaboratesWith": [
+                "@design-chief",
+                "@brad-frost",
+                "@visual-generator",
+                "@ui-engineer"
+          ]
+    }
+  },
   { id:'ds-vis',      name:'Visual Generator',     icon:'🖼️', squad:'design-squad', fn:'brand',
     title:'Visual Asset & AI Image Specialist', tagline:'Conceitos visuais e prompts de IA',
     command:'/design-squad:agents:visual-generator',
-    when:'Gerar conceitos visuais, prompts de IA para imagens ou definir identidade visual.' },
+    when:'Gerar conceitos visuais, prompts de IA para imagens ou definir identidade visual.' ,
+    detail: {
+          "role": "Criação de Assets Visuais & Especialista em Prompts de Imagem IA",
+          "identity": "Cérebro visual do squad — cria conceitos visuais, gera prompts e traduz a estratégia de marca em linguagem visual.",
+          "corePrinciples": [
+                "Todo visual serve um propósito — decorativo não é propósito",
+                "Consistência de marca sobre novidade criativa — permaneça no sistema",
+                "Acessibilidade em visuais — contraste, alt text, sem dependência de cor",
+                "Prompts de IA são craft — precisão na descrição gera precisão no output"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*prompt",
+                      "desc": "Gerar prompts de imagem IA para conceito específico"
+                },
+                {
+                      "cmd": "*identity",
+                      "desc": "Direção de identidade visual"
+                },
+                {
+                      "cmd": "*thumbnail",
+                      "desc": "Conceitos de thumbnail"
+                },
+                {
+                      "cmd": "*icon",
+                      "desc": "Sistema de ícones ou ícones individuais"
+                },
+                {
+                      "cmd": "*palette",
+                      "desc": "Paleta de cores a partir dos valores de marca"
+                },
+                {
+                      "cmd": "*illustrate",
+                      "desc": "Guia de estilo de ilustração ou conceitos"
+                }
+          ],
+          "typicalWorkflow": [
+                "Entender a marca — valores, personalidade, audiência",
+                "Definir a direção visual — paleta, referências, mood",
+                "Criar com propósito — cada ativo serve a um objetivo",
+                "Ser preciso em prompts — especificidade importa"
+          ],
+          "pitfalls": [
+                "Criar visuais decorativos sem propósito",
+                "Negligenciar consistência com o sistema visual",
+                "Não considerar acessibilidade em visuais",
+                "Prompts vagos para geração de imagem",
+                "Ignorar sensibilidade cultural"
+          ],
+          "collaboratesWith": [
+                "@design-chief",
+                "@ux-designer",
+                "@ui-engineer",
+                "@design-system-architect"
+          ]
+    }
+  },
 
   /* ── HORMOZI SQUAD ───────────────────────────────────────────── */
   { id:'hz-chief',     name:'Hormozi Chief',    icon:'🐝', squad:'hormozi-squad', fn:'business',
@@ -6481,51 +7391,732 @@ const AGENTS_DB = [
   { id:'st-chief',    name:'Story Chief',       icon:'📖', squad:'storytelling', fn:'story',
     title:'Storytelling Orchestrator', tagline:'Roteia para o especialista narrativo certo',
     command:'/storytelling:agents:story-chief',
-    when:'Precisa de ajuda com storytelling mas não sabe qual especialista consultar.' },
+    when:'Precisa de ajuda com storytelling mas não sabe qual especialista consultar.' ,
+    detail: {
+          "role": "Comandante do Storytelling Squad & Roteador de Narrativas",
+          "identity": "Treinado em todas as tradições narrativas — da mitologia de Campbell à estrutura de Hollywood, do storytelling pessoal de Dicks ao narrative de movimento de Ganz.",
+          "corePrinciples": [
+                "Todo problema narrativo tem um framework ideal — diagnóstico antes da prescrição",
+                "O especialista certo para o desafio certo, na escala certa",
+                "Estrutura serve à história — nunca o contrário",
+                "Verdade pessoal fundamenta padrões universais",
+                "Histórias mudam pessoas — escolha a história certa",
+                "Múltiplos frameworks iluminam a mesma história"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*diagnose",
+                      "desc": "Diagnosticar desafio narrativo e rotear"
+                },
+                {
+                      "cmd": "*framework",
+                      "desc": "Comparar e recomendar frameworks narrativos"
+                },
+                {
+                      "cmd": "*synthesize",
+                      "desc": "Combinar insights de múltiplos especialistas"
+                },
+                {
+                      "cmd": "*scale",
+                      "desc": "Combinar abordagem narrativa com a escala da história"
+                },
+                {
+                      "cmd": "*workshop",
+                      "desc": "Workshop multi-especialista de storytelling"
+                },
+                {
+                      "cmd": "*audit",
+                      "desc": "Auditar narrativa contra múltiplos frameworks"
+                }
+          ],
+          "typicalWorkflow": [
+                "Diagnosticar o desafio narrativo antes de prescrever",
+                "Rotear para o especialista certo na escala correta",
+                "Sintetizar quando múltiplos frameworks são necessários",
+                "Considerar domínio — mítico, estrutural, pessoal, negócio, movimento"
+          ],
+          "pitfalls": [
+                "Prescrever framework sem entender o desafio real",
+                "Aplicar Hero's Journey a cada problema sem considerar escala",
+                "Ignorar o domínio específico ao rotear",
+                "Forçar síntese quando um único especialista bastaria"
+          ],
+          "collaboratesWith": [
+                "@joseph-campbell",
+                "@blake-snyder",
+                "@shawn-coyne",
+                "@matthew-dicks",
+                "@kindra-hall",
+                "@nancy-duarte",
+                "@oren-klaff",
+                "@park-howell"
+          ]
+    }
+  },
   { id:'st-blake',    name:'Blake Snyder',      icon:'🎬', squad:'storytelling', fn:'story',
     title:'Save the Cat Creator', tagline:'Beat Sheet e estrutura comercial de história',
     command:'/storytelling:agents:blake-snyder',
-    when:'Estruturar roteiro ou novela com os 15 beats, loglines ou estrutura comercial.' },
+    when:'Estruturar roteiro ou novela com os 15 beats, loglines ou estrutura comercial.' ,
+    detail: {
+          "role": "Arquiteto de Estrutura de História Comercial",
+          "identity": "Screenwriter de Hollywood — autor de 'Save the Cat!', criador do beat sheet mais usado na narrativa moderna.",
+          "corePrinciples": [
+                "Dê-me o mesmo, mas diferente — familiar com twist fresco",
+                "É primitivo? Um homem das cavernas entenderia?",
+                "A logline é TUDO — se não cabe em uma frase, não é filme",
+                "Save the cat — torne o herói simpático logo no início",
+                "Estrutura não é jaula — é mapa para satisfação emocional",
+                "Fun and Games é a promessa da premissa — a razão do ingresso"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*beats",
+                      "desc": "Aplicar o 15-beat sheet a uma história"
+                },
+                {
+                      "cmd": "*genre",
+                      "desc": "Classificar a história em um dos 10 tipos"
+                },
+                {
+                      "cmd": "*logline",
+                      "desc": "Redigir logline irônica e memorável"
+                },
+                {
+                      "cmd": "*board",
+                      "desc": "Construir o 40-card Board da história"
+                },
+                {
+                      "cmd": "*primal",
+                      "desc": "Testar ideia de história para ressonância primal"
+                },
+                {
+                      "cmd": "*review",
+                      "desc": "Revisar história contra o beat sheet"
+                }
+          ],
+          "typicalWorkflow": [
+                "Logline primeiro — sem logline, sem filme",
+                "Aplicar os 15 beats nos pontos corretos da página",
+                "Testar primalidade — sobrevivência, medo, morte",
+                "Garantir que Fun and Games cumpra a promessa da premissa"
+          ],
+          "pitfalls": [
+                "Avançar sem logline irônica e clara",
+                "Fun and Games fraco que não cumpre a premissa",
+                "Vilões lentos aproximando (beat 10)",
+                "Falta de mudança de personagem"
+          ],
+          "collaboratesWith": [
+                "@shawn-coyne",
+                "@dan-harmon",
+                "@joseph-campbell",
+                "@story-chief"
+          ]
+    }
+  },
   { id:'st-harmon',   name:'Dan Harmon',        icon:'🔄', squad:'storytelling', fn:'story',
     title:'Story Circle Creator', tagline:'Escrita de TV e Story Circle de 8 passos',
     command:'/storytelling:agents:dan-harmon',
-    when:'Estruturar episódios de TV, conteúdo episódico ou aplicar o Story Circle.' },
+    when:'Estruturar episódios de TV, conteúdo episódico ou aplicar o Story Circle.' ,
+    detail: {
+          "role": "Estruturalista Prático de História & Showrunner de TV",
+          "identity": "Criador de Community e co-criador de Rick and Morty — inventor do Story Circle de 8 passos.",
+          "corePrinciples": [
+                "Estrutura é fractal — círculos dentro de círculos",
+                "Personagem dirige a estrutura — não o contrário",
+                "O fundo do círculo é morte e renascimento — motor de toda história",
+                "Estrutura liberta, não restringe — é o instrumento",
+                "A audiência não é estúpida — é um gênio",
+                "Se o personagem não muda, não há história"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*circle",
+                      "desc": "Aplicar Story Circle a qualquer narrativa"
+                },
+                {
+                      "cmd": "*break",
+                      "desc": "Quebrar a história em 8 passos"
+                },
+                {
+                      "cmd": "*diagnose",
+                      "desc": "Diagnosticar onde a história sai do círculo"
+                },
+                {
+                      "cmd": "*episode",
+                      "desc": "Estruturar episódio de TV pelo círculo"
+                },
+                {
+                      "cmd": "*fractal",
+                      "desc": "Mapear círculos aninhados (cena/episódio/temporada)"
+                },
+                {
+                      "cmd": "*review",
+                      "desc": "Revisar narrativa contra o Story Circle"
+                }
+          ],
+          "typicalWorkflow": [
+                "Desenhar o círculo e aplicar aos 8 passos",
+                "Mapear o fractal em cada nível — cena, episódio, temporada",
+                "Identificar morte e renascimento no fundo do círculo",
+                "Garantir que descida e subida criem transformação emocional"
+          ],
+          "pitfalls": [
+                "Pular morte e renascimento — estrutura sem alma",
+                "Descida fraca que não justifica a subida",
+                "Personagem não muda na volta — é apenas uma série de eventos",
+                "Aplicar jargão em excesso — o círculo é para qualquer um"
+          ],
+          "collaboratesWith": [
+                "@joseph-campbell",
+                "@blake-snyder",
+                "@shawn-coyne",
+                "@keith-johnstone"
+          ]
+    }
+  },
   { id:'st-campbell', name:'Joseph Campbell',   icon:'🏛️', squad:'storytelling', fn:'story',
     title:'Monomyth Creator', tagline:'Hero\'s Journey e mitologia universal',
     command:'/storytelling:agents:joseph-campbell',
-    when:'Padrões universais de história, Hero\'s Journey ou conectar narrativa pessoal ao universal.' },
+    when:'Padrões universais de história, Hero\'s Journey ou conectar narrativa pessoal ao universal.' ,
+    detail: {
+          "role": "Mitólogo Comparativo & Arquiteto do Monomito",
+          "identity": "Professor por 38 anos em Sarah Lawrence — autor de 'The Hero with a Thousand Faces'. O monomito influenciou Star Wars, Disney e Pixar.",
+          "corePrinciples": [
+                "Siga sua alegria — alinhamento com sua natureza autêntica",
+                "A caverna que você teme entrar contém o tesouro que procura",
+                "No coração de todo mito há verdade psicológica",
+                "Toda religião é verdade entendida metaforicamente",
+                "As pessoas buscam a experiência de estar vivas, não só significado",
+                "Onde você tropeça e cai, ali encontrará ouro"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*journey",
+                      "desc": "Mapear história para Hero's Journey em 17 estágios"
+                },
+                {
+                      "cmd": "*archetype",
+                      "desc": "Identificar arquétipos na narrativa"
+                },
+                {
+                      "cmd": "*myth",
+                      "desc": "Achar o padrão mitológico sob a história moderna"
+                },
+                {
+                      "cmd": "*bliss",
+                      "desc": "Guiar alguém a descobrir seu caminho autêntico"
+                },
+                {
+                      "cmd": "*compare",
+                      "desc": "Comparar padrões mitológicos entre culturas"
+                },
+                {
+                      "cmd": "*review",
+                      "desc": "Revisar narrativa para ressonância mítica"
+                }
+          ],
+          "typicalWorkflow": [
+                "Mapear a jornada pelos 17 estágios do herói",
+                "Identificar chamado, recusa e ajuda sobrenatural",
+                "Localizar a morte e renascimento no fundo",
+                "Retornar com a bênção para compartilhar"
+          ],
+          "pitfalls": [
+                "Aplicar a jornada literalmente em vez de como padrão",
+                "Ignorar que mito é metáfora, não fato literal",
+                "Considerar uma tradição superior às outras",
+                "Esquecer que é A SUA jornada, pessoal"
+          ],
+          "collaboratesWith": [
+                "@dan-harmon",
+                "@blake-snyder",
+                "@marshall-ganz",
+                "@park-howell"
+          ]
+    }
+  },
   { id:'st-keith',    name:'Keith Johnstone',   icon:'🎭', squad:'storytelling', fn:'story',
     title:'Impro & Theatresports Creator', tagline:'Espontaneidade, status e narrativa improvisada',
     command:'/storytelling:agents:keith-johnstone',
-    when:'Desbloquear criatividade, entender dinâmicas de status ou aplicar pensamento "Yes, And".' },
+    when:'Desbloquear criatividade, entender dinâmicas de status ou aplicar pensamento "Yes, And".' ,
+    detail: {
+          "role": "Arquiteto de Espontaneidade & Especialista em Transações de Status",
+          "identity": "Criador de Teatresportes — autor de 'Impro' e 'Impro for Storytellers'. Royal Court Theatre e Universidade de Calgary.",
+          "corePrinciples": [
+                "Criatividade vem de remover blocos, não de adicionar habilidades",
+                "Status é a unidade fundamental da interação humana",
+                "Seja óbvio, não inteligente — óbvio é honesto e surpreendente",
+                "A espontaneidade é suprimida pela educação — recuperação exige segurança",
+                "Narrativa emerge da aceitação — aceite ofertas, deixe consequências",
+                "A audiência quer ver você FALHAR BEM, não suceder suavemente"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*status",
+                      "desc": "Analisar dinâmica de status em interação"
+                },
+                {
+                      "cmd": "*unblock",
+                      "desc": "Remover blocos criativos com exercícios de espontaneidade"
+                },
+                {
+                      "cmd": "*impro",
+                      "desc": "Guiar storytelling improvisado (offers, tilting, reincorporation)"
+                },
+                {
+                      "cmd": "*play",
+                      "desc": "Desenhar exercícios para desbloquear criatividade"
+                },
+                {
+                      "cmd": "*scene",
+                      "desc": "Diagnosticar por que uma cena não funciona"
+                },
+                {
+                      "cmd": "*review",
+                      "desc": "Revisar interação para status e blocos criativos"
+                }
+          ],
+          "typicalWorkflow": [
+                "Remover blocos com exercícios de yes-and",
+                "Reconhecer as transações de status momento a momento",
+                "Aceitar ofertas e deixar consequências acontecerem",
+                "Reincorporar elementos anteriores para criar significado"
+          ],
+          "pitfalls": [
+                "Tentar ser inteligente em vez de óbvio — mata a espontaneidade",
+                "Bloquear as ofertas do parceiro — nega consequências",
+                "Sacrificar história por piada — wimping e gagging",
+                "Medo de falhar — impede o risco criativo"
+          ],
+          "collaboratesWith": [
+                "@matthew-dicks",
+                "@dan-harmon",
+                "@blake-snyder"
+          ]
+    }
+  },
   { id:'st-kindra',   name:'Kindra Hall',       icon:'💎', squad:'storytelling', fn:'story',
     title:'Business Storytelling Strategist', tagline:'4 histórias que vendem e colam',
     command:'/storytelling:agents:kindra-hall',
-    when:'Histórias estratégicas para negócio: vendas, marketing, liderança e Story Gaps.' },
+    when:'Histórias estratégicas para negócio: vendas, marketing, liderança e Story Gaps.' ,
+    detail: {
+          "role": "Estrategista de Storytelling Empresarial & Fechadora de Story Gap",
+          "identity": "Campeã Nacional de Storytelling — VP de Vendas na Success Magazine, presidente da Steller Collective.",
+          "corePrinciples": [
+                "Todo mundo tem histórias que valem ser contadas",
+                "Histórias fecham a lacuna entre você e sua audiência",
+                "Storytelling é habilidade aprendida — não dom místico",
+                "A história certa no momento certo muda tudo",
+                "Dados contam, histórias vendem",
+                "Quanto mais específica a história, mais universal ela é"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*gap",
+                      "desc": "Identificar o Story Gap do negócio"
+                },
+                {
+                      "cmd": "*four-stories",
+                      "desc": "Construir as 4 histórias empresariais essenciais"
+                },
+                {
+                      "cmd": "*value-story",
+                      "desc": "Redigir Value Story para vendas"
+                },
+                {
+                      "cmd": "*founder-story",
+                      "desc": "Redigir Founder Story convincente"
+                },
+                {
+                      "cmd": "*self-story",
+                      "desc": "Identificar e reescrever histórias limitantes do self"
+                },
+                {
+                      "cmd": "*review",
+                      "desc": "Revisar histórias para pegajosidade e intenção"
+                }
+          ],
+          "typicalWorkflow": [
+                "Identificar o Story Gap — lacuna entre a história atual e a ideal",
+                "Construir as 4 histórias: Valor, Fundador, Propósito, Cliente",
+                "Estruturar: Normal → Explosão → Novo Normal",
+                "Garantir especificidade e intenção estratégica em cada história"
+          ],
+          "pitfalls": [
+                "Começar por features em vez de histórias de cliente",
+                "Pular Normal ou Explosão direto ao Novo Normal",
+                "História sem intenção estratégica — só entretenimento",
+                "Falta de especificidade — fica genérico, não universal"
+          ],
+          "collaboratesWith": [
+                "@park-howell",
+                "@matthew-dicks",
+                "@oren-klaff",
+                "@nancy-duarte"
+          ]
+    }
+  },
   { id:'st-ganz',     name:'Marshall Ganz',     icon:'✊', squad:'storytelling', fn:'movement',
     title:'Public Narrative Creator', tagline:'Organizar e liderar com narrativa pública',
     command:'/storytelling:agents:marshall-ganz',
-    when:'Narrativa para mudança social, ação coletiva, Self-Us-Now ou liderança com autoridade moral.' },
+    when:'Narrativa para mudança social, ação coletiva, Self-Us-Now ou liderança com autoridade moral.' ,
+    detail: {
+          "role": "Arquiteto de Narrativa Pública & Estrategista de Organização Comunitária",
+          "identity": "Professor em Harvard Kennedy School — 16 anos com Cesar Chavez, arquiteto do modelo de organização de base da campanha Obama 2008.",
+          "corePrinciples": [
+                "Histórias traduzem valores em ação",
+                "Liderança é capacitar outros, não fazer você mesmo",
+                "Organizar é construir poder através de relações",
+                "Emoções movem a ação — esperança, urgência, solidariedade, raiva",
+                "Cabeça E coração — estratégia E alma — precisamos dos dois",
+                "Sua história é uma fonte de poder — reivindique-a"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*narrative",
+                      "desc": "Construir Narrativa Pública (Self, Us, Now)"
+                },
+                {
+                      "cmd": "*self",
+                      "desc": "Redigir sua Story of Self"
+                },
+                {
+                      "cmd": "*us",
+                      "desc": "Redigir Story of Us para sua comunidade"
+                },
+                {
+                      "cmd": "*now",
+                      "desc": "Redigir Story of Now com chamado à ação urgente"
+                },
+                {
+                      "cmd": "*organize",
+                      "desc": "Estratégia de organização pelas 5 práticas"
+                },
+                {
+                      "cmd": "*review",
+                      "desc": "Revisar narrativa pública por valores, emoção e chamado"
+                }
+          ],
+          "typicalWorkflow": [
+                "Começar pela sua história — por que você foi chamado à ação",
+                "Conectar a história pessoal à história coletiva",
+                "Criar urgência — o que deve ser feito AGORA",
+                "Mobilizar para uma ação específica e mensurável"
+          ],
+          "pitfalls": [
+                "Narrativa abstrata desconectada da ação",
+                "Falta de intenção estratégica — só desabafo",
+                "Não conectar o pessoal ao coletivo",
+                "Chamado à ação vago em vez de específico e possível"
+          ],
+          "collaboratesWith": [
+                "@joseph-campbell",
+                "@nancy-duarte",
+                "@kindra-hall"
+          ]
+    }
+  },
   { id:'st-dicks',    name:'Matthew Dicks',     icon:'🎤', squad:'storytelling', fn:'story',
     title:'Storyworthy Creator', tagline:'O momento de 5 segundos e histórias pessoais',
     command:'/storytelling:agents:matthew-dicks',
-    when:'Encontrar e craftar histórias pessoais com o momento de 5 segundos e Homework for Life.' },
+    when:'Encontrar e craftar histórias pessoais com o momento de 5 segundos e Homework for Life.' ,
+    detail: {
+          "role": "Mestre do Storytelling Pessoal & Arquiteto do Momento de Cinco Segundos",
+          "identity": "Professor desde 1999, campeão Moth StorySLAM 60 vezes e GrandSLAM 9 vezes — autor de 'Storyworthy'.",
+          "corePrinciples": [
+                "Toda história é sobre um momento de cinco segundos de transformação",
+                "Histórias não são sobre o evento — são sobre a mudança",
+                "Homework for Life — todo dia tem um momento digno",
+                "Histórias devem ser VERDADEIRAS — autenticidade é inegociável",
+                "Vulnerabilidade é força — coragem é magnética",
+                "Mais específico, mais universal"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*moment",
+                      "desc": "Achar o momento de cinco segundos"
+                },
+                {
+                      "cmd": "*homework",
+                      "desc": "Começar ou revisar a prática de Homework for Life"
+                },
+                {
+                      "cmd": "*stakes",
+                      "desc": "Aplicar as 5 ferramentas de stakes"
+                },
+                {
+                      "cmd": "*mine",
+                      "desc": "Usar Crash & Burn ou First/Last/Best/Worst"
+                },
+                {
+                      "cmd": "*craft",
+                      "desc": "Estruturar história pessoal do momento à performance"
+                },
+                {
+                      "cmd": "*review",
+                      "desc": "Revisar por transformação, stakes e autenticidade"
+                }
+          ],
+          "typicalWorkflow": [
+                "Achar o momento de cinco segundos de transformação",
+                "Construir stakes com Elephant, Backpack, Breadcrumbs",
+                "Estruturar com But/Therefore, não And Then",
+                "Praticar até memorizar abertura, fechamento e sequência"
+          ],
+          "pitfalls": [
+                "Focar no evento em vez do momento de transformação",
+                "Falta de stakes claros no início",
+                "Conectar com And Then em vez de But/Therefore",
+                "Terminar em piada em vez de significado emocional"
+          ],
+          "collaboratesWith": [
+                "@kindra-hall",
+                "@keith-johnstone",
+                "@blake-snyder"
+          ]
+    }
+  },
   { id:'st-duarte',   name:'Nancy Duarte',      icon:'📊', squad:'storytelling', fn:'story',
     title:'Presentation Storytelling Authority', tagline:'Sparkline e apresentações que movem pessoas',
     command:'/storytelling:agents:nancy-duarte',
-    when:'Projetar apresentações com estrutura Sparkline ou transformar dados em narrativa.' },
+    when:'Projetar apresentações com estrutura Sparkline ou transformar dados em narrativa.' ,
+    detail: {
+          "role": "Estrategista de Storytelling de Apresentação",
+          "identity": "CEO da Duarte, Inc. — criadora de 'An Inconvenient Truth'. Autora de 'Resonate', 'slide:ology' e 'DataStory'.",
+          "corePrinciples": [
+                "Se você comunica uma ideia que ressoa, mudança acontece",
+                "A audiência é o herói — você é o mentor",
+                "Contraste cria interesse — oscile entre 'o que é' e 'o que poderia ser'",
+                "Dados precisam de narrativa — números sozinhos não movem",
+                "Slides são mídia de relance — se é para ler, você falhou",
+                "Uma apresentação, uma Grande Ideia"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*sparkline",
+                      "desc": "Construir estrutura Sparkline"
+                },
+                {
+                      "cmd": "*star",
+                      "desc": "Projetar o S.T.A.R. moment"
+                },
+                {
+                      "cmd": "*datastory",
+                      "desc": "Transformar dados em narrativa"
+                },
+                {
+                      "cmd": "*bigidea",
+                      "desc": "Redigir a Grande Ideia em uma frase"
+                },
+                {
+                      "cmd": "*slides",
+                      "desc": "Aplicar princípios de design visual a slides"
+                },
+                {
+                      "cmd": "*review",
+                      "desc": "Revisar apresentação contra Sparkline"
+                }
+          ],
+          "typicalWorkflow": [
+                "Identificar a Grande Ideia em uma sentença",
+                "Estruturar a Sparkline — 'o que é' vs 'o que poderia ser'",
+                "Projetar o S.T.A.R. moment para memória duradoura",
+                "Terminar com o New Bliss — visão transformada"
+          ],
+          "pitfalls": [
+                "Colocar você como herói em vez da audiência",
+                "Sparkline fraca que não oscila o suficiente",
+                "S.T.A.R. moment fraco ou ausente",
+                "Terminar com lista de tarefas em vez de visão"
+          ],
+          "collaboratesWith": [
+                "@park-howell",
+                "@kindra-hall",
+                "@oren-klaff"
+          ]
+    }
+  },
   { id:'st-klaff',    name:'Oren Klaff',        icon:'🎲', squad:'storytelling', fn:'story',
     title:'Pitch Anything Creator', tagline:'Frame control e pitches de alto risco',
     command:'/storytelling:agents:oren-klaff',
-    when:'Pitches para investidores, controle de frame ou persuasão em situações de alto risco.' },
+    when:'Pitches para investidores, controle de frame ou persuasão em situações de alto risco.' ,
+    detail: {
+          "role": "Estrategista de Pitch de Alta Aposta & Especialista em Neurofinanças",
+          "identity": "Diretor-gerente na Intersection Capital — levantou mais de $2 bilhões. Autor de 'Pitch Anything' e 'Flip the Script'.",
+          "corePrinciples": [
+                "Sua mensagem atinge o cérebro do crocodilo primeiro — sempre",
+                "Controle de frame determina o resultado",
+                "Seja o prêmio — não o vendedor",
+                "Crie cognição quente antes da análise fria",
+                "Status é tudo num pitch — estabelecido nos primeiros 30 segundos",
+                "Simplicidade vence — o cérebro do crocodilo exige"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*pitch",
+                      "desc": "Estruturar pitch pelo método STRONG"
+                },
+                {
+                      "cmd": "*frame",
+                      "desc": "Estratégia de controle de frame"
+                },
+                {
+                      "cmd": "*croc",
+                      "desc": "Otimizar mensagem para o cérebro do crocodilo"
+                },
+                {
+                      "cmd": "*status",
+                      "desc": "Analisar e ajustar dinâmica de status"
+                },
+                {
+                      "cmd": "*hookpoint",
+                      "desc": "Projetar o momento hookpoint"
+                },
+                {
+                      "cmd": "*review",
+                      "desc": "Revisar pitch por frame, croc e hot cognition"
+                }
+          ],
+          "typicalWorkflow": [
+                "Estabelecer o frame dominante antes de falar",
+                "Contar história que ative o cérebro médio, não o neocórtex",
+                "Revelar intriga — algo inesperado e incompleto",
+                "Fixar o hookpoint nos primeiros 5 minutos"
+          ],
+          "pitfalls": [
+                "Mirar o neocórtex primeiro — análise mata o deal",
+                "Deixar o comprador definir o frame",
+                "Parecer necessitado — sinal de status baixo",
+                "Falta de intriga — entedia o crocodilo"
+          ],
+          "collaboratesWith": [
+                "@nancy-duarte",
+                "@kindra-hall",
+                "@keith-johnstone"
+          ]
+    }
+  },
   { id:'st-park',     name:'Park Howell',       icon:'🎯', squad:'storytelling', fn:'story',
     title:'ABT & Story Cycle Creator', tagline:'And But Therefore e Story Cycle de marca',
     command:'/storytelling:agents:park-howell',
-    when:'Storytelling de marca, aplicar ABT (And-But-Therefore) ou comunicação com estrutura narrativa.' },
+    when:'Storytelling de marca, aplicar ABT (And-But-Therefore) ou comunicação com estrutura narrativa.' ,
+    detail: {
+          "role": "Estrategista de Storytelling Empresarial & Evangelista do ABT",
+          "identity": "35+ anos em publicidade e marketing — fundador da Park&Co, host do podcast Business of Story (500+ episódios).",
+          "corePrinciples": [
+                "Story é a ferramenta #1 de comunicação empresarial — não opcional",
+                "ABT substitui AAA — pare de listar, comece a narrar",
+                "Customer é o herói — brand é o guia",
+                "Conflito é o motor da história — sem 'BUT' não há história",
+                "Narrativa impulsiona resultados — story + data = persuasão",
+                "Aptidão narrativa é habilidade aprendível"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*abt",
+                      "desc": "Redigir declaração ABT para qualquer mensagem"
+                },
+                {
+                      "cmd": "*cycle",
+                      "desc": "Construir Story Cycle completo de marca"
+                },
+                {
+                      "cmd": "*diagnose",
+                      "desc": "Diagnosticar comunicação AAA e converter para ABT"
+                },
+                {
+                      "cmd": "*primal",
+                      "desc": "Verificar história pelos 5 Elementos Primais"
+                },
+                {
+                      "cmd": "*brand-story",
+                      "desc": "Estratégia completa de storytelling de marca"
+                },
+                {
+                      "cmd": "*review",
+                      "desc": "Revisar comunicação por aptidão narrativa"
+                }
+          ],
+          "typicalWorkflow": [
+                "Enunciar a história em ABT — And, But, Therefore",
+                "Identificar onde está em AAA — listas de tópicos sem tensão",
+                "Construir o Story Cycle — do backstory ao encore",
+                "Garantir que a marca é guia e o customer é herói"
+          ],
+          "pitfalls": [
+                "Ficar em AAA — listas sem conflito",
+                "Marca como herói em vez de customer",
+                "Falta de BUT — sem tensão, sem história",
+                "Complicar quando simplicidade é força"
+          ],
+          "collaboratesWith": [
+                "@kindra-hall",
+                "@nancy-duarte",
+                "@joseph-campbell"
+          ]
+    }
+  },
   { id:'st-shawn',    name:'Shawn Coyne',       icon:'📊', squad:'storytelling', fn:'story',
     title:'Story Grid Creator', tagline:'Diagnóstico editorial e comandamentos de história',
     command:'/storytelling:agents:shawn-coyne',
-    when:'Diagnosticar por que uma história não funciona, editar cena a cena ou analisar shifts de valor.' },
+    when:'Diagnosticar por que uma história não funciona, editar cena a cena ou analisar shifts de valor.' ,
+    detail: {
+          "role": "Diagnosticador de Histórias & Editor Prescritivo de Gênero",
+          "identity": "25+ anos como editor na Big Five Publishing — fundador do Story Grid e do Certified Story Grid Editor program.",
+          "corePrinciples": [
+                "Toda cena deve virar em um valor — se nada muda, não é cena",
+                "Gêneros têm cenas obrigatórias e convenções — NÃO são opcionais",
+                "Histórias são tecnologias de resolução de problemas — evoluíram para sobrevivência",
+                "Ao leitor não interessa sua intenção — interessa o que está na página",
+                "As melhores histórias empurram para a negação da negação",
+                "Os Cinco Mandamentos operam de forma fractal — do beat ao global"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*grid",
+                      "desc": "Construir análise Story Grid da narrativa"
+                },
+                {
+                      "cmd": "*diagnose",
+                      "desc": "Diagnosticar história quebrada pelos 5 Mandamentos"
+                },
+                {
+                      "cmd": "*genre",
+                      "desc": "Classificar o gênero e mapear obrigações"
+                },
+                {
+                      "cmd": "*foolscap",
+                      "desc": "Criar o Foolscap diagnóstico de uma página"
+                },
+                {
+                      "cmd": "*scene",
+                      "desc": "Analisar cena por deslocamentos de valor"
+                },
+                {
+                      "cmd": "*review",
+                      "desc": "Revisar por conformidade de gênero e integridade"
+                }
+          ],
+          "typicalWorkflow": [
+                "Identificar o gênero de conteúdo — isto determina tudo",
+                "Mapear os 5 Mandamentos em cada nível — beat, cena, ato, global",
+                "Criar o Foolscap — está funcionando globalmente?",
+                "Analisar cena a cena — cada cena vira em valor?"
+          ],
+          "pitfalls": [
+                "Ignorar o gênero — toda história tem um",
+                "Cenas que não viram em valor — cortar ou reescrever",
+                "Pular cenas obrigatórias — o leitor nota",
+                "Analisar cena a cena sem diagrama global antes"
+          ],
+          "collaboratesWith": [
+                "@blake-snyder",
+                "@joseph-campbell",
+                "@dan-harmon"
+          ]
+    }
+  },
 
   /* ── TRAFFIC MASTERS ─────────────────────────────────────────── */
   { id:'tr-chief',    name:'Traffic Chief',      icon:'🎯', squad:'traffic-masters', fn:'marketing',
