@@ -379,6 +379,137 @@
     ───────────────────────────────────────────── */
     #agents-panel { display: none; position: relative; z-index: 1; }
     #agents-panel.visible { display: block; }
+    #strategies-panel { display: none; position: relative; z-index: 1; }
+    #strategies-panel.visible { display: block; }
+
+    /* ═════════════════════════════════════════════
+       STRATEGIES — intro + filters + cards
+       ═════════════════════════════════════════════ */
+    .strat-intro {
+      max-width: 920px; margin: 36px auto 26px;
+      padding: 0 32px;
+    }
+    .strat-intro-title {
+      font-family: var(--ff-display); font-size: 22px; font-weight: 800;
+      letter-spacing: -.02em; color: var(--text); margin-bottom: 6px;
+    }
+    .strat-intro-desc {
+      font-size: 14px; color: var(--text-2); line-height: 1.55;
+      max-width: 640px;
+    }
+
+    .strat-filters {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      max-width: 1380px; margin: 0 auto 18px;
+      padding: 0 32px;
+    }
+    .strat-filter-btn {
+      font-family: var(--ff-mono); font-size: 11.5px; font-weight: 500;
+      color: var(--text-2);
+      background: var(--surface); border: 1px solid var(--border);
+      padding: 7px 13px; border-radius: 20px;
+      cursor: pointer;
+      transition: color .15s, border-color .15s, background .15s;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .strat-filter-btn .fc {
+      background: rgba(255,255,255,0.06);
+      color: var(--text-3);
+      padding: 1px 8px; border-radius: 10px;
+      font-size: 10px; font-weight: 600;
+    }
+    .strat-filter-btn:hover { color: var(--text); border-color: rgba(255,255,255,0.15); }
+    .strat-filter-btn.active {
+      color: var(--filter-color);
+      background: color-mix(in srgb, var(--filter-color) 10%, transparent);
+      border-color: color-mix(in srgb, var(--filter-color) 35%, transparent);
+    }
+    .strat-filter-btn.active .fc {
+      background: color-mix(in srgb, var(--filter-color) 20%, transparent);
+      color: var(--filter-color);
+    }
+
+    #strategies-main { max-width: 1380px; margin: 0 auto; padding: 0 32px 40px; }
+    .strategies-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 14px;
+    }
+
+    .strat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      position: relative; overflow: hidden;
+      display: flex; flex-direction: column;
+      transition: background .2s, border-color .2s, transform .18s, box-shadow .2s;
+      opacity: 0; animation: fadeUp .35s ease forwards;
+    }
+    .strat-card:hover {
+      background: var(--surface-h);
+      border-color: color-mix(in srgb, var(--cat-color) 30%, transparent);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(0,0,0,.5);
+    }
+    .strat-card[hidden] { display: none !important; }
+
+    .strat-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--cat-color), color-mix(in srgb, var(--cat-color) 30%, transparent));
+      opacity: .7; transition: opacity .2s;
+    }
+    .strat-card:hover .strat-bar { opacity: 1; }
+
+    .strat-inner { padding: 20px 20px 18px; display: flex; flex-direction: column; flex: 1; }
+    .strat-head { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 14px; }
+    .strat-icon {
+      width: 48px; height: 48px; flex-shrink: 0;
+      border-radius: 12px; display: flex; align-items: center; justify-content: center;
+      font-size: 24px;
+      background: color-mix(in srgb, var(--cat-color) 12%, transparent);
+      border: 1px solid color-mix(in srgb, var(--cat-color) 25%, transparent);
+    }
+    .strat-meta { display: flex; flex-wrap: wrap; gap: 6px; flex: 1; }
+    .strat-pill {
+      font-family: var(--ff-mono); font-size: 10px; font-weight: 500;
+      padding: 3px 8px; border-radius: 6px;
+      border: 1px solid;
+    }
+    .strat-cat-pill {
+      color: var(--cat-color);
+      background: color-mix(in srgb, var(--cat-color) 8%, transparent);
+      border-color: color-mix(in srgb, var(--cat-color) 25%, transparent);
+    }
+    .strat-diff-easy   { color: #4ade80; border-color: rgba(74,222,128,.3); background: rgba(74,222,128,.06); }
+    .strat-diff-medium { color: #fbbf24; border-color: rgba(251,191,36,.3); background: rgba(251,191,36,.06); }
+    .strat-diff-hard   { color: #f87171; border-color: rgba(248,113,113,.3); background: rgba(248,113,113,.06); }
+
+    .strat-title {
+      font-family: var(--ff-display);
+      font-size: 18px; font-weight: 700;
+      color: var(--text); letter-spacing: -.02em;
+      margin-bottom: 6px; line-height: 1.2;
+    }
+    .strat-tagline {
+      font-size: 13.5px; color: var(--text); line-height: 1.45;
+      margin-bottom: 10px; font-weight: 500;
+    }
+    .strat-desc {
+      font-size: 12.5px; color: var(--text-2); line-height: 1.55;
+      margin-bottom: 14px;
+      display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .strat-footer {
+      margin-top: auto;
+      display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+      padding-top: 14px; border-top: 1px solid var(--border);
+    }
+    .strat-stat {
+      font-family: var(--ff-mono); font-size: 10.5px; color: var(--text-3);
+    }
+    .strat-stat b { color: var(--text-2); font-weight: 600; margin-right: 3px; }
+    .strat-time { margin-left: auto; color: var(--text-2); }
 
     /* ─── HOW-TO BANNER ─── */
     .howto-wrap {
@@ -759,6 +890,7 @@
     }
   </style>
   <script src="agents-data.js"></script>
+  <script src="strategies-data.js"></script>
 </head>
 <body>
 
@@ -780,9 +912,13 @@
       🤖 <span class="nav-tab-label">Agentes</span>
       <span class="nav-badge" id="mode-cnt-agents">0</span>
     </button>
+    <button class="nav-tab" id="tab-strategies" onclick="setMode('strategies')">
+      🎯 <span class="nav-tab-label">Estratégias</span>
+      <span class="nav-badge" id="mode-cnt-strategies">0</span>
+    </button>
   </nav>
 
-  <div class="header-stat"><b id="stat-skills">0</b> skills · <b id="stat-agents">0</b> agentes</div>
+  <div class="header-stat"><b id="stat-skills">0</b> skills · <b id="stat-agents">0</b> agentes · <b id="stat-strategies">0</b> estratégias</div>
 
   <div class="search-wrap">
     <span class="s-ico">⌕</span>
@@ -875,11 +1011,29 @@
   </div>
 </div>
 
+<!-- ═══════════════════════════════════════ STRATEGIES ═══ -->
+<div id="strategies-panel">
+  <div class="strat-intro">
+    <div class="strat-intro-title">Playbooks multi-squad</div>
+    <div class="strat-intro-desc">Combinações pré-montadas de agentes para objetivos de negócio concretos. Cada estratégia é uma sequência de fases com os comandos e agentes certos na ordem certa.</div>
+  </div>
+  <div class="strat-filters" id="strat-filters"></div>
+  <div id="strategies-main">
+    <div class="strategies-grid" id="strategies-grid"></div>
+    <div id="strategies-empty" class="empty" style="display:none">
+      <div class="empty-icon">🎯</div>
+      <div class="empty-title">Nenhuma estratégia encontrada</div>
+      <div class="empty-sub">Tente outra categoria ou termo de busca</div>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <footer>
   <span class="hl" id="footer-skills">0</span> skills &nbsp;·&nbsp;
   <span class="hl" id="footer-agents">0</span> agentes &nbsp;·&nbsp;
+  <span class="hl" id="footer-strategies">0</span> estratégias &nbsp;·&nbsp;
   Atualizado em <span class="hl" id="updated"></span>
 </footer>
 
@@ -893,11 +1047,21 @@ function setMode(mode) {
   currentMode = mode;
   document.getElementById('skills-panel').style.display = mode === 'skills' ? 'block' : 'none';
   document.getElementById('agents-panel').classList.toggle('visible', mode === 'agents');
+  document.getElementById('strategies-panel').classList.toggle('visible', mode === 'strategies');
   document.getElementById('tab-skills').classList.toggle('active', mode === 'skills');
   document.getElementById('tab-agents').classList.toggle('active', mode === 'agents');
+  document.getElementById('tab-strategies').classList.toggle('active', mode === 'strategies');
   if (mode === 'skills') applyFilters();
-  else applyAgentFilters();
+  else if (mode === 'agents') applyAgentFilters();
+  else if (mode === 'strategies') applyStrategyFilters();
 }
+
+// Hash-routing: abrir direto em uma aba via #estrategias ou #agents
+(function initModeFromHash(){
+  const h = (location.hash || '').replace('#','');
+  if (h === 'estrategias' || h === 'strategies') setTimeout(()=>setMode('strategies'), 0);
+  else if (h === 'agents' || h === 'agentes')    setTimeout(()=>setMode('agents'), 0);
+})();
 
 /* ════════════════════════════════════════════════════
    AGENTS
@@ -1480,8 +1644,10 @@ document.getElementById('search').addEventListener('input', e => {
       document.querySelector('[data-cat="all"]').classList.add('active');
     }
     applyFilters();
-  } else {
+  } else if (currentMode === 'agents') {
     applyAgentFilters();
+  } else if (currentMode === 'strategies') {
+    applyStrategyFilters();
   }
 });
 
@@ -1491,7 +1657,8 @@ function clearSearch() {
   document.getElementById('s-hint').style.display = '';
   searchQ = ''; agentSearchQ = '';
   if (currentMode === 'skills') applyFilters();
-  else applyAgentFilters();
+  else if (currentMode === 'agents') applyAgentFilters();
+  else if (currentMode === 'strategies') applyStrategyFilters();
 }
 
 document.addEventListener('keydown', e => {
@@ -1500,10 +1667,117 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape' && document.activeElement === inp) { clearSearch(); inp.blur(); }
 });
 
+/* ════════════════════════════════════════════════════
+   STRATEGIES
+════════════════════════════════════════════════════ */
+let activeStratCat = 'all';
+
+function renderStrategies() {
+  // Filter bar
+  const filterBar = document.getElementById('strat-filters');
+  const catCounts = {};
+  for (const s of STRATEGIES_DB) catCounts[s.category] = (catCounts[s.category]||0) + 1;
+
+  const allBtn = document.createElement('button');
+  allBtn.className = 'strat-filter-btn active';
+  allBtn.dataset.cat = 'all';
+  allBtn.style.setProperty('--filter-color', '#7cd3ff');
+  allBtn.innerHTML = `◈ Todas <span class="fc">${STRATEGIES_DB.length}</span>`;
+  allBtn.onclick = () => filterStratCat('all', allBtn);
+  filterBar.appendChild(allBtn);
+
+  CATEGORIES_ORDER.forEach(key => {
+    const meta = CATEGORIES_META[key];
+    const count = catCounts[key] || 0;
+    if (!count) return;
+    const btn = document.createElement('button');
+    btn.className = 'strat-filter-btn';
+    btn.dataset.cat = key;
+    btn.style.setProperty('--filter-color', meta.color);
+    btn.innerHTML = `${meta.icon} ${meta.name} <span class="fc">${count}</span>`;
+    btn.onclick = () => filterStratCat(key, btn);
+    filterBar.appendChild(btn);
+  });
+
+  // Cards
+  const grid = document.getElementById('strategies-grid');
+  let delay = 0;
+  STRATEGIES_DB.forEach(s => {
+    delay += 25;
+    const cat  = CATEGORIES_META[s.category] || { name: s.category, icon: '⚙️', color: '#7cd3ff' };
+    const diffLabel = {easy:'Fácil', medium:'Médio', hard:'Difícil'}[s.difficulty] || s.difficulty;
+    const phaseCount = s.phases.length;
+    const stepCount  = s.phases.reduce((n, p) => n + p.steps.length, 0);
+    const squadsUsed = new Set();
+    s.phases.forEach(p => p.steps.forEach(st => {
+      const a = AGENTS_DB.find(x => x.id === st.agent);
+      if (a) squadsUsed.add(a.squad);
+    }));
+
+    const card = document.createElement('div');
+    card.className = 'strat-card';
+    card.dataset.cat = s.category;
+    card.dataset.search = (s.title+' '+s.tagline+' '+s.description+' '+cat.name).toLowerCase();
+    card.style.setProperty('--cat-color', cat.color);
+    card.style.animationDelay = `${delay}ms`;
+    card.onclick = () => { location.href = 'strategy.html?id=' + encodeURIComponent(s.id); };
+    card.style.cursor = 'pointer';
+
+    card.innerHTML = `
+      <div class="strat-bar"></div>
+      <div class="strat-inner">
+        <div class="strat-head">
+          <div class="strat-icon">${s.icon}</div>
+          <div class="strat-meta">
+            <span class="strat-pill strat-cat-pill">${cat.icon} ${cat.name}</span>
+            <span class="strat-pill strat-diff-${s.difficulty}">◆ ${diffLabel}</span>
+          </div>
+        </div>
+        <h3 class="strat-title">${s.title}</h3>
+        <p class="strat-tagline">${s.tagline}</p>
+        <p class="strat-desc">${s.description}</p>
+        <div class="strat-footer">
+          <span class="strat-stat"><b>${phaseCount}</b> fases</span>
+          <span class="strat-stat"><b>${stepCount}</b> passos</span>
+          <span class="strat-stat"><b>${squadsUsed.size}</b> squads</span>
+          <span class="strat-stat strat-time">⏱ ${s.timeEstimate}</span>
+        </div>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+
+  const total = STRATEGIES_DB.length;
+  document.getElementById('mode-cnt-strategies').textContent = total;
+  document.getElementById('stat-strategies').textContent     = total;
+  document.getElementById('footer-strategies').textContent   = total;
+}
+
+function filterStratCat(cat, btn) {
+  activeStratCat = cat;
+  document.querySelectorAll('.strat-filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  applyStrategyFilters();
+}
+
+function applyStrategyFilters() {
+  const q = agentSearchQ || '';
+  let visible = 0;
+  document.querySelectorAll('.strat-card').forEach(card => {
+    const matchCat = activeStratCat === 'all' || card.dataset.cat === activeStratCat;
+    const matchQ   = !q || card.dataset.search.includes(q);
+    const ok = matchCat && matchQ;
+    card.hidden = !ok;
+    if (ok) visible++;
+  });
+  document.getElementById('strategies-empty').style.display = visible === 0 ? 'block' : 'none';
+}
+
 // Init
 render();
 renderSquadsOverview();
 renderAgents();
+renderStrategies();
 document.getElementById('mode-cnt-skills').textContent = document.querySelectorAll('.s-card').length;
 </script>
 </body>
