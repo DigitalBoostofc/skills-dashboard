@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Skills Dashboard — Claude Code</title>
+  <title>Skills & Agents — Claude Code</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
@@ -328,14 +328,206 @@
     }
     footer .hl { color: #7cd3ff; }
 
+    /* ── MODE TABS ────────────────────────────────────── */
+    .mode-bar {
+      position: sticky; top: 62px; z-index: 45;
+      background: rgba(5,5,9,0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 32px;
+      display: flex; align-items: center; gap: 4px;
+    }
+    .mode-tab {
+      display: flex; align-items: center; gap: 8px;
+      padding: 0 18px; height: 48px;
+      border: none; background: transparent;
+      font-family: var(--ff-body); font-size: 13px; font-weight: 500;
+      color: var(--text-2); cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: color .15s, border-color .15s;
+    }
+    .mode-tab:hover { color: var(--text); }
+    .mode-tab.active { color: var(--text); border-bottom-color: #7cd3ff; }
+    .mode-tab .mode-count {
+      font-family: var(--ff-mono); font-size: 10px;
+      background: rgba(255,255,255,0.06); padding: 2px 7px;
+      border-radius: 10px; color: var(--text-3);
+    }
+    .mode-tab.active .mode-count { background: rgba(124,211,255,0.12); color: #7cd3ff; }
+    .mode-divider {
+      width: 1px; height: 20px; background: var(--border); margin: 0 4px;
+    }
+
+    /* ── AGENT FILTER BARS ────────────────────────────── */
+    .agent-filters {
+      position: sticky; top: 110px; z-index: 40;
+      background: rgba(5,5,9,0.92);
+      backdrop-filter: blur(14px);
+    }
+    .squad-bar, .func-bar {
+      display: flex; gap: 0; overflow-x: auto; scrollbar-width: none;
+      padding: 0 32px;
+      border-bottom: 1px solid var(--border);
+    }
+    .squad-bar::-webkit-scrollbar, .func-bar::-webkit-scrollbar { display: none; }
+
+    .filter-btn {
+      flex-shrink: 0;
+      display: flex; align-items: center; gap: 6px;
+      padding: 0 13px; height: 42px;
+      border: none; background: transparent;
+      color: var(--text-2);
+      font-family: var(--ff-body); font-size: 12px;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: color .15s, border-color .15s;
+      white-space: nowrap;
+    }
+    .filter-btn:hover { color: var(--text); }
+    .filter-btn.active {
+      color: var(--text);
+      border-bottom-color: var(--filter-color, #7cd3ff);
+    }
+    .filter-btn .fi { font-size: 13px; }
+    .filter-btn .fc {
+      font-family: var(--ff-mono); font-size: 10px;
+      background: rgba(255,255,255,0.05); padding: 1px 5px;
+      border-radius: 8px; color: var(--text-3);
+    }
+    .filter-btn.active .fc { background: rgba(255,255,255,0.1); color: var(--text-2); }
+
+    /* ── AGENTS MAIN ──────────────────────────────────── */
+    #agents-panel { display: none; position: relative; z-index: 1; }
+    #agents-main {
+      max-width: 1400px; margin: 0 auto;
+      padding: 28px 32px 80px;
+    }
+    .agents-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 10px;
+    }
+
+    /* ── AGENT CARD ───────────────────────────────────── */
+    .a-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 16px 16px 14px;
+      position: relative; overflow: hidden; cursor: pointer;
+      transition: background .2s, border-color .2s, transform .2s, box-shadow .2s;
+      opacity: 0; animation: fadeUp .35s ease forwards;
+    }
+    .a-card:hover {
+      background: var(--surface-h);
+      border-color: rgba(255,255,255,0.11);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    }
+    .a-card[hidden] { display: none !important; }
+    .a-card::before {
+      content: '';
+      position: absolute; left: 0; top: 14px; bottom: 14px;
+      width: 3px;
+      background: var(--squad-color, #7cd3ff);
+      border-radius: 0 3px 3px 0;
+      opacity: .55; transition: opacity .2s;
+    }
+    .a-card:hover::before { opacity: 1; }
+
+    .a-head {
+      display: flex; align-items: flex-start;
+      justify-content: space-between; gap: 10px;
+      margin-bottom: 6px; padding-left: 12px;
+    }
+    .a-left { display: flex; align-items: center; gap: 9px; min-width: 0; }
+    .a-icon {
+      width: 34px; height: 34px; flex-shrink: 0;
+      border-radius: 9px; display: flex; align-items: center; justify-content: center;
+      font-size: 17px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .a-name-wrap { min-width: 0; }
+    .a-name {
+      font-family: var(--ff-display);
+      font-size: 13px; font-weight: 700;
+      color: var(--text); line-height: 1.2;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .a-title {
+      font-size: 10.5px; color: var(--text-2);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      margin-top: 1px;
+    }
+    .a-copy-btn {
+      width: 26px; height: 26px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 7px; border: 1px solid var(--border);
+      background: transparent; cursor: pointer;
+      color: var(--text-3);
+      transition: background .15s, border-color .15s, color .15s, transform .1s;
+    }
+    .a-copy-btn:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.15); color: var(--text-2); }
+    .a-copy-btn:active { transform: scale(0.9); }
+    .a-copy-btn.copied { color: #4ade80; border-color: rgba(74,222,128,.35); background: rgba(74,222,128,.07); }
+    .a-copy-btn svg { width: 12px; height: 12px; }
+
+    .a-tagline {
+      font-size: 11.5px; color: var(--text-2); line-height: 1.45;
+      padding-left: 12px; margin-bottom: 10px;
+    }
+    .a-when {
+      font-size: 11px; color: var(--text-3); line-height: 1.4;
+      padding-left: 12px; margin-bottom: 10px;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .a-footer {
+      padding-left: 12px;
+      display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+    }
+    .squad-badge {
+      font-family: var(--ff-mono); font-size: 9.5px;
+      padding: 2px 7px; border-radius: 5px;
+      border: 1px solid;
+    }
+    .fn-badge {
+      font-family: var(--ff-mono); font-size: 9.5px;
+      color: var(--text-3); background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      padding: 2px 7px; border-radius: 5px;
+    }
+    .a-cmd {
+      margin-left: auto;
+      font-family: var(--ff-mono); font-size: 9.5px;
+      color: var(--squad-color, #7cd3ff);
+      background: rgba(124,211,255,0.05);
+      border: 1px solid rgba(124,211,255,0.12);
+      padding: 2px 7px; border-radius: 5px;
+      cursor: pointer; white-space: nowrap;
+      transition: background .15s;
+    }
+    .a-cmd:hover { background: rgba(124,211,255,0.1); }
+
+    /* agents empty */
+    #agents-empty {
+      display: none; text-align: center; padding: 80px 20px;
+      position: relative; z-index: 1;
+    }
+
+    /* skills section: shift sticky when mode-bar is visible */
+    .cat-bar { top: 110px; }
+
     @media (max-width: 680px) {
       header { padding: 0 16px; gap: 10px; }
       .logo-sub, .header-stat { display: none; }
       .search-wrap input { width: 180px; }
       main { padding: 24px 16px 40px; }
       .cat-bar { padding: 0 16px; }
+      .mode-bar, .squad-bar, .func-bar { padding: 0 16px; }
+      #agents-main { padding: 20px 16px 40px; }
     }
   </style>
+  <script src="agents-data.js"></script>
 </head>
 <body>
 
@@ -347,35 +539,226 @@
       <div class="logo-sub">claude code</div>
     </div>
   </div>
-  <div class="header-stat"><b id="stat-skills">0</b> skills · <b id="stat-cats">0</b> categorias</div>
+  <div class="header-stat"><b id="stat-skills">0</b> skills · <b id="stat-agents">0</b> agentes</div>
   <div class="search-wrap">
     <span class="s-ico">⌕</span>
-    <input type="text" id="search" placeholder="Buscar skill ou /comando..." autocomplete="off" />
+    <input type="text" id="search" placeholder="Buscar skill, agente ou /comando..." autocomplete="off" />
     <span class="s-hint">pressione /</span>
     <span class="s-clear" id="s-clear" onclick="clearSearch()">✕</span>
   </div>
 </header>
 
-<div class="cat-bar" id="cat-bar">
-  <button class="cat-btn active" data-cat="all" style="--cat-color:#7cd3ff" onclick="filterCat('all',this)">
-    <span class="cat-icon">✦</span>
-    <span class="cat-name">Todos</span>
-    <span class="cat-count" id="cnt-all">0</span>
+<!-- MODE TABS -->
+<div class="mode-bar">
+  <button class="mode-tab active" id="tab-skills" onclick="setMode('skills')">
+    ⌘ Skills
+    <span class="mode-count" id="mode-cnt-skills">0</span>
+  </button>
+  <div class="mode-divider"></div>
+  <button class="mode-tab" id="tab-agents" onclick="setMode('agents')">
+    🤖 Agentes
+    <span class="mode-count" id="mode-cnt-agents">0</span>
   </button>
 </div>
 
-<main id="main"></main>
-<div class="empty" id="empty">
-  <div class="empty-icon">⌖</div>
-  <div class="empty-title">Nada encontrado</div>
-  <div class="empty-sub">Tente outro termo ou instale uma nova skill</div>
+<!-- SKILLS SECTION -->
+<div id="skills-panel">
+  <div class="cat-bar" id="cat-bar">
+    <button class="cat-btn active" data-cat="all" style="--cat-color:#7cd3ff" onclick="filterCat('all',this)">
+      <span class="cat-icon">✦</span>
+      <span class="cat-name">Todos</span>
+      <span class="cat-count" id="cnt-all">0</span>
+    </button>
+  </div>
+  <main id="main"></main>
+  <div class="empty" id="empty">
+    <div class="empty-icon">⌖</div>
+    <div class="empty-title">Nada encontrado</div>
+    <div class="empty-sub">Tente outro termo ou instale uma nova skill</div>
+  </div>
+</div>
+
+<!-- AGENTS SECTION -->
+<div id="agents-panel">
+  <div class="agent-filters">
+    <div class="squad-bar" id="squad-bar">
+      <button class="filter-btn active" data-squad="all" style="--filter-color:#7cd3ff" onclick="filterSquad('all',this)">
+        <span class="fi">✦</span> Todos os Squads
+        <span class="fc" id="sq-cnt-all">0</span>
+      </button>
+    </div>
+    <div class="func-bar" id="func-bar">
+      <button class="filter-btn active" data-fn="all" style="--filter-color:#7cd3ff" onclick="filterFn('all',this)">
+        <span class="fi">◈</span> Todas as Funções
+        <span class="fc" id="fn-cnt-all">0</span>
+      </button>
+    </div>
+  </div>
+  <div id="agents-main">
+    <div class="agents-grid" id="agents-grid"></div>
+    <div id="agents-empty" class="empty">
+      <div class="empty-icon">🤖</div>
+      <div class="empty-title">Nenhum agente encontrado</div>
+      <div class="empty-sub">Tente outro filtro ou termo de busca</div>
+    </div>
+  </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
-<footer>Atualizado em <span class="hl" id="updated"></span> · <span class="hl" id="footer-cnt">0</span> skills instaladas</footer>
+<footer>Atualizado em <span class="hl" id="updated"></span> · <span class="hl" id="footer-skills">0</span> skills · <span class="hl" id="footer-agents">0</span> agentes</footer>
 
 <script>
+/* ================================================================
+   MODE SWITCHER
+   ================================================================ */
+let currentMode = 'skills';
+
+function setMode(mode) {
+  currentMode = mode;
+  document.getElementById('skills-panel').style.display = mode === 'skills' ? '' : 'none';
+  document.getElementById('agents-panel').style.display = mode === 'agents' ? '' : 'none';
+  document.getElementById('tab-skills').classList.toggle('active', mode === 'skills');
+  document.getElementById('tab-agents').classList.toggle('active', mode === 'agents');
+
+  // sync search
+  const q = document.getElementById('search').value.toLowerCase().trim();
+  if (mode === 'skills') applyFilters();
+  else applyAgentFilters();
+}
+
+/* ================================================================
+   AGENTS
+   ================================================================ */
+let activeSquad = 'all';
+let activeFn    = 'all';
+let agentSearchQ = '';
+
+function renderAgents() {
+  const squadBar = document.getElementById('squad-bar');
+  const funcBar  = document.getElementById('func-bar');
+  const grid     = document.getElementById('agents-grid');
+
+  // Build squad buttons
+  Object.entries(SQUADS_META).forEach(([key, meta]) => {
+    const count = AGENTS_DB.filter(a => a.squad === key).length;
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn';
+    btn.dataset.squad = key;
+    btn.style.setProperty('--filter-color', meta.color);
+    btn.onclick = function() { filterSquad(key, this); };
+    btn.innerHTML = `<span class="fi">${meta.icon}</span> ${meta.name} <span class="fc" id="sq-cnt-${key}">${count}</span>`;
+    squadBar.appendChild(btn);
+  });
+
+  // Build function buttons
+  FUNCTIONS_ORDER.forEach(key => {
+    const meta  = FUNCTIONS_META[key];
+    const count = AGENTS_DB.filter(a => a.fn === key).length;
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn';
+    btn.dataset.fn = key;
+    btn.style.setProperty('--filter-color', meta.color);
+    btn.onclick = function() { filterFn(key, this); };
+    btn.innerHTML = `<span class="fi">${meta.icon}</span> ${meta.name} <span class="fc" id="fn-cnt-${key}">${count}</span>`;
+    funcBar.appendChild(btn);
+  });
+
+  // Build agent cards
+  let delay = 0;
+  AGENTS_DB.forEach(agent => {
+    delay += 18;
+    const squad  = SQUADS_META[agent.squad];
+    const fnMeta = FUNCTIONS_META[agent.fn];
+    const card   = document.createElement('div');
+    card.className = 'a-card';
+    card.style.setProperty('--squad-color', squad ? squad.color : '#7cd3ff');
+    card.style.animationDelay = `${delay}ms`;
+    card.dataset.squad  = agent.squad;
+    card.dataset.fn     = agent.fn;
+    card.dataset.search = (agent.name + ' ' + agent.title + ' ' + agent.tagline + ' ' + agent.when + ' ' + (squad ? squad.name : '')).toLowerCase();
+
+    const squadColor  = squad ? squad.color : '#7cd3ff';
+    const squadName   = squad ? squad.name : agent.squad;
+    const fnName      = fnMeta ? fnMeta.icon + ' ' + fnMeta.name : agent.fn;
+    const cmdShort    = agent.command.replace('/','').split(':').pop(); // last part
+
+    card.innerHTML = `
+      <div class="a-head">
+        <div class="a-left">
+          <div class="a-icon">${agent.icon}</div>
+          <div class="a-name-wrap">
+            <div class="a-name">${agent.name}</div>
+            <div class="a-title">${agent.title}</div>
+          </div>
+        </div>
+        <button class="a-copy-btn" title="Copiar comando" onclick="copyAgentCmd('${agent.command}',this); event.stopPropagation();">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+          </svg>
+        </button>
+      </div>
+      <div class="a-tagline">${agent.tagline}</div>
+      <div class="a-when">${agent.when}</div>
+      <div class="a-footer">
+        <span class="squad-badge" style="color:${squadColor};border-color:${squadColor}33;background:${squadColor}0d">${squadName}</span>
+        <span class="fn-badge">${fnName}</span>
+        <span class="a-cmd" onclick="copyAgentCmd('${agent.command}',this); event.stopPropagation();">${agent.command}</span>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+
+  document.getElementById('sq-cnt-all').textContent  = AGENTS_DB.length;
+  document.getElementById('fn-cnt-all').textContent  = AGENTS_DB.length;
+  document.getElementById('mode-cnt-agents').textContent = AGENTS_DB.length;
+  document.getElementById('stat-agents').textContent = AGENTS_DB.length;
+  document.getElementById('footer-agents').textContent = AGENTS_DB.length;
+}
+
+function filterSquad(squadKey, btn) {
+  activeSquad = squadKey;
+  document.querySelectorAll('.squad-bar .filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  applyAgentFilters();
+}
+
+function filterFn(fnKey, btn) {
+  activeFn = fnKey;
+  document.querySelectorAll('.func-bar .filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  applyAgentFilters();
+}
+
+function applyAgentFilters() {
+  const q = agentSearchQ;
+  let visible = 0;
+  document.querySelectorAll('.a-card').forEach(card => {
+    const matchSquad = activeSquad === 'all' || card.dataset.squad === activeSquad;
+    const matchFn    = activeFn    === 'all' || card.dataset.fn    === activeFn;
+    const matchQ     = !q || card.dataset.search.includes(q);
+    const ok = matchSquad && matchFn && matchQ;
+    card.hidden = !ok;
+    if (ok) visible++;
+  });
+  document.getElementById('agents-empty').style.display = visible === 0 ? 'block' : 'none';
+  document.getElementById('sq-cnt-all').textContent = visible;
+}
+
+function copyAgentCmd(cmd, el) {
+  navigator.clipboard.writeText(cmd).then(() => {
+    el.classList.add('copied');
+    const orig = el.innerHTML;
+    if (el.classList.contains('a-copy-btn')) {
+      el.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px"><polyline points="20 6 9 17 4 12"/></svg>`;
+    } else {
+      el.textContent = '✓ copiado';
+    }
+    setTimeout(() => { el.classList.remove('copied'); el.innerHTML = orig; }, 1500);
+    showToast(`${cmd} copiado!`);
+  });
+}
+
 /* ================================================================
    CATEGORIAS — organização por tipo de função
    ================================================================ */
@@ -750,9 +1133,8 @@ function render() {
   });
 
   document.getElementById('stat-skills').textContent = total;
-  document.getElementById('stat-cats').textContent = CATS.length;
   document.getElementById('cnt-all').textContent = total;
-  document.getElementById('footer-cnt').textContent = total;
+  document.getElementById('footer-skills').textContent = total;
   document.getElementById('updated').textContent = new Date().toLocaleDateString('pt-BR');
 }
 
@@ -808,23 +1190,32 @@ function showToast(msg) {
   toastTmr = setTimeout(() => t.classList.remove('show'), 2000);
 }
 
+document.getElementById('search').addEventListener('input', e => {
+  const q = e.target.value.toLowerCase().trim();
+  searchQ = q;
+  agentSearchQ = q;
+  document.getElementById('s-clear').classList.toggle('on', q.length > 0);
+
+  if (currentMode === 'skills') {
+    if (q) {
+      activeCat = 'all';
+      document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector('[data-cat="all"]').classList.add('active');
+    }
+    applyFilters();
+  } else {
+    applyAgentFilters();
+  }
+});
+
 function clearSearch() {
   document.getElementById('search').value = '';
   document.getElementById('s-clear').classList.remove('on');
   searchQ = '';
-  applyFilters();
+  agentSearchQ = '';
+  if (currentMode === 'skills') applyFilters();
+  else applyAgentFilters();
 }
-
-document.getElementById('search').addEventListener('input', e => {
-  searchQ = e.target.value.toLowerCase().trim();
-  document.getElementById('s-clear').classList.toggle('on', searchQ.length > 0);
-  if (searchQ) {
-    activeCat = 'all';
-    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-    document.querySelector('[data-cat="all"]').classList.add('active');
-  }
-  applyFilters();
-});
 
 document.addEventListener('keydown', e => {
   const inp = document.getElementById('search');
@@ -832,7 +1223,13 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape' && document.activeElement === inp) { clearSearch(); inp.blur(); }
 });
 
+// Init
 render();
+renderAgents();
+document.getElementById('agents-panel').style.display = 'none';
+
+// Update skills count in mode tab
+document.getElementById('mode-cnt-skills').textContent = document.querySelectorAll('.s-card').length;
 </script>
 </body>
 </html>
