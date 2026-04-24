@@ -603,10 +603,24 @@
     }
     .sq-orchestrator {
       margin-top: 6px;
-      font-family: var(--ff-mono); font-size: 9px;
-      color: var(--text-3);
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      display: flex; align-items: center; gap: 5px;
     }
+    .sq-orch-cmd {
+      font-family: var(--ff-mono); font-size: 9px;
+      color: var(--sq-color);
+      background: color-mix(in srgb, var(--sq-color) 8%, transparent);
+      border: 1px solid color-mix(in srgb, var(--sq-color) 22%, transparent);
+      padding: 3px 8px; border-radius: 5px;
+      cursor: pointer; white-space: nowrap;
+      overflow: hidden; text-overflow: ellipsis; max-width: 100%;
+      transition: background .15s, border-color .15s;
+      flex: 1;
+    }
+    .sq-orch-cmd:hover {
+      background: color-mix(in srgb, var(--sq-color) 16%, transparent);
+      border-color: color-mix(in srgb, var(--sq-color) 40%, transparent);
+    }
+    .sq-orch-cmd.copied { color: #4ade80; border-color: rgba(74,222,128,.35); background: rgba(74,222,128,.07); }
     .sq-quick {
       display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px;
     }
@@ -882,7 +896,7 @@ function renderSquadsOverview() {
       <div class="sq-name">${meta.name}</div>
       <div class="sq-desc">${meta.desc}</div>
       <div class="sq-notable">${meta.notable}</div>
-      ${meta.orchestrator ? `<div class="sq-orchestrator">↳ ${meta.orchestrator}</div>` : ''}
+      ${meta.orchestrator ? `<div class="sq-orchestrator"><span class="sq-orch-cmd" onclick="copyAgentCmd('${meta.orchestrator}',this); event.stopPropagation();">↳ ${meta.orchestrator}</span></div>` : ''}
       ${quickCmds ? `<div class="sq-quick">${quickCmds}</div>` : ''}
       ${meta.howTo ? `<div class="sq-howto">${meta.howTo}</div>` : ''}
     `;
