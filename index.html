@@ -443,6 +443,14 @@
     .squads-sub {
       font-family: var(--ff-mono); font-size: 11px; color: var(--text-3);
     }
+    .squads-hint {
+      font-size: 11px; color: var(--text-3);
+      display: flex; align-items: center; gap: 5px;
+    }
+    .squads-hint::before {
+      content: '↑';
+      font-size: 10px; opacity: .5;
+    }
     .squads-line {
       flex: 1; height: 1px;
       background: linear-gradient(to right, var(--border), transparent);
@@ -545,7 +553,7 @@
     }
     .sq-card.sq-active .sq-howto { display: block; }
 
-    /* ─── AGENT FILTER BARS — pill style ─── */
+    /* ─── AGENT FILTER BAR — single row ─── */
     .agent-filters {
       position: sticky; top: 66px; z-index: 40;
       background: rgba(7,7,14,0.94);
@@ -553,7 +561,7 @@
     }
     .filter-row {
       display: flex; align-items: center; gap: 6px;
-      padding: 8px 28px;
+      padding: 10px 28px;
       border-bottom: 1px solid var(--border);
       overflow-x: auto; scrollbar-width: none;
     }
@@ -561,14 +569,11 @@
 
     .filter-label-tag {
       font-family: var(--ff-mono); font-size: 9.5px;
-      color: var(--text-3); letter-spacing: .08em;
+      color: var(--text-3); letter-spacing: .06em;
       text-transform: uppercase; flex-shrink: 0;
-      padding: 4px 10px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid var(--border);
-      border-radius: 20px;
+      margin-right: 2px;
     }
-    .filter-sep { width: 1px; height: 18px; background: var(--border); flex-shrink: 0; margin: 0 2px; }
+    .filter-sep { width: 1px; height: 18px; background: var(--border); flex-shrink: 0; margin: 0 6px; }
 
     .filter-btn {
       flex-shrink: 0;
@@ -840,22 +845,16 @@
   <!-- squads overview -->
   <div class="squads-wrap">
     <div class="squads-header">
-      <span class="squads-title">Squads disponíveis</span>
+      <span class="squads-title">Squads</span>
       <span class="squads-sub" id="sq-overview-sub">0 squads · 0 agentes</span>
       <div class="squads-line"></div>
+      <span class="squads-hint">clique para filtrar</span>
     </div>
     <div class="squads-grid" id="squads-grid"></div>
   </div>
 
-  <!-- filter bars -->
+  <!-- filter bar — função only; squad is selected via the cards above -->
   <div class="agent-filters">
-    <div class="filter-row" id="squad-bar">
-      <span class="filter-label-tag">Squad</span>
-      <div class="filter-sep"></div>
-      <button class="filter-btn active" data-squad="all" style="--filter-color:#7cd3ff" onclick="filterSquad('all',this)">
-        ✦ Todos <span class="fc" id="sq-cnt-all">0</span>
-      </button>
-    </div>
     <div class="filter-row" id="func-bar">
       <span class="filter-label-tag">Função</span>
       <div class="filter-sep"></div>
@@ -950,33 +949,16 @@ function selectSquadCard(squadKey, clickedCard) {
   document.querySelectorAll('.sq-card').forEach(c => c.classList.remove('sq-active'));
   if (activeSquad === squadKey) {
     activeSquad = 'all';
-    document.querySelectorAll('#squad-bar .filter-btn').forEach(b => b.classList.remove('active'));
-    document.querySelector('#squad-bar .filter-btn[data-squad="all"]').classList.add('active');
   } else {
     clickedCard.classList.add('sq-active');
     activeSquad = squadKey;
-    document.querySelectorAll('#squad-bar .filter-btn').forEach(b => b.classList.remove('active'));
-    const btn = document.querySelector(`#squad-bar .filter-btn[data-squad="${squadKey}"]`);
-    if (btn) { btn.classList.add('active'); btn.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'}); }
   }
   applyAgentFilters();
 }
 
 function renderAgents() {
-  const squadBar = document.getElementById('squad-bar');
   const funcBar  = document.getElementById('func-bar');
   const grid     = document.getElementById('agents-grid');
-
-  Object.entries(SQUADS_META).forEach(([key, meta]) => {
-    const count = AGENTS_DB.filter(a => a.squad === key).length;
-    const btn = document.createElement('button');
-    btn.className = 'filter-btn';
-    btn.dataset.squad = key;
-    btn.style.setProperty('--filter-color', meta.color);
-    btn.onclick = function() { filterSquad(key, this); };
-    btn.innerHTML = `<span class="fi">${meta.icon}</span> ${meta.name} <span class="fc" id="sq-cnt-${key}">${count}</span>`;
-    squadBar.appendChild(btn);
-  });
 
   FUNCTIONS_ORDER.forEach(key => {
     const meta  = FUNCTIONS_META[key];
@@ -1040,21 +1022,10 @@ function renderAgents() {
     grid.appendChild(card);
   });
 
-  document.getElementById('sq-cnt-all').textContent      = AGENTS_DB.length;
   document.getElementById('fn-cnt-all').textContent      = AGENTS_DB.length;
   document.getElementById('mode-cnt-agents').textContent = AGENTS_DB.length;
   document.getElementById('stat-agents').textContent     = AGENTS_DB.length;
   document.getElementById('footer-agents').textContent   = AGENTS_DB.length;
-}
-
-function filterSquad(squadKey, btn) {
-  activeSquad = squadKey;
-  document.querySelectorAll('#squad-bar .filter-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  document.querySelectorAll('.sq-card').forEach(c => {
-    c.classList.toggle('sq-active', c.dataset.squad === squadKey && squadKey !== 'all');
-  });
-  applyAgentFilters();
 }
 
 function filterFn(fnKey, btn) {
@@ -1075,7 +1046,7 @@ function applyAgentFilters() {
     if (ok) visible++;
   });
   document.getElementById('agents-empty').style.display = visible === 0 ? 'block' : 'none';
-  document.getElementById('sq-cnt-all').textContent = visible;
+  document.getElementById('fn-cnt-all').textContent = visible;
 }
 
 function copyAgentCmd(cmd, el) {
