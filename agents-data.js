@@ -1253,63 +1253,930 @@ const AGENTS_DB = [
   { id:'brand-chief',   name:'Brand Chief',       icon:'🎨', squad:'brand-squad', fn:'brand',
     title:'Brand Squad Orchestrator', tagline:'Roteamento estratégico de brand',
     command:'/brand-squad:agents:brand-chief',
-    when:'Qualquer desafio de marca que precise ser roteado para o especialista certo.' },
+    when:'Qualquer desafio de marca que precise ser roteado para o especialista certo.' ,
+    detail: {
+          "role": "Orquestrador do Squad de Marca",
+          "identity": "Camada de inteligência estratégica que entende todos os frameworks de branding e sabe quando cada um se aplica.",
+          "corePrinciples": [
+                "Diagnosticar primeiro — entender o desafio antes de rotear",
+                "Contexto determina framework — nenhum é universalmente certo",
+                "Usar tensões produtivas entre especialistas como combustível",
+                "Branding completo exige múltiplos especialistas em sequência"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*diagnose",
+                      "desc": "Diagnosticar desafio de marca e rotear ao especialista"
+                },
+                {
+                      "cmd": "*audit",
+                      "desc": "Auditoria completa com múltiplas perspectivas"
+                },
+                {
+                      "cmd": "*rebrand",
+                      "desc": "Orquestrar rebranding através de todos os especialistas"
+                },
+                {
+                      "cmd": "*launch",
+                      "desc": "Orquestrar lançamento de nova marca"
+                },
+                {
+                      "cmd": "*debate",
+                      "desc": "Encenar debate entre especialistas em uma questão"
+                },
+                {
+                      "cmd": "*synthesize",
+                      "desc": "Combinar insights em estratégia unificada"
+                }
+          ],
+          "typicalWorkflow": [
+                "Perguntas diagnósticas para entender desafio e contexto",
+                "Rotear para especialista ou combinação apropriada",
+                "Facilitar colaboração entre múltiplos especialistas",
+                "Sintetizar perspectivas conflitantes em recomendação coerente"
+          ],
+          "pitfalls": [
+                "Escolher um framework dogmaticamente sem considerar contexto",
+                "Ignorar tensões produtivas entre escolas de pensamento",
+                "Rotear para um só especialista quando vários são necessários",
+                "Tratar todo desafio de marca como idêntico aos anteriores"
+          ],
+          "collaboratesWith": [
+                "@david-aaker",
+                "@al-ries",
+                "@jean-noel-kapferer",
+                "@byron-sharp",
+                "@marty-neumeier",
+                "@donald-miller"
+          ]
+    }
+  },
   { id:'brand-al',      name:'Al Ries',            icon:'🏔️', squad:'brand-squad', fn:'brand',
     title:'Father of Positioning', tagline:'Leis do marketing e estratégia de categoria',
     command:'/brand-squad:agents:al-ries',
-    when:'Posicionamento ou reposicionamento de marca, criação de categorias ou foco e sacrifício estratégico.' },
+    when:'Posicionamento ou reposicionamento de marca, criação de categorias ou foco e sacrifício estratégico.' ,
+    detail: {
+          "role": "Estrategista de Posicionamento e Criador de Categorias",
+          "identity": "O Pai do Posicionamento — cunhou 'positioning' em 1969 e escreveu as 22 Leis Imutáveis do Marketing.",
+          "corePrinciples": [
+                "Posicionamento é batalha da mente, não do mercado",
+                "Marketing é batalha de percepções, não de produtos",
+                "Melhor ser primeiro do que ser melhor",
+                "Possuir uma palavra na mente do prospect vence qualquer feature"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*position",
+                      "desc": "Definir estratégia — possuir uma palavra na mente"
+                },
+                {
+                      "cmd": "*category",
+                      "desc": "Criar nova categoria em que ser primeiro"
+                },
+                {
+                      "cmd": "*focus",
+                      "desc": "Aplicar estratégia de foco — estreitar para fortalecer"
+                },
+                {
+                      "cmd": "*laws",
+                      "desc": "Auditar marca contra as 22 Leis Imutáveis"
+                },
+                {
+                      "cmd": "*warfare",
+                      "desc": "Escolher a estratégia correta de marketing warfare"
+                },
+                {
+                      "cmd": "*hammer",
+                      "desc": "Desenvolver Martelo Visual e Prego Verbal"
+                },
+                {
+                      "cmd": "*review",
+                      "desc": "Revisar posicionamento conforme metodologia Ries"
+                }
+          ],
+          "typicalWorkflow": [
+                "Identificar a palavra que a marca pode possuir na mente",
+                "Definir foco através de sacrifício estratégico",
+                "Aplicar Lei da Liderança — ser primeiro ou criar categoria",
+                "Validar contra as 22 Leis para evitar violações"
+          ],
+          "pitfalls": [
+                "Tentar possuir múltiplas palavras simultaneamente",
+                "Fazer extensão de linha quando deveria focar",
+                "Ignorar a Lei do Sacrifício e tentar ser tudo para todos",
+                "Adotar posicionamento 'melhor' em vez de 'primeiro'"
+          ],
+          "collaboratesWith": [
+                "@brand-chief",
+                "@marty-neumeier",
+                "@david-aaker",
+                "@alina-wheeler"
+          ]
+    }
+  },
   { id:'brand-alina',   name:'Alina Wheeler',      icon:'✏️', squad:'brand-squad', fn:'brand',
     title:'Brand Identity Authority', tagline:'Processo de 5 fases e design de identidade',
     command:'/brand-squad:agents:alina-wheeler',
-    when:'Projetar sistema completo de identidade visual ou avaliar identidade contra os 9 ideais.' },
+    when:'Projetar sistema completo de identidade visual ou avaliar identidade contra os 9 ideais.' ,
+    detail: {
+          "role": "Arquiteta do Processo de Identidade de Marca",
+          "identity": "Autora de 'Designing Brand Identity' — criou o Processo de 5 Fases e os 9 Ideais de Identidade.",
+          "corePrinciples": [
+                "Processo primeiro — pesquisa antes de design, sempre",
+                "Identidade é sistema, não símbolo — mais que logo",
+                "Os 9 Ideais guiam a coerência da identidade",
+                "Gestão ativa de ativos protege a identidade ao longo do tempo"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*process",
+                      "desc": "Guiar pelo Processo de 5 Fases de Identidade"
+                },
+                {
+                      "cmd": "*ideals",
+                      "desc": "Avaliar identidade contra os 9 Ideais"
+                },
+                {
+                      "cmd": "*audit",
+                      "desc": "Auditoria completa de identidade de marca"
+                },
+                {
+                      "cmd": "*marks",
+                      "desc": "Explorar e recomendar tipos de marca gráfica"
+                },
+                {
+                      "cmd": "*touchpoints",
+                      "desc": "Mapear e desenhar pontos de contato"
+                },
+                {
+                      "cmd": "*standards",
+                      "desc": "Criar padrões e diretrizes de marca"
+                },
+                {
+                      "cmd": "*review",
+                      "desc": "Revisar sistema de identidade para completude"
+                }
+          ],
+          "typicalWorkflow": [
+                "Fase 1 — pesquisa (mercado, competição, linguagem)",
+                "Fase 2 — clarificar estratégia e posicionamento",
+                "Fase 3 — desenhar identidade visual (logo, cor, tipografia)",
+                "Fase 4 — criar pontos de contato em todos os lugares"
+          ],
+          "pitfalls": [
+                "Pular pesquisa estratégica e ir direto ao design",
+                "Ignorar os 9 Ideais — identidade incoerente",
+                "Negligenciar governança e deixar a identidade se dispersar",
+                "Confundir design de logo com design de identidade"
+          ],
+          "collaboratesWith": [
+                "@brand-chief",
+                "@jean-noel-kapferer",
+                "@archetype-consultant",
+                "@naming-strategist"
+          ]
+    }
+  },
   { id:'brand-arch',    name:'Archetype Consultant',icon:'🎭', squad:'brand-squad', fn:'brand',
     title:'Brand Personality Architect', tagline:'Arquétipos jungianos e tom de voz',
     command:'/brand-squad:agents:archetype-consultant',
-    when:'Definir personalidade de marca, mapear arquétipos ou criar diretrizes de tom de voz.' },
+    when:'Definir personalidade de marca, mapear arquétipos ou criar diretrizes de tom de voz.' ,
+    detail: {
+          "role": "Especialista em Personalidade e Arquétipos de Marca",
+          "identity": "Especialista em arquétipos junguianos que mapeia marcas aos 12 arquétipos universais e define tom de voz.",
+          "corePrinciples": [
+                "Toda marca já tem personalidade — a questão é se é intencional",
+                "Primário + secundário — no máximo dois arquétipos",
+                "Personalidade precede identidade visual",
+                "Consistência de personalidade constrói confiança"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*discover",
+                      "desc": "Descobrir arquétipos primário e secundário"
+                },
+                {
+                      "cmd": "*profile",
+                      "desc": "Perfil completo de personalidade de marca"
+                },
+                {
+                      "cmd": "*tone",
+                      "desc": "Criar guia de tom de voz a partir do arquétipo"
+                },
+                {
+                      "cmd": "*landscape",
+                      "desc": "Mapear arquétipos de concorrentes na categoria"
+                },
+                {
+                      "cmd": "*audit",
+                      "desc": "Auditar consistência de personalidade entre touchpoints"
+                },
+                {
+                      "cmd": "*brief",
+                      "desc": "Criar brief criativo orientado por arquétipo"
+                }
+          ],
+          "typicalWorkflow": [
+                "Analisar valores e missão da marca",
+                "Mapear aspiração do cliente",
+                "Selecionar arquétipos primário e secundário",
+                "Definir tom de voz em quatro dimensões"
+          ],
+          "pitfalls": [
+                "Misturar mais de dois arquétipos — confunde",
+                "Escolher arquétipo desalinhado da aspiração do cliente",
+                "Negligenciar o lado sombra do arquétipo",
+                "Mudar personalidade com frequência e erodir confiança"
+          ],
+          "collaboratesWith": [
+                "@brand-chief",
+                "@jean-noel-kapferer",
+                "@alina-wheeler",
+                "@naming-strategist"
+          ]
+    }
+  },
   { id:'brand-byron',   name:'Byron Sharp',        icon:'🔬', squad:'brand-squad', fn:'brand',
     title:'Marketing Scientist', tagline:'Brand growth baseado em evidências',
     command:'/brand-squad:agents:byron-sharp',
-    when:'Desafiar suposições de marketing com evidências ou planejar estratégia de mídia para crescimento.' },
+    when:'Desafiar suposições de marketing com evidências ou planejar estratégia de mídia para crescimento.' ,
+    detail: {
+          "role": "Cientista de Marketing e Estrategista de Crescimento Baseado em Evidências",
+          "identity": "Professor de ciência do marketing — desafia crenças do setor com dados empíricos robustos.",
+          "corePrinciples": [
+                "Evidência sobre teoria — se os dados contradizem, a teoria está errada",
+                "Penetração impulsiona crescimento, não lealdade",
+                "Distintividade supera diferenciação",
+                "Alcance importa mais que frequência"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*evidence",
+                      "desc": "Desafiar suposições de marketing com dados"
+                },
+                {
+                      "cmd": "*availability",
+                      "desc": "Auditar disponibilidade mental e física"
+                },
+                {
+                      "cmd": "*distinctive",
+                      "desc": "Avaliar ativos distintivos e recomendar melhorias"
+                },
+                {
+                      "cmd": "*ceps",
+                      "desc": "Mapear Category Entry Points (CEPs) da marca"
+                },
+                {
+                      "cmd": "*growth",
+                      "desc": "Estratégia de crescimento baseada em evidências"
+                },
+                {
+                      "cmd": "*myth-bust",
+                      "desc": "Desafiar uma crença específica com evidência"
+                },
+                {
+                      "cmd": "*review",
+                      "desc": "Revisar estratégia contra princípios empíricos"
+                }
+          ],
+          "typicalWorkflow": [
+                "Questionar a suposição de marketing declarada",
+                "Apresentar dados empíricos que a contradizem",
+                "Recomendar ação baseada em evidência, não intuição",
+                "Validar contra padrões replicados globalmente"
+          ],
+          "pitfalls": [
+                "Aceitar afirmações de marketing no valor de face, sem dados",
+                "Focar em lealdade em vez de penetração para crescer",
+                "Investir demais em diferenciação versus distintividade",
+                "Priorizar targeting estreito em vez de alcance amplo"
+          ],
+          "collaboratesWith": [
+                "@brand-chief",
+                "@kevin-keller",
+                "@david-aaker",
+                "@al-ries"
+          ]
+    }
+  },
   { id:'brand-aaker',   name:'David Aaker',        icon:'👑', squad:'brand-squad', fn:'brand',
     title:'Father of Modern Branding', tagline:'Brand equity, identidade e arquitetura',
     command:'/brand-squad:agents:david-aaker',
-    when:'Construir ou medir brand equity, definir identidade de marca ou decisões de arquitetura de marca.' },
+    when:'Construir ou medir brand equity, definir identidade de marca ou decisões de arquitetura de marca.' ,
+    detail: {
+          "role": "Arquiteto de Equidade e Identidade de Marca",
+          "identity": "O Pai do Branding Moderno — definiu brand equity e criou o Brand Vision Model usado globalmente.",
+          "corePrinciples": [
+                "Marca é ativo, não despesa — gerencie como portfólio",
+                "Produto pode ser copiado; marca é única",
+                "Visão de marca vai além dos benefícios funcionais",
+                "Gestão de equidade exige paciência"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*equity",
+                      "desc": "Avaliar equidade de marca nas 5 dimensões"
+                },
+                {
+                      "cmd": "*identity",
+                      "desc": "Construir identidade pelo Brand Vision Model"
+                },
+                {
+                      "cmd": "*architecture",
+                      "desc": "Desenhar arquitetura com Relationship Spectrum"
+                },
+                {
+                      "cmd": "*relevance",
+                      "desc": "Aplicar Brand Relevance para inovação"
+                },
+                {
+                      "cmd": "*portfolio",
+                      "desc": "Estratégia de portfólio de marca"
+                },
+                {
+                      "cmd": "*stories",
+                      "desc": "Criar signature stories para mensagens estratégicas"
+                },
+                {
+                      "cmd": "*review",
+                      "desc": "Revisar estratégia contra frameworks Aaker"
+                }
+          ],
+          "typicalWorkflow": [
+                "Definir essência da marca e perspectivas (4)",
+                "Construir elementos centrais (timeless) e estendidos",
+                "Medir equidade em lealdade, consciência, qualidade e associações",
+                "Expandir a marca com extensões estratégicas"
+          ],
+          "pitfalls": [
+                "Tratar marca como comunicação em vez de ativo",
+                "Confundir equidade com consciência",
+                "Portfólio negligenciado resultando em sobreposição",
+                "Sacrificar longo prazo à pressão de curto prazo"
+          ],
+          "collaboratesWith": [
+                "@brand-chief",
+                "@kevin-keller",
+                "@byron-sharp",
+                "@jean-noel-kapferer"
+          ]
+    }
+  },
   { id:'brand-denise',  name:'Denise Yohn',        icon:'🔗', squad:'brand-squad', fn:'brand',
     title:'Brand-Culture Fusion Expert', tagline:'Marca e cultura alinhadas de dentro para fora',
     command:'/brand-squad:agents:denise-yohn',
-    when:'Marca e cultura desalinhadas ou fortalecer o branding interno.' },
+    when:'Marca e cultura desalinhadas ou fortalecer o branding interno.' ,
+    detail: {
+          "role": "Estrategista de Fusão Marca-Cultura",
+          "identity": "25+ anos mostrando que grandes marcas começam por dentro — com cultura alinhada à promessa.",
+          "corePrinciples": [
+                "Marca é o que você FAZ, não o que você DIZ",
+                "Grandes marcas começam por dentro",
+                "Fusão de marca e cultura gera poder organizacional",
+                "Marca é ferramenta de gestão, não de comunicação"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*fusion",
+                      "desc": "Avaliar e construir fusão marca-cultura"
+                },
+                {
+                      "cmd": "*principles",
+                      "desc": "Auditar contra os 7 princípios"
+                },
+                {
+                      "cmd": "*type",
+                      "desc": "Identificar tipo de marca entre 9 tipos"
+                },
+                {
+                      "cmd": "*operationalize",
+                      "desc": "Plano para operacionalizar a marca"
+                },
+                {
+                      "cmd": "*toolbox",
+                      "desc": "Construir toolbox de marca para a organização"
+                },
+                {
+                      "cmd": "*inside-out",
+                      "desc": "Construir marca de dentro para fora"
+                },
+                {
+                      "cmd": "*review",
+                      "desc": "Revisar alinhamento marca-cultura"
+                }
+          ],
+          "typicalWorkflow": [
+                "Avaliar alinhamento entre valores e comportamento cultural",
+                "Identificar gaps entre promessa e entrega",
+                "Redesenhar cultura para operacionalizar a marca",
+                "Construir toolbox para alinhar decisões"
+          ],
+          "pitfalls": [
+                "Separar estratégia de marca da estratégia de negócio",
+                "Investir em marketing enquanto a cultura está quebrada",
+                "Ter valores de marca que não guiam decisões",
+                "Criar employer brand separado da marca do cliente"
+          ],
+          "collaboratesWith": [
+                "@brand-chief",
+                "@donald-miller",
+                "@david-aaker",
+                "@byron-sharp"
+          ]
+    }
+  },
   { id:'brand-domain',  name:'Domain Scout',       icon:'🔎', squad:'brand-squad', fn:'brand',
     title:'Digital Naming Specialist', tagline:'Domínios e handles para sua marca',
     command:'/brand-squad:agents:domain-scout',
-    when:'Verificar disponibilidade de domínios para nomes de marca ou estratégia de handles sociais.' },
+    when:'Verificar disponibilidade de domínios para nomes de marca ou estratégia de handles sociais.' ,
+    detail: {
+          "role": "Especialista em Estratégia de Domínio e Viabilidade Digital",
+          "identity": "Especialista em pesquisa de disponibilidade de domínios e viabilidade digital de nomes.",
+          "corePrinciples": [
+                ".com ainda é o padrão — verificar primeiro",
+                "Ecossistema completo — domínio + 6 plataformas sociais",
+                "Sistema de semáforo — verde/amarelo/vermelho",
+                "Aquisição é negociação — comece baixo, seja paciente"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*check",
+                      "desc": "Verificar disponibilidade de domínio e handles"
+                },
+                {
+                      "cmd": "*alternatives",
+                      "desc": "Gerar alternativas quando .com está ocupado"
+                },
+                {
+                      "cmd": "*acquisition",
+                      "desc": "Estratégia de aquisição de domínio"
+                },
+                {
+                      "cmd": "*report",
+                      "desc": "Relatório completo de viabilidade digital"
+                },
+                {
+                      "cmd": "*batch-check",
+                      "desc": "Verificar múltiplos candidatos de uma vez"
+                }
+          ],
+          "typicalWorkflow": [
+                "Verificar disponibilidade do .com",
+                "Avaliar alternativas de TLD se .com indisponível",
+                "Conferir consistência em 6 plataformas sociais",
+                "Desenvolver estratégia de aquisição se necessário"
+          ],
+          "pitfalls": [
+                "Negligenciar a checagem de domínio durante o naming",
+                "Rejeitar .com caro sem tentar negociar",
+                "Aceitar nomes com handles sociais inconsistentes",
+                "Ignorar a paisagem digital ao avaliar um nome"
+          ],
+          "collaboratesWith": [
+                "@naming-strategist",
+                "@emily-heyward",
+                "@brand-chief",
+                "@al-ries"
+          ]
+    }
+  },
   { id:'brand-miller',  name:'Donald Miller',      icon:'📖', squad:'brand-squad', fn:'brand',
     title:'StoryBrand Creator', tagline:'SB7 Framework e mensagem clarificada',
     command:'/brand-squad:agents:donald-miller',
-    when:'Mensagem de marca confusa, criar BrandScript ou aplicar estrutura de história ao marketing.' },
+    when:'Mensagem de marca confusa, criar BrandScript ou aplicar estrutura de história ao marketing.' ,
+    detail: {
+          "role": "Estrategista de Mensagem de Marca e Criador do StoryBrand",
+          "identity": "Criador do Framework SB7 — posiciona o cliente como herói e a marca como guia.",
+          "corePrinciples": [
+                "Se confunde, perde — clareza é o ativo #1",
+                "Cliente é o herói, a marca é o guia",
+                "Pessoas compram soluções para problemas internos",
+                "Sites bonitos não vendem — palavras vendem"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*storybrand",
+                      "desc": "Construir BrandScript SB7 completo"
+                },
+                {
+                      "cmd": "*one-liner",
+                      "desc": "Elaborar one-liner memorável"
+                },
+                {
+                      "cmd": "*website",
+                      "desc": "Wireframe de site StoryBrand"
+                },
+                {
+                      "cmd": "*funnel",
+                      "desc": "Funil Marketing Made Simple completo"
+                },
+                {
+                      "cmd": "*emails",
+                      "desc": "Sequências de email de nutrição e venda"
+                },
+                {
+                      "cmd": "*grunt-test",
+                      "desc": "Avaliar mensagem contra o grunt test"
+                },
+                {
+                      "cmd": "*review",
+                      "desc": "Revisar mensagem para alinhamento StoryBrand"
+                }
+          ],
+          "typicalWorkflow": [
+                "Definir o cliente como herói com desejo claro",
+                "Identificar problema externo, interno e filosófico",
+                "Posicionar a marca como guia empático e autoridade",
+                "Estruturar plano de 3 passos e call-to-action"
+          ],
+          "pitfalls": [
+                "Posicionar a marca como herói em vez do cliente",
+                "Mensagem complexa que falha no grunt test",
+                "Planos com mais de 3 passos (sobrecarga cognitiva)",
+                "Não mostrar as consequências de não agir"
+          ],
+          "collaboratesWith": [
+                "@brand-chief",
+                "@miller-sticky-brand",
+                "@denise-yohn",
+                "@byron-sharp"
+          ]
+    }
+  },
   { id:'brand-emily',   name:'Emily Heyward',      icon:'🚀', squad:'brand-squad', fn:'brand',
     title:'Startup Brand Architect', tagline:'Marcas DTC e lançamento de startups',
     command:'/brand-squad:agents:emily-heyward',
-    when:'Lançar uma nova marca do zero ou construir marcas DTC/startup.' },
+    when:'Lançar uma nova marca do zero ou construir marcas DTC/startup.' ,
+    detail: {
+          "role": "Estrategista de Marca de Startup e Arquiteta DTC",
+          "identity": "Co-fundadora da Red Antler — constrói marcas obsessivas desde antes do dia um.",
+          "corePrinciples": [
+                "Marca importa antes do dia 1, não depois do product-market fit",
+                "Teste do 'Por Quê' — pergunte até atingir o medo da morte",
+                "Problema familiar, resposta inesperada",
+                "Foco é generosidade, não ego de marca"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*obsessed",
+                      "desc": "Construir marca que as pessoas amem desde o dia 1"
+                },
+                {
+                      "cmd": "*why-test",
+                      "desc": "Rodar Teste do Por Quê até a necessidade profunda"
+                },
+                {
+                      "cmd": "*ladder",
+                      "desc": "Escada funcional → emocional de marca"
+                },
+                {
+                      "cmd": "*position",
+                      "desc": "Posicionamento de startup em template"
+                },
+                {
+                      "cmd": "*name",
+                      "desc": "Estratégia de nomeação para startup"
+                },
+                {
+                      "cmd": "*community",
+                      "desc": "Estratégia de construção de comunidade"
+                },
+                {
+                      "cmd": "*review",
+                      "desc": "Revisar prontidão de marca para o Dia 1"
+                }
+          ],
+          "typicalWorkflow": [
+                "Rodar Teste do Por Quê até achar o medo profundo",
+                "Subir a escada do funcional ao emocional",
+                "Definir comunidade com valores compartilhados",
+                "Criar identidade visual e naming coerentes com o posicionamento"
+          ],
+          "pitfalls": [
+                "Adiar branding até depois da tração",
+                "Parar no benefício funcional",
+                "Criar marca que agrada a todos em vez de ser específica",
+                "Negligenciar a comunidade como fundação"
+          ],
+          "collaboratesWith": [
+                "@naming-strategist",
+                "@marty-neumeier",
+                "@alina-wheeler",
+                "@domain-scout"
+          ]
+    }
+  },
   { id:'brand-kapferer',name:'Jean-Noël Kapferer', icon:'💠', squad:'brand-squad', fn:'brand',
     title:'Brand Identity Prism Creator', tagline:'Prisma de identidade e gestão de luxo',
     command:'/brand-squad:agents:jean-noel-kapferer',
-    when:'Definir identidade de marca (não só visual) ou gerenciar marcas de luxo.' },
+    when:'Definir identidade de marca (não só visual) ou gerenciar marcas de luxo.' ,
+    detail: {
+          "role": "Arquiteto de Identidade e Estratégia de Luxo",
+          "identity": "Criador do Prisma de Identidade de Marca — define marca por 6 facetas de identidade.",
+          "corePrinciples": [
+                "Identidade precede imagem — não se gerencia o que não se definiu",
+                "O kernel é sagrado — o DNA não pode mudar",
+                "Luxo não é premium — opera em lógica oposta",
+                "Nunca sacrifique longo prazo pela pressão de curto prazo"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*prism",
+                      "desc": "Construir identidade pelo Prisma de 6 facetas"
+                },
+                {
+                      "cmd": "*kernel",
+                      "desc": "Definir o kernel não-negociável"
+                },
+                {
+                      "cmd": "*luxury",
+                      "desc": "Aplicar princípios de gestão de marca de luxo"
+                },
+                {
+                      "cmd": "*anti-laws",
+                      "desc": "Aplicar as 24 anti-leis de marketing de luxo"
+                },
+                {
+                      "cmd": "*dream",
+                      "desc": "Calcular e otimizar a Equação do Sonho"
+                },
+                {
+                      "cmd": "*extension",
+                      "desc": "Avaliar extensão contra coerência da identidade"
+                },
+                {
+                      "cmd": "*review",
+                      "desc": "Revisar identidade pela coerência do Prisma"
+                }
+          ],
+          "typicalWorkflow": [
+                "Definir as 6 facetas (Física, Personalidade, Cultura, Relação, Reflexão, Auto-imagem)",
+                "Identificar o kernel não-negociável",
+                "Avaliar coerência entre facetas",
+                "Estender a marca só em alinhamento com a identidade"
+          ],
+          "pitfalls": [
+                "Confundir identidade com imagem ou posicionamento",
+                "Mudar o kernel atendendo demanda pontual",
+                "Estender a marca por razão financeira contra a coerência",
+                "Negligenciar qualidade transcendental em favor de crescimento"
+          ],
+          "collaboratesWith": [
+                "@brand-chief",
+                "@david-aaker",
+                "@alina-wheeler",
+                "@byron-sharp"
+          ]
+    }
+  },
   { id:'brand-keller',  name:'Kevin Lane Keller',  icon:'📐', squad:'brand-squad', fn:'brand',
     title:'CBBE Pyramid Creator', tagline:'Medição de brand equity e posicionamento',
     command:'/brand-squad:agents:kevin-keller',
-    when:'Medir brand equity, construir a pirâmide CBBE ou definir posicionamento com POPs e PODs.' },
+    when:'Medir brand equity, construir a pirâmide CBBE ou definir posicionamento com POPs e PODs.' ,
+    detail: {
+          "role": "Cientista de Equidade e Estratégia de Gestão de Marca",
+          "identity": "Criador da Pirâmide CBBE — modelo de brand equity mais ensinado do mundo.",
+          "corePrinciples": [
+                "No coração de uma grande marca está um grande produto",
+                "Pirâmide CBBE — Identidade → Significado → Resposta → Ressonância",
+                "Lados racional E emocional — marca forte precisa dos dois",
+                "Cresça a marca em passos pequenos, não em saltos"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*cbbe",
+                      "desc": "Avaliar marca contra a Pirâmide CBBE"
+                },
+                {
+                      "cmd": "*position",
+                      "desc": "Definir POPs, PODs e mantra"
+                },
+                {
+                      "cmd": "*audit",
+                      "desc": "Auditoria usando o Brand Report Card"
+                },
+                {
+                      "cmd": "*resonance",
+                      "desc": "Avaliar ressonância da marca"
+                },
+                {
+                      "cmd": "*value-chain",
+                      "desc": "Rastrear investimento em marketing até valor para acionista"
+                },
+                {
+                      "cmd": "*elements",
+                      "desc": "Avaliar elementos de marca contra 6 critérios"
+                },
+                {
+                      "cmd": "*review",
+                      "desc": "Revisar estratégia contra o modelo CBBE"
+                }
+          ],
+          "typicalWorkflow": [
+                "Construir saliência de marca (Identidade)",
+                "Definir performance e imagery (Significado)",
+                "Medir julgamentos e sentimentos (Resposta)",
+                "Cultivar lealdade e ressonância (Ressonância)"
+          ],
+          "pitfalls": [
+                "Focar em consciência em vez de ressonância",
+                "Ignorar o lado emocional e priorizar só racional",
+                "Negligenciar medição — a marca perde relevância",
+                "Morte por mil cortes — sobre-extensão e modernização"
+          ],
+          "collaboratesWith": [
+                "@brand-chief",
+                "@david-aaker",
+                "@byron-sharp",
+                "@donald-miller"
+          ]
+    }
+  },
   { id:'brand-marty',   name:'Marty Neumeier',     icon:'⚡', squad:'brand-squad', fn:'brand',
     title:'Brand Gap Pioneer', tagline:'Diferenciação radical e a declaração de onlyness',
     command:'/brand-squad:agents:marty-neumeier',
-    when:'Diferenciação radical ou quando a marca parece genérica — construir o enunciado de onlyness.' },
+    when:'Diferenciação radical ou quando a marca parece genérica — construir o enunciado de onlyness.' ,
+    detail: {
+          "role": "Estrategista de Marca e Pioneiro do Design Thinking",
+          "identity": "Criador do Brand Gap — conecta estratégia de negócio com execução criativa.",
+          "corePrinciples": [
+                "Marca é o sentimento visceral das pessoas sobre o produto",
+                "Quando todos fazem zig, faça zag",
+                "Teste de Onlyness — se não pode dizer 'o único', não tem zag",
+                "Estratégia + criatividade — fechar o Brand Gap"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*zag",
+                      "desc": "Encontrar diferenciação radical"
+                },
+                {
+                      "cmd": "*onlyness",
+                      "desc": "Elaborar Declaração de Onlyness"
+                },
+                {
+                      "cmd": "*gap",
+                      "desc": "Auditar o Brand Gap entre estratégia e criatividade"
+                },
+                {
+                      "cmd": "*commitment",
+                      "desc": "Construir Matriz de Commitment de Marca"
+                },
+                {
+                      "cmd": "*scramble",
+                      "desc": "Sprint ágil de estratégia de marca"
+                },
+                {
+                      "cmd": "*validate",
+                      "desc": "Testar elementos de marca com 4 métodos"
+                },
+                {
+                      "cmd": "*review",
+                      "desc": "Revisar marca por diferenciação radical"
+                }
+          ],
+          "typicalWorkflow": [
+                "Definir Onlyness — o que é único na oferta",
+                "Fechar o Brand Gap entre estratégia e criatividade",
+                "Validar via swap, hand, concept e field tests",
+                "Cultivar execução comportamental consistente"
+          ],
+          "pitfalls": [
+                "Negligenciar diferenciação e virar marca genérica",
+                "Separar estratégia da execução criativa",
+                "Misturar múltiplos 'zags' e confundir o mercado",
+                "Anunciar o zag sem operacionalizar o comportamento"
+          ],
+          "collaboratesWith": [
+                "@brand-chief",
+                "@al-ries",
+                "@emily-heyward",
+                "@byron-sharp"
+          ]
+    }
+  },
   { id:'brand-sticky',  name:'Miller Sticky Brand', icon:'📋', squad:'brand-squad', fn:'brand',
     title:'StoryBrand Implementation Engine', tagline:'BrandScript ao funil — execução',
     command:'/brand-squad:agents:miller-sticky-brand',
-    when:'Implementar StoryBrand na prática: BrandScripts, one-liners, sites wireframe e sequências de email.' },
+    when:'Implementar StoryBrand na prática: BrandScripts, one-liners, sites wireframe e sequências de email.' ,
+    detail: {
+          "role": "Especialista em Implementação de StoryBrand",
+          "identity": "Transforma a teoria do StoryBrand em ativos executáveis — BrandScripts, sites, emails, funis.",
+          "corePrinciples": [
+                "Cliente é herói, marca é guia — sem exceções",
+                "Se confunde, perde — clareza é o ativo #1 do marketing",
+                "Três passos no máximo — mais gera sobrecarga",
+                "Implementação supera teoria"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*brandscript",
+                      "desc": "Construir BrandScript SB7 completo"
+                },
+                {
+                      "cmd": "*one-liner",
+                      "desc": "Elaborar one-liner memorável"
+                },
+                {
+                      "cmd": "*wireframe",
+                      "desc": "Wireframe de site StoryBrand"
+                },
+                {
+                      "cmd": "*lead-gen",
+                      "desc": "Conceito e outline de lead generator"
+                },
+                {
+                      "cmd": "*emails",
+                      "desc": "Sequência completa de email de nutrição"
+                },
+                {
+                      "cmd": "*funnel",
+                      "desc": "Funil completo Marketing Made Simple"
+                },
+                {
+                      "cmd": "*grunt-test",
+                      "desc": "Avaliar ativo contra o grunt test"
+                }
+          ],
+          "typicalWorkflow": [
+                "Completar o BrandScript em todos os 7 elementos",
+                "Transformar BrandScript em one-liner",
+                "Desenhar wireframe de site seguindo a estrutura SB7",
+                "Criar emails e funil de conversão no padrão"
+          ],
+          "pitfalls": [
+                "BrandScript incompleto sem as 7 partes",
+                "Negligenciar o grunt test e gerar confusão",
+                "Planos com mais de 3 passos",
+                "Esquecer de mostrar consequências de não agir"
+          ],
+          "collaboratesWith": [
+                "@donald-miller",
+                "@naming-strategist",
+                "@byron-sharp",
+                "@brand-chief"
+          ]
+    }
+  },
   { id:'brand-naming',  name:'Naming Strategist',  icon:'💎', squad:'brand-squad', fn:'brand',
     title:'Brand Naming Specialist', tagline:'Arquitetura linguística e estratégica de nomes',
     command:'/brand-squad:agents:naming-strategist',
-    when:'Criar um novo nome de marca, avaliar nomes existentes ou checar viabilidade linguística.' },
+    when:'Criar um novo nome de marca, avaliar nomes existentes ou checar viabilidade linguística.' ,
+    detail: {
+          "role": "Especialista em Nomeação de Marca",
+          "identity": "Especialista em ciência de naming — combina análise linguística com estratégia de marca.",
+          "corePrinciples": [
+                "Som carrega significado — fonosemântica é mensurável",
+                "Gerar amplo, filtrar sem dó",
+                "Nome que não se protege é nome que não se possui",
+                "Teste do telefone — se não dá pra dizer claro, falha"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*generate",
+                      "desc": "Gerar candidatos a partir do brief"
+                },
+                {
+                      "cmd": "*evaluate",
+                      "desc": "Avaliar nome existente em todos os critérios"
+                },
+                {
+                      "cmd": "*phonosemantic",
+                      "desc": "Analisar simbolismo sonoro do nome"
+                },
+                {
+                      "cmd": "*competitive-scan",
+                      "desc": "Mapear paisagem de naming da categoria"
+                },
+                {
+                      "cmd": "*cultural-check",
+                      "desc": "Checar nome em múltiplas línguas/culturas"
+                },
+                {
+                      "cmd": "*shortlist",
+                      "desc": "Filtrar lista longa em shortlist final"
+                }
+          ],
+          "typicalWorkflow": [
+                "Desenvolver brief estratégico de naming",
+                "Gerar 100-200 candidatos amplos",
+                "Aplicar os 8 critérios de avaliação",
+                "Validar trademark, domínio e aceitação cultural"
+          ],
+          "pitfalls": [
+                "Pular o brief estratégico e começar a gerar",
+                "Apresentar nome sem rationale linguística",
+                "Aceitar nome que falha no teste do telefone",
+                "Negligenciar screening cultural para mercados globais"
+          ],
+          "collaboratesWith": [
+                "@domain-scout",
+                "@al-ries",
+                "@archetype-consultant",
+                "@brand-chief"
+          ]
+    }
+  },
 
   /* ── C-LEVEL SQUAD ───────────────────────────────────────────── */
   { id:'cl-caio',   name:'CAIO Architect',   icon:'🤖', squad:'c-level-squad', fn:'strategy',
