@@ -3,19 +3,84 @@
    ================================================================ */
 
 const SQUADS_META = {
-  'aiox':              { name: 'AIOX',           color: '#7cd3ff', icon: '🤖', desc: 'Framework de desenvolvimento ágil' },
-  'advisory-board':    { name: 'Advisory Board', color: '#a78bfa', icon: '🏛️', desc: 'Conselheiros estratégicos de elite' },
-  'brand-squad':       { name: 'Brand Squad',    color: '#f472b6', icon: '🎨', desc: 'Branding e posicionamento' },
-  'c-level-squad':     { name: 'C-Level',        color: '#fbbf24', icon: '👔', desc: 'Liderança executiva' },
-  'claude-code-mastery': { name: 'CC Mastery',   color: '#22d3ee', icon: '⚡', desc: 'Domínio do Claude Code' },
-  'copy-master':       { name: 'Copy Master',    color: '#fb923c', icon: '✍️', desc: 'Os maiores copywriters da história' },
-  'cybersecurity':     { name: 'Cybersecurity',  color: '#f87171', icon: '🛡️', desc: 'Segurança ofensiva e defensiva' },
-  'data-squad':        { name: 'Data Squad',     color: '#60a5fa', icon: '📊', desc: 'Analytics, growth e comunidade' },
-  'design-squad':      { name: 'Design Squad',   color: '#c084fc', icon: '🖌️', desc: 'UX/UI e design systems' },
-  'hormozi-squad':     { name: 'Hormozi',        color: '#f59e0b', icon: '💰', desc: 'Negócios e escala — Alex Hormozi' },
-  'movement':          { name: 'Movement',       color: '#34d399', icon: '✊', desc: 'Construção de movimentos' },
-  'storytelling':      { name: 'Storytelling',   color: '#818cf8', icon: '📖', desc: 'Narrativa e storytelling' },
-  'traffic-masters':   { name: 'Traffic',        color: '#f97316', icon: '📣', desc: 'Tráfego pago e mídia' },
+  'aiox': {
+    name: 'AIOX', color: '#7cd3ff', icon: '🤖',
+    desc: 'Framework de desenvolvimento ágil',
+    notable: 'Dev, QA, Architect, DevOps, PM, PO, SM...',
+    xquad: false,
+  },
+  'advisory-board': {
+    name: 'Advisory Board', color: '#a78bfa', icon: '🏛️',
+    desc: 'Conselheiros estratégicos',
+    notable: 'Ray Dalio, Charlie Munger, Naval Ravikant...',
+    xquad: true,
+  },
+  'brand-squad': {
+    name: 'Brand Squad', color: '#f472b6', icon: '🎨',
+    desc: 'Branding e posicionamento',
+    notable: 'David Aaker, Marty Neumeier, Al Ries...',
+    xquad: true,
+  },
+  'c-level-squad': {
+    name: 'C-Level Squad', color: '#fbbf24', icon: '👔',
+    desc: 'Liderança executiva',
+    notable: 'CEO, CTO, CMO, COO, CIO, CAIO',
+    xquad: true,
+  },
+  'claude-code-mastery': {
+    name: 'Claude Code Mastery', color: '#22d3ee', icon: '⚡',
+    desc: 'Domínio do Claude Code e AIOS',
+    notable: 'Config, Hooks, MCP, Swarm, Skills...',
+    xquad: true,
+  },
+  'copy-master': {
+    name: 'Copy Master', color: '#fb923c', icon: '✍️',
+    desc: 'Copywriting — os maiores da história',
+    notable: 'Gary Halbert, Eugene Schwartz, David Ogilvy...',
+    xquad: true,
+  },
+  'cybersecurity': {
+    name: 'Cybersecurity', color: '#f87171', icon: '🛡️',
+    desc: 'Segurança ofensiva e defensiva',
+    notable: 'Recon, Fuzzer, OSINT, Red Team, AppSec...',
+    xquad: true,
+  },
+  'data-squad': {
+    name: 'Data Squad', color: '#60a5fa', icon: '📊',
+    desc: 'Analytics, growth e comunidade',
+    notable: 'Sean Ellis, Avinash Kaushik, Peter Fader...',
+    xquad: true,
+  },
+  'design-squad': {
+    name: 'Design Squad', color: '#c084fc', icon: '🖌️',
+    desc: 'UX/UI e design systems',
+    notable: 'Brad Frost, Dan Mall, Dave Malouf...',
+    xquad: true,
+  },
+  'hormozi-squad': {
+    name: 'Hormozi Squad', color: '#f59e0b', icon: '💰',
+    desc: 'Negócios e escala',
+    notable: 'Offers, Leads, Pricing, Scale, Closer...',
+    xquad: true,
+  },
+  'movement': {
+    name: 'Movement', color: '#34d399', icon: '✊',
+    desc: 'Construção de movimentos e comunidades',
+    notable: 'Architect, Manifesto, Identidade, Impacto...',
+    xquad: true,
+  },
+  'storytelling': {
+    name: 'Storytelling', color: '#818cf8', icon: '📖',
+    desc: 'Narrativa e storytelling',
+    notable: 'Joseph Campbell, Oren Klaff, Nancy Duarte...',
+    xquad: true,
+  },
+  'traffic-masters': {
+    name: 'Traffic Masters', color: '#f97316', icon: '📣',
+    desc: 'Tráfego pago e mídia',
+    notable: 'Pedro Sobral, Kasim Aslam, Molly Pittman...',
+    xquad: true,
+  },
 };
 
 const FUNCTIONS_META = {
