@@ -538,7 +538,7 @@
     }
     .squads-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
       gap: 8px;
       margin-bottom: 24px;
     }
@@ -601,10 +601,94 @@
       font-family: var(--ff-mono); font-size: 8px;
       color: var(--text-3); letter-spacing: .04em;
     }
+    .sq-orchestrator {
+      margin-top: 6px;
+      font-family: var(--ff-mono); font-size: 9px;
+      color: var(--text-3);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .sq-quick {
+      display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px;
+    }
+    .sq-quick-cmd {
+      font-family: var(--ff-mono); font-size: 9px;
+      color: var(--sq-color);
+      background: color-mix(in srgb, var(--sq-color) 8%, transparent);
+      border: 1px solid color-mix(in srgb, var(--sq-color) 22%, transparent);
+      padding: 2px 6px; border-radius: 5px;
+      white-space: nowrap;
+    }
+
+    /* ── HOW TO USE BANNER ─────────────────────────────── */
+    .how-to-banner {
+      max-width: 1400px; margin: 0 auto;
+      padding: 20px 32px 0;
+    }
+    .how-to-inner {
+      background: linear-gradient(135deg, rgba(124,211,255,0.04) 0%, rgba(167,139,250,0.04) 100%);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      padding: 20px 24px;
+      margin-bottom: 0;
+    }
+    .how-to-title {
+      font-family: var(--ff-mono); font-size: 10px;
+      letter-spacing: .1em; color: var(--text-3);
+      text-transform: uppercase; margin-bottom: 14px;
+    }
+    .how-to-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .how-to-step {
+      display: flex; gap: 12px; align-items: flex-start;
+    }
+    .step-num {
+      width: 24px; height: 24px; flex-shrink: 0;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--ff-mono); font-size: 11px; font-weight: 600;
+      color: #7cd3ff;
+      background: rgba(124,211,255,0.1);
+      border: 1px solid rgba(124,211,255,0.2);
+    }
+    .step-body {}
+    .step-label {
+      font-size: 12px; font-weight: 500; color: var(--text);
+      margin-bottom: 3px;
+    }
+    .step-desc {
+      font-size: 11px; color: var(--text-2); line-height: 1.5;
+    }
+    .step-code {
+      display: inline-block;
+      font-family: var(--ff-mono); font-size: 10px;
+      color: #7cd3ff;
+      background: rgba(124,211,255,0.08);
+      border: 1px solid rgba(124,211,255,0.18);
+      padding: 1px 6px; border-radius: 4px;
+      margin-top: 4px;
+    }
+
+    /* ── SQUAD CARD HOW TO ─────────────────────────────── */
+    .sq-howto {
+      display: none;
+      margin-top: 8px;
+      font-size: 10px; color: var(--text-2); line-height: 1.5;
+      padding-top: 8px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .sq-card.sq-active .sq-howto,
+    .sq-card:hover .sq-howto {
+      display: block;
+    }
 
     @media (max-width: 680px) {
       .squads-overview { padding: 20px 16px 0; }
       .squads-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+      .how-to-banner { padding: 16px 16px 0; }
+      .how-to-steps { grid-template-columns: 1fr; gap: 12px; }
     }
 
     /* skills section: shift sticky when mode-bar is visible */
@@ -673,6 +757,40 @@
 
 <!-- AGENTS SECTION -->
 <div id="agents-panel">
+
+  <!-- HOW TO USE -->
+  <div class="how-to-banner">
+    <div class="how-to-inner">
+      <div class="how-to-title">Como usar os agentes</div>
+      <div class="how-to-steps">
+        <div class="how-to-step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <div class="step-label">Ative no Claude Code</div>
+            <div class="step-desc">Copie o comando do agente e execute como slash command no terminal do Claude Code.</div>
+            <span class="step-code">/squad:agents:nome</span>
+          </div>
+        </div>
+        <div class="how-to-step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <div class="step-label">Diagnostique com *diagnose</div>
+            <div class="step-desc">Cada squad tem um orquestrador que analisa seu contexto e recomenda o próximo passo.</div>
+            <span class="step-code">*diagnose</span>
+          </div>
+        </div>
+        <div class="how-to-step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <div class="step-label">Execute um workflow</div>
+            <div class="step-desc">Use os quick commands do squad para iniciar fluxos especializados completos.</div>
+            <span class="step-code">*workflow-name</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- SQUADS OVERVIEW -->
   <div class="squads-overview" id="squads-overview">
     <div class="squads-overview-header">
@@ -752,6 +870,9 @@ function renderSquadsOverview() {
     card.style.animationDelay = `${i * 40}ms`;
     card.onclick = () => selectSquadCard(key, card);
 
+    const quickCmds = (meta.quickStart || []).slice(0, 3)
+      .map(c => `<span class="sq-quick-cmd">${c}</span>`).join('');
+
     card.innerHTML = `
       ${meta.xquad ? '<span class="sq-xquad-badge">xquads</span>' : '<span class="sq-xquad-badge">aios</span>'}
       <div class="sq-top">
@@ -761,6 +882,9 @@ function renderSquadsOverview() {
       <div class="sq-name">${meta.name}</div>
       <div class="sq-desc">${meta.desc}</div>
       <div class="sq-notable">${meta.notable}</div>
+      ${meta.orchestrator ? `<div class="sq-orchestrator">↳ ${meta.orchestrator}</div>` : ''}
+      ${quickCmds ? `<div class="sq-quick">${quickCmds}</div>` : ''}
+      ${meta.howTo ? `<div class="sq-howto">${meta.howTo}</div>` : ''}
     `;
     grid.appendChild(card);
   });
@@ -833,6 +957,7 @@ function renderAgents() {
     const fnName      = fnMeta ? fnMeta.icon + ' ' + fnMeta.name : agent.fn;
     const cmdShort    = agent.command.replace('/','').split(':').pop(); // last part
 
+    const safeCmd = agent.command.replace(/'/g, "\\'");
     card.innerHTML = `
       <div class="a-head">
         <div class="a-left">
@@ -842,7 +967,7 @@ function renderAgents() {
             <div class="a-title">${agent.title}</div>
           </div>
         </div>
-        <button class="a-copy-btn" title="Copiar comando" onclick="copyAgentCmd('${agent.command}',this); event.stopPropagation();">
+        <button class="a-copy-btn" title="Copiar comando" onclick="copyAgentCmd('${safeCmd}',this); event.stopPropagation();">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
           </svg>
@@ -853,7 +978,7 @@ function renderAgents() {
       <div class="a-footer">
         <span class="squad-badge" style="color:${squadColor};border-color:${squadColor}33;background:${squadColor}0d">${squadName}</span>
         <span class="fn-badge">${fnName}</span>
-        <span class="a-cmd" onclick="copyAgentCmd('${agent.command}',this); event.stopPropagation();">${agent.command}</span>
+        <span class="a-cmd" onclick="copyAgentCmd('${safeCmd}',this); event.stopPropagation();">${agent.command}</span>
       </div>
     `;
     grid.appendChild(card);
