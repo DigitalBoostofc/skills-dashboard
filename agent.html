@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agent Detail — Claude Code</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:        #050509;
+      --bg2:       #09090f;
+      --surface:   rgba(255,255,255,0.025);
+      --surface-h: rgba(255,255,255,0.045);
+      --border:    rgba(255,255,255,0.07);
+      --text:      #f0f0fa;
+      --text-2:    #8080a8;
+      --text-3:    #3c3c60;
+      --radius:    14px;
+      --squad-color: #7cd3ff;
+      --ff-display:'Syne', sans-serif;
+      --ff-mono:   'JetBrains Mono', monospace;
+      --ff-body:   'DM Sans', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--ff-body);
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 26px 26px;
+    }
+
+    header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(5,5,9,0.88);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 32px;
+      height: 62px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .back-btn {
+      display: flex; align-items: center; gap: 8px;
+      text-decoration: none; color: var(--text-2);
+      font-family: var(--ff-mono); font-size: 12px;
+      padding: 6px 12px; border-radius: 8px;
+      border: 1px solid var(--border); background: var(--surface);
+      transition: color .15s, border-color .15s, background .15s;
+      flex-shrink: 0;
+    }
+    .back-btn:hover { color: var(--text); border-color: rgba(255,255,255,0.15); background: var(--surface-h); }
+    .breadcrumb {
+      font-family: var(--ff-mono); font-size: 12px;
+      color: var(--text-3);
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .breadcrumb .sep { color: var(--text-3); margin: 0 6px; }
+    .breadcrumb .crumb { color: var(--text-2); }
+    .header-cmd-badge {
+      margin-left: auto; flex-shrink: 0;
+      font-family: var(--ff-mono); font-size: 11px; font-weight: 600;
+      color: var(--squad-color);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 5px 12px; border-radius: 7px;
+      cursor: pointer;
+      transition: background .15s, border-color .15s;
+    }
+    .header-cmd-badge:hover { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.2); }
+    .header-cmd-badge.copied { color: #4ade80; border-color: rgba(74,222,128,0.35); background: rgba(74,222,128,0.07); }
+
+    main {
+      position: relative; z-index: 1;
+      max-width: 960px; margin: 0 auto;
+      padding: 48px 32px 100px;
+    }
+
+    /* ── HERO ──────────────────────────────────── */
+    .hero { margin-bottom: 40px; }
+    .hero-top { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+    .squad-pill {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 12px; color: var(--squad-color);
+      background: color-mix(in srgb, var(--squad-color) 8%, transparent);
+      border: 1px solid color-mix(in srgb, var(--squad-color) 25%, transparent);
+      padding: 4px 10px; border-radius: 20px;
+    }
+    .fn-pill {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 12px; color: var(--text-2);
+      background: var(--surface); border: 1px solid var(--border);
+      padding: 4px 10px; border-radius: 20px;
+    }
+    .hero-title-row { display: flex; align-items: center; gap: 20px; margin-bottom: 16px; }
+    .hero-icon {
+      width: 72px; height: 72px; flex-shrink: 0;
+      border-radius: 18px; display: flex; align-items: center; justify-content: center;
+      font-size: 36px;
+      background: color-mix(in srgb, var(--squad-color) 12%, transparent);
+      border: 1px solid color-mix(in srgb, var(--squad-color) 30%, transparent);
+    }
+    .agent-name {
+      font-family: var(--ff-display);
+      font-size: clamp(28px, 5vw, 48px);
+      font-weight: 800; letter-spacing: -.03em;
+      color: var(--text);
+      line-height: 1.05;
+    }
+    .agent-title {
+      font-size: 14px; color: var(--text-2);
+      font-family: var(--ff-mono);
+      margin-top: 6px;
+    }
+
+    .agent-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+    .cmd-badge {
+      font-family: var(--ff-mono); font-size: 13px; font-weight: 600;
+      color: var(--squad-color);
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 6px 14px; border-radius: 8px;
+      cursor: pointer;
+      transition: background .15s, border-color .15s, transform .1s;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .cmd-badge:hover { background: rgba(255,255,255,0.09); border-color: rgba(255,255,255,0.22); }
+    .cmd-badge:active { transform: scale(0.97); }
+    .cmd-badge.copied { color: #4ade80; border-color: rgba(74,222,128,0.35); background: rgba(74,222,128,0.07); }
+    .cmd-badge svg { width: 13px; height: 13px; opacity: .6; }
+
+    .agent-tagline {
+      font-size: 18px; font-weight: 500;
+      color: var(--text-2); line-height: 1.45;
+      margin-bottom: 10px;
+      max-width: 680px;
+    }
+    .agent-identity {
+      font-size: 14px; color: var(--text-3);
+      line-height: 1.7; max-width: 680px;
+    }
+
+    /* ── SECTION ──────────────────────────────── */
+    .section { margin-bottom: 36px; }
+    .section-title {
+      font-family: var(--ff-display);
+      font-size: 13px; font-weight: 700;
+      letter-spacing: .06em; text-transform: uppercase;
+      color: var(--text-3); margin-bottom: 14px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-title::before {
+      content: ''; width: 18px; height: 2px;
+      background: var(--squad-color); opacity: .5;
+    }
+
+    .when-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--squad-color);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      font-size: 15px; color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* Principles / Pitfalls list */
+    .bullet-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 10px;
+    }
+    .bullet-list li {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-size: 13px; color: var(--text-2);
+      line-height: 1.5;
+      display: flex; gap: 10px; align-items: flex-start;
+      transition: background .15s, border-color .15s;
+    }
+    .bullet-list li:hover { background: var(--surface-h); border-color: rgba(255,255,255,0.12); }
+    .bullet-list li .mark { flex-shrink: 0; font-size: 14px; line-height: 1.2; margin-top: 1px; color: var(--squad-color); }
+    .pitfalls .bullet-list li .mark { color: #f87171; }
+
+    /* Commands */
+    .cmd-grid { display: grid; grid-template-columns: 1fr; gap: 8px; }
+    .cmd-row {
+      display: flex; align-items: center; gap: 14px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 12px 16px;
+      cursor: pointer;
+      transition: background .15s, border-color .15s;
+    }
+    .cmd-row:hover { background: var(--surface-h); border-color: color-mix(in srgb, var(--squad-color) 30%, transparent); }
+    .cmd-row:active { transform: scale(0.995); }
+    .cmd-row.copied { border-color: rgba(74,222,128,.4); background: rgba(74,222,128,.06); }
+    .cmd-row.copied .cmd-name { color: #4ade80; border-color: rgba(74,222,128,.45); background: rgba(74,222,128,.1); }
+    .cmd-name {
+      font-family: var(--ff-mono); font-size: 12.5px; font-weight: 600;
+      color: var(--squad-color);
+      background: color-mix(in srgb, var(--squad-color) 10%, transparent);
+      border: 1px solid color-mix(in srgb, var(--squad-color) 25%, transparent);
+      padding: 4px 10px; border-radius: 6px;
+      flex-shrink: 0; min-width: 160px;
+      transition: background .15s, color .15s, border-color .15s;
+    }
+    .cmd-desc { font-size: 13px; color: var(--text-2); line-height: 1.5; flex: 1; }
+    .cmd-copy-icon {
+      flex-shrink: 0; width: 28px; height: 28px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-3); opacity: 0;
+      transition: opacity .15s, color .15s;
+    }
+    .cmd-row:hover .cmd-copy-icon { opacity: 1; color: var(--text-2); }
+    .cmd-row.copied .cmd-copy-icon { opacity: 1; color: #4ade80; }
+    .cmd-copy-icon svg { width: 14px; height: 14px; }
+
+    /* Workflow - ordered */
+    .workflow-list { counter-reset: step; list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .workflow-list li {
+      counter-increment: step;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 12px 16px 12px 52px;
+      font-size: 13px; color: var(--text-2); line-height: 1.5;
+      position: relative;
+    }
+    .workflow-list li::before {
+      content: counter(step);
+      position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+      width: 26px; height: 26px;
+      background: color-mix(in srgb, var(--squad-color) 15%, transparent);
+      border: 1px solid color-mix(in srgb, var(--squad-color) 35%, transparent);
+      color: var(--squad-color);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-family: var(--ff-mono); font-size: 11px; font-weight: 700;
+    }
+
+    /* Collaborators */
+    .collab-row { display: flex; flex-wrap: wrap; gap: 8px; }
+    .collab-pill {
+      font-family: var(--ff-mono); font-size: 12px; font-weight: 500;
+      color: var(--text-2);
+      background: var(--surface); border: 1px solid var(--border);
+      padding: 6px 12px; border-radius: 20px;
+      transition: background .15s, color .15s, border-color .15s;
+    }
+    .collab-pill:hover { color: var(--squad-color); border-color: color-mix(in srgb, var(--squad-color) 40%, transparent); background: color-mix(in srgb, var(--squad-color) 8%, transparent); }
+
+    /* Toast */
+    .toast {
+      position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(16px);
+      background: #0e1a12; border: 1px solid rgba(74,222,128,0.3);
+      color: #4ade80; font-family: var(--ff-mono); font-size: 12px;
+      padding: 10px 18px; border-radius: 10px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      z-index: 999; opacity: 0; pointer-events: none;
+      transition: opacity .2s, transform .2s;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    .not-found { text-align: center; padding: 100px 20px; }
+    .not-found-icon { font-size: 56px; opacity: .2; margin-bottom: 20px; }
+    .not-found-title {
+      font-family: var(--ff-display); font-size: 24px; font-weight: 800;
+      color: var(--text-2); margin-bottom: 10px;
+    }
+    .not-found-sub { font-size: 14px; color: var(--text-3); margin-bottom: 24px; }
+    .not-found-link {
+      font-family: var(--ff-mono); font-size: 12px;
+      color: var(--squad-color); text-decoration: none;
+      border: 1px solid color-mix(in srgb, var(--squad-color) 25%, transparent);
+      padding: 8px 18px; border-radius: 8px;
+      transition: background .15s;
+    }
+    .not-found-link:hover { background: color-mix(in srgb, var(--squad-color) 6%, transparent); }
+
+    .enrich-note {
+      background: rgba(250,204,21,0.06);
+      border: 1px solid rgba(250,204,21,0.2);
+      color: #fbbf24;
+      font-family: var(--ff-mono); font-size: 12px;
+      padding: 10px 14px; border-radius: 10px;
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 680px) {
+      header { padding: 0 16px; }
+      .breadcrumb { display: none; }
+      main { padding: 32px 16px 60px; }
+      .hero-title-row { flex-direction: column; align-items: flex-start; gap: 14px; }
+      .hero-icon { width: 56px; height: 56px; font-size: 28px; }
+      .cmd-name { min-width: auto; width: 100%; }
+      .cmd-row { flex-direction: column; align-items: flex-start; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="index.html#agents" class="back-btn">
+    <span>←</span> Dashboard
+  </a>
+  <div class="breadcrumb">
+    <span class="sep">/</span>
+    <span class="crumb" id="hdr-squad">—</span>
+    <span class="sep">/</span>
+    <span class="crumb" id="hdr-name">—</span>
+  </div>
+  <div class="header-cmd-badge" id="hdr-cmd" onclick="copyCmd(AGENT.command)" title="Copiar comando"></div>
+</header>
+
+<main id="main">
+  <div class="not-found" id="not-found" style="display:none">
+    <div class="not-found-icon">⌖</div>
+    <div class="not-found-title">Agente não encontrado</div>
+    <div class="not-found-sub">Verifique o ID na URL ou volte ao dashboard.</div>
+    <a href="index.html#agents" class="not-found-link">← Voltar ao Dashboard</a>
+  </div>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script src="agents-data.js"></script>
+<script>
+const params = new URLSearchParams(location.search);
+const id = params.get('id');
+const AGENT = id ? AGENTS_DB.find(a => a.id === id) : null;
+
+if (!AGENT) {
+  document.getElementById('not-found').style.display = 'block';
+} else {
+  const squad  = SQUADS_META[AGENT.squad] || { name: AGENT.squad, color: '#7cd3ff', icon: '⚙️' };
+  const fnMeta = FUNCTIONS_META[AGENT.fn] || { name: AGENT.fn, icon: '⚙️' };
+  const d      = AGENT.detail || null;
+
+  document.documentElement.style.setProperty('--squad-color', squad.color);
+
+  document.title = `${AGENT.name} — ${squad.name}`;
+  document.getElementById('hdr-squad').textContent = squad.name;
+  document.getElementById('hdr-name').textContent  = AGENT.name;
+  document.getElementById('hdr-cmd').textContent   = AGENT.command;
+
+  const main = document.getElementById('main');
+
+  const sections = [];
+
+  // Enrichment warning
+  if (!d) {
+    sections.push(`<div class="enrich-note">⚠️ Este agente ainda não foi enriquecido com detalhes completos. Exibindo apenas informações básicas.</div>`);
+  }
+
+  // Hero
+  sections.push(`
+    <div class="hero">
+      <div class="hero-top">
+        <span class="squad-pill">${squad.icon} ${esc(squad.name)}</span>
+        <span class="fn-pill">${fnMeta.icon} ${esc(fnMeta.name)}</span>
+      </div>
+      <div class="hero-title-row">
+        <div class="hero-icon">${AGENT.icon}</div>
+        <div>
+          <h1 class="agent-name">${esc(AGENT.name)}</h1>
+          <div class="agent-title">${esc(AGENT.title)}</div>
+        </div>
+      </div>
+      <div class="agent-meta">
+        <div class="cmd-badge" onclick="copyCmd(AGENT.command)" title="Copiar comando">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+          </svg>
+          ${esc(AGENT.command)}
+        </div>
+      </div>
+      <p class="agent-tagline">${esc(AGENT.tagline)}</p>
+      ${d && d.identity ? `<p class="agent-identity">${esc(d.identity)}</p>` : ''}
+    </div>
+  `);
+
+  // When to use
+  sections.push(`
+    <div class="section">
+      <div class="section-title">Quando usar</div>
+      <div class="when-card">${esc(AGENT.when)}</div>
+    </div>
+  `);
+
+  // Role
+  if (d && d.role) {
+    sections.push(`
+      <div class="section">
+        <div class="section-title">Papel</div>
+        <div class="when-card">${esc(d.role)}</div>
+      </div>
+    `);
+  }
+
+  // Core principles
+  if (d && d.corePrinciples && d.corePrinciples.length) {
+    sections.push(`
+      <div class="section">
+        <div class="section-title">Princípios centrais</div>
+        <ul class="bullet-list">
+          ${d.corePrinciples.map(p => `<li><span class="mark">◆</span><span>${esc(p)}</span></li>`).join('')}
+        </ul>
+      </div>
+    `);
+  }
+
+  // Key commands
+  if (d && d.keyCommands && d.keyCommands.length) {
+    sections.push(`
+      <div class="section">
+        <div class="section-title">Comandos principais</div>
+        <div class="cmd-grid">
+          ${d.keyCommands.map(c => `
+            <div class="cmd-row" onclick="copyInlineCmd('${esc(c.cmd).replace(/'/g,"\\'")}', this)" title="Clique para copiar">
+              <span class="cmd-name">${esc(c.cmd)}</span>
+              <span class="cmd-desc">${esc(c.desc)}</span>
+              <span class="cmd-copy-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                </svg>
+              </span>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `);
+  }
+
+  // Typical workflow
+  if (d && d.typicalWorkflow && d.typicalWorkflow.length) {
+    sections.push(`
+      <div class="section">
+        <div class="section-title">Fluxo típico</div>
+        <ol class="workflow-list">
+          ${d.typicalWorkflow.map(s => `<li>${esc(s)}</li>`).join('')}
+        </ol>
+      </div>
+    `);
+  }
+
+  // Pitfalls
+  if (d && d.pitfalls && d.pitfalls.length) {
+    sections.push(`
+      <div class="section pitfalls">
+        <div class="section-title">Armadilhas comuns</div>
+        <ul class="bullet-list">
+          ${d.pitfalls.map(p => `<li><span class="mark">✗</span><span>${esc(p)}</span></li>`).join('')}
+        </ul>
+      </div>
+    `);
+  }
+
+  // Collaborators
+  if (d && d.collaboratesWith && d.collaboratesWith.length) {
+    sections.push(`
+      <div class="section">
+        <div class="section-title">Colabora com</div>
+        <div class="collab-row">
+          ${d.collaboratesWith.map(a => `<span class="collab-pill">${esc(a)}</span>`).join('')}
+        </div>
+      </div>
+    `);
+  }
+
+  main.innerHTML = sections.join('');
+}
+
+function esc(str) {
+  return String(str == null ? '' : str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+let toastTmr;
+function copyCmd(cmd) {
+  if (!cmd) return;
+  navigator.clipboard.writeText(cmd).then(() => {
+    document.querySelectorAll('.cmd-badge, .header-cmd-badge').forEach(el => el.classList.add('copied'));
+    showToast(`${cmd} copiado!`);
+    setTimeout(() => {
+      document.querySelectorAll('.cmd-badge, .header-cmd-badge').forEach(el => el.classList.remove('copied'));
+    }, 1500);
+  });
+}
+
+function copyInlineCmd(cmd, row) {
+  if (!cmd) return;
+  navigator.clipboard.writeText(cmd).then(() => {
+    row.classList.add('copied');
+    showToast(`${cmd} copiado!`);
+    setTimeout(() => row.classList.remove('copied'), 1500);
+  });
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTmr);
+  toastTmr = setTimeout(() => t.classList.remove('show'), 2000);
+}
+</script>
+</body>
+</html>

@@ -142,97 +142,1112 @@ const AGENTS_DB = [
   { id:'aiox-orion',   name:'Orion',  icon:'👑', squad:'aiox', fn:'tech',
     title:'AIOX Master Orchestrator', tagline:'Expertise total + orquestração de workflows',
     command:'/AIOX:agents:aiox-master',
-    when:'Para expertise abrangente em múltiplos domínios, criação de componentes do framework ou tarefas sem persona especializada.' },
+    when:'Para expertise abrangente em múltiplos domínios, criação de componentes do framework ou tarefas sem persona especializada.',
+    detail: {
+      role: 'Master Orchestrator, Framework Developer & AIOX Method Expert',
+      identity: 'Executor universal de todas as capacidades AIOX — cria componentes de framework, orquestra workflows e executa qualquer task diretamente.',
+      corePrinciples: [
+        'Executa qualquer recurso sem transformação de persona',
+        'Carrega recursos em runtime, nunca pré-carrega',
+        'Processa comandos (*) imediatamente',
+        'Abordagem security-first para operações meta-agent',
+        'Criação de componentes orientada por templates',
+        'Tracking de componentes criados/modificados via memory'
+      ],
+      keyCommands: [
+        {cmd:'*create', desc:'Cria novo componente AIOX (agent, task, workflow, template)'},
+        {cmd:'*modify', desc:'Modifica componente AIOX existente'},
+        {cmd:'*workflow', desc:'Inicia workflow (modo guided ou engine)'},
+        {cmd:'*run-workflow', desc:'Executa workflow com guided ou engine mode'},
+        {cmd:'*validate-component', desc:'Valida segurança e padrões do componente'},
+        {cmd:'*ids check', desc:'Pre-check do registry (REUSE/ADAPT/CREATE)'},
+        {cmd:'*execute-checklist', desc:'Executa checklist disponível'},
+        {cmd:'*plan', desc:'Planejamento de workflow (create/status/update)'}
+      ],
+      typicalWorkflow: [
+        'Framework dev → *create-agent / *create-task / *create-workflow',
+        'IDS check → *ids check {intent} verifica artefatos existentes',
+        'Execução → *task {task} roda qualquer task diretamente',
+        'Workflow → *workflow {name} para processos multi-step',
+        'Planning → *plan antes de operações complexas',
+        'Validação → *validate-component para segurança/padrões'
+      ],
+      pitfalls: [
+        'Usar para tarefas rotineiras (prefira agentes especializados)',
+        'Não habilitar KB mode ao modificar o framework',
+        'Pular validação de componentes',
+        'Não seguir a sintaxe dos templates',
+        'Modificar componentes sem o fluxo propose-modify'
+      ],
+      collaboratesWith: ['@dev','@architect','@qa','@pm','@data-engineer','@ux-design-expert']
+    }
+  },
   { id:'aiox-atlas',   name:'Atlas',  icon:'🔍', squad:'aiox', fn:'tech',
     title:'Business Analyst', tagline:'Análise de negócios e requisitos',
     command:'/AIOX:agents:analyst',
-    when:'Análise de requisitos, documentação de processos, elicitação de stakeholders e modelagem de negócios.' },
+    when:'Análise de requisitos, documentação de processos, elicitação de stakeholders e modelagem de negócios.',
+    detail: {
+      role: 'Analista Estratégico & Parceiro de Ideação',
+      identity: 'Analista estratégico especializado em brainstorming, pesquisa de mercado, análise competitiva e briefing de projetos.',
+      corePrinciples: [
+        'Inquirição guiada por curiosidade — pergunta "por quê" até a raiz',
+        'Análise objetiva e baseada em evidências verificáveis',
+        'Facilita clareza e entendimento compartilhado',
+        'Exploração criativa e pensamento divergente',
+        'Entregáveis orientados a ação — claros e acionáveis'
+      ],
+      keyCommands: [
+        {cmd:'*brainstorm', desc:'Facilita sessão estruturada de brainstorming'},
+        {cmd:'*perform-market-research', desc:'Cria análise de pesquisa de mercado'},
+        {cmd:'*create-competitor-analysis', desc:'Cria análise competitiva'},
+        {cmd:'*create-project-brief', desc:'Cria documento de project brief'},
+        {cmd:'*research-prompt', desc:'Gera prompt de deep research'},
+        {cmd:'*elicit', desc:'Executa sessão de elicitação avançada'},
+        {cmd:'*extract-patterns', desc:'Extrai e documenta padrões do codebase'},
+        {cmd:'*research-deps', desc:'Pesquisa dependências e restrições técnicas'}
+      ],
+      typicalWorkflow: [
+        'Pesquisa → *perform-market-research ou *create-competitor-analysis',
+        'Brainstorming → *brainstorm {topic} para ideação estruturada',
+        'Síntese → cria project brief ou resumo de pesquisa',
+        'Handoff → entrega insights para @pm criar o PRD'
+      ],
+      pitfalls: [
+        'Não validar as fontes de dados',
+        'Pular o framework de técnicas de brainstorming',
+        'Criar análise sem insights acionáveis',
+        'Não usar opções numeradas para seleção'
+      ],
+      collaboratesWith: ['@pm','@po','@architect','@aiox-master']
+    }
+  },
   { id:'aiox-aria',    name:'Aria',   icon:'🏛️', squad:'aiox', fn:'tech',
     title:'Architect', tagline:'Arquitetura de software e decisões técnicas',
     command:'/AIOX:agents:architect',
-    when:'Decisões de arquitetura, design de sistemas, avaliação de trade-offs técnicos e revisão de stack.' },
+    when:'Decisões de arquitetura, design de sistemas, avaliação de trade-offs técnicos e revisão de stack.',
+    detail: {
+      role: 'Arquiteto de Sistemas Holístico & Líder Técnico Full-Stack',
+      identity: 'Mestre em design holístico de aplicações que conecta frontend, backend, infra e tudo no meio.',
+      corePrinciples: [
+        'Pensamento sistêmico holístico — cada peça faz parte de algo maior',
+        'Experiência do usuário guia a arquitetura — parte da jornada',
+        'Seleção pragmática de tecnologia — boring onde der, exciting onde preciso',
+        'Complexidade progressiva — simples no início, escalável depois',
+        'Performance cross-stack — otimiza em todas as camadas'
+      ],
+      keyCommands: [
+        {cmd:'*create-full-stack-architecture', desc:'Design completo de arquitetura de sistema'},
+        {cmd:'*create-backend-architecture', desc:'Design de arquitetura backend'},
+        {cmd:'*create-front-end-architecture', desc:'Design de arquitetura frontend'},
+        {cmd:'*analyze-project-structure', desc:'Analisa projeto para nova feature'},
+        {cmd:'*validate-tech-preset', desc:'Valida estrutura do tech preset'},
+        {cmd:'*assess-complexity', desc:'Avalia complexidade de story e estima esforço'},
+        {cmd:'*document-project', desc:'Gera documentação do projeto'},
+        {cmd:'*map-codebase', desc:'Gera mapa do codebase (serviços, patterns)'}
+      ],
+      typicalWorkflow: [
+        'Análise → revisa PRD e restrições',
+        'Design → *create-full-stack-architecture ou camada específica',
+        'Coordenação → alinha com @data-engineer e @ux-design-expert',
+        'Documentação → *document-project para docs abrangentes',
+        'Handoff → entrega arquitetura para @dev implementar'
+      ],
+      pitfalls: [
+        'Desenhar sem entender NFRs (escalabilidade, segurança)',
+        'Não consultar @data-engineer sobre a camada de dados',
+        'Overengineering para os requisitos atuais',
+        'Pular os architecture checklists',
+        'Não considerar restrições brownfield'
+      ],
+      collaboratesWith: ['@data-engineer','@ux-design-expert','@pm','@dev','@devops']
+    }
+  },
   { id:'aiox-dara',    name:'Dara',   icon:'📊', squad:'aiox', fn:'tech',
     title:'Database Architect', tagline:'Banco de dados, Supabase e RLS',
     command:'/AIOX:agents:data-engineer',
-    when:'Design de schema, policies RLS, migrations, otimização de queries e modelagem de dados.' },
+    when:'Design de schema, policies RLS, migrations, otimização de queries e modelagem de dados.',
+    detail: {
+      role: 'Arquiteta de Banco de Dados & Reliability Engineer',
+      identity: 'Guardiã da integridade de dados — conecta arquitetura, operações e performance com expertise profunda em PostgreSQL e Supabase.',
+      corePrinciples: [
+        'Schema-first com migrations seguras e reversíveis',
+        'Defesa em profundidade — RLS + constraints + triggers + validações',
+        'Idempotência e reversibilidade em todas operações',
+        'Performance por entendimento — conheça o engine',
+        'Arquitetura evolutiva com estratégias de migração adequadas'
+      ],
+      keyCommands: [
+        {cmd:'*create-schema', desc:'Desenha schema de banco de dados'},
+        {cmd:'*create-rls-policies', desc:'Desenha políticas RLS'},
+        {cmd:'*setup-database', desc:'Setup interativo de projeto de DB'},
+        {cmd:'*apply-migration', desc:'Aplica migration com safety snapshot'},
+        {cmd:'*security-audit', desc:'Auditoria de segurança e qualidade do DB'},
+        {cmd:'*analyze-performance', desc:'Análise de performance de queries'},
+        {cmd:'*snapshot', desc:'Cria snapshot de schema para rollback'},
+        {cmd:'*rollback', desc:'Restaura snapshot ou executa rollback'}
+      ],
+      typicalWorkflow: [
+        'Design → *create-schema ou *model-domain',
+        'Bootstrap → *setup-database para estrutura inicial',
+        'Migrate → *apply-migration {path} com safety snapshot',
+        'Seguro → *security-audit e *policy-apply',
+        'Otimiza → *analyze-performance para queries',
+        'Testa → *smoke-test {version} antes de deploy'
+      ],
+      pitfalls: [
+        'Aplicar migrations sem dry-run',
+        'Pular cobertura de RLS policies',
+        'Não criar scripts de rollback',
+        'Esquecer de snapshot antes das migrations',
+        'Normalizar demais ou de menos'
+      ],
+      collaboratesWith: ['@architect','@dev','@devops','@aiox-master']
+    }
+  },
   { id:'aiox-dex',     name:'Dex',    icon:'💻', squad:'aiox', fn:'tech',
     title:'Full Stack Developer', tagline:'Implementação, debug e refatoração',
     command:'/AIOX:agents:dev',
-    when:'Implementação de código, debugging, refatoração e boas práticas de desenvolvimento.' },
+    when:'Implementação de código, debugging, refatoração e boas práticas de desenvolvimento.',
+    detail: {
+      role: 'Senior Software Engineer & Especialista em Implementação',
+      identity: 'Expert que implementa stories lendo requisitos e executando tasks sequencialmente com testes abrangentes.',
+      corePrinciples: [
+        'A story contém TODAS as informações necessárias',
+        'SOMENTE atualiza seções Dev Agent Record na story',
+        'SEMPRE segue o comando develop-story quando instruído',
+        'CodeRabbit pre-commit review antes de marcar story completa',
+        'Opções numeradas ao apresentar escolhas'
+      ],
+      keyCommands: [
+        {cmd:'*develop', desc:'Implementa tasks da story (yolo/interactive/preflight)'},
+        {cmd:'*run-tests', desc:'Executa lint + todos os testes'},
+        {cmd:'*create-service', desc:'Cria novo serviço a partir de template'},
+        {cmd:'*build-autonomous', desc:'Loop de build autônomo para a story'},
+        {cmd:'*apply-qa-fixes', desc:'Aplica feedback e fixes do QA'},
+        {cmd:'*execute-subtask', desc:'Executa uma subtask do implementation.yaml'},
+        {cmd:'*waves', desc:'Analisa workflow para execução paralela'},
+        {cmd:'*gotcha', desc:'Adiciona um gotcha manualmente'}
+      ],
+      typicalWorkflow: [
+        'Story atribuída pelo @sm → *develop story-X.Y.Z',
+        'Implementação → código + testes (segue tasks da story)',
+        'Validação → *run-tests (deve passar)',
+        'QA feedback → *apply-qa-fixes se houver issues',
+        'Marca como Ready for Review',
+        'Handoff para @github-devops fazer o push'
+      ],
+      pitfalls: [
+        'Começar antes da story ser aprovada',
+        'Pular testes ("adiciono depois")',
+        'Não atualizar o File List na story',
+        'Fazer push direto (usar @github-devops)',
+        'Esquecer o CodeRabbit pre-commit review'
+      ],
+      collaboratesWith: ['@sm','@qa','@architect','@data-engineer','@devops','@aiox-master']
+    }
+  },
   { id:'aiox-gage',    name:'Gage',   icon:'⚡', squad:'aiox', fn:'tech',
     title:'DevOps Specialist', tagline:'GitHub, CI/CD e push para remoto',
     command:'/AIOX:agents:devops',
-    when:'Operações de repositório, versionamento, CI/CD, quality gates e push para GitHub. Único agente autorizado a fazer push.' },
+    when:'Operações de repositório, versionamento, CI/CD, quality gates e push para GitHub. Único agente autorizado a fazer push.',
+    detail: {
+      role: 'Guardião do Repositório GitHub & Release Manager',
+      identity: 'Guardião da integridade do repositório — enforça quality gates e controla todas as operações remotas no GitHub.',
+      corePrinciples: [
+        'Integridade do repositório primeiro — nunca sobe código quebrado',
+        'Quality gates são obrigatórios — tudo deve passar antes do push',
+        'CodeRabbit pre-PR review antes de criar PRs',
+        'Semantic versioning sempre (MAJOR.MINOR.PATCH)',
+        'Gestão sistemática de releases — changelog em tudo'
+      ],
+      keyCommands: [
+        {cmd:'*detect-repo', desc:'Detecta contexto do repo (framework vs projeto)'},
+        {cmd:'*pre-push', desc:'Roda todos os quality gates antes do push'},
+        {cmd:'*push', desc:'Executa git push após gates passarem'},
+        {cmd:'*create-pr', desc:'Cria pull request da branch atual'},
+        {cmd:'*version-check', desc:'Analisa e recomenda próxima versão'},
+        {cmd:'*health-check', desc:'Diagnóstico unificado de saúde do repo'},
+        {cmd:'*triage-issues', desc:'Analisa issues abertas, classifica e prioriza'},
+        {cmd:'*cleanup', desc:'Identifica e remove branches/arquivos stale'}
+      ],
+      typicalWorkflow: [
+        'Gates → *pre-push roda todas as checagens',
+        'Version → *version-check para semantic versioning',
+        'Push → *push após gates + confirmação do usuário',
+        'PR → *create-pr com descrição gerada',
+        'Release → *release com changelog'
+      ],
+      pitfalls: [
+        'Fazer push sem rodar os quality gates',
+        'Force push em main/master',
+        'Não confirmar bump de versão com o usuário',
+        'Criar PR antes dos gates passarem',
+        'Ignorar issues CRITICAL do CodeRabbit'
+      ],
+      collaboratesWith: ['@dev','@sm','@architect','@qa','@aiox-master']
+    }
+  },
   { id:'aiox-morgan',  name:'Morgan', icon:'📋', squad:'aiox', fn:'strategy',
     title:'Product Manager', tagline:'Produto, roadmap e descoberta',
     command:'/AIOX:agents:pm',
-    when:'Definição de roadmap, descoberta de produto, alinhamento de stakeholders e estratégia de features.' },
+    when:'Definição de roadmap, descoberta de produto, alinhamento de stakeholders e estratégia de features.',
+    detail: {
+      role: 'Product Strategist Investigativo & PM Market-Savvy',
+      identity: 'Product Manager especializada em criação de documentos e pesquisa de produto.',
+      corePrinciples: [
+        'Entender profundamente o "Why" — causas raiz e motivações',
+        'Campeã do usuário — foco obsessivo em valor real',
+        'Decisões informadas por dados com julgamento estratégico',
+        'Priorização implacável e foco em MVP',
+        'Clareza e precisão na comunicação'
+      ],
+      keyCommands: [
+        {cmd:'*create-prd', desc:'Cria Product Requirements Document'},
+        {cmd:'*create-brownfield-prd', desc:'Cria PRD para projetos existentes'},
+        {cmd:'*create-epic', desc:'Cria epic (brownfield)'},
+        {cmd:'*research', desc:'Gera prompt de deep research'},
+        {cmd:'*execute-epic', desc:'Executa epic com dev paralelo em ondas'},
+        {cmd:'*gather-requirements', desc:'Elicita e documenta requisitos'},
+        {cmd:'*write-spec', desc:'Gera spec formal a partir dos requisitos'},
+        {cmd:'*shard-prd', desc:'Quebra PRD em partes menores'}
+      ],
+      typicalWorkflow: [
+        'Pesquisa → *research {topic} para análise profunda',
+        'PRD → *create-prd ou *create-brownfield-prd',
+        'Epic → *create-epic (brownfield)',
+        'Story planning → coordena com @po',
+        'Execução → *execute-epic {path} com waves paralelas',
+        'Correção → escala para @aiox-master se desviar'
+      ],
+      pitfalls: [
+        'Criar PRD sem pesquisa de mercado',
+        'Não embutir quality gates (CodeRabbit) nos epics',
+        'Pular validação com stakeholders',
+        'PRDs detalhados demais (use *shard-prd)',
+        'Não antecipar quais agentes especializados atuam'
+      ],
+      collaboratesWith: ['@analyst','@po','@sm','@architect','@aiox-master']
+    }
+  },
   { id:'aiox-pax',     name:'Pax',    icon:'🎯', squad:'aiox', fn:'strategy',
     title:'Product Owner', tagline:'Backlog, stories e critérios de aceitação',
     command:'/AIOX:agents:po',
-    when:'Gestão de backlog, refinamento de stories, critérios de aceitação e planejamento de sprint.' },
+    when:'Gestão de backlog, refinamento de stories, critérios de aceitação e planejamento de sprint.',
+    detail: {
+      role: 'Technical Product Owner & Steward de Processo',
+      identity: 'PO que valida a coesão dos artefatos e orienta mudanças significativas.',
+      corePrinciples: [
+        'Guardião de qualidade e completude dos artefatos',
+        'Clareza e acionabilidade para desenvolvimento',
+        'Aderência a processo e sistematização',
+        'Vigilância sobre dependências e sequência lógica',
+        'Orientação meticulosa a detalhes para evitar retrabalho'
+      ],
+      keyCommands: [
+        {cmd:'*backlog-review', desc:'Gera review do backlog para sprint planning'},
+        {cmd:'*backlog-add', desc:'Adiciona item ao backlog de stories'},
+        {cmd:'*validate-story-draft', desc:'Valida qualidade e completude da story'},
+        {cmd:'*close-story', desc:'Fecha story e atualiza epic/backlog'},
+        {cmd:'*sync-story', desc:'Sincroniza story para a PM tool'},
+        {cmd:'*pull-story', desc:'Puxa updates da story da PM tool'},
+        {cmd:'*execute-checklist-po', desc:'Executa o PO master checklist'},
+        {cmd:'*backlog-prioritize', desc:'Re-prioriza item do backlog'}
+      ],
+      typicalWorkflow: [
+        'Review → *backlog-review para sprint planning',
+        'Story creation → delega para @sm *draft',
+        'Validação → *validate-story-draft (início do ciclo)',
+        'Priorização → *backlog-prioritize {item} {prioridade}',
+        'Schedule → *backlog-schedule {item} {sprint}',
+        'Sync → *sync-story para PM tool',
+        'Após merge → *close-story (fim do ciclo)'
+      ],
+      pitfalls: [
+        'Criar story sem PRD validado',
+        'Não rodar o PO checklist antes de aprovar',
+        'Esquecer de sincronizar updates na PM tool',
+        'Priorizar tudo como HIGH',
+        'Pular o planejamento de quality gates'
+      ],
+      collaboratesWith: ['@pm','@sm','@dev','@qa','@aiox-master']
+    }
+  },
   { id:'aiox-quinn',   name:'Quinn',  icon:'✅', squad:'aiox', fn:'tech',
     title:'Test Architect', tagline:'Qualidade, testes e revisão de código',
     command:'/AIOX:agents:qa',
-    when:'Arquitetura de testes, revisão de qualidade, rastreabilidade de requisitos e estratégia de QA.' },
+    when:'Arquitetura de testes, revisão de qualidade, rastreabilidade de requisitos e estratégia de QA.',
+    detail: {
+      role: 'Test Architect com Autoridade Advisory em Qualidade',
+      identity: 'Arquiteta de testes que entrega avaliação completa e recomendações acionáveis sem bloquear o progresso.',
+      corePrinciples: [
+        'Profundidade conforme o risco — fundo quando preciso, conciso quando baixo',
+        'Rastreabilidade de requisitos — tudo mapeado em Given-When-Then',
+        'Testes baseados em risco — probabilidade × impacto',
+        'Atributos de qualidade — valida NFRs (segurança, performance) em cenários',
+        'Balanço pragmático — separa must-fix de nice-to-have'
+      ],
+      keyCommands: [
+        {cmd:'*review', desc:'Review completo da story + gate decision'},
+        {cmd:'*gate', desc:'Cria decisão de quality gate'},
+        {cmd:'*code-review', desc:'Review automatizado (uncommitted/committed)'},
+        {cmd:'*test-design', desc:'Cria cenários de teste abrangentes'},
+        {cmd:'*risk-profile', desc:'Gera matriz de risco'},
+        {cmd:'*nfr-assess', desc:'Valida requisitos não-funcionais'},
+        {cmd:'*create-fix-request', desc:'Gera QA_FIX_REQUEST.md para o @dev'},
+        {cmd:'*security-check', desc:'Scan de vulnerabilidades em 8 pontos'}
+      ],
+      typicalWorkflow: [
+        'Pedido de review → *review {story-id}',
+        'CodeRabbit scan automático antes do review manual',
+        'Análise manual → critérios de aceitação + cobertura',
+        'Gate → *gate (PASS/CONCERNS/FAIL/WAIVED)',
+        'Feedback → atualiza seção QA Results na story',
+        'Decisão → aprova ou volta para @dev'
+      ],
+      pitfalls: [
+        'Reviewar antes do CodeRabbit terminar',
+        'Modificar seções da story fora de QA Results',
+        'Pular checagens de requisitos não-funcionais',
+        'Não documentar concerns no gate file',
+        'Aprovar sem verificar cobertura de testes'
+      ],
+      collaboratesWith: ['@dev','@sm','@po','@architect','@aiox-master']
+    }
+  },
   { id:'aiox-river',   name:'River',  icon:'🌊', squad:'aiox', fn:'strategy',
     title:'Scrum Master', tagline:'Cerimônias ágeis e remoção de impedimentos',
     command:'/AIOX:agents:sm',
-    when:'Facilitação de cerimônias Scrum, remoção de impedimentos e coaching de times ágeis.' },
+    when:'Facilitação de cerimônias Scrum, remoção de impedimentos e coaching de times ágeis.',
+    detail: {
+      role: 'Technical Scrum Master — Especialista em Preparação de Stories',
+      identity: 'Expert em criação de stories — prepara stories detalhadas e acionáveis para AI developers.',
+      corePrinciples: [
+        'Segue rigorosamente o procedimento create-next-story',
+        'Garante que toda info venha de PRD e Arquitetura',
+        'NUNCA implementa stories ou modifica código',
+        'Predictive quality planning — popula CodeRabbit Integration em toda story'
+      ],
+      keyCommands: [
+        {cmd:'*draft', desc:'Cria a próxima user story'},
+        {cmd:'*story-checklist', desc:'Executa o story draft checklist'},
+        {cmd:'*session-info', desc:'Mostra detalhes da sessão atual'},
+        {cmd:'*guide', desc:'Exibe o guia de uso completo do agente'},
+        {cmd:'*yolo', desc:'Alterna permissões (ask/auto/explore)'}
+      ],
+      typicalWorkflow: [
+        'Criar story → *draft cria a próxima',
+        'Checagem de qualidade → *story-checklist no draft',
+        'Handoff → atribui ao @dev (Dex)',
+        'Monitora progresso → acompanha até a conclusão',
+        'Correção → escala para @aiox-master se precisar',
+        'Fechamento do sprint → coordena com @devops para push'
+      ],
+      pitfalls: [
+        'Criar stories sem aprovação do PO',
+        'Pular o story draft checklist',
+        'Não gerenciar branches locais corretamente',
+        'Tentar operações git remotas (use @devops)',
+        'Não coordenar sprint planning com @po'
+      ],
+      collaboratesWith: ['@po','@dev','@devops','@pm','@aiox-master']
+    }
+  },
   { id:'aiox-craft',   name:'Craft',  icon:'🏗️', squad:'aiox', fn:'tech',
     title:'Squad Creator', tagline:'Criar, validar e publicar squads',
     command:'/AIOX:agents:squad-creator',
-    when:'Criar, validar, publicar e gerenciar squads de agentes.' },
+    when:'Criar, validar, publicar e gerenciar squads de agentes.',
+    detail: {
+      role: 'Arquiteto & Builder de Squads',
+      identity: 'Expert que cria squads bem-estruturados em sinergia com o aiox-core.',
+      corePrinciples: [
+        'Todos squads seguem arquitetura task-first',
+        'Valida squads antes de qualquer distribuição',
+        'Usa JSON Schema para validação de manifest',
+        'Suporta 3 níveis de distribuição (Local, aiox-squads, Synkra API)',
+        'Integra com squad-loader e squad-validator existentes'
+      ],
+      keyCommands: [
+        {cmd:'*design-squad', desc:'Desenha squad a partir de docs com recomendações'},
+        {cmd:'*create-squad', desc:'Cria squad seguindo arquitetura task-first'},
+        {cmd:'*validate-squad', desc:'Valida squad contra JSON Schema e padrões AIOX'},
+        {cmd:'*analyze-squad', desc:'Analisa estrutura, cobertura e melhorias'},
+        {cmd:'*extend-squad', desc:'Adiciona novos componentes ao squad existente'},
+        {cmd:'*list-squads', desc:'Lista todos squads locais no projeto'},
+        {cmd:'*migrate-squad', desc:'Migra squad legado para formato AIOX 2.1'},
+        {cmd:'*publish-squad', desc:'Publica squad para o repositório aiox-squads'}
+      ],
+      typicalWorkflow: [
+        'Design → *design-squad --docs ./docs/prd/meu-projeto.md',
+        'Revisa recomendações de agentes e tasks',
+        'Gera blueprint em ./squads/.designs/',
+        'Cria → *create-squad meu-squad --from-design',
+        'Valida → *validate-squad meu-squad',
+        'Analisa → *analyze-squad meu-squad',
+        'Estende → *extend-squad meu-squad'
+      ],
+      pitfalls: [
+        'Esquecer de validar antes de publicar',
+        'Campos obrigatórios faltando no squad.yaml',
+        'Não seguir a arquitetura task-first',
+        'Dependências circulares entre squads'
+      ],
+      collaboratesWith: ['@dev','@qa','@devops','@aiox-master']
+    }
+  },
   { id:'aiox-uma',     name:'Uma',    icon:'🎨', squad:'aiox', fn:'tech',
     title:'UX/UI Designer', tagline:'Research, wireframes e design systems',
     command:'/AIOX:agents:ux-design-expert',
-    when:'Workflow completo de design: pesquisa, wireframes, design systems, extração de tokens e QA.' },
+    when:'Workflow completo de design: pesquisa, wireframes, design systems, extração de tokens e QA.',
+    detail: {
+      role: 'Designer UX/UI & Arquiteta de Design System',
+      identity: 'Parceira de design completa — empatia do usuário + pensamento de sistemas. Entende profundamente o usuário E constrói design systems escaláveis.',
+      corePrinciples: [
+        'Necessidades do usuário primeiro',
+        'Métricas importam — dados guiam decisões (uso, ROI, acessibilidade)',
+        'Constrói sistemas — design tokens e componentes, não páginas avulsas',
+        'Itera e melhora — começa simples, refina com feedback',
+        'Acessível por padrão — WCAG AA mínimo'
+      ],
+      keyCommands: [
+        {cmd:'*research', desc:'Conduz pesquisa de usuário e análise de necessidades'},
+        {cmd:'*wireframe', desc:'Cria wireframes e fluxos de interação'},
+        {cmd:'*audit', desc:'Escaneia codebase em busca de redundâncias de UI'},
+        {cmd:'*tokenize', desc:'Extrai design tokens dos padrões consolidados'},
+        {cmd:'*build', desc:'Constrói componente atômico production-ready'},
+        {cmd:'*document', desc:'Gera documentação da pattern library'},
+        {cmd:'*a11y-check', desc:'Auditoria de acessibilidade (WCAG AA/AAA)'},
+        {cmd:'*calculate-roi', desc:'Calcula ROI e economia de custos'}
+      ],
+      typicalWorkflow: [
+        'Pesquisa → *research para análise de necessidades',
+        'Audit (brownfield) → *audit {path} para redundâncias',
+        'Tokeniza → *tokenize para extrair design tokens',
+        'Constrói → *build {componente} atômico',
+        'Documenta → *document pattern library',
+        'Acessibilidade → *a11y-check (WCAG)'
+      ],
+      pitfalls: [
+        'Pular pesquisa (começar direto na UI)',
+        'Não seguir Atomic Design',
+        'Esquecer checagens de acessibilidade',
+        'Construir páginas avulsas em vez de sistemas'
+      ],
+      collaboratesWith: ['@architect','@dev','@pm','@qa','@aiox-master']
+    }
+  },
 
   /* ── ADVISORY BOARD ─────────────────────────────────────────── */
   { id:'ab-chair',    name:'Board Chair',     icon:'🏛️', squad:'advisory-board', fn:'strategy',
     title:'Advisory Board Orchestrator', tagline:'Facilitação estratégica e síntese de sabedoria',
     command:'/advisory-board:agents:board-chair',
-    when:'Quando precisar de conselho estratégico multidisciplinar ou convocar múltiplos conselheiros.' },
+    when:'Quando precisar de conselho estratégico multidisciplinar ou convocar múltiplos conselheiros.' ,
+    detail: {
+          "role": "Presidente do Conselho Consultivo",
+          "identity": "Orquestrador estratégico que diagnostica desafios organizacionais e roteia para especialistas.",
+          "corePrinciples": [
+                "Diagnóstico precede prescrição",
+                "Pessoas certas, papéis certos, fase certa",
+                "Estrutura cria comportamento inevitável",
+                "Simplicidade através de clareza"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*assess",
+                      "desc": "Avaliar saúde organizacional em 8 dimensões"
+                },
+                {
+                      "cmd": "*diagnose",
+                      "desc": "Diagnosticar desafio e rotear especialista"
+                },
+                {
+                      "cmd": "*route",
+                      "desc": "Rotear desafio para especialista certo"
+                },
+                {
+                      "cmd": "*health",
+                      "desc": "Gerar relatório de saúde organizacional"
+                },
+                {
+                      "cmd": "*sync",
+                      "desc": "Sincronizar alinhamento entre especialistas"
+                },
+                {
+                      "cmd": "*report",
+                      "desc": "Relatório executivo consolidado"
+                }
+          ],
+          "typicalWorkflow": [
+                "Coletar contexto do desafio e história recente",
+                "Avaliar saúde em 8 dimensões-chave",
+                "Identificar raiz versus sintoma",
+                "Rotear para especialista ou equipe apropriada",
+                "Orquestrar handoffs entre especialistas"
+          ],
+          "pitfalls": [
+                "Ignorar sinais macios de disfunção",
+                "Rotear para sintoma em vez de raiz",
+                "Pular diagnóstico para ir direto à ação",
+                "Não considerar fase de maturidade organizacional"
+          ],
+          "collaboratesWith": [
+                "@brene-brown",
+                "@charlie-munger",
+                "@ray-dalio",
+                "@simon-sinek",
+                "@patrick-lencioni"
+          ]
+    }
+  },
   { id:'ab-brene',    name:'Brené Brown',     icon:'💛', squad:'advisory-board', fn:'strategy',
     title:'Vulnerability & Courageous Leadership', tagline:'Coragem, vergonha e segurança psicológica',
     command:'/advisory-board:agents:brene-brown',
-    when:'Construir confiança em times, desenvolver liderança corajosa ou criar cultura de pertencimento.' },
+    when:'Construir confiança em times, desenvolver liderança corajosa ou criar cultura de pertencimento.' ,
+    detail: {
+          "role": "Especialista em Vulnerabilidade e Liderança Corajosa",
+          "identity": "Pesquisadora que transforma pesquisa sobre vulnerabilidade em frameworks práticos de liderança.",
+          "corePrinciples": [
+                "Vulnerabilidade é coragem, não fraqueza",
+                "Pertencimento começa com autoaceitação",
+                "Empatia exige estar presente",
+                "Vergonha prospera no silêncio"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*shame",
+                      "desc": "Mapear dinâmica de vergonha em organização"
+                },
+                {
+                      "cmd": "*belonging",
+                      "desc": "Arquitetar cultura de pertencimento"
+                },
+                {
+                      "cmd": "*courage",
+                      "desc": "Desenvolver liderança corajosa"
+                },
+                {
+                      "cmd": "*vulnerability",
+                      "desc": "Estruturar conversa de vulnerabilidade"
+                },
+                {
+                      "cmd": "*daring",
+                      "desc": "Avaliar ousadia organizacional"
+                }
+          ],
+          "typicalWorkflow": [
+                "Mapear padrões de vergonha e desconexão",
+                "Identificar barreiras ao pertencimento",
+                "Desenhar rituais de vulnerabilidade",
+                "Treinar líderes para coragem autêntica",
+                "Sustentar cultura através de narrativa"
+          ],
+          "pitfalls": [
+                "Confundir vulnerabilidade com fraqueza",
+                "Negligenciar defesa contra vergonha tóxica",
+                "Forçar vulnerabilidade prematuramente",
+                "Ignorar interseccionalidade e contexto"
+          ],
+          "collaboratesWith": [
+                "@board-chair",
+                "@patrick-lencioni",
+                "@simon-sinek"
+          ]
+    }
+  },
   { id:'ab-munger',   name:'Charlie Munger',  icon:'🧠', squad:'advisory-board', fn:'strategy',
     title:'Multidisciplinary Thinker', tagline:'Mental models, vieses cognitivos e pensamento racional',
     command:'/advisory-board:agents:charlie-munger',
-    when:'Problemas que exigem múltiplos mental models, vieses cognitivos ou avaliação de vantagens competitivas.' },
+    when:'Problemas que exigem múltiplos mental models, vieses cognitivos ou avaliação de vantagens competitivas.' ,
+    detail: {
+          "role": "Especialista em Modelos Mentais e Pensamento Inverso",
+          "identity": "Pensador de sistemas que aplica estruturas mentais multidisciplinares a problemas complexos.",
+          "corePrinciples": [
+                "Coletar modelos de todas as disciplinas",
+                "Pensar ao contrário para clareza",
+                "Vieses psicológicos determinam decisão",
+                "Simples supera complexo"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*invert",
+                      "desc": "Pensar ao contrário sobre problema"
+                },
+                {
+                      "cmd": "*models",
+                      "desc": "Aplicar modelos mentais ao desafio"
+                },
+                {
+                      "cmd": "*bias",
+                      "desc": "Identificar vieses psicológicos em decisão"
+                },
+                {
+                      "cmd": "*framework",
+                      "desc": "Construir framework multidisciplinar"
+                },
+                {
+                      "cmd": "*synthesis",
+                      "desc": "Sintetizar insights entre disciplinas"
+                }
+          ],
+          "typicalWorkflow": [
+                "Mapear modelos mentais relevantes",
+                "Identificar vieses em pensamento atual",
+                "Pensar inverso sobre problema",
+                "Sintetizar insights entre disciplinas",
+                "Testar decisão contra múltiplos modelos"
+          ],
+          "pitfalls": [
+                "Aplicar modelo certo a contexto errado",
+                "Ignorar vieses próprios do pensador",
+                "Ser excessivamente teórico",
+                "Negligenciar dinâmica sistêmica"
+          ],
+          "collaboratesWith": [
+                "@board-chair",
+                "@ray-dalio",
+                "@peter-thiel"
+          ]
+    }
+  },
   { id:'ab-sivers',   name:'Derek Sivers',    icon:'🎯', squad:'advisory-board', fn:'strategy',
     title:'Minimalist Founder', tagline:'Hell Yeah or No — simplicidade e anti-escala',
     command:'/advisory-board:agents:derek-sivers',
-    when:'Decidir sobre oportunidades, simplificar decisões ou resistir à pressão de escalar.' },
+    when:'Decidir sobre oportunidades, simplificar decisões ou resistir à pressão de escalar.' ,
+    detail: {
+          "role": "Especialista em Clareza de Propósito e Decisão Decisiva",
+          "identity": "Filósofo prático que simplifica decisão através de critérios de 'Hell Yeah or No'.",
+          "corePrinciples": [
+                "Hell Yeah ou Não — sem talvez",
+                "Oportunidade custa verdadeiramente",
+                "Simplicidade através de limitação",
+                "Propósito precede ação"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*clarity",
+                      "desc": "Clarificar propósito e valores essenciais"
+                },
+                {
+                      "cmd": "*decide",
+                      "desc": "Aplicar Hell Yeah or No a decisão"
+                },
+                {
+                      "cmd": "*focus",
+                      "desc": "Eliminar distrações e focar direção"
+                },
+                {
+                      "cmd": "*values",
+                      "desc": "Mapear valores profundos e autênticos"
+                },
+                {
+                      "cmd": "*test",
+                      "desc": "Testar alinhamento decisão com valores"
+                }
+          ],
+          "typicalWorkflow": [
+                "Clarificar propósito e valores autênticos",
+                "Mapear oportunidades contra critérios",
+                "Aplicar Hell Yeah or No",
+                "Eliminar ambiguidade através decisão",
+                "Testar mudança de direção contra valores"
+          ],
+          "pitfalls": [
+                "Confundir popularidade com alinhamento",
+                "Não considerar custo de oportunidade",
+                "Ser vago sobre valores reais",
+                "Buscar permissão para dizer não"
+          ],
+          "collaboratesWith": [
+                "@board-chair",
+                "@yvon-chouinard",
+                "@naval-ravikant"
+          ]
+    }
+  },
   { id:'ab-naval',    name:'Naval Ravikant',  icon:'🧘', squad:'advisory-board', fn:'strategy',
     title:'Philosopher-Investor', tagline:'Riqueza, leverage e felicidade',
     command:'/advisory-board:agents:naval-ravikant',
-    when:'Clareza sobre criação de riqueza, leverage, specific knowledge ou frameworks de felicidade.' },
+    when:'Clareza sobre criação de riqueza, leverage, specific knowledge ou frameworks de felicidade.' ,
+    detail: {
+          "role": "Especialista em Criação de Riqueza e Filosofia Autêntica",
+          "identity": "Empreendedor e filósofo que ensina criação de riqueza através de alavancagem e autenticidade.",
+          "corePrinciples": [
+                "Alavancagem multiplica esforço",
+                "Juízo específico é não-treinável",
+                "Autenticidade supera cópia",
+                "Liberdade é o objetivo final"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*leverage",
+                      "desc": "Identificar tipos de alavancagem apropriados"
+                },
+                {
+                      "cmd": "*wealth",
+                      "desc": "Desenhar liberdade através criação de riqueza"
+                },
+                {
+                      "cmd": "*authentic",
+                      "desc": "Alinhar trabalho com autenticidade pessoal"
+                },
+                {
+                      "cmd": "*network",
+                      "desc": "Construir alavancagem através de rede"
+                },
+                {
+                      "cmd": "*judgment",
+                      "desc": "Desenvolver juízo específico de domínio"
+                }
+          ],
+          "typicalWorkflow": [
+                "Mapear ativos e vantagens naturais",
+                "Identificar alavancagem apropriada",
+                "Construir posição de mercado",
+                "Desenvolver juízo específico",
+                "Estruturar liberdade progressiva"
+          ],
+          "pitfalls": [
+                "Confundir ganho financeiro com liberdade",
+                "Usar alavancagem errada para contexto",
+                "Negligenciar desenvolvimento de juízo",
+                "Perseguir cópia em vez do autêntico"
+          ],
+          "collaboratesWith": [
+                "@board-chair",
+                "@reid-hoffman",
+                "@derek-sivers"
+          ]
+    }
+  },
   { id:'ab-lencioni', name:'Patrick Lencioni',icon:'🏗️', squad:'advisory-board', fn:'strategy',
     title:'Master of Team Dynamics', tagline:'Disfunções de time e saúde organizacional',
     command:'/advisory-board:agents:patrick-lencioni',
-    when:'Times disfuncionais, reuniões improdutivas, problemas de accountability ou cultura organizacional.' },
+    when:'Times disfuncionais, reuniões improdutivas, problemas de accountability ou cultura organizacional.' ,
+    detail: {
+          "role": "Especialista em Saúde de Equipe e Confiança",
+          "identity": "Consultor que diagnostica disfunção através análise de dinâmica de grupo e confiança.",
+          "corePrinciples": [
+                "Saúde supera talento individual",
+                "Confiança é fundação de tudo",
+                "Conflito saudável gera melhores decisões",
+                "Accountability cria segurança"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*health",
+                      "desc": "Diagnosticar saúde de equipe"
+                },
+                {
+                      "cmd": "*trust",
+                      "desc": "Construir confiança através de vulnerabilidade"
+                },
+                {
+                      "cmd": "*conflict",
+                      "desc": "Estruturar conflito saudável"
+                },
+                {
+                      "cmd": "*accountability",
+                      "desc": "Implementar accountability sem punição"
+                },
+                {
+                      "cmd": "*pyramid",
+                      "desc": "Aplicar Pirâmide das 5 Disfunções"
+                }
+          ],
+          "typicalWorkflow": [
+                "Avaliar cinco níveis de disfunção",
+                "Diagnosticar raiz de desconexão",
+                "Construir confiança através de rituais",
+                "Estruturar conflito produtivo",
+                "Implementar accountability clara"
+          ],
+          "pitfalls": [
+                "Negligenciar confiança como base",
+                "Evitar conflito saudável",
+                "Implementar accountability punitivo",
+                "Aplicar One Size Fits All"
+          ],
+          "collaboratesWith": [
+                "@board-chair",
+                "@brene-brown",
+                "@simon-sinek"
+          ]
+    }
+  },
   { id:'ab-thiel',    name:'Peter Thiel',     icon:'♟️', squad:'advisory-board', fn:'strategy',
     title:'Contrarian Venture Philosopher', tagline:'Monopólio, zero-to-one e segredos',
     command:'/advisory-board:agents:peter-thiel',
-    when:'Análise contrarian, avaliar se um negócio cria valor de monopólio real ou apenas compete.' },
+    when:'Análise contrarian, avaliar se um negócio cria valor de monopólio real ou apenas compete.' ,
+    detail: {
+          "role": "Especialista em Estratégia de Monopólio e Inovação",
+          "identity": "Pensador estratégico que ensina construir monopólios através de inovação e diferenciação.",
+          "corePrinciples": [
+                "Monopólio é objetivo, não competição",
+                "Zero a Um supera N a N+1",
+                "Tecnologia multiplica diferenciação",
+                "Poder vem de segredo"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*monopoly",
+                      "desc": "Construir posição de monopólio"
+                },
+                {
+                      "cmd": "*innovation",
+                      "desc": "Desenhar inovação de Zero a Um"
+                },
+                {
+                      "cmd": "*secrets",
+                      "desc": "Identificar segredos competitivos"
+                },
+                {
+                      "cmd": "*strategy",
+                      "desc": "Desenvolver estratégia de longo prazo"
+                },
+                {
+                      "cmd": "*network",
+                      "desc": "Aproveitar efeitos de rede"
+                }
+          ],
+          "typicalWorkflow": [
+                "Identificar segredo competitivo",
+                "Desenhar produto de Zero a Um",
+                "Construir efeitos de rede",
+                "Proteger posição de monopólio",
+                "Planejar expansão de longo prazo"
+          ],
+          "pitfalls": [
+                "Competir em mercados saturados",
+                "Negligenciar propriedade intelectual",
+                "Pular fase de escalabilidade",
+                "Ignorar efeitos de rede"
+          ],
+          "collaboratesWith": [
+                "@board-chair",
+                "@reid-hoffman",
+                "@charlie-munger"
+          ]
+    }
+  },
   { id:'ab-dalio',    name:'Ray Dalio',       icon:'📐', squad:'advisory-board', fn:'strategy',
     title:'Principles Architect', tagline:'Decisões sistemáticas, ciclos econômicos e radical truth',
     command:'/advisory-board:agents:ray-dalio',
-    when:'Framework sistemático para decisões, diagnóstico de causa raiz ou cultura de transparência radical.' },
+    when:'Framework sistemático para decisões, diagnóstico de causa raiz ou cultura de transparência radical.' ,
+    detail: {
+          "role": "Especialista em Princípios e Sistemas de Decisão",
+          "identity": "Investidor que codifica princípios em sistemas para decisão consistente sob incerteza.",
+          "corePrinciples": [
+                "Princípios superam intuição",
+                "Transparência radical melhora decisão",
+                "Realidade é a verdade fundamental",
+                "Diversidade de pensamento fortalece"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*principles",
+                      "desc": "Codificar princípios de decisão"
+                },
+                {
+                      "cmd": "*machine",
+                      "desc": "Desenhar máquina econômica"
+                },
+                {
+                      "cmd": "*radical",
+                      "desc": "Implementar transparência radical"
+                },
+                {
+                      "cmd": "*meritocracy",
+                      "desc": "Construir meritocracia correta"
+                },
+                {
+                      "cmd": "*system",
+                      "desc": "Criar sistemas de decisão confiáveis"
+                }
+          ],
+          "typicalWorkflow": [
+                "Mapear princípios organizacionais",
+                "Codificar em sistemas de decisão",
+                "Implementar transparência radical",
+                "Testar princípios contra realidade",
+                "Refinar através de feedback"
+          ],
+          "pitfalls": [
+                "Não codificar princípios explicitamente",
+                "Evitar transparência por medo",
+                "Aplicar princípios mecanicamente",
+                "Negligenciar realidade como critério"
+          ],
+          "collaboratesWith": [
+                "@board-chair",
+                "@charlie-munger",
+                "@patrick-lencioni"
+          ]
+    }
+  },
   { id:'ab-reid',     name:'Reid Hoffman',    icon:'🔗', squad:'advisory-board', fn:'strategy',
     title:'Oracle of Networks', tagline:'Blitzscaling e efeitos de rede',
     command:'/advisory-board:agents:reid-hoffman',
-    when:'Estratégia de escala, análise de efeitos de rede, planejamento ABZ ou blitzscaling.' },
+    when:'Estratégia de escala, análise de efeitos de rede, planejamento ABZ ou blitzscaling.' ,
+    detail: {
+          "role": "Especialista em Blitzscaling e Crescimento Exponencial",
+          "identity": "Empreendedor que codifica crescimento exponencial em frameworks de scale.",
+          "corePrinciples": [
+                "Velocidade importa mais que perfeição",
+                "LOMS supera ROMS em mercados dinâmicos",
+                "Risco calculado acelera crescimento",
+                "Timing é tudo em mercados novos"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*blitz",
+                      "desc": "Planejar blitzscaling de crescimento"
+                },
+                {
+                      "cmd": "*scale",
+                      "desc": "Dimensionar operações sem quebra"
+                },
+                {
+                      "cmd": "*timing",
+                      "desc": "Otimizar timing de entrada no mercado"
+                },
+                {
+                      "cmd": "*capital",
+                      "desc": "Estruturar estratégia de capital"
+                },
+                {
+                      "cmd": "*culture",
+                      "desc": "Manter cultura durante escala"
+                }
+          ],
+          "typicalWorkflow": [
+                "Avaliar fit de mercado e timing",
+                "Planejar fases de blitzscaling",
+                "Construir infraestrutura de escala",
+                "Manter cultura durante crescimento",
+                "Navegar transições de fase"
+          ],
+          "pitfalls": [
+                "Escalar sem fit de mercado validado",
+                "Negligenciar cultura durante crescimento",
+                "Otimizar para velocidade sobre sustentabilidade",
+                "Ignorar timing de mercado"
+          ],
+          "collaboratesWith": [
+                "@board-chair",
+                "@peter-thiel",
+                "@naval-ravikant"
+          ]
+    }
+  },
   { id:'ab-sinek',    name:'Simon Sinek',     icon:'⭕', squad:'advisory-board', fn:'strategy',
     title:'Purpose-Driven Leadership', tagline:'Start With Why e mentalidade infinita',
     command:'/advisory-board:agents:simon-sinek',
-    when:'Organização sem propósito claro, líderes que precisam inspirar ou transição para mentalidade infinita.' },
+    when:'Organização sem propósito claro, líderes que precisam inspirar ou transição para mentalidade infinita.' ,
+    detail: {
+          "role": "Especialista em Propósito e Liderança Inspiradora",
+          "identity": "Orador que ensina liderança através de clareza de propósito e jogo infinito.",
+          "corePrinciples": [
+                "Comece com Por Quê, não O Quê",
+                "Propósito inspira ação sustentada",
+                "Jogo infinito supera jogo finito",
+                "Seguidores escolhem líderes autênticos"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*why",
+                      "desc": "Articular Por Quê profundo"
+                },
+                {
+                      "cmd": "*purpose",
+                      "desc": "Alinhar organização ao propósito"
+                },
+                {
+                      "cmd": "*inspire",
+                      "desc": "Estruturar liderança inspiradora"
+                },
+                {
+                      "cmd": "*infinite",
+                      "desc": "Adotar mentalidade de jogo infinito"
+                },
+                {
+                      "cmd": "*followers",
+                      "desc": "Construir seguidores fiéis"
+                }
+          ],
+          "typicalWorkflow": [
+                "Descobrir Por Quê profundo",
+                "Comunicar Por Quê antes do O Quê",
+                "Alinhar estrutura ao propósito",
+                "Manter Jogo Infinito",
+                "Cultivar liderança através de exemplo"
+          ],
+          "pitfalls": [
+                "Confundir O Quê com Por Quê",
+                "Ter Por Quê sem execução",
+                "Jogar jogo finito em contexto infinito",
+                "Negligenciar autenticidade de liderança"
+          ],
+          "collaboratesWith": [
+                "@board-chair",
+                "@brene-brown",
+                "@patrick-lencioni"
+          ]
+    }
+  },
   { id:'ab-yvon',     name:'Yvon Chouinard',  icon:'🏔️', squad:'advisory-board', fn:'strategy',
     title:'Reluctant Businessman', tagline:'Propósito, planeta e anti-crescimento',
     command:'/advisory-board:agents:yvon-chouinard',
-    when:'Questionar crescimento a qualquer custo ou construir empresa orientada por missão.' },
+    when:'Questionar crescimento a qualquer custo ou construir empresa orientada por missão.' ,
+    detail: {
+          "role": "Especialista em Filosofia Anti-Crescimento e Sustentabilidade",
+          "identity": "Empreendedor que questiona crescimento e operacionaliza responsabilidade ambiental.",
+          "corePrinciples": [
+                "Crescimento infinito é ficção",
+                "Lucro supera crescimento",
+                "Simplicidade supera complexidade",
+                "Ação supera conversa ambiental"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*growth",
+                      "desc": "Questionar narrativa de crescimento"
+                },
+                {
+                      "cmd": "*profit",
+                      "desc": "Otimizar lucro sobre crescimento"
+                },
+                {
+                      "cmd": "*simple",
+                      "desc": "Simplificar operação e oferecimento"
+                },
+                {
+                      "cmd": "*impact",
+                      "desc": "Medir impacto ambiental real"
+                },
+                {
+                      "cmd": "*values",
+                      "desc": "Alinhar valores com ação operacional"
+                }
+          ],
+          "typicalWorkflow": [
+                "Questionar suposições de crescimento",
+                "Medir lucro versus crescimento",
+                "Eliminar complexidade desnecessária",
+                "Quantificar impacto ambiental",
+                "Tomar ação sobre questões ambientais"
+          ],
+          "pitfalls": [
+                "Confundir crescimento com sucesso",
+                "Green-washing sem ação real",
+                "Negligenciar profitabilidade",
+                "Ser purista em vez de prático"
+          ],
+          "collaboratesWith": [
+                "@board-chair",
+                "@derek-sivers",
+                "@ray-dalio"
+          ]
+    }
+  },
 
   /* ── BRAND SQUAD ─────────────────────────────────────────────── */
   { id:'brand-chief',   name:'Brand Chief',       icon:'🎨', squad:'brand-squad', fn:'brand',
@@ -556,31 +1571,358 @@ const AGENTS_DB = [
   { id:'data-chief',   name:'Datum',           icon:'📊', squad:'data-squad', fn:'data',
     title:'Data Chief Orchestrator', tagline:'Analytics, growth e retenção',
     command:'/data-squad:agents:data-chief',
-    when:'Análise de dados, estratégia de crescimento, insights de retenção ou analytics sem especialista definido.' },
+    when:'Análise de dados, estratégia de crescimento, insights de retenção ou analytics sem especialista definido.' ,
+    detail: {
+          "role": "Chefe de Orquestração de Dados e Insight",
+          "identity": "Maestro de dados que roteia problemas de insight para especialista apropriado.",
+          "corePrinciples": [
+                "Pergunta precede método",
+                "Contexto determina métrica",
+                "Simplicidade supera sofisticação",
+                "Ação supera análise perfeita"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*diagnose",
+                      "desc": "Diagnosticar desafio de insight"
+                },
+                {
+                      "cmd": "*route",
+                      "desc": "Rotear para especialista certo"
+                },
+                {
+                      "cmd": "*framework",
+                      "desc": "Aplicar framework de análise"
+                }
+          ],
+          "typicalWorkflow": [
+                "Entender pergunta de negócio real",
+                "Mapear contexto e restrições",
+                "Rotear para especialista apropriado",
+                "Sintetizar insights em ação"
+          ],
+          "pitfalls": [
+                "Análise sem pergunta de negócio",
+                "Confundir métrica com insight",
+                "Negligenciar contexto de decisão"
+          ],
+          "collaboratesWith": [
+                "@avinash-kaushik",
+                "@peter-fader",
+                "@nick-mehta",
+                "@sean-ellis"
+          ]
+    }
+  },
   { id:'data-avinash', name:'Avinash Kaushik', icon:'🔍', squad:'data-squad', fn:'data',
     title:'Digital Marketing Evangelist', tagline:'Analytics e KPIs acionáveis',
     command:'/data-squad:agents:avinash-kaushik',
-    when:'Construir modelo de medição, KPIs acionáveis, dashboards que geram decisão ou desafiar métricas de vaidade.' },
+    when:'Construir modelo de medição, KPIs acionáveis, dashboards que geram decisão ou desafiar métricas de vaidade.' ,
+    detail: {
+          "role": "Especialista em Framework de Análise Comportamental",
+          "identity": "Analista que transforma dados comportamentais em insight através de See-Think-Do-Care.",
+          "corePrinciples": [
+                "Comportamento supera intenção declarada",
+                "Segmentação por comportamento, não demografia",
+                "Atribuição complexa exige humildade",
+                "Simplicidade de framework vence"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*see",
+                      "desc": "Análise de comportamento de descoberta"
+                },
+                {
+                      "cmd": "*think",
+                      "desc": "Análise de intenção e consideração"
+                },
+                {
+                      "cmd": "*do",
+                      "desc": "Análise de comportamento de compra"
+                },
+                {
+                      "cmd": "*care",
+                      "desc": "Análise de lealdade e advocacy"
+                },
+                {
+                      "cmd": "*segment",
+                      "desc": "Segmentar por comportamento real"
+                }
+          ],
+          "typicalWorkflow": [
+                "Mapear jornada comportamental",
+                "Aplicar framework See-Think-Do-Care",
+                "Identificar fricções em cada fase",
+                "Desenhar otimização comportamental",
+                "Medir mudança de comportamento"
+          ],
+          "pitfalls": [
+                "Ignorar comportamento real",
+                "Segmentação por demografia",
+                "Confundir intenção com ação",
+                "Negligenciar contexto"
+          ],
+          "collaboratesWith": [
+                "@data-chief",
+                "@sean-ellis",
+                "@nick-mehta"
+          ]
+    }
+  },
   { id:'data-spinks',  name:'David Spinks',    icon:'🤝', squad:'data-squad', fn:'movement',
     title:'Community Strategy Pioneer', tagline:'Community-led growth e modelo SPACES',
     command:'/data-squad:agents:david-spinks',
-    when:'Construir estratégia de comunidade, medir ROI de comunidade ou aplicar o modelo SPACES.' },
+    when:'Construir estratégia de comunidade, medir ROI de comunidade ou aplicar o modelo SPACES.' ,
+    detail: {
+          "role": "Especialista em Monetização de Comunidade e Network",
+          "identity": "Consultor que estrutura como comunidades criam valor econômico sustentável.",
+          "corePrinciples": [
+                "Comunidade é economia antes de audiência",
+                "Valor compartilhado sustenta crescimento",
+                "Rede supera propriedade centralizada",
+                "Medição começa em valor trocado"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*spaces",
+                      "desc": "Aplicar modelo SPACES de comunidade"
+                },
+                {
+                      "cmd": "*value",
+                      "desc": "Mapear fluxo de valor"
+                },
+                {
+                      "cmd": "*monetize",
+                      "desc": "Estruturar monetização sustentável"
+                },
+                {
+                      "cmd": "*network",
+                      "desc": "Desenhar economia de rede"
+                }
+          ],
+          "typicalWorkflow": [
+                "Mapear valores que a comunidade troca",
+                "Aplicar framework SPACES",
+                "Identificar oportunidades de monetização",
+                "Desenhar modelo econômico",
+                "Medir saúde econômica da comunidade"
+          ],
+          "pitfalls": [
+                "Ignorar economia da comunidade",
+                "Monetizar sem criar valor",
+                "Negligenciar valor trocado antes de dinheiro",
+                "Ser guloso em extração"
+          ],
+          "collaboratesWith": [
+                "@data-chief",
+                "@peter-fader",
+                "@movement-architect"
+          ]
+    }
+  },
   { id:'data-nick',    name:'Nick Mehta',      icon:'💚', squad:'data-squad', fn:'data',
     title:'Customer Success Pioneer', tagline:'NRR, health scores e prevenção de churn',
     command:'/data-squad:agents:nick-mehta',
-    when:'Estratégia de Customer Success, health scores, retenção ou Net Revenue Retention.' },
+    when:'Estratégia de Customer Success, health scores, retenção ou Net Revenue Retention.' ,
+    detail: {
+          "role": "Especialista em Sucesso de Cliente e Retenção",
+          "identity": "Consultor que otimiza saúde de cliente através de mensuração e intervenção proativa.",
+          "corePrinciples": [
+                "Retenção supera aquisição",
+                "Saúde é preditiva, métrica é atrasada",
+                "Score de saúde habilita intervenção",
+                "Empatia supera automação"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*health",
+                      "desc": "Construir score de saúde de cliente"
+                },
+                {
+                      "cmd": "*churn",
+                      "desc": "Prever e prevenir churn"
+                },
+                {
+                      "cmd": "*playbook",
+                      "desc": "Criar playbook de sucesso do cliente"
+                },
+                {
+                      "cmd": "*outcome",
+                      "desc": "Desenhar outcomes de cliente"
+                }
+          ],
+          "typicalWorkflow": [
+                "Mapear comportamentos de saúde",
+                "Construir score de saúde preditivo",
+                "Desenhar playbook de intervenção",
+                "Implementar monitoramento proativo",
+                "Medir retenção e NRR"
+          ],
+          "pitfalls": [
+                "Focar em aquisição em vez de retenção",
+                "Score de saúde sem ação",
+                "Negligenciar causas raiz de churn",
+                "Automação sem empatia"
+          ],
+          "collaboratesWith": [
+                "@data-chief",
+                "@peter-fader",
+                "@avinash-kaushik"
+          ]
+    }
+  },
   { id:'data-peter',   name:'Peter Fader',     icon:'💎', squad:'data-squad', fn:'data',
     title:'CLV Authority', tagline:'Customer lifetime value e customer centricity',
     command:'/data-squad:agents:peter-fader',
-    when:'Calcular CLV, segmentação por valor ou construir estratégia genuinamente customer-centric.' },
+    when:'Calcular CLV, segmentação por valor ou construir estratégia genuinamente customer-centric.' ,
+    detail: {
+          "role": "Especialista em Valor de Vida de Cliente e Modelos Preditivos",
+          "identity": "Cientista que quantifica o futuro através de modelos probabilísticos de retenção.",
+          "corePrinciples": [
+                "Valor de vida supera transação",
+                "Probabilidade supera certeza",
+                "Modelos preditivos habilitam decisão",
+                "Dados históricos revelam o futuro"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*ltv",
+                      "desc": "Construir modelo de Lifetime Value"
+                },
+                {
+                      "cmd": "*predict",
+                      "desc": "Prever retenção probabilística"
+                },
+                {
+                      "cmd": "*model",
+                      "desc": "Desenvolver modelo BG/NBD"
+                },
+                {
+                      "cmd": "*segment",
+                      "desc": "Segmentar por valor potencial"
+                }
+          ],
+          "typicalWorkflow": [
+                "Coletar dados transacionais históricos",
+                "Construir modelo de retenção",
+                "Calcular LTV por segmento",
+                "Validar modelo contra realidade",
+                "Usar para decisão de aquisição"
+          ],
+          "pitfalls": [
+                "LTV sem consideração de churn",
+                "Ignorar dados comportamentais",
+                "Confundir correlação com causalidade",
+                "Modelo sem validação"
+          ],
+          "collaboratesWith": [
+                "@data-chief",
+                "@nick-mehta",
+                "@avinash-kaushik"
+          ]
+    }
+  },
   { id:'data-sean',    name:'Sean Ellis',      icon:'🚀', squad:'data-squad', fn:'data',
     title:'Growth Hacking Pioneer', tagline:'PMF, North Star Metric e experimentos de crescimento',
     command:'/data-squad:agents:sean-ellis',
-    when:'Validar product-market fit, desenhar experimentos de crescimento ou diagnosticar stall de crescimento.' },
+    when:'Validar product-market fit, desenhar experimentos de crescimento ou diagnosticar stall de crescimento.' ,
+    detail: {
+          "role": "Especialista em Growth Hacking e Validação de Product-Market Fit",
+          "identity": "Empreendedor que valida e acelera crescimento através de testes rápidos.",
+          "corePrinciples": [
+                "Teste antes de escalar",
+                "PMF precede crescimento",
+                "Velocidade de iteração importa",
+                "Simplicidade vence sofisticação"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*pmf",
+                      "desc": "Testar e validar product-market fit"
+                },
+                {
+                      "cmd": "*growth",
+                      "desc": "Desenhar ciclos de crescimento"
+                },
+                {
+                      "cmd": "*test",
+                      "desc": "Estruturar testes de crescimento"
+                },
+                {
+                      "cmd": "*loop",
+                      "desc": "Otimizar feedback loop"
+                }
+          ],
+          "typicalWorkflow": [
+                "Mapear comportamento de retenção",
+                "Aplicar Teste de Sean Ellis",
+                "Desenhar testes de crescimento",
+                "Iterar baseado em dados",
+                "Escalar quando PMF validado"
+          ],
+          "pitfalls": [
+                "Escalar sem PMF validado",
+                "Ignorar retenção em testes",
+                "Testes sem hipótese clara",
+                "Negligenciar causa raiz"
+          ],
+          "collaboratesWith": [
+                "@data-chief",
+                "@avinash-kaushik",
+                "@reid-hoffman"
+          ]
+    }
+  },
   { id:'data-wes',     name:'Wes Kao',         icon:'🎓', squad:'data-squad', fn:'data',
     title:'Cohort Education Strategist', tagline:'Cursos em coorte e audience building',
     command:'/data-squad:agents:wes-kao',
-    when:'Projetar cursos em coorte, construir audiência ou criar conteúdo com ponto de vista definido.' },
+    when:'Projetar cursos em coorte, construir audiência ou criar conteúdo com ponto de vista definido.' ,
+    detail: {
+          "role": "Especialista em Design de Cohort Learning e Ponto de Vista Aguçado",
+          "identity": "Educadora que estrutura aprendizado em cohorts através de clareza de diferenciação.",
+          "corePrinciples": [
+                "Ponto de vista aguçado supera neutralidade",
+                "Cohort cria accountability",
+                "Estrutura precede conteúdo",
+                "Posição clara atrai pessoas certas"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*spiky",
+                      "desc": "Desenvolver ponto de vista aguçado"
+                },
+                {
+                      "cmd": "*cohort",
+                      "desc": "Desenhar programa de cohort"
+                },
+                {
+                      "cmd": "*curriculum",
+                      "desc": "Estruturar currículo de aprendizado"
+                },
+                {
+                      "cmd": "*alumni",
+                      "desc": "Construir network pós-programa"
+                }
+          ],
+          "typicalWorkflow": [
+                "Desenvolver ponto de vista único",
+                "Desenhar estrutura de cohort",
+                "Criar currículo baseado em POV",
+                "Implementar accountability",
+                "Construir alumni network"
+          ],
+          "pitfalls": [
+                "Ser genérico em vez de aguçado",
+                "Ignorar estrutura de cohort",
+                "Conteúdo sem filosofia clara",
+                "Negligenciar network pós-programa"
+          ],
+          "collaboratesWith": [
+                "@data-chief",
+                "@movement-architect"
+          ]
+    }
+  },
 
   /* ── DESIGN SQUAD ─────────────────────────────────────────────── */
   { id:'ds-chief',    name:'Design Chief',         icon:'🎨', squad:'design-squad', fn:'brand',
@@ -686,31 +2028,376 @@ const AGENTS_DB = [
   { id:'mv-chief',    name:'Movement Chief',       icon:'✊', squad:'movement', fn:'movement',
     title:'Movement Building Orchestrator', tagline:'Construir, analisar e escalar movimentos',
     command:'/movement:agents:movement-chief',
-    when:'Construir, analisar ou escalar um movimento — roteia para os especialistas certos.' },
+    when:'Construir, analisar ou escalar um movimento — roteia para os especialistas certos.' ,
+    detail: {
+          "role": "Orquestrador Executivo de Movimentos",
+          "identity": "Maestro que diagnostica fase de movimento e roteia para especialista apropriado.",
+          "corePrinciples": [
+                "Tensão precede identidade",
+                "Fase diagnostica prescrição",
+                "Identidade antes de crescimento",
+                "Movimento vive ou morre na estrutura"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*build",
+                      "desc": "Iniciar construção completa de movimento"
+                },
+                {
+                      "cmd": "*assess",
+                      "desc": "Avaliar oportunidade de movimento"
+                },
+                {
+                      "cmd": "*route",
+                      "desc": "Rotear desafio para especialista"
+                },
+                {
+                      "cmd": "*phase",
+                      "desc": "Diagnosticar fase de movimento"
+                },
+                {
+                      "cmd": "*report",
+                      "desc": "Gerar relatório de status"
+                }
+          ],
+          "typicalWorkflow": [
+                "Mapear tensão sentida e compartilhada",
+                "Diagnosticar fase do ciclo de vida",
+                "Rotear para especialista apropriado",
+                "Orquestrar handoff entre especialistas",
+                "Monitorar saúde do movimento"
+          ],
+          "pitfalls": [
+                "Negligenciar tensão fraca como base",
+                "Avançar fase sem fundação anterior",
+                "Confundir marketing com movimento",
+                "Ignorar sinal de morte do movimento"
+          ],
+          "collaboratesWith": [
+                "@identitario",
+                "@manifestador",
+                "@movement-architect"
+          ]
+    }
+  },
   { id:'mv-arch',     name:'Movement Architect',   icon:'🏗️', squad:'movement', fn:'movement',
     title:'Community Design Specialist', tagline:'Estrutura de comunidades e escadas de engajamento',
     command:'/movement:agents:movement-architect',
-    when:'Projetar estruturas de comunidade, pathways de participação ou governança descentralizada.' },
+    when:'Projetar estruturas de comunidade, pathways de participação ou governança descentralizada.' ,
+    detail: {
+          "role": "Engenheiro de Arquitetura de Movimento",
+          "identity": "Arquiteto que desenha estruturas comunitárias invisíveis que sustentam movimentos.",
+          "corePrinciples": [
+                "Estrutura cria comportamento inevitável",
+                "Melhor arquitetura é invisível",
+                "Escada de engajamento precisa de gatilhos",
+                "Governo distribui poder, não responsabilidade"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*design",
+                      "desc": "Desenhar arquitetura completa"
+                },
+                {
+                      "cmd": "*community",
+                      "desc": "Analisar e redesenhar topologia"
+                },
+                {
+                      "cmd": "*ladder",
+                      "desc": "Construir escada de engajamento"
+                },
+                {
+                      "cmd": "*ritual",
+                      "desc": "Desenhar rituais comunitários"
+                },
+                {
+                      "cmd": "*canvas",
+                      "desc": "Criar Movement Canvas"
+                }
+          ],
+          "typicalWorkflow": [
+                "Mapear topologia comunitária atual",
+                "Desenhar escada de engajamento",
+                "Construir flywheel comunitário",
+                "Criar modelo de governança",
+                "Desenhar rituais de pertencimento"
+          ],
+          "pitfalls": [
+                "Conteúdo antes de arquitetura",
+                "Escada de engajamento sem gatilhos",
+                "Delegação sem poder real",
+                "Ignorar burnout de líderes"
+          ],
+          "collaboratesWith": [
+                "@movement-chief",
+                "@identitario",
+                "@estrategista-de-ciclo"
+          ]
+    }
+  },
   { id:'mv-fen',      name:'Fenomenologo',          icon:'🔮', squad:'movement', fn:'movement',
     title:'Phenomenological Analysis Specialist', tagline:'A tensão central que pode alimentar um movimento',
     command:'/movement:agents:fenomenologo',
-    when:'Identificar tensão central do movimento, testar se a ideia ressoa com a realidade vivida.' },
+    when:'Identificar tensão central do movimento, testar se a ideia ressoa com a realidade vivida.' ,
+    detail: {
+          "role": "Analista Fenomenológico de Tensão Compartilhada",
+          "identity": "Pesquisador que escava experiência vivida para identificar tensões que movem movimentos.",
+          "corePrinciples": [
+                "Corpo conhece antes da mente",
+                "Nomeie o que é sentido, não invente",
+                "Tensão vive na lacuna",
+                "Ressonância somática precede intelectual"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*tension",
+                      "desc": "Mapear tensões sentidas em comunidade"
+                },
+                {
+                      "cmd": "*experience",
+                      "desc": "Analisar experiência vivida"
+                },
+                {
+                      "cmd": "*resonate",
+                      "desc": "Testar ressonância de ideia"
+                },
+                {
+                      "cmd": "*map",
+                      "desc": "Criar mapa completo de tensão"
+                },
+                {
+                      "cmd": "*feel",
+                      "desc": "Descrever experiência fenomenologicamente"
+                }
+          ],
+          "typicalWorkflow": [
+                "Suspender suposições sobre experiência",
+                "Coletar descrições densas de vida",
+                "Identificar lacunas entre narrativa oficial",
+                "Nomear tensão que faz o corpo responder",
+                "Testar ressonância em contextos diversos"
+          ],
+          "pitfalls": [
+                "Inventar tensão em vez de nomeá-la",
+                "Parar em ressonância intelectual",
+                "Negligenciar corpo como epistemologia",
+                "Aplicar tensão sem validar"
+          ],
+          "collaboratesWith": [
+                "@movement-chief",
+                "@identitario",
+                "@manifestador"
+          ]
+    }
+  },
   { id:'mv-id',       name:'Identitario',          icon:'🛡️', squad:'movement', fn:'movement',
     title:'Identity Architecture Specialist', tagline:'Valores, símbolos, linguagem e rituais tribais',
     command:'/movement:agents:identitario',
-    when:'Projetar sistema de identidade do movimento — quem pertence, marcadores tribais, coesão.' },
+    when:'Projetar sistema de identidade do movimento — quem pertence, marcadores tribais, coesão.' ,
+    detail: {
+          "role": "Arquiteto de Identidade de Movimento",
+          "identity": "Designer que constrói stack de identidade que faz pessoas se sentirem encontradas.",
+          "corePrinciples": [
+                "Identidade precede crescimento",
+                "Pertencimento supera recrutamento",
+                "Símbolos cristalizam crença",
+                "Identidade clara permite exclusão"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*stack",
+                      "desc": "Construir stack de identidade completo"
+                },
+                {
+                      "cmd": "*values",
+                      "desc": "Desenhar arquitetura de valores"
+                },
+                {
+                      "cmd": "*symbol",
+                      "desc": "Criar símbolos que cristalizam crença"
+                },
+                {
+                      "cmd": "*boundary",
+                      "desc": "Desenhar quem está dentro e fora"
+                },
+                {
+                      "cmd": "*evolution",
+                      "desc": "Guiar evolução de identidade"
+                }
+          ],
+          "typicalWorkflow": [
+                "Mapear tensão fenomenológica como base",
+                "Desenhar stack de identidade de 5 camadas",
+                "Criar símbolos que cristalizam crença",
+                "Desenhar limites claros de identidade",
+                "Testar identidade contra audiência diversa"
+          ],
+          "pitfalls": [
+                "Identidade desconectada de tensão",
+                "Ser vago sobre valores",
+                "Negligenciar exclusão apropriada",
+                "Símbolos sem ancoragem fenomenológica"
+          ],
+          "collaboratesWith": [
+                "@movement-chief",
+                "@fenomenologo",
+                "@manifestador"
+          ]
+    }
+  },
   { id:'mv-man',      name:'Manifestador',         icon:'📜', squad:'movement', fn:'story',
     title:'Manifesto Creation Specialist', tagline:'Documento fundador e propagação narrativa',
     command:'/movement:agents:manifestador',
-    when:'Escrever o manifesto fundador do movimento ou redesenhar narrativa para nova fase.' },
+    when:'Escrever o manifesto fundador do movimento ou redesenhar narrativa para nova fase.' ,
+    detail: {
+          "role": "Escritor de Manifesto e Cristalizador de Narrativa",
+          "identity": "Escritor que cristaliza crença em palavras que pessoas precisam compartilhar.",
+          "corePrinciples": [
+                "Manifestos são escavados, não escritos",
+                "Palavras que viajam têm ritmo",
+                "Emoção precisa de estrutura para sustentar",
+                "Manifesto é declaração, não argumento"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*manifest",
+                      "desc": "Escrever manifesto completo"
+                },
+                {
+                      "cmd": "*narrative",
+                      "desc": "Estruturar arco narrativo"
+                },
+                {
+                      "cmd": "*propagate",
+                      "desc": "Desenhar propagação de narrativa"
+                },
+                {
+                      "cmd": "*crystallize",
+                      "desc": "Cristalizar ideia em frase"
+                }
+          ],
+          "typicalWorkflow": [
+                "Mapear experiência vivida como base",
+                "Estudar ritmo de manifesto histórico",
+                "Estruturar 5 partes da anatomia",
+                "Escrever primeiro rascunho",
+                "Refinar até ressoar"
+          ],
+          "pitfalls": [
+                "Manifesto sem fenomenologia",
+                "Argumentação em vez de declaração",
+                "Ignorar ritmo e musicalidade",
+                "Abstrair em vez de encarnar"
+          ],
+          "collaboratesWith": [
+                "@movement-chief",
+                "@identitario",
+                "@fenomenologo"
+          ]
+    }
+  },
   { id:'mv-ciclo',    name:'Estrategista de Ciclo', icon:'🔄', squad:'movement', fn:'movement',
     title:'Growth Cycle Strategist', tagline:'Atrair, ativar, sustentar, multiplicar',
     command:'/movement:agents:estrategista-de-ciclo',
-    when:'Projetar o motor de crescimento do movimento — quando o momentum está estagnando.' },
+    when:'Projetar o motor de crescimento do movimento — quando o momentum está estagnando.' ,
+    detail: {
+          "role": "Estrategista de Ciclos de Crescimento de Movimento",
+          "identity": "Especialista em design de ciclos que fazem movimentos crescer sem perder essência.",
+          "corePrinciples": [
+                "Crescimento vem em ondas, não em linhas",
+                "Retenção precisa ser maior que ativação",
+                "Ciclos respeitam fase de movimento",
+                "Líderes multiplicam melhor que o centro"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*flywheel",
+                      "desc": "Desenhar motor de crescimento"
+                },
+                {
+                      "cmd": "*activation",
+                      "desc": "Desenhar sequência de ativação"
+                },
+                {
+                      "cmd": "*retention",
+                      "desc": "Estruturar retenção através de ritual"
+                },
+                {
+                      "cmd": "*waves",
+                      "desc": "Planejar ondas de crescimento"
+                }
+          ],
+          "typicalWorkflow": [
+                "Mapear ciclo natural do movimento",
+                "Desenhar sequências de ativação",
+                "Criar rituais de retenção",
+                "Planejar ondas de crescimento",
+                "Medir saúde em cada fase"
+          ],
+          "pitfalls": [
+                "Confundir velocidade com direção",
+                "Negligenciar retenção",
+                "Forçar fase de movimento",
+                "Crescimento sem raiz"
+          ],
+          "collaboratesWith": [
+                "@movement-chief",
+                "@movement-architect",
+                "@analista-de-impacto"
+          ]
+    }
+  },
   { id:'mv-impacto',  name:'Analista de Impacto',  icon:'📊', squad:'movement', fn:'movement',
     title:'Impact Measurement Specialist', tagline:'Medir impacto real vs atenção gerada',
     command:'/movement:agents:analista-de-impacto',
-    when:'Medir se o movimento cria mudança real, projetar frameworks de impacto ou saúde do movimento.' },
+    when:'Medir se o movimento cria mudança real, projetar frameworks de impacto ou saúde do movimento.' ,
+    detail: {
+          "role": "Analista de Impacto Real de Movimento",
+          "identity": "Pesquisador que distingue mudança real de ativismo performativo.",
+          "corePrinciples": [
+                "Impacto é comportamento mudado, não métrica de vaidade",
+                "Saúde precede crescimento",
+                "Medição começa no design, não no final",
+                "Movimento morre de dentro, não de fora"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*pyramid",
+                      "desc": "Construir pirâmide de impacto"
+                },
+                {
+                      "cmd": "*health",
+                      "desc": "Diagnosticar saúde de movimento"
+                },
+                {
+                      "cmd": "*measure",
+                      "desc": "Desenhar medição de impacto"
+                },
+                {
+                      "cmd": "*signal",
+                      "desc": "Identificar sinais de mudança real"
+                }
+          ],
+          "typicalWorkflow": [
+                "Mapear comportamentos que queremos mudar",
+                "Desenhar medição desde o começo",
+                "Coletar sinais de mudança real",
+                "Diagnosticar saúde de movimento",
+                "Comunicar impacto além da vaidade"
+          ],
+          "pitfalls": [
+                "Métrica de vaidade em vez de impacto",
+                "Medição sem comportamento-alvo",
+                "Ignorar sinais de morte do movimento",
+                "Confundir escala com impacto"
+          ],
+          "collaboratesWith": [
+                "@movement-chief",
+                "@estrategista-de-ciclo",
+                "@movement-architect"
+          ]
+    }
+  },
 
   /* ── STORYTELLING ─────────────────────────────────────────────── */
   { id:'st-chief',    name:'Story Chief',       icon:'📖', squad:'storytelling', fn:'story',
@@ -766,65 +2453,1008 @@ const AGENTS_DB = [
   { id:'tr-chief',    name:'Traffic Chief',      icon:'🎯', squad:'traffic-masters', fn:'marketing',
     title:'Traffic Masters Orchestrator', tagline:'Roteia para o especialista de tráfego certo',
     command:'/traffic-masters:agents:traffic-chief',
-    when:'Qualquer desafio de tráfego pago ou mídia — roteia para o especialista.' },
+    when:'Qualquer desafio de tráfego pago ou mídia — roteia para o especialista.' ,
+    detail: {
+          "role": "Diagnosticador de Problemas de Tráfego & Roteador",
+          "identity": "Sistema nervoso central do Traffic Masters — fluente em todas as plataformas e estratégias de tráfego.",
+          "corePrinciples": [
+                "Ouvir antes de rotear",
+                "Diagnosticar até a raiz",
+                "Validar antes de otimizar",
+                "Revisar qualidade do output"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*diagnose",
+                      "desc": "Diagnostica problema e recomenda especialista"
+                },
+                {
+                      "cmd": "*route",
+                      "desc": "Roteia para agente de tráfego correto"
+                },
+                {
+                      "cmd": "*review",
+                      "desc": "Revisa estratégia de tráfego"
+                },
+                {
+                      "cmd": "*roster",
+                      "desc": "Mostra os 16 agentes Traffic Masters"
+                },
+                {
+                      "cmd": "*metrics",
+                      "desc": "Health check rápido de métricas"
+                }
+          ],
+          "typicalWorkflow": [
+                "Ouvir o problema de tráfego/ads",
+                "Identificar plataforma e função",
+                "Verificar nível de orçamento",
+                "Rotear para o especialista certo",
+                "Revisar output para ROAS"
+          ],
+          "pitfalls": [
+                "Rotear sem entender o problema real",
+                "Ignorar contexto de orçamento",
+                "Pular validação de rastreamento",
+                "Não revisar o funil completo"
+          ],
+          "collaboratesWith": [
+                "@molly-pittman",
+                "@depesh-mandalia",
+                "@kasim-aslam",
+                "@tom-breeze",
+                "@pedro-sobral",
+                "@ralph-burns"
+          ]
+    }
+  },
   { id:'tr-midas',    name:'Ad Midas',           icon:'✨', squad:'traffic-masters', fn:'marketing',
     title:'Ad Creative Strategy Specialist', tagline:'Criativos, scripts e briefs',
     command:'/traffic-masters:agents:ad-midas',
-    when:'Criar criativos, scripts de anúncio ou briefs — quando os ads não estão gerando cliques.' },
+    when:'Criar criativos, scripts de anúncio ou briefs — quando os ads não estão gerando cliques.' ,
+    detail: {
+          "role": "Estrategista de Criativo & Desenvolvedor Conceitual",
+          "identity": "Domina a ciência e arte de criativos que convertem — criativo IS targeting.",
+          "corePrinciples": [
+                "Criativo é a maior alavanca",
+                "Hook determina 80% do desempenho",
+                "Teste ângulo antes de formato",
+                "Construa biblioteca, não ads únicos"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*concept",
+                      "desc": "Desenvolve conceitos de ads"
+                },
+                {
+                      "cmd": "*script",
+                      "desc": "Escreve script de vídeo com hooks"
+                },
+                {
+                      "cmd": "*brief",
+                      "desc": "Cria creative brief para campanha"
+                },
+                {
+                      "cmd": "*matrix",
+                      "desc": "Constrói matriz de testes criativa"
+                },
+                {
+                      "cmd": "*library",
+                      "desc": "Desenha estratégia de biblioteca criativa"
+                },
+                {
+                      "cmd": "*hooks",
+                      "desc": "Gera 10 hooks para um ângulo"
+                },
+                {
+                      "cmd": "*review",
+                      "desc": "Revisa criativo e potencial"
+                }
+          ],
+          "typicalWorkflow": [
+                "Define ângulo de mensagem",
+                "Escreve 10+ variações de hook",
+                "Testa ângulo com hooks principais",
+                "Expande para formatos",
+                "Constrói biblioteca vencedora"
+          ],
+          "pitfalls": [
+                "Criar apenas 1-2 criativos",
+                "Escolher formato antes do ângulo",
+                "Apegar-se emocionalmente ao criativo",
+                "Ignorar dados de performance"
+          ],
+          "collaboratesWith": [
+                "@creative-analyst",
+                "@molly-pittman",
+                "@tom-breeze",
+                "@ralph-burns"
+          ]
+    }
+  },
   { id:'tr-analyst',  name:'Ads Analyst',        icon:'🔎', squad:'traffic-masters', fn:'data',
     title:'Ad Account Audit Specialist', tagline:'Auditoria de conta e desperdício de verba',
     command:'/traffic-masters:agents:ads-analyst',
-    when:'Auditar conta de anúncios, performance caindo sem causa clara ou gastar sem resultado.' },
+    when:'Auditar conta de anúncios, performance caindo sem causa clara ou gastar sem resultado.' ,
+    detail: {
+          "role": "Auditor de Conta de Ads & Especialista em Otimização",
+          "identity": "Detetive forense de contas — encontra problemas estruturais que outros ignoram.",
+          "corePrinciples": [
+                "Estrutura determina performance",
+                "Desperdício é invisível até auditado",
+                "Sobreposição de audiência é silent killer",
+                "Quick wins primeiro"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*full-audit",
+                      "desc": "Auditoria completa da conta de ads"
+                },
+                {
+                      "cmd": "*waste",
+                      "desc": "Encontra desperdício de spend"
+                },
+                {
+                      "cmd": "*structure",
+                      "desc": "Avalia estrutura de campanha"
+                },
+                {
+                      "cmd": "*overlap",
+                      "desc": "Verifica sobreposição de audiência"
+                },
+                {
+                      "cmd": "*quick-wins",
+                      "desc": "Identifica oportunidades imediatas"
+                },
+                {
+                      "cmd": "*scorecard",
+                      "desc": "Pontua saúde da conta"
+                },
+                {
+                      "cmd": "*review",
+                      "desc": "Revisa recomendações de otimização"
+                }
+          ],
+          "typicalWorkflow": [
+                "Audita estrutura e naming",
+                "Analisa audiência e overlap",
+                "Revisa criativos e teste",
+                "Identifica spend desperdiçado",
+                "Prioriza ações rápidas"
+          ],
+          "pitfalls": [
+                "Focar apenas em métricas superficiais",
+                "Não conectar achados a ações",
+                "Ignorar eficiência de orçamento",
+                "Auditar sem roadmap de implementação"
+          ],
+          "collaboratesWith": [
+                "@performance-analyst",
+                "@pixel-specialist",
+                "@media-buyer"
+          ]
+    }
+  },
   { id:'tr-creative', name:'Creative Analyst',   icon:'🔬', squad:'traffic-masters', fn:'marketing',
     title:'Ad Creative Performance Analyst', tagline:'Quais criativos funcionam e por quê',
     command:'/traffic-masters:agents:creative-analyst',
-    when:'Analisar criativos, identificar padrões de performance ou quando o criativo está fatigado.' },
+    when:'Analisar criativos, identificar padrões de performance ou quando o criativo está fatigado.' ,
+    detail: {
+          "role": "Analista de Performance Criativa & Identificador de Padrões",
+          "identity": "Entende POR QUE criativos vencem — decompõe elementos e identifica padrões.",
+          "corePrinciples": [
+                "Entenda o POR QUE, não só O QUE",
+                "Decomponha em elementos testáveis",
+                "Detecte fadiga antes de falhar",
+                "Padrões > ads vencedores individuais"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*analyze-creative",
+                      "desc": "Análise profunda de performance criativa"
+                },
+                {
+                      "cmd": "*patterns",
+                      "desc": "Identifica padrões vencedores"
+                },
+                {
+                      "cmd": "*fatigue",
+                      "desc": "Verifica sinais de fadiga criativa"
+                },
+                {
+                      "cmd": "*competitive",
+                      "desc": "Analisa criativos de concorrentes"
+                },
+                {
+                      "cmd": "*score",
+                      "desc": "Pontua criativo em 5 pontos"
+                },
+                {
+                      "cmd": "*insights",
+                      "desc": "Gera relatório de insights criativos"
+                },
+                {
+                      "cmd": "*review",
+                      "desc": "Revisa efetividade da estratégia"
+                }
+          ],
+          "typicalWorkflow": [
+                "Decompõe criativo em componentes",
+                "Mede cada elemento independentemente",
+                "Identifica padrões vencedores",
+                "Detecta sinais de fadiga",
+                "Alimenta insights para próximo round"
+          ],
+          "pitfalls": [
+                "Medir apenas CPA geral",
+                "Ignorar padrões nos perdedores",
+                "Confundir correlação com causa",
+                "Não documentar insights"
+          ],
+          "collaboratesWith": [
+                "@ad-midas",
+                "@performance-analyst",
+                "@scale-optimizer"
+          ]
+    }
+  },
   { id:'tr-depesh',   name:'Depesh Mandalia',    icon:'📐', squad:'traffic-masters', fn:'marketing',
     title:'BPM Method Creator', tagline:'Escalar Facebook Ads com estrutura sistemática',
     command:'/traffic-masters:agents:depesh-mandalia',
-    when:'Escalar Facebook/Meta Ads de 5 para 6-7 dígitos com o BPM Method e CBO estruturado.' },
+    when:'Escalar Facebook/Meta Ads de 5 para 6-7 dígitos com o BPM Method e CBO estruturado.' ,
+    detail: {
+          "role": "Arquiteto de Scaling Facebook & Criador do BPM Method",
+          "identity": "Construiu a Wonderbly de $800K para $26.5M em 18 meses. Criador do The BPM Method.",
+          "corePrinciples": [
+                "AC-4 score antes de escalar",
+                "Teste pequeno, gradua vencedores",
+                "Criativo é a nova audiência",
+                "Simplificar é vencer"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*bpm",
+                      "desc": "Aplica o BPM Method completo"
+                },
+                {
+                      "cmd": "*ac4",
+                      "desc": "Pontua o negócio em AC-4"
+                },
+                {
+                      "cmd": "*avatar",
+                      "desc": "Constrói 5W Avatar em 20 minutos"
+                },
+                {
+                      "cmd": "*graduation",
+                      "desc": "Desenha sequência de Graduation Testing"
+                },
+                {
+                      "cmd": "*cbo",
+                      "desc": "Estrutura campanhas CBO"
+                },
+                {
+                      "cmd": "*scale",
+                      "desc": "Cria plano V-Scale ou H-Scale"
+                },
+                {
+                      "cmd": "*review",
+                      "desc": "Revisa alinhamento com BPM"
+                }
+          ],
+          "typicalWorkflow": [
+                "Calcula AC-4: Product/Audience/Offer/Funnel",
+                "Constrói 5W Avatar detalhado",
+                "Executa Graduation Testing",
+                "Estrutura CBO com recipes",
+                "Escala V (vertical) depois H (horizontal)"
+          ],
+          "pitfalls": [
+                "Escalar com AC-4 abaixo de 17",
+                "Testar múltiplas variáveis ao mesmo tempo",
+                "Ignorar arquitetura de audiência",
+                "Confundir automatizado com otimizado"
+          ],
+          "collaboratesWith": [
+                "@ralph-burns",
+                "@molly-pittman",
+                "@scale-optimizer",
+                "@pedro-sobral"
+          ]
+    }
+  },
   { id:'tr-fiscal',   name:'Fiscal',             icon:'💰', squad:'traffic-masters', fn:'business',
     title:'Ad Budget & Financial Manager', tagline:'Orçamentos, ROAS e fluxo de caixa para ads',
     command:'/traffic-masters:agents:fiscal',
-    when:'Definir orçamento de anúncios, gerenciar fluxo de caixa ou calcular metas de ROAS.' },
+    when:'Definir orçamento de anúncios, gerenciar fluxo de caixa ou calcular metas de ROAS.' ,
+    detail: {
+          "role": "Gerente de Orçamento & Estrategista Financeiro",
+          "identity": "CFO da operação de tráfego — garante viabilidade financeira do ad spend.",
+          "corePrinciples": [
+                "ROAS net, não gross",
+                "Cash flow é rei",
+                "Nunca escale mais rápido que o cash",
+                "Budget segue performance"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*budget",
+                      "desc": "Define orçamentos de ads"
+                },
+                {
+                      "cmd": "*cash-flow",
+                      "desc": "Modela impacto no cash flow"
+                },
+                {
+                      "cmd": "*profitability",
+                      "desc": "Calcula lucratividade verdadeira"
+                },
+                {
+                      "cmd": "*roas-target",
+                      "desc": "Define targets de ROAS"
+                },
+                {
+                      "cmd": "*payback",
+                      "desc": "Analisa payback periods"
+                },
+                {
+                      "cmd": "*scale-finance",
+                      "desc": "Plano financeiro para escala"
+                },
+                {
+                      "cmd": "*review",
+                      "desc": "Revisa saúde financeira"
+                }
+          ],
+          "typicalWorkflow": [
+                "Calcula ROAS net com margens",
+                "Modela cash flow spend vs revenue",
+                "Define payback period target",
+                "Aloca budget por performance",
+                "Planeja scaling sustentável"
+          ],
+          "pitfalls": [
+                "Usar ROAS gross sem contexto",
+                "Ignorar gap de cash flow",
+                "Escalar sem reserva 30-60 dias",
+                "Confundir receita com lucro"
+          ],
+          "collaboratesWith": [
+                "@scale-optimizer",
+                "@performance-analyst",
+                "@traffic-chief"
+          ]
+    }
+  },
   { id:'tr-kasim',    name:'Kasim Aslam',        icon:'🔍', squad:'traffic-masters', fn:'marketing',
     title:'Google Ads Authority', tagline:'Performance Max, Search e "You vs. Google"',
     command:'/traffic-masters:agents:kasim-aslam',
-    when:'Google Ads, otimizar Performance Max ou aplicar o framework adversarial "You vs. Google".' },
+    when:'Google Ads, otimizar Performance Max ou aplicar o framework adversarial "You vs. Google".' ,
+    detail: {
+          "role": "Estrategista Google Ads & Pioneiro do Framework Adversarial",
+          "identity": "Fundador da Solutions 8, maior agência Google Ads. Gerencia $100M+ de spend anual.",
+          "corePrinciples": [
+                "Google não está do seu lado",
+                "Tráfego primeiro, produto segundo",
+                "Diminishing returns ainda são returns",
+                "Entenda o purpose, não os botões"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*google-setup",
+                      "desc": "Setup de conta Google com 4 campaign types"
+                },
+                {
+                      "cmd": "*pmax",
+                      "desc": "Constrói e otimiza Performance Max"
+                },
+                {
+                      "cmd": "*adversarial",
+                      "desc": "Aplica framework You vs Google"
+                },
+                {
+                      "cmd": "*traffic-first",
+                      "desc": "Identifica traffic pools"
+                },
+                {
+                      "cmd": "*conversions",
+                      "desc": "Desenha arquitetura de conversão"
+                },
+                {
+                      "cmd": "*scale-google",
+                      "desc": "Escala Google com bell curve"
+                },
+                {
+                      "cmd": "*review",
+                      "desc": "Revisa alinhamento Solutions 8"
+                }
+          ],
+          "typicalWorkflow": [
+                "Mapeia 4 tipos de campanha (branded/competitor/intent/remarketing)",
+                "Estrutura PMax com audience signals",
+                "Configura secondary conversions",
+                "Otimiza placement quality",
+                "Escala respeitando diminishing returns"
+          ],
+          "pitfalls": [
+                "Confiar em recomendações do Google cegamente",
+                "Consolidar demais os asset groups",
+                "Ignorar placement quality",
+                "Abandonar canais antes da maturidade"
+          ],
+          "collaboratesWith": [
+                "@ralph-burns",
+                "@performance-analyst",
+                "@molly-pittman"
+          ]
+    }
+  },
   { id:'tr-buyer',    name:'Media Buyer',        icon:'🖥️', squad:'traffic-masters', fn:'marketing',
     title:'Cross-Platform Media Buyer', tagline:'Setup, otimização diária e multi-plataforma',
     command:'/traffic-masters:agents:media-buyer',
-    when:'Configurar campanhas, gerenciar otimização diária ou gerenciar campanhas multi-plataforma.' },
+    when:'Configurar campanhas, gerenciar otimização diária ou gerenciar campanhas multi-plataforma.' ,
+    detail: {
+          "role": "Especialista em Media Buying Multi-Platform & Execução",
+          "identity": "Backbone operacional — transforma estratégia em campanhas vivas e otimizadas.",
+          "corePrinciples": [
+                "Estrutura determina desempenho",
+                "Nomes consistentes = dados encontráveis",
+                "Comece pequeno, escale com dados",
+                "Rotina diária é não-negociável"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*setup",
+                      "desc": "Setup de campanha em qualquer plataforma"
+                },
+                {
+                      "cmd": "*structure",
+                      "desc": "Desenha estrutura de campanha"
+                },
+                {
+                      "cmd": "*optimize",
+                      "desc": "Checklist de otimização diária"
+                },
+                {
+                      "cmd": "*bid",
+                      "desc": "Recomenda bid strategy"
+                },
+                {
+                      "cmd": "*audience",
+                      "desc": "Constrói estratégia de audiência"
+                },
+                {
+                      "cmd": "*multi-platform",
+                      "desc": "Desenha estratégia multi-plataforma"
+                },
+                {
+                      "cmd": "*review",
+                      "desc": "Revisa estrutura e configurações"
+                }
+          ],
+          "typicalWorkflow": [
+                "Estrutura conta com naming conventions",
+                "Configura objetivos e audiências",
+                "Escolhe bid strategy com dados",
+                "Executa rotina de otimização diária",
+                "Documenta learnings"
+          ],
+          "pitfalls": [
+                "Estrutura inconsistente ou caótica",
+                "Testar múltiplas variáveis ao mesmo tempo",
+                "Ignorar sinais de fadiga criativa",
+                "Não documentar aprendizados"
+          ],
+          "collaboratesWith": [
+                "@traffic-chief",
+                "@ad-midas",
+                "@pixel-specialist",
+                "@scale-optimizer"
+          ]
+    }
+  },
   { id:'tr-molly',    name:'Molly Pittman',      icon:'👑', squad:'traffic-masters', fn:'marketing',
     title:'The Conversion Queen', tagline:'Facebook Ads e Ad Grid para e-commerce',
     command:'/traffic-masters:agents:molly-pittman',
-    when:'Construir sistemas de anúncios Facebook do zero com Ad Grid e estratégia de temperatura.' },
+    when:'Construir sistemas de anúncios Facebook do zero com Ad Grid e estratégia de temperatura.' ,
+    detail: {
+          "role": "Construtora de Sistemas de Tráfego & Estrategista de Temperature",
+          "identity": "VP de Marketing na DigitalMarketer aos 24. CEO da Smart Marketer. A Conversion Queen.",
+          "corePrinciples": [
+                "Grid primeiro (avatars x hooks)",
+                "Traffic temperature (cold/warm/hot)",
+                "Entre na conversa deles",
+                "Horizontal > vertical scaling"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*grid",
+                      "desc": "Constrói Ad Grid avatars x hooks"
+                },
+                {
+                      "cmd": "*traffic-engine",
+                      "desc": "Constrói sistema de 9 passos completo"
+                },
+                {
+                      "cmd": "*hooks",
+                      "desc": "Desenvolve hooks para avatar"
+                },
+                {
+                      "cmd": "*temperature",
+                      "desc": "Aplica estratégia de temperature"
+                },
+                {
+                      "cmd": "*scale",
+                      "desc": "Cria plano de escalação"
+                },
+                {
+                      "cmd": "*copy",
+                      "desc": "Escreve copy com Enter/Transition/CTA"
+                },
+                {
+                      "cmd": "*review",
+                      "desc": "Revisa alinhamento com Traffic Engine"
+                }
+          ],
+          "typicalWorkflow": [
+                "Define avatars (2-4 segmentos)",
+                "Define hooks (2-4 tipos)",
+                "Escreve copy única por célula",
+                "Testa todas combinações",
+                "Aplica traffic temperature"
+          ],
+          "pitfalls": [
+                "Lançar sem construir o Grid",
+                "Usar hook único para todos os avatars",
+                "Ignorar temperatura de tráfego",
+                "Focar só em vertical scaling"
+          ],
+          "collaboratesWith": [
+                "@ralph-burns",
+                "@depesh-mandalia",
+                "@nicholas-kusmich"
+          ]
+    }
+  },
   { id:'tr-nicholas', name:'Nicholas Kusmich',   icon:'🎯', squad:'traffic-masters', fn:'marketing',
     title:'Contextual Congruence Pioneer', tagline:'Ads nativos com alto ROI para personal brands',
     command:'/traffic-masters:agents:nicholas-kusmich',
-    when:'Facebook Ads que parecem nativos, filosofia Give-Give-Give-Ask para coaches/consultores.' },
+    when:'Facebook Ads que parecem nativos, filosofia Give-Give-Give-Ask para coaches/consultores.' ,
+    detail: {
+          "role": "Estrategista de High-ROI & Pioneiro da Congruência Contextual",
+          "identity": "Ex-pastor virou marketer. Criou a H2H Media Group com ROI de até 30.973%.",
+          "corePrinciples": [
+                "Dê, dê, dê, peça",
+                "Facebook é plataforma social, não commerce",
+                "4% mágico (20% do 20%)",
+                "Tática 10%, estratégia 90%"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*congruence",
+                      "desc": "Aplica Contextual Congruence"
+                },
+                {
+                      "cmd": "*four-ms",
+                      "desc": "Constrói com os Four Ms"
+                },
+                {
+                      "cmd": "*sage",
+                      "desc": "Cria lead magnet SAGE-compliant"
+                },
+                {
+                      "cmd": "*trifecta",
+                      "desc": "Constrói targeting Trifecta"
+                },
+                {
+                      "cmd": "*give",
+                      "desc": "Desenha sequência Give-Give-Give-Ask"
+                },
+                {
+                      "cmd": "*avatar-4pct",
+                      "desc": "Identifica avatar 4% hiper-específico"
+                },
+                {
+                      "cmd": "*review",
+                      "desc": "Revisa Contextual Congruence"
+                }
+          ],
+          "typicalWorkflow": [
+                "Identifica target 4% do 20%",
+                "Cria lead magnet SAGE",
+                "Desenha messaging que entende",
+                "Constrói follow-up nurture",
+                "Escala via audiences de influenciador"
+          ],
+          "pitfalls": [
+                "Começar com tática, não estratégia",
+                "Almejar massa em vez de ressonância",
+                "Pedir antes de dar suficiente",
+                "Ignorar contexto da plataforma"
+          ],
+          "collaboratesWith": [
+                "@molly-pittman",
+                "@tom-breeze",
+                "@depesh-mandalia"
+          ]
+    }
+  },
   { id:'tr-pedro',    name:'Pedro Sobral',       icon:'🥷', squad:'traffic-masters', fn:'marketing',
     title:'Ninja Supremo do Tráfego', tagline:'Meta Ads no mercado brasileiro e LATAM',
     command:'/traffic-masters:agents:pedro-sobral',
-    when:'Gestão de tráfego para mercados BR/LATAM, Meta Ads em português e formação de gestores.' },
+    when:'Gestão de tráfego para mercados BR/LATAM, Meta Ads em português e formação de gestores.' ,
+    detail: {
+          "role": "Gestor de Tráfego Pioneiro & Educador Brasil/LATAM",
+          "identity": "O Ninja Supremo do Tráfego. Fundou a Comunidade Sobral. R$350M+ gerenciados.",
+          "corePrinciples": [
+                "Vai lá e faz (execute)",
+                "Criativo é o novo público",
+                "Cada centavo é um teste",
+                "Nunca confie cegamente no algoritmo"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*campanha",
+                      "desc": "Estrutura campanha Meta em 3 tipos"
+                },
+                {
+                      "cmd": "*criativo",
+                      "desc": "Cria estratégia de criativos"
+                },
+                {
+                      "cmd": "*publico",
+                      "desc": "Define estratégia de públicos"
+                },
+                {
+                      "cmd": "*lancamento",
+                      "desc": "Monta estrutura de lançamento"
+                },
+                {
+                      "cmd": "*teste",
+                      "desc": "Desenha matriz de testes"
+                },
+                {
+                      "cmd": "*gestor",
+                      "desc": "Treina gestor com a metodologia"
+                },
+                {
+                      "cmd": "*review",
+                      "desc": "Revisa campanhas Meta"
+                }
+          ],
+          "typicalWorkflow": [
+                "Define 3 tipos de campanha (audiência/leads/vendas)",
+                "Estrutura públicos quentes/mornos/frios",
+                "Cria criativos testáveis",
+                "Executa testes isolados",
+                "Escala o que funciona"
+          ],
+          "pitfalls": [
+                "Confiar cegamente na IA da plataforma",
+                "Testar múltiplas variáveis",
+                "Ignorar o passo anterior de estratégia",
+                "Paralisia por consumir conteúdo"
+          ],
+          "collaboratesWith": [
+                "@depesh-mandalia",
+                "@molly-pittman",
+                "@nicholas-kusmich"
+          ]
+    }
+  },
   { id:'tr-perf',     name:'Performance Analyst',icon:'📊', squad:'traffic-masters', fn:'data',
     title:'Campaign Data Analyst', tagline:'Análise de performance e relatórios',
     command:'/traffic-masters:agents:performance-analyst',
-    when:'Analisar performance de campanhas, construir dashboards ou decidir com base em dados.' },
+    when:'Analisar performance de campanhas, construir dashboards ou decidir com base em dados.' ,
+    detail: {
+          "role": "Analista de Performance de Tráfego & Storyteller de Dados",
+          "identity": "Traduz dados brutos em insights acionáveis — constrói dashboards de decisão.",
+          "corePrinciples": [
+                "Dados sem contexto é ruído",
+                "Significância estatística antes da decisão",
+                "Conecte métricas de ads a outcomes",
+                "Trend lines > snapshots"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*analyze",
+                      "desc": "Análise completa de performance de campanha"
+                },
+                {
+                      "cmd": "*dashboard",
+                      "desc": "Desenha dashboard de relatório"
+                },
+                {
+                      "cmd": "*funnel",
+                      "desc": "Análise de funil — encontra vazamentos"
+                },
+                {
+                      "cmd": "*significance",
+                      "desc": "Verifica significância estatística"
+                },
+                {
+                      "cmd": "*report",
+                      "desc": "Cria relatório de performance"
+                },
+                {
+                      "cmd": "*benchmark",
+                      "desc": "Compara contra benchmarks"
+                },
+                {
+                      "cmd": "*review",
+                      "desc": "Revisa e recomenda ações"
+                }
+          ],
+          "typicalWorkflow": [
+                "Define métrica objetivo principal",
+                "Compara current vs benchmark",
+                "Encontra vazamento no funil",
+                "Valida significância estatística",
+                "Recomenda ações data-driven"
+          ],
+          "pitfalls": [
+                "Apresentar dados sem contexto",
+                "Decidir antes da significância",
+                "Ignorar attribution windows",
+                "Confundir métricas de liderança e atraso"
+          ],
+          "collaboratesWith": [
+                "@ads-analyst",
+                "@creative-analyst",
+                "@fiscal"
+          ]
+    }
+  },
   { id:'tr-pixel',    name:'Pixel Specialist',   icon:'🔌', squad:'traffic-masters', fn:'marketing',
     title:'Tracking & Attribution Specialist', tagline:'Pixels, conversões e rastreamento server-side',
     command:'/traffic-masters:agents:pixel-specialist',
-    when:'Rastreamento quebrado, dados imprecisos, mudanças iOS/privacidade ou tracking server-side.' },
+    when:'Rastreamento quebrado, dados imprecisos, mudanças iOS/privacidade ou tracking server-side.' ,
+    detail: {
+          "role": "Especialista em Rastreamento, Pixels & Attribution",
+          "identity": "Herói invisível da operação de tráfego — sem rastreamento, é tudo chute.",
+          "corePrinciples": [
+                "Sem rastreamento, é chute",
+                "Browser + server, sempre",
+                "Teste antes ao vivo",
+                "Privacy-forward, não reativo"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*setup",
+                      "desc": "Setup da infraestrutura de rastreamento"
+                },
+                {
+                      "cmd": "*audit",
+                      "desc": "Audita rastreamento existente"
+                },
+                {
+                      "cmd": "*capi",
+                      "desc": "Implementa Conversions API"
+                },
+                {
+                      "cmd": "*ios",
+                      "desc": "Configura iOS 14.5+ requirements"
+                },
+                {
+                      "cmd": "*utm",
+                      "desc": "Desenha estratégia UTM"
+                },
+                {
+                      "cmd": "*debug",
+                      "desc": "Debug de issues de rastreamento"
+                },
+                {
+                      "cmd": "*review",
+                      "desc": "Revisa completude do setup"
+                }
+          ],
+          "typicalWorkflow": [
+                "Implementa pixels base + eventos",
+                "Configura server-side tracking",
+                "Testa todos os eventos em debug mode",
+                "Audita mensalmente para quebras",
+                "Adapta a privacy changes"
+          ],
+          "pitfalls": [
+                "Assumir que o rastreamento funciona",
+                "Ignorar iOS e privacy changes",
+                "Testar ao vivo sem sandbox",
+                "Só browser-side sem server"
+          ],
+          "collaboratesWith": [
+                "@media-buyer",
+                "@performance-analyst",
+                "@ads-analyst"
+          ]
+    }
+  },
   { id:'tr-ralph',    name:'Ralph Burns',        icon:'🎙️', squad:'traffic-masters', fn:'marketing',
     title:'Performance Marketing Pioneer', tagline:'Full-funnel paid social e nCAC/MER',
     command:'/traffic-masters:agents:ralph-burns',
-    when:'Estratégia full-funnel, análise nCAC/MER ou escalar negócios com propósito.' },
+    when:'Estratégia full-funnel, análise nCAC/MER ou escalar negócios com propósito.' ,
+    detail: {
+          "role": "Estrategista Performance Marketing Full-Funnel",
+          "identity": "Fundou a Tier 11, primeira agência de Facebook ads. $100M-200M+ gerenciados.",
+          "corePrinciples": [
+                "Offer primeiro (tráfego sem offer = nada)",
+                "nCAC, não ROAS",
+                "Cold traffic = escala",
+                "Criativo diverso = sobrevivência"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*five-levels",
+                      "desc": "Estrutura conta em 5 níveis de tráfego"
+                },
+                {
+                      "cmd": "*creative-lab",
+                      "desc": "Executa Creative Lab em 7 passos"
+                },
+                {
+                      "cmd": "*ncac",
+                      "desc": "Calcula nCAC e targets"
+                },
+                {
+                      "cmd": "*mer",
+                      "desc": "Calcula Marketing Efficiency Ratio"
+                },
+                {
+                      "cmd": "*andromeda",
+                      "desc": "Adapta para a era Andromeda"
+                },
+                {
+                      "cmd": "*conversion-arch",
+                      "desc": "Audita e otimiza Conversion Architecture"
+                },
+                {
+                      "cmd": "*review",
+                      "desc": "Revisa alinhamento com Tier 11"
+                }
+          ],
+          "typicalWorkflow": [
+                "Valida offer com customer research",
+                "Estrutura 70-80% em cold traffic",
+                "Executa Creative Lab research-first",
+                "Calcula nCAC, não ROAS",
+                "Diversifica formatos de criativo"
+          ],
+          "pitfalls": [
+                "Focar em tráfego sem validar a offer",
+                "Usar ROAS sem nCAC",
+                "Sub-investir em cold traffic",
+                "Homogeneidade criativa na era da IA"
+          ],
+          "collaboratesWith": [
+                "@molly-pittman",
+                "@kasim-aslam",
+                "@depesh-mandalia"
+          ]
+    }
+  },
   { id:'tr-scale',    name:'Scale Optimizer',    icon:'🚀', squad:'traffic-masters', fn:'marketing',
     title:'Campaign Scaling Specialist', tagline:'Escalar verba sem CPA explosivo',
     command:'/traffic-masters:agents:scale-optimizer',
-    when:'Escalar investimento em anúncios, CPA aumenta com budget ou diminishing returns.' },
+    when:'Escalar investimento em anúncios, CPA aumenta com budget ou diminishing returns.' ,
+    detail: {
+          "role": "Especialista em Escalação de Campanha & Eficiência",
+          "identity": "Domina a ciência de escalar rentavelmente — sabe quando e como expandir.",
+          "corePrinciples": [
+                "Valide antes de escalar",
+                "Vertical 20-30% a cada 48-72h",
+                "CPA marginal é real, não a média",
+                "Criativo deve acompanhar o pace"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*scale-plan",
+                      "desc": "Cria plano de escalação"
+                },
+                {
+                      "cmd": "*diagnose-plateau",
+                      "desc": "Diagnostica plateau na escalação"
+                },
+                {
+                      "cmd": "*horizontal",
+                      "desc": "Planeja expansão horizontal"
+                },
+                {
+                      "cmd": "*budget",
+                      "desc": "Otimiza alocação de budget"
+                },
+                {
+                      "cmd": "*safeguards",
+                      "desc": "Setup de safeguards com auto-rules"
+                },
+                {
+                      "cmd": "*platform-expand",
+                      "desc": "Planeja expansão para nova plataforma"
+                },
+                {
+                      "cmd": "*review",
+                      "desc": "Revisa estratégia e pace"
+                }
+          ],
+          "typicalWorkflow": [
+                "Valida lucratividade por 5+ dias",
+                "Aumenta 20-30% a cada 48-72h",
+                "Monitora CPA marginal",
+                "Expande horizontal quando plateau",
+                "Gerencia cash flow"
+          ],
+          "pitfalls": [
+                "Escalar o que não foi validado",
+                "Aumentar 2x em um dia",
+                "Ignorar diminishing returns",
+                "Escalar sem criativo fresco"
+          ],
+          "collaboratesWith": [
+                "@depesh-mandalia",
+                "@media-buyer",
+                "@fiscal",
+                "@creative-analyst"
+          ]
+    }
+  },
   { id:'tr-tom',      name:'Tom Breeze',         icon:'🎬', squad:'traffic-masters', fn:'marketing',
     title:'YouTube Ads Authority', tagline:'ADUCATE Formula e publicidade baseada em intenção',
     command:'/traffic-masters:agents:tom-breeze',
-    when:'Anúncios no YouTube, scripts de vídeo, funis YouTube ou campanhas TrueView.' },
+    when:'Anúncios no YouTube, scripts de vídeo, funis YouTube ou campanhas TrueView.' ,
+    detail: {
+          "role": "Arquiteto de Publicidade YouTube & Estrategista de Intent",
+          "identity": "Máxima autoridade em YouTube ads — fundou a Viewability. 1.700+ campanhas de vídeo.",
+          "corePrinciples": [
+                "YouTube é intent (lean in)",
+                "ADUCATE educa dentro do ad",
+                "Ato I emocional, Ato II lógico",
+                "Autenticidade > qualidade de produção"
+          ],
+          "keyCommands": [
+                {
+                      "cmd": "*aducate",
+                      "desc": "Escreve script YouTube ADUCATE"
+                },
+                {
+                      "cmd": "*three-act",
+                      "desc": "Estrutura vídeo em 3 atos"
+                },
+                {
+                      "cmd": "*cascade",
+                      "desc": "Constrói funil de vídeo em cascata"
+                },
+                {
+                      "cmd": "*adventure",
+                      "desc": "Desenha Choose Your Own Adventure"
+                },
+                {
+                      "cmd": "*targeting",
+                      "desc": "Constrói targeting YouTube"
+                },
+                {
+                      "cmd": "*relevancy",
+                      "desc": "Otimiza primeira janela de 10s"
+                },
+                {
+                      "cmd": "*review",
+                      "desc": "Revisa alinhamento com ADUCATE"
+                }
+          ],
+          "typicalWorkflow": [
+                "Pesquisa intent keywords",
+                "Escreve script ADUCATE",
+                "Estrutura 3 atos (emocional/lógico/ação)",
+                "Testa relevancy na janela inicial",
+                "Cria cascata de remarketing"
+          ],
+          "pitfalls": [
+                "Tratar YouTube como Facebook",
+                "Baixa retenção = falha (é filtro)",
+                "Priorizar produção alta > autenticidade",
+                "Ignorar intent do viewer"
+          ],
+          "collaboratesWith": [
+                "@ad-midas",
+                "@nicholas-kusmich",
+                "@depesh-mandalia"
+          ]
+    }
+  },
 ];

@@ -984,6 +984,8 @@ function renderAgents() {
     card.dataset.squad  = agent.squad;
     card.dataset.fn     = agent.fn;
     card.dataset.search = (agent.name+' '+agent.title+' '+agent.tagline+' '+agent.when+' '+(squad?squad.name:'')).toLowerCase();
+    card.style.cursor   = 'pointer';
+    card.onclick        = () => { location.href = 'agent.html?id=' + encodeURIComponent(agent.id); };
 
     const squadColor = squad ? squad.color : '#7cd3ff';
     const squadName  = squad ? squad.name  : agent.squad;
