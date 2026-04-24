@@ -398,6 +398,7 @@
 
     /* ── AGENTS MAIN ──────────────────────────────────── */
     #agents-panel { display: none; position: relative; z-index: 1; }
+    #agents-panel.visible { display: block; }
     #agents-main {
       max-width: 1400px; margin: 0 auto;
       padding: 28px 32px 80px;
@@ -616,13 +617,11 @@ let currentMode = 'skills';
 
 function setMode(mode) {
   currentMode = mode;
-  document.getElementById('skills-panel').style.display = mode === 'skills' ? '' : 'none';
-  document.getElementById('agents-panel').style.display = mode === 'agents' ? '' : 'none';
+  document.getElementById('skills-panel').style.display = mode === 'skills' ? 'block' : 'none';
+  document.getElementById('agents-panel').classList.toggle('visible', mode === 'agents');
   document.getElementById('tab-skills').classList.toggle('active', mode === 'skills');
   document.getElementById('tab-agents').classList.toggle('active', mode === 'agents');
 
-  // sync search
-  const q = document.getElementById('search').value.toLowerCase().trim();
   if (mode === 'skills') applyFilters();
   else applyAgentFilters();
 }
@@ -1226,7 +1225,6 @@ document.addEventListener('keydown', e => {
 // Init
 render();
 renderAgents();
-document.getElementById('agents-panel').style.display = 'none';
 
 // Update skills count in mode tab
 document.getElementById('mode-cnt-skills').textContent = document.querySelectorAll('.s-card').length;
