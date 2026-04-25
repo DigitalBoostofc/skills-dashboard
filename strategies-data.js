@@ -1079,6 +1079,90 @@ const STRATEGIES_DB = [
     ]
   },
 
+  /* ─────────────────────────────────────────────────────────────
+     20. CRIAÇÃO DE VSL DE ALTA CONVERSÃO
+     ───────────────────────────────────────────────────────────── */
+  {
+    id: 'vsl-creation',
+    title: 'Criação de VSL de Alta Conversão',
+    icon: '🎬',
+    category: 'sales',
+    tagline: 'Do RMBC research ao VSL no ar — pesquisa, mecanismo, copy e tráfego',
+    description: 'Use quando precisar criar uma Video Sales Letter de verdade — não um vídeo de pitch. Combina RMBC de Stefan Georgi com Grand Slam Offer (Hormozi), prova (Bencivenga), persuasão (Cialdini/Blair), estrutura clássica de VSL (Benson) e distribuição em Meta/YouTube. Cada fase alimenta a próxima.',
+    difficulty: 'hard',
+    timeEstimate: '4-8 semanas',
+    outcome: 'VSL com mecanismo único, proof stack robusto, oferta irresistível e funil de tráfego configurado para teste e escala',
+    phases: [
+      {
+        name: 'Research profundo & inteligência de mercado',
+        description: '40% do trabalho está aqui — pular esta fase mata a VSL',
+        steps: [
+          { agent: 'cm-georgi',     command: '*research',       purpose: 'Plano de pesquisa RMBC para o mercado' },
+          { agent: 'cm-joanna',     command: '*mine',           purpose: 'Message mining — voice of customer real' },
+          { agent: 'cm-schwartz',   command: '*diagnose',       purpose: 'Diagnosticar nível de consciência e sofisticação' },
+          { agent: 'data-avinash',  command: '*see',            purpose: 'Análise See-Think-Do-Care da jornada' },
+          { agent: 'hz-leads',      command: '*core-4',         purpose: 'Mapear onde a audiência está (Core 4)' },
+        ]
+      },
+      {
+        name: 'Oferta, mecanismo & Big Idea',
+        description: 'Antes de qualquer copy: a substância',
+        steps: [
+          { agent: 'hz-offers',     command: '*grand-slam',     purpose: 'Construir a Grand Slam Offer' },
+          { agent: 'hz-pricing',    command: '*premium',        purpose: 'Posicionamento premium e justificativa' },
+          { agent: 'cm-georgi',     command: '*mechanism',      purpose: 'Two-Part Unique Mechanism' },
+          { agent: 'cm-deutsch',    command: '*big-idea',       purpose: 'A Big Marketing Idea que sustenta a VSL' },
+          { agent: 'cm-evaldo',     command: '*one-belief',     purpose: 'A One Belief que o lead deve adotar' },
+        ]
+      },
+      {
+        name: 'Estrutura & brief do VSL',
+        description: 'O blueprint antes de escrever uma palavra',
+        steps: [
+          { agent: 'cm-georgi',     command: '*brief',          purpose: 'Brief detalhado RMBC (acelera 3-5×)' },
+          { agent: 'cm-benson',     command: '*vsl',            purpose: 'Estrutura 5-step do criador do VSL' },
+          { agent: 'cm-georgi',     command: '*vsl',            purpose: 'Framework de 7 seções para VSL' },
+          { agent: 'cm-makepeace',  command: '*outline',        purpose: 'Arquitetura 17-step para profundidade' },
+        ]
+      },
+      {
+        name: 'Hook, abertura & fluxo',
+        description: 'Os primeiros 3-30 segundos decidem 80% do resultado',
+        steps: [
+          { agent: 'hz-hooks',      command: '*hooks',          purpose: '10 hooks testáveis por ângulo' },
+          { agent: 'cm-sugarman',   command: '*slide',          purpose: 'Slippery Slide — fluxo irresistível' },
+          { agent: 'cm-halbert',    command: '*story',          purpose: 'Abertura crua orientada a história' },
+          { agent: 'cm-deutsch',    command: '*fascinations',   purpose: 'Fascinations com mecanismo misterioso' },
+        ]
+      },
+      {
+        name: 'Copy persuasivo & camadas de prova',
+        description: 'O coração da VSL — onde a transformação acontece',
+        steps: [
+          { agent: 'cm-benson',     command: '*magnify',        purpose: 'Amplificar o problema antes da solução' },
+          { agent: 'cm-cialdini',   command: '*pre-suade',      purpose: 'Pre-suasão antes do pitch principal' },
+          { agent: 'cm-blair',      command: '*triggers',       purpose: 'Aplicar os 5 gatilhos emocionais' },
+          { agent: 'cm-collier',    command: '*mental-movie',   purpose: 'Mental movie sensorial vívido' },
+          { agent: 'cm-bencivenga', command: '*proof-stack',    purpose: 'Proof stack com os 11 elementos' },
+          { agent: 'cm-benson',     command: '*nlp',            purpose: 'Camadas de NLP no script' },
+          { agent: 'cm-parris',     command: '*fascinations',   purpose: 'Bullets de fascinação para a oferta' },
+        ]
+      },
+      {
+        name: 'Produção, tráfego & otimização',
+        description: 'A VSL no ar com tracking e plano de teste',
+        steps: [
+          { agent: 'tr-tom',        command: '*aducate',        purpose: 'Script ADUCATE para versão YouTube' },
+          { agent: 'tr-pedro',      command: '*campanha',       purpose: 'Estrutura de campanha Meta (BR)' },
+          { agent: 'tr-pixel',      command: '*setup',          purpose: 'Tracking server-side antes do go-live' },
+          { agent: 'cm-claude-h',   command: '*test-plan',      purpose: 'Plano de testes A/B científico' },
+          { agent: 'tr-creative',   command: '*patterns',       purpose: 'Identificar padrões vencedores' },
+          { agent: 'cm-benson',     command: '*review',         purpose: 'Review final — pacing, mecanismo, NLP' },
+        ]
+      },
+    ]
+  },
+
 ];
 
 const STRATEGIES_COUNT = STRATEGIES_DB.length;
