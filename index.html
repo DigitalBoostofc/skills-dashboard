@@ -17,8 +17,8 @@
       --border:    rgba(255,255,255,0.05);
       --border-h:  rgba(255,255,255,0.10);
       --text:      #ffffff;
-      --text-2:    rgba(255,255,255,0.55);
-      --text-3:    rgba(255,255,255,0.25);
+      --text-2:    rgba(255,255,255,0.62);
+      --text-3:    rgba(255,255,255,0.42);
       --accent:    #00f2ff;
       --magenta:   #ff00e5;
       --lime:      #adff00;
@@ -29,6 +29,24 @@
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
+
+    /* skip-to-content — acessibilidade por teclado */
+    .skip-link {
+      position: fixed; top: -100px; left: 16px; z-index: 9999;
+      background: var(--accent); color: #000; font-family: var(--ff-mono);
+      font-size: 12px; font-weight: 700; padding: 8px 16px; border-radius: 8px;
+      text-decoration: none; letter-spacing: .06em; text-transform: uppercase;
+      transition: top .15s;
+    }
+    .skip-link:focus { top: 80px; }
+
+    /* focus ring visível para navegação por teclado */
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+    button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
     body {
       font-family: var(--ff-body);
       background: var(--bg);
@@ -173,8 +191,8 @@
       backdrop-filter: blur(12px);
       color: var(--text); border-radius: 10px;
       padding: 0 36px 0 38px;
-      font-size: 11px; font-family: var(--ff-mono);
-      letter-spacing: .08em; text-transform: uppercase;
+      font-size: 13px; font-family: var(--ff-mono);
+      letter-spacing: .02em; text-transform: none;
       outline: none;
       transition: border-color .2s, box-shadow .2s, background .2s;
     }
@@ -183,7 +201,7 @@
       box-shadow: 0 0 0 3px rgba(0,242,255,0.07), 0 0 16px rgba(0,242,255,0.08);
       background: rgba(0,242,255,0.03);
     }
-    .search-wrap input::placeholder { color: var(--text-3); text-transform: uppercase; }
+    .search-wrap input::placeholder { color: var(--text-3); }
     .s-ico {
       position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
       color: var(--text-3); font-size: 14px; pointer-events: none;
@@ -222,8 +240,8 @@
       border: 1px solid transparent; border-radius: 20px;
       background: transparent;
       color: var(--text-2);
-      font-family: var(--ff-mono); font-size: 10px; font-weight: 700;
-      letter-spacing: .1em; text-transform: uppercase;
+      font-family: var(--ff-mono); font-size: 11px; font-weight: 700;
+      letter-spacing: .06em; text-transform: uppercase;
       cursor: pointer;
       transition: color .2s, background .2s, border-color .2s, box-shadow .2s;
       white-space: nowrap;
@@ -330,14 +348,13 @@
     .card-name {
       font-family: var(--ff-display);
       font-size: 15px; font-weight: 800;
-      color: var(--text); line-height: 1.3; letter-spacing: .01em;
-      text-transform: uppercase;
+      color: var(--text); line-height: 1.3; letter-spacing: .02em;
     }
     .cmd-group {
       display: flex; align-items: center; gap: 6px; flex-shrink: 0;
     }
     .copy-btn {
-      width: 28px; height: 28px;
+      width: 34px; height: 34px;
       display: flex; align-items: center; justify-content: center;
       border-radius: 8px; border: 1px solid var(--border);
       background: transparent; cursor: pointer;
@@ -546,7 +563,6 @@
       font-family: var(--ff-display);
       font-size: 18px; font-weight: 900;
       color: var(--text); letter-spacing: .02em;
-      text-transform: uppercase;
       margin-bottom: 6px; line-height: 1.2;
     }
     .strat-tagline {
@@ -775,8 +791,8 @@
       border: 1px solid transparent; border-radius: 20px;
       background: transparent;
       color: var(--text-2);
-      font-family: var(--ff-mono); font-size: 9.5px; font-weight: 700;
-      letter-spacing: .08em; text-transform: uppercase;
+      font-family: var(--ff-mono); font-size: 11px; font-weight: 700;
+      letter-spacing: .05em; text-transform: uppercase;
       cursor: pointer;
       transition: color .2s, background .2s, border-color .2s, box-shadow .2s;
       white-space: nowrap;
@@ -854,7 +870,6 @@
       font-family: var(--ff-display);
       font-size: 15px; font-weight: 800;
       color: var(--text); line-height: 1.2; letter-spacing: .02em;
-      text-transform: uppercase;
       white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
     .a-title {
@@ -863,7 +878,7 @@
       margin-top: 2px;
     }
     .a-copy-btn {
-      width: 30px; height: 30px; flex-shrink: 0;
+      width: 36px; height: 36px; flex-shrink: 0;
       display: flex; align-items: center; justify-content: center;
       border-radius: 9px; border: 1px solid var(--border);
       background: transparent; cursor: pointer;
@@ -963,9 +978,10 @@
 </head>
 <body>
 
+<a href="#main" class="skip-link">Ir para o conteúdo</a>
 <div class="scanline-fx"></div>
 
-<header>
+<header role="banner">
   <div class="logo">
     <div class="logo-mark">⌘</div>
     <div>
@@ -974,20 +990,20 @@
     </div>
   </div>
 
-  <nav class="header-nav">
-    <button class="nav-tab active" id="tab-skills" onclick="setMode('skills')">
+  <nav class="header-nav" role="navigation" aria-label="Seções do dashboard">
+    <button class="nav-tab active" id="tab-skills" onclick="setMode('skills')" aria-label="Skills (Alt+1)" title="Alt+1">
       ⌘ <span class="nav-tab-label">Skills</span>
-      <span class="nav-badge" id="mode-cnt-skills">0</span>
+      <span class="nav-badge" id="mode-cnt-skills" aria-live="polite">0</span>
     </button>
-    <button class="nav-tab" id="tab-agents" onclick="setMode('agents')">
+    <button class="nav-tab" id="tab-agents" onclick="setMode('agents')" aria-label="Agentes (Alt+2)" title="Alt+2">
       🤖 <span class="nav-tab-label">Agentes</span>
-      <span class="nav-badge" id="mode-cnt-agents">0</span>
+      <span class="nav-badge" id="mode-cnt-agents" aria-live="polite">0</span>
     </button>
-    <button class="nav-tab" id="tab-strategies" onclick="setMode('strategies')">
+    <button class="nav-tab" id="tab-strategies" onclick="setMode('strategies')" aria-label="Estratégias (Alt+3)" title="Alt+3">
       🎯 <span class="nav-tab-label">Estratégias</span>
-      <span class="nav-badge" id="mode-cnt-strategies">0</span>
+      <span class="nav-badge" id="mode-cnt-strategies" aria-live="polite">0</span>
     </button>
-    <button class="nav-tab" id="tab-guide" onclick="setMode('guide')">
+    <button class="nav-tab" id="tab-guide" onclick="setMode('guide')" aria-label="Como Usar (Alt+4)" title="Alt+4">
       📖 <span class="nav-tab-label">Como Usar</span>
     </button>
   </nav>
@@ -1001,7 +1017,7 @@
 
   <div class="search-wrap">
     <span class="s-ico">⌕</span>
-    <input type="text" id="search" placeholder="/ buscar skill, agente..." autocomplete="off" />
+    <input type="text" id="search" placeholder="Buscar skill, agente ou /comando…" autocomplete="off" aria-label="Buscar skills e agentes" role="searchbox" />
     <span class="s-hint" id="s-hint">pressione /</span>
     <span class="s-clear" id="s-clear" onclick="clearSearch()">✕</span>
   </div>
@@ -2224,6 +2240,8 @@ function setMode(mode) {
   document.getElementById('tab-agents').classList.toggle('active', mode === 'agents');
   document.getElementById('tab-strategies').classList.toggle('active', mode === 'strategies');
   document.getElementById('tab-guide').classList.toggle('active', mode === 'guide');
+  // UX: scroll to top on tab switch
+  window.scrollTo({ top: 0, behavior: 'smooth' });
   if (mode === 'skills') applyFilters();
   else if (mode === 'agents') applyAgentFilters();
   else if (mode === 'strategies') applyStrategyFilters();
@@ -2368,8 +2386,8 @@ function renderAgents() {
               <div class="a-title">${agent.title}</div>
             </div>
           </div>
-          <button class="a-copy-btn" title="Copiar comando" onclick="copyAgentCmd('${safeCmd}',this);event.stopPropagation();">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <button class="a-copy-btn" title="Copiar comando do agente" aria-label="Copiar comando de ${agent.name}" onclick="copyAgentCmd('${safeCmd}',this);event.stopPropagation();">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
             </svg>
           </button>
@@ -2761,8 +2779,8 @@ function render() {
           <div class="card-name">${skill.name}</div>
           <div class="cmd-group">
             <div class="card-cmd" onclick="copyCmd('${skill.command}',this);event.stopPropagation();">${skill.command}</div>
-            <button class="copy-btn" title="Copiar" onclick="copyCmd('${skill.command}',this);event.stopPropagation();">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <button class="copy-btn" title="Copiar comando" aria-label="Copiar ${skill.command}" onclick="copyCmd('${skill.command}',this);event.stopPropagation();">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
               </svg>
             </button>
@@ -2811,7 +2829,12 @@ function applyFilters() {
     if (el) el.textContent = `${secCount} skill${secCount !== 1 ? 's' : ''}`;
   });
   document.getElementById('cnt-all').textContent = total;
-  document.getElementById('empty').style.display = total === 0 ? 'block' : 'none';
+  const emptyEl = document.getElementById('empty');
+  emptyEl.style.display = total === 0 ? 'block' : 'none';
+  if (total === 0 && searchQ) {
+    const sub = emptyEl.querySelector('.empty-sub');
+    if (sub) sub.textContent = `Nenhum resultado para "${searchQ}" — tente outro termo ou instale uma nova skill`;
+  }
 }
 
 function copyCmd(cmd, el) {
@@ -2864,8 +2887,17 @@ function clearSearch() {
 
 document.addEventListener('keydown', e => {
   const inp = document.getElementById('search');
+  // '/' focuses search
   if (e.key === '/' && document.activeElement !== inp) { e.preventDefault(); inp.focus(); }
+  // Escape clears search or blurs
   if (e.key === 'Escape' && document.activeElement === inp) { clearSearch(); inp.blur(); }
+  // Alt+1/2/3/4 — keyboard shortcuts for tab navigation
+  if (e.altKey && !e.ctrlKey && !e.shiftKey) {
+    if (e.key === '1') { e.preventDefault(); setMode('skills'); }
+    else if (e.key === '2') { e.preventDefault(); setMode('agents'); }
+    else if (e.key === '3') { e.preventDefault(); setMode('strategies'); }
+    else if (e.key === '4') { e.preventDefault(); setMode('guide'); }
+  }
 });
 
 /* ════════════════════════════════════════════════════
